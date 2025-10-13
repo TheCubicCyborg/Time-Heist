@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0eilnkhu73fw"]
+
+[ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/character_body_3d.gd" id="1_kpmja"]
+[ext_resource type="PackedScene" uid="uid://dm11mod08oeil" path="res://Assets/Models/fox.glb" id="2_0cskx"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cbu7u"]
+height = 1.0
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_kpmja")
+
+[node name="fox" parent="." instance=ExtResource("2_0cskx")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_cbu7u")
