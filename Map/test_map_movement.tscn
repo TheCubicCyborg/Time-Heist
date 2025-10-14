@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cvpussyyat68g"]
+[gd_scene load_steps=13 format=3 uid="uid://cvpussyyat68g"]
 
 [ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="1_0btr0"]
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="2_fwwy1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="4_f7iyc"]
 [ext_resource type="Texture2D" uid="uid://iysiiph8g0nq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_normal-ogl.png" id="5_7aoof"]
 [ext_resource type="Texture2D" uid="uid://bi1v4o5qgvkpp" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_roughness.png" id="6_pa7sq"]
+[ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/character_body_3d.tscn" id="7_fwwy1"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_terai"]
 
@@ -48,6 +49,9 @@ shape = SubResource("WorldBoundaryShape3D_terai")
 mesh = SubResource("PlaneMesh_terai")
 surface_material_override/0 = SubResource("StandardMaterial3D_lhttk")
 
+[node name="CharacterBody3D" parent="." instance=ExtResource("7_fwwy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1612346, 0, 1.8356428)
+
 [node name="Ball-Throw-it-against-the-wall" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94134, 3.16438)
 
@@ -56,9 +60,6 @@ shape = SubResource("SphereShape3D_uf72f")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ball-Throw-it-against-the-wall"]
 mesh = SubResource("SphereMesh_8uw46")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.025708, -0.618052, 0.785717, -0.0202113, 0.786137, 0.617721, -0.999465, 0, -0.0327017, 4.12148, 3.90659, 3.48228)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.657362, 0.753575, 0, -0.753575, 0.657362, 0, 0, 0)

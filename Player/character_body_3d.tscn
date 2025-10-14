@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0eilnkhu73fw"]
+[gd_scene load_steps=5 format=3 uid="uid://b0eilnkhu73fw"]
 
 [ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/character_body_3d.gd" id="1_kpmja"]
 [ext_resource type="PackedScene" uid="uid://dm11mod08oeil" path="res://Assets/Models/fox.glb" id="2_0cskx"]
+[ext_resource type="Script" uid="uid://ddcrxqxycn04f" path="res://Player/camera_pivot.gd" id="3_0cskx"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_cbu7u"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpmja"]
+radius = 0.3
 height = 1.0
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
@@ -11,6 +13,23 @@ script = ExtResource("1_kpmja")
 
 [node name="fox" parent="." instance=ExtResource("2_0cskx")]
 
+[node name="IdleDemo" parent="fox" index="0"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Armature" parent="fox" index="1"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 1)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("CylinderShape3D_cbu7u")
+shape = SubResource("CapsuleShape3D_kpmja")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 0.9, 0)
+script = ExtResource("3_0cskx")
+X_ROTATION = -60.0
+CAM_ROT_SPEED = 6.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[editable path="fox"]
