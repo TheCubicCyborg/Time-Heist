@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://cu2d5aioq3tn2"]
+[gd_scene load_steps=13 format=3 uid="uid://cu2d5aioq3tn2"]
 
-[ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="1_terai"]
-[ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="2_08stc"]
-[ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="3_e13gr"]
-[ext_resource type="Texture2D" uid="uid://cjwgyolwq6axi" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_ao.png" id="3_uf72f"]
-[ext_resource type="Texture2D" uid="uid://iysiiph8g0nq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_normal-ogl.png" id="5_8uw46"]
-[ext_resource type="Texture2D" uid="uid://bi1v4o5qgvkpp" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_roughness.png" id="6_w7w4i"]
+[ext_resource type="Script" uid="uid://dttx216bflsl" path="res://Map/Test_Map/test_map.gd" id="1_xnwlh"]
+[ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="2_ef02n"]
+[ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="3_yjiye"]
+[ext_resource type="Texture2D" uid="uid://cjwgyolwq6axi" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_ao.png" id="4_57qo1"]
+[ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="5_h1mgg"]
+[ext_resource type="Texture2D" uid="uid://iysiiph8g0nq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_normal-ogl.png" id="6_pr2o6"]
+[ext_resource type="Texture2D" uid="uid://bi1v4o5qgvkpp" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_roughness.png" id="7_vgbny"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_terai"]
 
@@ -13,14 +14,14 @@
 size = Vector2(100, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lhttk"]
-albedo_texture = ExtResource("2_08stc")
+albedo_texture = ExtResource("3_yjiye")
 metallic = 1.0
-metallic_texture = ExtResource("3_e13gr")
-roughness_texture = ExtResource("6_w7w4i")
+metallic_texture = ExtResource("5_h1mgg")
+roughness_texture = ExtResource("7_vgbny")
 normal_enabled = true
-normal_texture = ExtResource("5_8uw46")
+normal_texture = ExtResource("6_pr2o6")
 ao_enabled = true
-ao_texture = ExtResource("3_uf72f")
+ao_texture = ExtResource("4_57qo1")
 uv1_scale = Vector3(12.5, 12.5, 12.5)
 grow_amount = -4.125
 
@@ -29,9 +30,10 @@ grow_amount = -4.125
 [sub_resource type="SphereMesh" id="SphereMesh_8uw46"]
 
 [node name="TestScene" type="Node3D"]
+script = ExtResource("1_xnwlh")
 
 [node name="World" type="GridMap" parent="."]
-mesh_library = ExtResource("1_terai")
+mesh_library = ExtResource("2_ef02n")
 cell_size = Vector3(0.25, 3, 0.25)
 cell_center_y = false
 data = {

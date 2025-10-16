@@ -14,6 +14,10 @@ config/name="TimeHeist"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/time_tracker/plugin.cfg")
+
 [input]
 
 player_up={
