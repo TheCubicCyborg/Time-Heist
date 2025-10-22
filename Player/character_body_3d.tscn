@@ -30,6 +30,6 @@ X_ROTATION = -60.0
 CAM_ROT_SPEED = 6.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.52096653, 9.275756)
 
 [editable path="fox"]

@@ -2,14 +2,14 @@
 extends Node
 
 var editor: ScriptEditor
-var replacement_string:String = "\n\tset(value):\n\t\tglobals.time_manager.timelog(self,\"VARNAME\",VARNAME,value)\n\t\tVARNAME = value"
+var replacement_string:String = "\n\tset(value):\n\t\tif not globals.time_manager.reversing:\n\t\t\tglobals.time_manager.timelog(self,\"VARNAME\",VARNAME,value)\n\t\tVARNAME = value"
 
 
 func _ready():
 	editor = EditorInterface.get_script_editor()
 
 func _process(delta):
-	if Engine.is_editor_hint() and editor.get_current_script().resource_path != "res://addons/time_tracker/time_tracker_replacement.gd":
+	if Engine.is_editor_hint() and editor.get_current_script() and editor.get_current_script().resource_path != "res://addons/time_tracker/time_tracker_replacement.gd":
 		var edit_control:CodeEdit = editor.get_current_editor().get_base_editor()
 		var index = edit_control.text.find("@TIMEVAR")
 		if index != -1:
@@ -21,5 +21,5 @@ func _process(delta):
 			edit_control.start_action(TextEdit.ACTION_TYPING)
 			edit_control.text = edit_control.text.replace("@TIMEVAR",replacement_string.replace("VARNAME",var_name))
 			print("replaced")
-			edit_control.set_caret_line(starting_line + 3)
+			edit_control.set_caret_line(starting_line + 4)
 			edit_control.set_caret_column(var_name.length()+10)
