@@ -1,7 +1,10 @@
 extends Node3D
 
-@export var X_ROTATION : float
-@export var CAM_ROT_SPEED : float
+@export var X_ROTATION : float = -60
+@export var CAM_ROT_SPEED : float = 5
+@export var CAMERA_DISTANCE : float = 7
+
+@export var player : Player
 
 enum Direction { 
 	NORTH = 0,
@@ -15,6 +18,7 @@ var destination_rotation : int
 var current_rotation : float
 
 func _ready() -> void:
+	get_child(0).position.z = CAMERA_DISTANCE
 	rotation_degrees.x = X_ROTATION
 	rotation_degrees.y = facing_direction * 90
 	destination_rotation = int(rotation_degrees.y)
@@ -38,6 +42,8 @@ func step_rotation(change: int):
 
 #var elapsed = 0.0
 func _process(delta: float) -> void:
+	position = player.position
+	
 	if rotation_degrees.y != float(destination_rotation):
 		rotation_degrees.y = lerp(rotation_degrees.y, float(destination_rotation), delta * CAM_ROT_SPEED)
 	else:

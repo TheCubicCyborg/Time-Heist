@@ -14,8 +14,8 @@ func exit() -> void:
 func process_input(event: InputEvent) -> State: #return the state you should swap to
 	return null
 	
-func process_frame(delta: float) -> State:
+func process_physics(delta: float) -> State:
 	return null
 	
-func process_physics(delta: float) -> State:
+func process_frame(delta: float) -> State:
 	return null
