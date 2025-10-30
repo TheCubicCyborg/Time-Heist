@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0eilnkhu73fw"]
+[gd_scene load_steps=8 format=3 uid="uid://b0eilnkhu73fw"]
 
 [ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/character_body_3d.gd" id="1_kpmja"]
 [ext_resource type="PackedScene" uid="uid://dm11mod08oeil" path="res://Assets/Models/fox.glb" id="2_0cskx"]
@@ -21,11 +21,6 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0
 
 [node name="Armature" parent="fox" index="1"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 1)
-
-[node name="InteractableDetector" parent="fox" node_paths=PackedStringArray("rotation_body") instance=ExtResource("2_f3eu6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.8)
-rotation_body = NodePath("..")
-collider_size = Vector3(1, 2, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
