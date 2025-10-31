@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0eilnkhu73fw"]
+[gd_scene load_steps=9 format=3 uid="uid://b0eilnkhu73fw"]
 
 [ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/character_body_3d.gd" id="1_kpmja"]
 [ext_resource type="PackedScene" uid="uid://dm11mod08oeil" path="res://Assets/Models/fox.glb" id="2_0cskx"]

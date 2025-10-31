@@ -50,9 +50,11 @@ shape = SubResource("WorldBoundaryShape3D_terai")
 mesh = SubResource("PlaneMesh_terai")
 surface_material_override/0 = SubResource("StandardMaterial3D_lhttk")
 
-[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("7_fwwy1")]
+[node name="Camera_pivot" parent="." instance=ExtResource("1_8i5ej")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1612346, 0, 1.8356428)
-camera = NodePath("../Camera_pivot")
+
+[node name="Player" parent="." instance=ExtResource("7_fwwy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1612346, 0, 1.8356428)
 
 [node name="Ball-Throw-it-against-the-wall" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94134, 3.16438)
@@ -62,10 +64,6 @@ shape = SubResource("SphereShape3D_uf72f")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ball-Throw-it-against-the-wall"]
 mesh = SubResource("SphereMesh_8uw46")
-
-[node name="Camera_pivot" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_8i5ej")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1612346, 0, 1.8356428)
-player = NodePath("../Player")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.657362, 0.753575, 0, -0.753575, 0.657362, 0, 0, 0)

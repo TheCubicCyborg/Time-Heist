@@ -18,6 +18,7 @@ var destination_rotation : int
 var current_rotation : float
 
 func _ready() -> void:
+	print(2)
 	globals.camera = self
 	
 	get_child(0).position.z = CAMERA_DISTANCE
