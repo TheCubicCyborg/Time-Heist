@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 
 func step_rotation(change: int):
 	#For character input remapping
-	globals.player.should_update_map = true
+	globals.player.move_component.should_update_map = true
 	
 	destination_rotation = (destination_rotation + change*90)
 	previous_facing_direction = facing_direction

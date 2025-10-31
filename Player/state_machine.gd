@@ -4,9 +4,10 @@ extends Node
 
 var current_state: State
 # Called when the node enters the scene tree for the first time.
-func init(parent: Player) -> void:
+func init(move_component: Node) -> void:
 	for child in get_children():
-		child.parent = parent
+		child.player = globals.player
+		child.move_component = move_component
 	
 	change_state(starting_state)
 
@@ -18,6 +19,7 @@ func change_state(new_state : State) -> void:
 	current_state.enter()
 	
 func handle_input(event: InputEvent) -> void:
+	print(current_state)
 	var new_state = current_state.process_input(event)
 	if new_state:
 		change_state(new_state)

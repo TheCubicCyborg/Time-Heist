@@ -1,7 +1,23 @@
 extends State
 
-#@export the needed states here
+@export
+var walking_state : State
 
 func enter() -> void:
+	player.velocity = Vector3.ZERO
 	pass
-	#parent.velocity.x = 0
+	
+func exit() -> void:
+	pass
+	
+func process_input(event: InputEvent) -> State:
+	print(Input)
+	if Input.is_action_just_pressed("player_left") or Input.is_action_just_pressed("player_right") or Input.is_action_just_pressed("player_up") or Input.is_action_just_pressed("player_down"):
+		return walking_state
+	return null
+	
+func process_physics(delta: float) -> State:
+	return null
+	
+func process_frame(delta: float) -> State:
+	return null
