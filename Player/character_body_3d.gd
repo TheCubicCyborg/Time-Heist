@@ -33,7 +33,6 @@ var direction_facing
 var added_velocity := 0.0
 
 func _ready() -> void:
-	print(1)
 	globals.player = self
 	
 	input_map = face_to_move[globals.camera.facing_direction] # Initally set input map
@@ -64,7 +63,7 @@ func _physics_process(delta: float) -> void:
 	
 	added_velocity = lerp(added_velocity, MAX_SPEED, ACCELERATION * delta)
 	velocity = added_velocity * direction_vector
-	print(velocity)
+	#print(velocity)
 	if input_dir == Vector2.ZERO:
 		added_velocity = 0.0
 	#if rad_to_deg(direction_facing.angle_to(previous_direction_facing)) > 0.05:
