@@ -4,8 +4,6 @@ extends Node3D
 @export var CAM_ROT_SPEED : float = 5
 @export var CAMERA_DISTANCE : float = 7
 
-@export var player : Player
-
 enum Direction { 
 	NORTH = 0,
 	WEST,
@@ -13,15 +11,20 @@ enum Direction {
 	EAST
 }
 
-@export var facing_direction : Direction
+@export var facing_direction : Direction #Starting facing direction
+var previous_facing_direction : Direction
+
 var destination_rotation : int
 var current_rotation : float
 
 func _ready() -> void:
+	globals.camera = self
+	
 	get_child(0).position.z = CAMERA_DISTANCE
 	rotation_degrees.x = X_ROTATION
+	
 	rotation_degrees.y = facing_direction * 90
-	destination_rotation = int(rotation_degrees.y)
+	destination_rotation = facing_direction * 90
 	pass
 
 func _input(event: InputEvent) -> void:
@@ -33,7 +36,11 @@ func _input(event: InputEvent) -> void:
 		test_print()
 
 func step_rotation(change: int):
+	#For character input remapping
+	globals.player.should_update_map = true
+	
 	destination_rotation = (destination_rotation + change*90)
+	previous_facing_direction = facing_direction
 	if change == -1:
 		facing_direction = (facing_direction + change + 4) % 4 as Direction
 	elif change == 1:
@@ -42,7 +49,8 @@ func step_rotation(change: int):
 
 #var elapsed = 0.0
 func _process(delta: float) -> void:
-	position = player.position
+	#Centers camera pivot on the parent
+	position = globals.player.position
 	
 	if rotation_degrees.y != float(destination_rotation):
 		rotation_degrees.y = lerp(rotation_degrees.y, float(destination_rotation), delta * CAM_ROT_SPEED)
