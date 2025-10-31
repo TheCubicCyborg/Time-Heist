@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dxeefq8nxmasb"]
+[gd_scene load_steps=15 format=3 uid="uid://dxeefq8nxmasb"]
 
 [ext_resource type="Script" uid="uid://dttx216bflsl" path="res://Map/Test_Map/test_map.gd" id="1_k6b3p"]
 [ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="2_pfxt6"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://iysiiph8g0nq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_normal-ogl.png" id="6_mtkwk"]
 [ext_resource type="Texture2D" uid="uid://bi1v4o5qgvkpp" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_roughness.png" id="7_88cv8"]
 [ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/character_body_3d.tscn" id="8_oxmku"]
+[ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/player_camera.tscn" id="8_pfxt6"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_terai"]
 
@@ -51,6 +52,8 @@ shape = SubResource("WorldBoundaryShape3D_terai")
 mesh = SubResource("PlaneMesh_terai")
 surface_material_override/0 = SubResource("StandardMaterial3D_lhttk")
 
+[node name="Camera_pivot" parent="." instance=ExtResource("8_pfxt6")]
+
 [node name="CharacterBody3D" parent="." instance=ExtResource("8_oxmku")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2830129, 0, 1.6257386)
 
@@ -62,10 +65,6 @@ shape = SubResource("SphereShape3D_uf72f")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ball-Throw-it-against-the-wall"]
 mesh = SubResource("SphereMesh_8uw46")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.025708, -0.618052, 0.785717, -0.0202113, 0.786137, 0.617721, -0.999465, 0, -0.0327017, 4.12148, 3.90659, 3.48228)
-visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.657362, 0.753575, 0, -0.753575, 0.657362, 0, 0, 0)
