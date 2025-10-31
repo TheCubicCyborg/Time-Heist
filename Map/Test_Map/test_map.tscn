@@ -43,8 +43,6 @@ data = {
 "cells": PackedInt32Array(65526, 3, 1, 65526, 7, 1, 65526, 11, 1, 65526, 15, 1, 65526, 16, 1441793, 65530, 16, 1441793, 65534, 16, 1441794, 4, 16, 1441793, 8, 16, 1441796, 12, 16, 1441793, 16, 16, 1, 16, 12, 1, 16, 8, 1, 16, 4, 1048577, 12, 4, 1048577, 9, 3, 1, 9, 65535, 1, 9, 65531, 1048577, 5, 65531, 1048577, 1, 65531, 1048577, 65533, 65531, 1048577, 65529, 65531, 1048577, 65526, 65532, 655361, 65526, 29, 1441793, 65530, 29, 1441793, 65534, 29, 1441793, 2, 29, 1441793, 6, 29, 1441793, 10, 29, 1441793, 14, 29, 1441793, 17, 28, 1, 17, 24, 1, 17, 20, 1)
 }
 
-[node name="Camera_pivot" parent="." instance=ExtResource("10_57qo1")]
-
 [node name="Floor" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
@@ -54,6 +52,8 @@ shape = SubResource("WorldBoundaryShape3D_terai")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("PlaneMesh_terai")
 surface_material_override/0 = SubResource("StandardMaterial3D_lhttk")
+
+[node name="Camera_pivot" parent="." instance=ExtResource("10_57qo1")]
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("8_ef02n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2830129, 0, 1.6257386)

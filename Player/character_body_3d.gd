@@ -33,6 +33,7 @@ var direction_facing
 var added_velocity := 0.0
 
 func _ready() -> void:
+	print(1)
 	globals.player = self
 	
 	input_map = face_to_move[globals.camera.facing_direction] # Initally set input map
