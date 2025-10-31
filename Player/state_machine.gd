@@ -19,7 +19,6 @@ func change_state(new_state : State) -> void:
 	current_state.enter()
 	
 func handle_input(event: InputEvent) -> void:
-	print(current_state)
 	var new_state = current_state.process_input(event)
 	if new_state:
 		change_state(new_state)
