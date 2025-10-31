@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://b0eilnkhu73fw"]
 
-[ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/character_body_3d.gd" id="1_kpmja"]
-[ext_resource type="PackedScene" uid="uid://dm11mod08oeil" path="res://Assets/Models/fox.glb" id="2_0cskx"]
+[ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/player_controller.gd" id="1_kpmja"]
 [ext_resource type="PackedScene" uid="uid://8gkxub0dm0s7" path="res://Modules/Interaction/interactable_detector.tscn" id="2_f3eu6"]
+[ext_resource type="PackedScene" uid="uid://d2vq2hp7us37e" path="res://Assets/Models/player.glb" id="2_k7ba4"]
 [ext_resource type="PackedScene" uid="uid://bqe3vsxnn8umo" path="res://Player/sneak_detect.tscn" id="4_cbu7u"]
 [ext_resource type="Script" uid="uid://6bxjlk376khp" path="res://Player/state_machine.gd" id="5_ku6g1"]
 [ext_resource type="Script" uid="uid://bgmirdlww6rh4" path="res://Player/idle.gd" id="6_yr07i"]
@@ -10,27 +10,20 @@
 [ext_resource type="Script" uid="uid://djpyaus28oo7t" path="res://Player/walking.gd" id="8_j4rxl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpmja"]
-radius = 0.3
-height = 1.0
+radius = 0.25
+height = 1.829
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
 script = ExtResource("1_kpmja")
 
-[node name="fox" parent="." instance=ExtResource("2_0cskx")]
+[node name="PlayerMesh" parent="." instance=ExtResource("2_k7ba4")]
 
-[node name="IdleDemo" parent="fox" index="0"]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
-
-[node name="Armature" parent="fox" index="1"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 1)
-
-[node name="InteractableDetector" parent="fox" node_paths=PackedStringArray("rotation_body") instance=ExtResource("2_f3eu6")]
+[node name="InteractableDetector" parent="PlayerMesh" instance=ExtResource("2_f3eu6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.8)
-rotation_body = NodePath("..")
 collider_size = Vector3(1, 2, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.914, -0.05)
 shape = SubResource("CapsuleShape3D_kpmja")
 
 [node name="SneakDetect" parent="." instance=ExtResource("4_cbu7u")]
@@ -49,5 +42,3 @@ idle_state = NodePath("../idle")
 
 [node name="move_component" type="Node" parent="."]
 script = ExtResource("7_f3eu6")
-
-[editable path="fox"]
