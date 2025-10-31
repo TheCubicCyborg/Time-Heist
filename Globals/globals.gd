@@ -12,6 +12,10 @@ extends Node
 
 var time_manager: TimeManager
 
+var player : Player
+
+var camera : Node3D
+
 var allow_interact: bool = true
 
 func _ready():

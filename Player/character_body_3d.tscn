@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0eilnkhu73fw"]
+[gd_scene load_steps=10 format=3 uid="uid://b0eilnkhu73fw"]
 
 [ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/character_body_3d.gd" id="1_kpmja"]
 [ext_resource type="PackedScene" uid="uid://dm11mod08oeil" path="res://Assets/Models/fox.glb" id="2_0cskx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bqe3vsxnn8umo" path="res://Player/sneak_detect.tscn" id="4_cbu7u"]
 [ext_resource type="Script" uid="uid://6bxjlk376khp" path="res://Player/state_machine.gd" id="5_ku6g1"]
 [ext_resource type="Script" uid="uid://bgmirdlww6rh4" path="res://Player/idle.gd" id="6_yr07i"]
+[ext_resource type="Script" uid="uid://g1e51k6pxnwx" path="res://Player/player_movable.gd" id="7_f3eu6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpmja"]
 radius = 0.3
@@ -35,7 +36,6 @@ shape = SubResource("CapsuleShape3D_kpmja")
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 0.9, 0)
 script = ExtResource("3_0cskx")
-X_ROTATION = -60.0
 CAM_ROT_SPEED = 6.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
@@ -48,5 +48,8 @@ script = ExtResource("5_ku6g1")
 
 [node name="idle" type="Node" parent="state_machine"]
 script = ExtResource("6_yr07i")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("7_f3eu6")
 
 [editable path="fox"]
