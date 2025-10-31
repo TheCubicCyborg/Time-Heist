@@ -6,7 +6,6 @@ var state_machine = $state_machine
 @onready
 var move_component = $move_component
 
-@onready var body := $fox
 @onready var collision := $CollisionShape3D
 
 var previous_direction_facing := Vector3.FORWARD

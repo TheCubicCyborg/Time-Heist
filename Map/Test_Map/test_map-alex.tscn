@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="5_w4jvu"]
 [ext_resource type="Texture2D" uid="uid://iysiiph8g0nq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_normal-ogl.png" id="6_mtkwk"]
 [ext_resource type="Texture2D" uid="uid://bi1v4o5qgvkpp" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_roughness.png" id="7_88cv8"]
-[ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/character_body_3d.tscn" id="8_oxmku"]
-[ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/player_camera.tscn" id="8_pfxt6"]
+[ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/Player.tscn" id="8_oxmku"]
+[ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/camera_pivot.tscn" id="8_pfxt6"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_terai"]
 
