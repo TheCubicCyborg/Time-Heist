@@ -21,7 +21,6 @@ size = Vector3(0.25, 1, 1)
 [node name="MeshLibrary" type="Node3D"]
 
 [node name="SmallWall" type="MeshInstance3D" parent="."]
-visible = false
 mesh = ExtResource("1_8v12d")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="SmallWall"]
@@ -31,7 +30,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_rgqh2")
 
 [node name="WideWall" type="MeshInstance3D" parent="."]
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.39338505)
 mesh = ExtResource("2_m8hoe")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="WideWall"]

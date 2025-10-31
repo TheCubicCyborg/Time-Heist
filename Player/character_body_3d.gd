@@ -16,7 +16,6 @@ var direction_facing
 @onready var SneakDetect := $SneakDetect
 
 func _ready() -> void:
-	# Set proper globals
 	globals.player = self
 	
 	state_machine.init(move_component)
