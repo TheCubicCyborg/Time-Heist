@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0eilnkhu73fw"]
+[gd_scene load_steps=10 format=3 uid="uid://b0eilnkhu73fw"]
 
 [ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/character_body_3d.gd" id="1_kpmja"]
 [ext_resource type="PackedScene" uid="uid://dm11mod08oeil" path="res://Assets/Models/fox.glb" id="2_0cskx"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://6bxjlk376khp" path="res://Player/state_machine.gd" id="5_ku6g1"]
 [ext_resource type="Script" uid="uid://bgmirdlww6rh4" path="res://Player/idle.gd" id="6_yr07i"]
 [ext_resource type="Script" uid="uid://g1e51k6pxnwx" path="res://Player/player_movable.gd" id="7_f3eu6"]
+[ext_resource type="Script" uid="uid://djpyaus28oo7t" path="res://Player/walking.gd" id="8_j4rxl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpmja"]
 radius = 0.3
@@ -34,13 +35,19 @@ shape = SubResource("CapsuleShape3D_kpmja")
 
 [node name="SneakDetect" parent="." instance=ExtResource("4_cbu7u")]
 
-[node name="state_machine" type="Node" parent="."]
+[node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("5_ku6g1")
+starting_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="state_machine"]
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state")]
 script = ExtResource("6_yr07i")
+walking_state = NodePath("../walking")
 
-[node name="Node" type="Node" parent="."]
+[node name="walking" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state")]
+script = ExtResource("8_j4rxl")
+idle_state = NodePath("../idle")
+
+[node name="move_component" type="Node" parent="."]
 script = ExtResource("7_f3eu6")
 
 [editable path="fox"]

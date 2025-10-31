@@ -4,6 +4,7 @@ extends Node
 #ANY EXPORTS?
 
 var player: Player
+var move_component: Node
 
 func enter() -> void:
 	pass
