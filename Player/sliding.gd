@@ -2,9 +2,14 @@ extends State
 
 @export
 var walking_state : State
+@export
+var idle_state : State
+
+#var added_velocity
 
 func enter() -> void:
-	#player.velocity = Vector3.ZERO
+	print("ENTERING")
+	#Play sliding animation
 	pass
 	
 func exit() -> void:
@@ -16,8 +21,16 @@ func process_input(event: InputEvent) -> State:
 	return null
 	
 func process_physics(delta: float) -> State:
+	print(globals.player.velocity)
+	print("STOPPING")
+	move_component.added_velocity = lerp(move_component.added_velocity, 0.0, delta * move_component.STOP_ACCELERATION) # maybe move this lerp to the move component
+	player.velocity = move_component.added_velocity * (move_component.get_direction_facing().normalized())
+	
+	
+	
+	if player.velocity == Vector3.ZERO:
+		return idle_state
 	return null
 	
 func process_frame(delta: float) -> State:
-	print("IDLE")
 	return null
