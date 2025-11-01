@@ -13,7 +13,7 @@ extends Area3D
 func _physics_process(delta):
 	if not Engine.is_editor_hint():
 		if Input.is_action_just_pressed("player_interacat") and targetted:
-			targetted.interact_object.interact()
+			targetted.interact()
 
 
 func update_targeted():
