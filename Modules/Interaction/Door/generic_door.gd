@@ -2,6 +2,7 @@ extends Node3D
 class_name Generic_Door
 
 @export var is_open: bool = false
+@export var is_locked: bool = false
 @export var collision_body: StaticBody3D = null
 @export var mesh: MeshInstance3D = null
 
@@ -19,8 +20,21 @@ func close():
 	mesh.visible = true
 	is_open = false
 
+func lock():
+	is_locked = false
+
+func unlock():
+	is_locked = true
+
+func toggle_lock():
+	is_locked = not is_locked
+
 func interact():
 	if is_open:
 		close()
-	else:
+		return true
+	elif not is_locked:
 		open()
+		return true
+	else:
+		return false
