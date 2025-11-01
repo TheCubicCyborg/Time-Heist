@@ -4,7 +4,8 @@ extends State
 var walking_state : State
 
 func enter() -> void:
-	#player.velocity = Vector3.ZERO
+	player.velocity = Vector3.ZERO
+	move_component.added_velocity = 0
 	pass
 	
 func exit() -> void:

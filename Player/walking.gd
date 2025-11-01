@@ -18,7 +18,6 @@ func process_input(event: InputEvent) -> State:
 	return null
 	
 func process_physics(delta: float) -> State:
-	print(player.velocity)
 	
 	if not player.is_on_floor():
 		player.velocity += player.get_gravity() * delta
@@ -32,9 +31,7 @@ func process_physics(delta: float) -> State:
 	
 	move_component.added_velocity = lerp(move_component.added_velocity, move_component.MAX_SPEED, move_component.ACCELERATION * delta)
 	if input_dir == Vector2.ZERO: #if stop moving -> velocity = 0
-		if move_component.added_velocity > move_component.MAX_SPEED * 0.85: # if moving fast enough -> slide
-			return sliding_state
-		return idle_state
+		return sliding_state
 	player.velocity = move_component.added_velocity * direction_vector
 
 	player.move_and_slide()

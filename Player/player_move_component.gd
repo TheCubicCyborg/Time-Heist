@@ -1,9 +1,9 @@
 extends Node
 
-@export var MAX_SPEED = 7.0
-@export var ACCELERATION = 3
-@export var STOP_ACCELERATION = 3.2
-@export var rotation_speed : float = 10.0
+@export var MAX_SPEED = 5.5
+@export var ACCELERATION = 5
+@export var STOP_ACCELERATION = 1.3
+@export var rotation_speed : float = 15.0
 
 var face_to_move = {
 	0 : ["player_left", "player_right", "player_up", "player_down"],
