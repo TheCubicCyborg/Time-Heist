@@ -1,7 +1,8 @@
 extends Node
 
-@export var MAX_SPEED = 5.0
+@export var MAX_SPEED = 7.0
 @export var ACCELERATION = 3
+@export var STOP_ACCELERATION = 3.2
 @export var rotation_speed : float = 10.0
 
 var face_to_move = {
@@ -15,8 +16,10 @@ var previous_input : Vector2
 var input_map
 var should_update_map : bool = false
 
+var added_velocity : float
+
 func _ready() -> void:
-	input_map = face_to_move[globals.camera.facing_direction] # Initally set input map
+	input_map = face_to_move[0] # Initally set input map
 
 func get_input_direction() -> Vector2:
 	# Get input (based on mapping from direction it is facing)
@@ -33,8 +36,11 @@ func get_input_direction() -> Vector2:
 	return input_dir
 
 func get_direction_vector(input_dir : Vector2) -> Vector3:
-	var direction_facing = -get_parent().get_global_transform().basis.z # Used for angle difference checker 
+	var direction_facing = get_direction_facing()
 	return (direction_facing * Vector3(abs(input_dir.x), 0, abs(input_dir.y))).normalized()
+
+func get_direction_facing() -> Vector3:
+	return -get_parent().get_global_transform().basis.z
 
 func can_jump() -> bool:
 	return false
