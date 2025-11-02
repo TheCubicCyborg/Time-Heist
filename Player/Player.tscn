@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0eilnkhu73fw"]
+[gd_scene load_steps=11 format=3 uid="uid://b0eilnkhu73fw"]
 
 [ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/player_controller.gd" id="1_kpmja"]
 [ext_resource type="PackedScene" uid="uid://8gkxub0dm0s7" path="res://Modules/Interaction/interactable_detector.tscn" id="2_f3eu6"]
@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bqe3vsxnn8umo" path="res://Player/sneak_detect.tscn" id="4_cbu7u"]
 [ext_resource type="Script" uid="uid://6bxjlk376khp" path="res://Player/state_machine.gd" id="5_ku6g1"]
 [ext_resource type="Script" uid="uid://bgmirdlww6rh4" path="res://Player/idle.gd" id="6_yr07i"]
-[ext_resource type="Script" uid="uid://g1e51k6pxnwx" path="res://Player/player_movable.gd" id="7_f3eu6"]
+[ext_resource type="Script" uid="uid://g1e51k6pxnwx" path="res://Player/player_move_component.gd" id="7_f3eu6"]
 [ext_resource type="Script" uid="uid://djpyaus28oo7t" path="res://Player/walking.gd" id="8_j4rxl"]
+[ext_resource type="Script" uid="uid://b7xtgegfse881" path="res://Player/sliding.gd" id="8_j23h2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpmja"]
 radius = 0.25
@@ -36,8 +37,14 @@ starting_state = NodePath("idle")
 script = ExtResource("6_yr07i")
 walking_state = NodePath("../walking")
 
-[node name="walking" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state")]
+[node name="walking" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "sliding_state")]
 script = ExtResource("8_j4rxl")
+idle_state = NodePath("../idle")
+sliding_state = NodePath("../sliding")
+
+[node name="sliding" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "idle_state")]
+script = ExtResource("8_j23h2")
+walking_state = NodePath("../walking")
 idle_state = NodePath("../idle")
 
 [node name="move_component" type="Node" parent="."]
