@@ -5,6 +5,8 @@ extends State
 var idle_state : State
 @export 
 var sliding_state : State
+@export
+var dash_state : State
 
 #var added_velocity := 0.0
 
@@ -15,6 +17,8 @@ func exit() -> void:
 	pass
 	
 func process_input(event: InputEvent) -> State:
+	if Input.is_action_just_pressed("player_dash"):
+		return dash_state
 	return null
 	
 func process_physics(delta: float) -> State:

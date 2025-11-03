@@ -2,6 +2,8 @@ extends State
 
 @export
 var walking_state : State
+@export
+var dash_state : State
 
 func enter() -> void:
 	player.velocity = Vector3.ZERO
@@ -14,11 +16,12 @@ func exit() -> void:
 func process_input(event: InputEvent) -> State:
 	if Input.is_action_pressed("player_left") or Input.is_action_pressed("player_right") or Input.is_action_pressed("player_up") or Input.is_action_pressed("player_down"):
 		return walking_state
+	if Input.is_action_just_pressed("player_dash"):
+		return dash_state
 	return null
 	
 func process_physics(delta: float) -> State:
 	return null
 	
 func process_frame(delta: float) -> State:
-	print("IDLE")
 	return null

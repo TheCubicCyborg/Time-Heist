@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0eilnkhu73fw"]
+[gd_scene load_steps=12 format=3 uid="uid://b0eilnkhu73fw"]
 
 [ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/player_controller.gd" id="1_kpmja"]
 [ext_resource type="PackedScene" uid="uid://8gkxub0dm0s7" path="res://Modules/Interaction/interactable_detector.tscn" id="2_f3eu6"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://g1e51k6pxnwx" path="res://Player/player_move_component.gd" id="7_f3eu6"]
 [ext_resource type="Script" uid="uid://djpyaus28oo7t" path="res://Player/walking.gd" id="8_j4rxl"]
 [ext_resource type="Script" uid="uid://b7xtgegfse881" path="res://Player/sliding.gd" id="8_j23h2"]
+[ext_resource type="Script" uid="uid://cgl4x6uxdkx3o" path="res://Player/dash.gd" id="9_0j2ni"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kpmja"]
 radius = 0.25
@@ -33,19 +34,28 @@ shape = SubResource("CapsuleShape3D_kpmja")
 script = ExtResource("5_ku6g1")
 starting_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state")]
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "dash_state")]
 script = ExtResource("6_yr07i")
 walking_state = NodePath("../walking")
+dash_state = NodePath("../dash")
 
-[node name="walking" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "sliding_state")]
+[node name="walking" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "sliding_state", "dash_state")]
 script = ExtResource("8_j4rxl")
 idle_state = NodePath("../idle")
 sliding_state = NodePath("../sliding")
+dash_state = NodePath("../dash")
 
-[node name="sliding" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "idle_state")]
+[node name="sliding" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "idle_state", "dash_state")]
 script = ExtResource("8_j23h2")
 walking_state = NodePath("../walking")
 idle_state = NodePath("../idle")
+dash_state = NodePath("../dash")
+
+[node name="dash" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "walking_state", "sliding_state")]
+script = ExtResource("9_0j2ni")
+idle_state = NodePath("../idle")
+walking_state = NodePath("../walking")
+sliding_state = NodePath("../sliding")
 
 [node name="move_component" type="Node" parent="."]
 script = ExtResource("7_f3eu6")
