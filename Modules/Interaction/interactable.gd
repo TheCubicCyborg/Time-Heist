@@ -3,8 +3,8 @@ class_name Interactable
 
 @export var mesh: MeshInstance3D = null
 @export var interact_object: Node = null
-static var outline_material:StandardMaterial3D = preload("res://Assets/Materials/Highlight.tres")
-static var invalid_outline_material:StandardMaterial3D = preload("res://Assets/Materials/Invalid_Highlight.tres")
+static var outline_material:StandardMaterial3D = preload("res://Assets/Materials/Interactable/Highlight.tres")
+static var invalid_outline_material:StandardMaterial3D = preload("res://Assets/Materials/Interactable/Invalid_Highlight.tres")
 
 var playing_invalid_animation: bool = false
 var invalid_animation_info: Array = [0.2,0,3,0,false] #blink duration, blink timer, number of blinks, cur_blink, is highlighted

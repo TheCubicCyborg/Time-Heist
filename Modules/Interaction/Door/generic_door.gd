@@ -1,8 +1,18 @@
 extends Node3D
 class_name Generic_Door
 
-@export var is_open: bool = false
-@export var is_locked: bool = false
+@export var is_open: bool = false : #TIMEVAR
+	set(value):
+		if globals.time_manager and globals.time_manager.logging:
+			globals.time_manager.timelog(self,"is_open",is_open,value)
+		@warning_ignore("standalone_ternary")
+		open() if value else close()
+		is_open = value
+@export var is_locked: bool = false : #TIMEVAR
+	set(value):
+		if globals.time_manager and globals.time_manager.logging:
+			globals.time_manager.timelog(self,"is_locked",is_locked,value)
+		is_locked = value
 @export var collision_body: StaticBody3D = null
 @export var mesh: MeshInstance3D = null
 
@@ -13,12 +23,10 @@ func _ready():
 func open():
 	collision_body.process_mode = Node.PROCESS_MODE_DISABLED
 	mesh.visible = false
-	is_open = true
 
 func close():
 	collision_body.process_mode = Node.PROCESS_MODE_INHERIT
 	mesh.visible = true
-	is_open = false
 
 func lock():
 	is_locked = false
@@ -31,10 +39,10 @@ func toggle_lock():
 
 func interact():
 	if is_open:
-		close()
+		is_open = false
 		return true
 	elif not is_locked:
-		open()
+		is_open = true
 		return true
 	else:
 		return false
