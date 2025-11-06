@@ -32,7 +32,6 @@ func process_physics(delta: float) -> State:
 	player.move_and_slide()
 
 	if move_component.added_velocity < 1: #no_small_values(abs(player.velocity)):
-		print("THIS_")
 		return idle_state
 	return null
 	
