@@ -50,10 +50,10 @@ shape = SubResource("WorldBoundaryShape3D_terai")
 mesh = SubResource("PlaneMesh_terai")
 surface_material_override/0 = SubResource("StandardMaterial3D_lhttk")
 
-[node name="Camera_pivot" parent="." instance=ExtResource("1_8i5ej")]
+[node name="Player" parent="." instance=ExtResource("7_fwwy1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1612346, 0, 1.8356428)
 
-[node name="Player" parent="." instance=ExtResource("7_fwwy1")]
+[node name="Camera_pivot" parent="." instance=ExtResource("1_8i5ej")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1612346, 0, 1.8356428)
 
 [node name="Ball-Throw-it-against-the-wall" type="RigidBody3D" parent="."]

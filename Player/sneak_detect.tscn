@@ -8,29 +8,37 @@ script = ExtResource("1_iytpq")
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
-[node name="Head1" type="RayCast3D" parent="Head"]
-target_position = Vector3(-1, 0, 0)
-
-[node name="Head2" type="RayCast3D" parent="Head"]
+[node name="HeadForward" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 0, -1)
+collision_mask = 8
 
-[node name="Head3" type="RayCast3D" parent="Head"]
-target_position = Vector3(1, 0, 0)
+[node name="HeadLeft" type="RayCast3D" parent="Head"]
+target_position = Vector3(-1, 0, 0)
+collision_mask = 8
 
-[node name="Head4" type="RayCast3D" parent="Head"]
+[node name="HeadBack" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 0, 1)
+collision_mask = 8
+
+[node name="HeadRight" type="RayCast3D" parent="Head"]
+target_position = Vector3(1, 0, 0)
+collision_mask = 8
 
 [node name="Hip" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 
-[node name="Hip1" type="RayCast3D" parent="Hip"]
-target_position = Vector3(-1, 0, 0)
-
-[node name="Hip2" type="RayCast3D" parent="Hip"]
+[node name="HipForward" type="RayCast3D" parent="Hip"]
 target_position = Vector3(0, 0, -1)
+collision_mask = 8
 
-[node name="Hip3" type="RayCast3D" parent="Hip"]
-target_position = Vector3(1, 0, 0)
+[node name="HipLeft" type="RayCast3D" parent="Hip"]
+target_position = Vector3(-1, 0, 0)
+collision_mask = 8
 
-[node name="Hip4" type="RayCast3D" parent="Hip"]
+[node name="HipBack" type="RayCast3D" parent="Hip"]
 target_position = Vector3(0, 0, 1)
+collision_mask = 8
+
+[node name="HipRight" type="RayCast3D" parent="Hip"]
+target_position = Vector3(1, 0, 0)
+collision_mask = 8

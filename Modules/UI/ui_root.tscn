@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bm4y2kiv4odnp"]
+[gd_scene load_steps=7 format=3 uid="uid://bm4y2kiv4odnp"]
 
 [ext_resource type="Script" uid="uid://b25imoa11adq2" path="res://Modules/UI/ui_root.gd" id="1_yaem8"]
 [ext_resource type="Script" uid="uid://b1b742guris2v" path="res://Modules/UI/debug_ui.gd" id="2_u3icv"]
@@ -13,6 +13,33 @@ func _process(_delta):
 	text = \"Time Display: \" + \"%02d:%02d.%03d\" % [cur_time/60,int(cur_time)%60,(cur_time - int(cur_time))*1000]
 "
 
+[sub_resource type="GDScript" id="GDScript_u3icv"]
+resource_name = "StateDisplay"
+script/source = "extends Label
+
+func _process(_delta):
+	var cur_state = globals.player.state_machine.current_state.get_script().get_global_name()
+	text = \"Current State: \" + cur_state
+"
+
+[sub_resource type="GDScript" id="GDScript_nr7cl"]
+resource_name = "CrouchingDisplay"
+script/source = "extends Label
+
+func _process(_delta):
+	var cur_crouching = globals.player.is_crouching
+	text = \"Crouching: \" + str(cur_crouching)
+"
+
+[sub_resource type="GDScript" id="GDScript_isv23"]
+resource_name = "SpeedDisplay"
+script/source = "extends Label
+
+func _process(_delta):
+	var cur_speed = globals.player.speed
+	text = \"Speed: \" + str(globals.player.speed)
+"
+
 [node name="UI Root" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -24,7 +51,6 @@ script = ExtResource("1_yaem8")
 
 [node name="DEBUG UI" type="Control" parent="."]
 process_mode = 4
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +61,31 @@ script = ExtResource("2_u3icv")
 
 [node name="Time Display" type="Label" parent="DEBUG UI"]
 layout_mode = 0
-offset_right = 741.0
-offset_bottom = 278.0
+offset_right = 302.0
+offset_bottom = 23.0
 text = "Time Display"
 script = SubResource("GDScript_yaem8")
+
+[node name="State Display" type="Label" parent="DEBUG UI"]
+layout_mode = 0
+offset_top = 18.63
+offset_right = 387.0
+offset_bottom = 42.0
+text = "State Display"
+script = SubResource("GDScript_u3icv")
+
+[node name="Crouching Display" type="Label" parent="DEBUG UI"]
+layout_mode = 0
+offset_top = 41.0
+offset_right = 387.0
+offset_bottom = 64.37
+text = "Crouching Display"
+script = SubResource("GDScript_nr7cl")
+
+[node name="Speed Display" type="Label" parent="DEBUG UI"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 387.0
+offset_bottom = 87.37
+text = "Speed Display"
+script = SubResource("GDScript_isv23")
