@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DocumentTableType" load_steps=2 format=3 uid="uid://2xort0efwv6a"]
+
+[ext_resource type="Script" uid="uid://b8fc0niwjbc6p" path="res://Modules/UI/DocumentViewer/DocumentTableType.gd" id="1_4qlbp"]
+
+[resource]
+script = ExtResource("1_4qlbp")
+doc_table = Array[Texture2D]([null])
+metadata/_custom_type_script = "uid://b8fc0niwjbc6p"
