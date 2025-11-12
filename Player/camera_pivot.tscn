@@ -4,5 +4,6 @@
 
 [node name="Camera_pivot" type="Node3D"]
 script = ExtResource("1_ehrhw")
+CAMERA_DISTANCE = 6.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
