@@ -3,7 +3,7 @@ extends Control
 class_name DocumentViewer
 
 @onready var doc_texture = $DocTexture
-var doc_table:Array[Texture2D] = preload("res://Modules/UI/DocumentViewer/DocumentTable.tres").doc_table
+var doc_table:Array[Texture2D] = preload("res://Modules/UI/Game UI/DocumentViewer/DocumentTable.tres").doc_table
 var is_displaying: bool = false
 
 func display_document(doc_id: int):

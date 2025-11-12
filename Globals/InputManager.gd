@@ -9,8 +9,8 @@ var input_controller = InputController.GAMEPLAY
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	pass
 
-func take_control(controller: InputController):
+func set_control(controller: InputController):
 	input_controller = controller

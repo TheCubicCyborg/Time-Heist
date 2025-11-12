@@ -2,6 +2,7 @@ extends Control
 class_name UI_Manager
 
 @onready var document_viewer = $DocumentViewer
+@onready var debug_ui = $"DEBUG UI"
 @export var debug_mode: bool = false
 var control_input: bool = false
 var ui_stack: Array[Control] = []
@@ -10,6 +11,7 @@ var cur_ui: Control = null
 
 func _ready():
 	globals.ui_manager = self
+	toggle_debug(false)
 
 func _process(_delta):
 	handle_debug_input()
@@ -34,7 +36,6 @@ func handle_debug_input():
 
 func toggle_debug(value:bool):
 	debug_mode = value
-	var debug_ui = $"DEBUG UI"
 	if not debug_ui:
 		return
 	if value:

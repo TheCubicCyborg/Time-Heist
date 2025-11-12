@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://o8bawnwr8utr"]
 
-[ext_resource type="Script" uid="uid://d1b4dlmjepbii" path="res://Modules/UI/DocumentViewer/document_viewer.gd" id="1_jj6w3"]
+[ext_resource type="Script" uid="uid://d1b4dlmjepbii" path="res://Modules/UI/Game UI/DocumentViewer/document_viewer.gd" id="1_jj6w3"]
 
 [node name="DocumentViewer" type="Control"]
 layout_mode = 3
