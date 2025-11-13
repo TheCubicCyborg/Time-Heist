@@ -53,7 +53,7 @@ func process_physics(delta: float) -> State:
 func process_frame(delta: float) -> State:
 	if move_component.get_input_direction() == Vector2.ZERO:
 		return sliding_state
-	if Input.is_action_pressed("player_dash"):
+	if player.can_move and Input.is_action_pressed("player_dash"):
 		return dash_state
 	
 	if player.is_crouching:

@@ -1,5 +1,7 @@
 extends Node
 
+#CURRENTLY UNUSED !!!!!
+
 class_name InputManager
 
 enum InputController {UI, GAMEPLAY}

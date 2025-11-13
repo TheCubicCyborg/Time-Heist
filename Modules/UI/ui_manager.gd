@@ -20,6 +20,7 @@ func _process(_delta):
 
 func take_control(UI: Control):
 	control_input = true
+	globals.player.can_move = false
 	if cur_ui:
 		ui_stack.append(cur_ui)
 	cur_ui = UI
@@ -28,7 +29,9 @@ func release_control():
 	if not ui_stack.is_empty():
 		cur_ui = ui_stack.pop_back()
 	else:
+		cur_ui = null
 		control_input = false
+		globals.player.can_move = true
 
 func handle_debug_input():
 	if not debug_mode and Input.is_action_just_released("debug_button"):

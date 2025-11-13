@@ -1,19 +1,14 @@
-@tool
 extends Area3D
 
 @export var detection_range: float = 1
 @export var rotation_body: Node3D = null #The raycast will rotate with this body
-@export var collider_size: Vector3 = Vector3(1,1,1):
-	set(value):
-		$CollisionShape3D.shape.size = value
-		collider_size = value
+@export var collider_size: Vector3 = Vector3(1,1,1)
 
 @export var targetted:Interactable = null
 
-func _physics_process(delta):
-	if not Engine.is_editor_hint():
-		if Input.is_action_just_pressed("player_interacat") and targetted:
-			targetted.interact()
+func _physics_process(_delta):
+	if globals.player.can_move and Input.is_action_just_pressed("player_interact") and targetted:
+		targetted.interact()
 
 
 func update_targeted():
@@ -32,7 +27,7 @@ func update_targeted():
 		targetted.targetted()
 
 
-func _on_area_entered(area):
+func _on_area_entered(_area):
 	update_targeted()
-func _on_area_exited(area):
+func _on_area_exited(_area):
 	update_targeted()
