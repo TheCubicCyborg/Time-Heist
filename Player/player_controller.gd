@@ -14,6 +14,8 @@ var sneak_detect = $SneakDetect
 var previous_input : Vector2
 var is_crouching := false
 
+var can_move: bool = true
+
 #region Movement Export Variables
 var speed : float
 var current_max_speed : float

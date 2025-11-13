@@ -16,6 +16,8 @@ func _ready() -> void:
 	input_map = face_to_move[0] # Initally set input map
 
 func get_input_direction() -> Vector2:
+	if not globals.player.can_move:
+		return Vector2.ZERO
 	# Get input (based on mapping from direction it is facing)
 	var input_dir := Input.get_vector(input_map[0],input_map[1],input_map[2],input_map[3])
 	# Update maping (only if should)

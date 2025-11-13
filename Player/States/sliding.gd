@@ -25,7 +25,7 @@ func exit() -> void:
 	pass
 	
 func process_input(event: InputEvent) -> State:
-	if Input.is_action_just_pressed("player_dash"):
+	if player.can_move and Input.is_action_just_pressed("player_dash"):
 		return dash_state
 	if Input.is_action_just_pressed("player_sneak"):
 		return sneak_checking_state
