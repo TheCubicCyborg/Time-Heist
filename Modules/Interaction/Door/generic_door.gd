@@ -40,9 +40,9 @@ func toggle_lock():
 func interact():
 	if is_open:
 		is_open = false
-		return true
+		return false
 	elif not is_locked:
 		is_open = true
-		return true
-	else:
 		return false
+	else:
+		return true

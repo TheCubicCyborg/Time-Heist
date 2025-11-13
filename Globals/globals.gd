@@ -1,4 +1,4 @@
-extends Node
+class_name Globals extends Node
 
 #Collision Layers:
 #1: Player
@@ -11,6 +11,7 @@ extends Node
 #8:
 
 var time_manager: TimeManager
+var ui_manager: UI_Manager
 
 var player : Player
 

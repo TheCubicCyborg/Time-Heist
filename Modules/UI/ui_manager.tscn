@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm4y2kiv4odnp"]
+[gd_scene load_steps=8 format=3 uid="uid://bm4y2kiv4odnp"]
 
-[ext_resource type="Script" uid="uid://b25imoa11adq2" path="res://Modules/UI/ui_root.gd" id="1_yaem8"]
-[ext_resource type="Script" uid="uid://b1b742guris2v" path="res://Modules/UI/debug_ui.gd" id="2_u3icv"]
+[ext_resource type="Script" uid="uid://b25imoa11adq2" path="res://Modules/UI/ui_manager.gd" id="1_yaem8"]
+[ext_resource type="Script" uid="uid://b1b742guris2v" path="res://Modules/UI/Game UI/debug_ui.gd" id="2_u3icv"]
+[ext_resource type="PackedScene" uid="uid://o8bawnwr8utr" path="res://Modules/UI/Game UI/DocumentViewer/document_viewer.tscn" id="3_jfs1l"]
 
 [sub_resource type="GDScript" id="GDScript_yaem8"]
 resource_name = "TimeDisplay"
@@ -18,7 +19,9 @@ resource_name = "StateDisplay"
 script/source = "extends Label
 
 func _process(_delta):
-	var cur_state = globals.player.state_machine.current_state.get_script().get_global_name()
+	var cur_state = \"N/A\"
+	if globals.player:
+		cur_state = globals.player.state_machine.current_state.get_script().get_global_name()
 	text = \"Current State: \" + cur_state
 "
 
@@ -27,7 +30,9 @@ resource_name = "CrouchingDisplay"
 script/source = "extends Label
 
 func _process(_delta):
-	var cur_crouching = globals.player.is_crouching
+	var cur_crouching = \"N/A\"
+	if globals.player:
+		cur_crouching = globals.player.is_crouching
 	text = \"Crouching: \" + str(cur_crouching)
 "
 
@@ -36,8 +41,10 @@ resource_name = "SpeedDisplay"
 script/source = "extends Label
 
 func _process(_delta):
-	var cur_speed = globals.player.speed
-	text = \"Speed: \" + str(globals.player.speed)
+	var cur_speed = \"N/A\"
+	if globals.player:
+		cur_speed = str(globals.player.speed)
+	text = \"Speed: \" + cur_speed
 "
 
 [node name="UI Root" type="Control"]
@@ -89,3 +96,11 @@ offset_right = 387.0
 offset_bottom = 87.37
 text = "Speed Display"
 script = SubResource("GDScript_isv23")
+
+[node name="DocumentViewer" parent="." instance=ExtResource("3_jfs1l")]
+layout_mode = 1
+
+[node name="Interface" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

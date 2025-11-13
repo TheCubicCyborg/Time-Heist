@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DocumentTableType" load_steps=3 format=3 uid="uid://2xort0efwv6a"]
+
+[ext_resource type="Script" uid="uid://b8fc0niwjbc6p" path="res://Modules/UI/Game UI/DocumentViewer/DocumentTableType.gd" id="1_4qlbp"]
+[ext_resource type="Texture2D" uid="uid://0cjiq2gdh6kt" path="res://Assets/Sprites/temp_doc.png" id="1_5xdl7"]
+
+[resource]
+script = ExtResource("1_4qlbp")
+doc_table = Array[Texture2D]([ExtResource("1_5xdl7")])
+metadata/_custom_type_script = "uid://b8fc0niwjbc6p"
