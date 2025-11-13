@@ -27,7 +27,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/time_tracker/plugin.cfg")
+enabled=PackedStringArray("res://addons/NPC Pathing/plugin.cfg", "res://addons/time_tracker/plugin.cfg")
 
 [input]
 

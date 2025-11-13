@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dxeefq8nxmasb"]
+[gd_scene load_steps=17 format=3 uid="uid://dxeefq8nxmasb"]
 
 [ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="2_pfxt6"]
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="3_g2cin"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/camera_pivot.tscn" id="8_pfxt6"]
 [ext_resource type="PackedScene" uid="uid://bm4y2kiv4odnp" path="res://Modules/UI/ui_manager.tscn" id="10_6nm1w"]
 [ext_resource type="PackedScene" uid="uid://bk11o2jtj5d7g" path="res://Modules/Interaction/Door/generic_door.tscn" id="10_g2cin"]
-[ext_resource type="PackedScene" uid="uid://c0bm051peh8go" path="res://Modules/AI/security_guard.tscn" id="11_6nm1w"]
+[ext_resource type="PackedScene" uid="uid://cne3kilvgkpxb" path="res://Modules/AI/NPC.tscn" id="11_6nm1w"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_terai"]
 
@@ -33,9 +33,10 @@ grow_amount = -4.125
 
 [sub_resource type="SphereMesh" id="SphereMesh_8uw46"]
 
-[sub_resource type="Curve3D" id="Curve3D_6nm1w"]
-
 [node name="TestScene" type="Node3D"]
+
+[node name="UI Root" parent="." instance=ExtResource("10_6nm1w")]
+debug_mode = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.657362, 0.753575, 0, -0.753575, 0.657362, 0, 0, 0)
@@ -175,9 +176,4 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20.
 [node name="Generic_Door19" parent="Doors" instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -20.5, 0, -9.25)
 
-[node name="UI Root" parent="." instance=ExtResource("10_6nm1w")]
-debug_mode = true
-
-[node name="SecurityGuard" parent="." instance=ExtResource("11_6nm1w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
-curve = SubResource("Curve3D_6nm1w")
+[node name="NPC" parent="." instance=ExtResource("11_6nm1w")]

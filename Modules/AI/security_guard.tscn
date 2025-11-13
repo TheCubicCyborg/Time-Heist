@@ -7,7 +7,7 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qqeid"]
 radius = 0.4
 
-[node name="SecurityGuard" type="Path3D"]
+[node name="NPC" type="Path3D"]
 curve = SubResource("Curve3D_qqeid")
 script = ExtResource("1_qqeid")
 
