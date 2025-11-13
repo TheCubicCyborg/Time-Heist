@@ -41,8 +41,8 @@ func process_physics(delta: float) -> State:
 	if not player.is_on_floor():
 		player.velocity += player.get_gravity() * delta
 
-	var input_dir = move_component.get_input_direction() # Input direction
-	var direction_vector = move_component.get_direction_vector(input_dir) # Direction vector
+	var input_dir = input_controller.get_input_direction() # Input direction
+	var direction_vector = input_controller.get_direction_vector(input_dir) # Direction vector
 	
 	player.speed = lerp(player.speed, player.speed / 2.3, player.acceleration * delta)
 	if input_dir == Vector2.ZERO: #if stop moving -> velocity = 0

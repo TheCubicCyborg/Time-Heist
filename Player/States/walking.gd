@@ -40,8 +40,8 @@ func process_physics(delta: float) -> State:
 	if not player.is_on_floor():
 		player.velocity += player.get_gravity() * delta
 
-	var input_dir = move_component.get_input_direction() # Input direction
-	var direction_vector = move_component.get_direction_vector(input_dir) # Direction vector
+	var input_dir = input_controller.get_input_direction() # Input direction
+	var direction_vector = input_controller.get_direction_vector(input_dir) # Direction vector
 	
 	player.speed = lerp(player.speed, player.current_max_speed, player.current_acceleration * delta)
 	player.velocity = player.speed * direction_vector
@@ -51,7 +51,7 @@ func process_physics(delta: float) -> State:
 	return null
 	
 func process_frame(delta: float) -> State:
-	if move_component.get_input_direction() == Vector2.ZERO:
+	if input_controller.get_input_direction() == Vector2.ZERO:
 		return sliding_state
 	if Input.is_action_pressed("player_dash"):
 		return dash_state
@@ -72,7 +72,4 @@ func process_frame(delta: float) -> State:
 			player.current_acceleration = player.acceleration_crouching
 		else:
 			player.current_acceleration = player.acceleration_walking
-		
-	if player.speed == 0.0:
-		return idle_state
 	return null

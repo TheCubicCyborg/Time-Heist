@@ -45,7 +45,7 @@ func process_physics(delta: float) -> State:
 	return null
 	
 func process_frame(delta: float) -> State:
-	if move_component.get_input_direction() != Vector2.ZERO:
+	if input_controller.get_input_direction() != Vector2.ZERO:
 		if Input.is_action_pressed("player_dash"):
 			return dash_state
 		return walking_state

@@ -4,10 +4,10 @@ extends Node
 
 var current_state: State
 # Called when the node enters the scene tree for the first time.
-func init(move_component: Node) -> void:
+func init(input_controller: Node) -> void:
 	for child in get_children():
 		child.player = globals.player
-		child.move_component = move_component
+		child.input_controller = input_controller
 	
 	change_state(starting_state)
 

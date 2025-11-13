@@ -129,5 +129,5 @@ sliding_state = NodePath("../sliding")
 dash_state = NodePath("../dash")
 sneak_checking_state = NodePath("../sneak_checking")
 
-[node name="move_component" type="Node" parent="."]
+[node name="input_controller" type="Node" parent="."]
 script = ExtResource("7_f3eu6")

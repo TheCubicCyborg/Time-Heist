@@ -16,36 +16,40 @@ extends Node3D
 @onready var head_casts = [head_forward, head_right, head_back, head_left]
 @onready var hip_casts = [hip_forward, hip_right, hip_back, hip_left]
 
-var hip_to_head = {
-	hip_forward : head_forward,
-	hip_right : head_right,
-	hip_back : head_back,
-	hip_left : head_left
-}
+var hip_to_head
 
 func _ready() -> void:
-	#add any needed exceptions here
-	#for ray in head_casts:
-		#ray.add_exception(globals.player_interact)
-	#for ray in hip_casts:
-		#ray.add_exception(globals.player_interact)
+	hip_to_head = {
+		hip_forward : head_forward,
+		hip_right : head_right,
+		hip_back : head_back,
+		hip_left : head_left,
+	}
 	pass # Replace with function body.
 
 
 func get_sneak_start_point(): #returns < start_point , bool should_crouch >
 	var should_crouch = true
-
+	
 	if are_any_rays_colliding(hip_casts):
 		#Priotize forward
 		if hip_forward.is_colliding(): #is it the forward one?
 			if head_forward.is_colliding(): #is the matching head also colliding?
 				should_crouch = false
-			return [hip_forward.get_collision_point(),should_crouch]
+			return [hip_forward.get_collision_point(),should_crouch,hip_forward]
 		else:
-			var closest_collision = abs(hip_forward.target_position + Vector3(1,1,1)) #ensures its farther than any ray
+			var closest_collision = abs(hip_forward.target_position + Vector3(50,50,50)) #ensures its farther than any ray
+			var closest_ray
 			for ray in hip_casts:
 				if ray.is_colliding():
-					pass
+					if abs(ray.get_collision_point()) < abs(closest_collision):
+						closest_collision = ray.get_collision_point()
+						closest_ray = ray
+			if closest_ray:
+				if hip_to_head[closest_ray].is_colliding():
+					should_crouch = false
+				return [closest_collision,should_crouch,closest_ray]
+						
 					
 		#Now check for the closest point
 		

@@ -12,6 +12,8 @@ var crouching_state: State
 func enter() -> void:
 	if player.sneak_detect.get_sneak_start_point():
 		print(player.sneak_detect.get_sneak_start_point())
+		if(player.sneak_detect.get_sneak_start_point()[1]):
+			player.is_crouching = true
 	else:
 		print("didnt find any")
 	pass
@@ -27,6 +29,7 @@ func process_input(event: InputEvent) -> State:
 	return null
 	
 func process_physics(delta: float) -> State:
+	player.position = lerp(player.position, player.sneak_detect.get_sneak_start_point()[0], 2 * delta)
 	return null
 	
 func process_frame(delta: float) -> State:
