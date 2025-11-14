@@ -51,4 +51,4 @@ func _process(_delta):
 		restarting = false
 	if Input.is_action_just_released("debug_button") and not debug_button_handled:
 		debug_button_handled = true
-		$"..".debug_mode = false
+		$"..".toggle_debug(false)

@@ -1,7 +1,7 @@
 extends Area3D
 class_name Interactable
 
-@export var mesh: MeshInstance3D = null
+@export var mesh: GeometryInstance3D = null
 @export var interact_object: Node = null
 static var outline_material:StandardMaterial3D = preload("res://Assets/Materials/Interactable/Highlight.tres")
 static var invalid_outline_material:StandardMaterial3D = preload("res://Assets/Materials/Interactable/Invalid_Highlight.tres")
@@ -27,7 +27,7 @@ func remove_highlight():
 	mesh.material_overlay = null
 
 func interact():
-	if not interact_object.interact():
+	if interact_object.interact():
 		playing_invalid_animation = true
 
 func _process(delta):
