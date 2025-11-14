@@ -10,7 +10,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yax4m")
-correct_answer = "4"
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -40,7 +39,7 @@ offset_bottom = -70.99988
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
-text = "What is 2 + 2?"
+text = "What is the password?"
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 1
