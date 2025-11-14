@@ -7,25 +7,26 @@ var gizmo_size = 0.0
 
 
 func _redraw():
-	clear()
-
-	var node3d = get_node_3d()
-
-	var lines = PackedVector3Array()
-
-	lines.push_back(Vector3(0, 1, 0))
-	lines.push_back(Vector3(gizmo_size, node3d.position.y, 0))
-
-	var handles = PackedVector3Array()
-
-	handles.push_back(Vector3(0, 1, 0))
-	handles.push_back(Vector3(gizmo_size, node3d.position.y, 0))
-
-	var material = get_plugin().get_material("main", self)
-	add_lines(lines, material, false)
-
-	var handles_material = get_plugin().get_material("handles", self)
-	add_handles(handles, handles_material, [])
+	#clear()
+#
+	#var node3d = get_node_3d()
+#
+	#var lines = PackedVector3Array()
+#
+	#lines.push_back(Vector3(0, 1, 0))
+	#lines.push_back(Vector3(gizmo_size, node3d.position.y, 0))
+#
+	#var handles = PackedVector3Array()
+#
+	#handles.push_back(Vector3(0, 1, 0))
+	#handles.push_back(Vector3(gizmo_size, node3d.position.y, 0))
+#
+	#var material = get_plugin().get_material("main", self)
+	#add_lines(lines, material, false)
+#
+	#var handles_material = get_plugin().get_material("handles", self)
+	#add_handles(handles, handles_material, [])
+	pass
 
 
 # You should implement the rest of handle-related callbacks
