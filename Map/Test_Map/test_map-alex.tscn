@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dxeefq8nxmasb"]
+[gd_scene load_steps=42 format=3 uid="uid://dxeefq8nxmasb"]
 
 [ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="2_pfxt6"]
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="3_g2cin"]
@@ -11,8 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://bm4y2kiv4odnp" path="res://Modules/UI/ui_manager.tscn" id="10_6nm1w"]
 [ext_resource type="PackedScene" uid="uid://bk11o2jtj5d7g" path="res://Modules/Interaction/Door/generic_door.tscn" id="10_g2cin"]
 [ext_resource type="PackedScene" uid="uid://b64t4twgcdips" path="res://Modules/Interaction/interactable.tscn" id="11_6nm1w"]
+[ext_resource type="PackedScene" uid="uid://j4buig8m5yp3" path="res://Assets/Models/cubicle_six_v3.glb" id="11_88cv8"]
 [ext_resource type="PackedScene" uid="uid://bqogo44h7ydxf" path="res://Modules/UI/Game UI/UIPuzzles/test_puzzle.tscn" id="12_mtkwk"]
 [ext_resource type="PackedScene" uid="uid://pq0bcv62221l" path="res://Modules/Interaction/Interface/interface.tscn" id="13_88cv8"]
+[ext_resource type="Script" uid="uid://cyycim24066r4" path="res://Modules/AI/security_guard.gd" id="15_oxmku"]
+[ext_resource type="PackedScene" uid="uid://djn3ckwc8enih" path="res://Modules/Interaction/Document/document.tscn" id="16_1tqx8"]
+[ext_resource type="Texture2D" uid="uid://b6oady1ollpgf" path="res://Assets/Sprites/temp-paper-resized.png" id="17_gbn1a"]
+[ext_resource type="Texture2D" uid="uid://dkfkrh8rlgw1e" path="res://Assets/Sprites/keycard.png" id="18_grg8u"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_terai"]
 
@@ -61,11 +66,25 @@ resource_name = "KeycardScanner"
 script/source = "extends Node3D
 
 signal keycard_scanned
+var display_note: bool = false
+var display_time_elapsed: float = 0
 
 func interact():
 	if globals.player_has_keycard:
 		keycard_scanned.emit()
 		$MeshInstance3D.mesh.material.albedo = Color(0.0, 1.0, 0.0, 1.0)
+	else:
+		display_note = true
+		$Label.visible = true
+
+func _process(delta):
+	if display_note:
+		if display_time_elapsed >= 2:
+			display_note = false
+			display_time_elapsed = 0
+			$Label.visible = false
+		else:
+			display_time_elapsed += delta
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6nm1w"]
@@ -89,6 +108,81 @@ albedo_color = Color(0.5933253, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_mtkwk"]
 material = SubResource("StandardMaterial3D_mtkwk")
 size = Vector3(0.2, 0.6, 0.6)
+
+[sub_resource type="Curve3D" id="Curve3D_1tqx8"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -10.5, 0, 0, 0, 0, 0, 0, 0, 0, -13.5, 0, 0, 0, 0, 0, 0, -1, 0, -13.5, 0, 0, 0, 0, 0, 0, -5.25, 0, -13.5, 0, 0, 0, 0, 0, 0, 0, 0, -13.5, 0, 0, 0, 0, 0, 0, 0, 0, -27.75, 0, 0, 0, 0, 0, 0, 35.5, 0, -27.75, 0, 0, 0, 0, 0, 0, 47, 0, -27.75),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="GDScript" id="GDScript_oxmku"]
+resource_name = "janitor"
+script/source = "extends Path3D
+
+@onready var follower: PathFollow3D = $PathFollow3D
+@export var speed: float = 1
+
+signal open_door1
+signal close_door1
+
+signal open_door2
+signal close_door2
+
+signal pick_up_keycard
+
+signal open_door3
+signal close_door3
+
+var interaction_signals = [open_door1,close_door1,open_door2,close_door2,pick_up_keycard,open_door2,close_door2,open_door3,close_door3]
+const interaction_points = [10.5, 12, 14.5, 16, 18.75, 21.5, 23, 73.75,75.25]
+
+var cur_dest_index = 0
+
+func _process(_delta):
+	if cur_dest_index != -1 and follower.progress >= interaction_points[cur_dest_index]:
+		interaction_signals[cur_dest_index].emit()
+		cur_dest_index += 1
+		if cur_dest_index >= interaction_points.size():
+			cur_dest_index = -1
+	
+	follower.progress = globals.time_manager.cur_time * speed
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88cv8"]
+albedo_color = Color(0.5933253, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oxmku"]
+material = SubResource("StandardMaterial3D_88cv8")
+
+[sub_resource type="Curve3D" id="Curve3D_88cv8"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 4.5, 0, 0, 0, 0, 0, 0, 0, 0, 4.5),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Curve3D" id="Curve3D_oxmku"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -5, 0, 0, 0, 0, 0, 0, -16, 0, -5, 0, 0, 0, 0, 0, 0, -16, 0, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="GDScript" id="GDScript_grg8u"]
+resource_name = "Keycard"
+script/source = "extends Node3D
+
+func interact():
+	globals.player_has_keycard = true
+	$Sprite3D.visible = false
+	$Interactable.process_mode = Node.PROCESS_MODE_DISABLED
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pfg1b"]
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="TestScene" type="Node3D"]
 
@@ -120,7 +214,7 @@ metadata/_editor_floor_ = Vector3(0, -1, 0)
 [node name="Camera_pivot" parent="." instance=ExtResource("8_pfxt6")]
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("8_oxmku")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.716988, 0, -1.3742614)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.25, 0, -2)
 
 [node name="Ball-Throw-it-against-the-wall" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.020811, 1.94134, 3.16438)
@@ -247,6 +341,49 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.
 [node name="Generic_Door35" parent="Doors" instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.25, 0, -27)
 
+[node name="OpenOfficeNode" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23.75)
+
+[node name="Section_Two" type="Node3D" parent="OpenOfficeNode"]
+
+[node name="cubicle_six_v11" parent="OpenOfficeNode/Section_Two" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16.75)
+
+[node name="cubicle_six_v12" parent="OpenOfficeNode/Section_Two" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -16.75)
+
+[node name="cubicle_six_v13" parent="OpenOfficeNode/Section_Two" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -11.75)
+
+[node name="cubicle_six_v14" parent="OpenOfficeNode/Section_Two" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -11.75)
+
+[node name="Section_One" type="Node3D" parent="OpenOfficeNode"]
+
+[node name="cubicle_six_v3" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.75)
+
+[node name="cubicle_six_v4" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -1.75)
+
+[node name="cubicle_six_v5" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.75)
+
+[node name="cubicle_six_v6" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -6.75)
+
+[node name="cubicle_six_v7" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.75)
+
+[node name="cubicle_six_v8" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -16.75)
+
+[node name="cubicle_six_v9" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.75)
+
+[node name="cubicle_six_v10" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -11.75)
+
 [node name="Button" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 1, -19.25)
 script = SubResource("GDScript_6nm1w")
@@ -259,6 +396,20 @@ interact_object = NodePath("..")
 shape = SubResource("BoxShape3D_w4jvu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
+mesh = SubResource("BoxMesh_w4jvu")
+
+[node name="Button2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.75, 1, -1.75)
+script = SubResource("GDScript_6nm1w")
+
+[node name="Interactable" parent="Button2" node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
+mesh = NodePath("../MeshInstance3D")
+interact_object = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button2/Interactable"]
+shape = SubResource("BoxShape3D_w4jvu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Button2"]
 mesh = SubResource("BoxMesh_w4jvu")
 
 [node name="KeycardScanner" type="Node3D" parent="."]
@@ -274,6 +425,22 @@ shape = SubResource("BoxShape3D_6nm1w")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="KeycardScanner"]
 mesh = SubResource("BoxMesh_w4jvu")
+
+[node name="Label" type="Label" parent="KeycardScanner"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.5
+offset_top = -390.0
+offset_right = 174.5
+offset_bottom = -321.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Need Keycard!"
 
 [node name="CodePuzzle" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.75, 1, -2.5)
@@ -294,15 +461,82 @@ shape = SubResource("BoxShape3D_oxmku")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CodePuzzle"]
 mesh = SubResource("BoxMesh_mtkwk")
 
-[node name="Janitor" type="Node3D" parent="."]
+[node name="Janitor" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.25, 0, 12)
+curve = SubResource("Curve3D_1tqx8")
+script = SubResource("GDScript_oxmku")
+speed = 3.0
 
-[node name="SecurityGuard1" type="Node3D" parent="."]
+[node name="PathFollow3D" type="PathFollow3D" parent="Janitor"]
 
-[node name="SecurityGuard2" type="Node3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Janitor/PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_oxmku")
+
+[node name="SecurityGuard1" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, -38)
+curve = SubResource("Curve3D_88cv8")
+script = ExtResource("15_oxmku")
+speed = 2.0
+
+[node name="PathFollow3D" type="PathFollow3D" parent="SecurityGuard1"]
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SecurityGuard1/PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_oxmku")
+
+[node name="SecurityGuard2" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -23)
+curve = SubResource("Curve3D_oxmku")
+script = ExtResource("15_oxmku")
+speed = 2.0
+
+[node name="PathFollow3D" type="PathFollow3D" parent="SecurityGuard2"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SecurityGuard2/PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_oxmku")
+
+[node name="Document" parent="." instance=ExtResource("16_1tqx8")]
+transform = Transform3D(2.77, 0, 0, 0, 2.77, 0, 0, 0, 2.77, 4.5, 0, -19.5)
+texture = ExtResource("17_gbn1a")
+
+[node name="Keycard" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0.001, -1.5)
+script = SubResource("GDScript_grg8u")
+
+[node name="Sprite3D" type="Sprite3D" parent="Keycard"]
+transform = Transform3D(0.075, 0, 0, 0, -3.2783543e-09, -0.075, 0, 0.075, -3.2783543e-09, 0, 0, 0)
+texture = ExtResource("18_grg8u")
+
+[node name="Interactable" parent="Keycard" node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
+mesh = NodePath("../Sprite3D")
+interact_object = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keycard/Interactable"]
+shape = SubResource("BoxShape3D_pfg1b")
 
 [connection signal="button_press" from="Button" to="Doors/Generic_Door20" method="unlock"]
 [connection signal="button_press" from="Button" to="Doors/Generic_Door21" method="unlock"]
+[connection signal="button_press" from="Button2" to="Doors/Generic_Door17" method="unlock"]
 [connection signal="keycard_scanned" from="KeycardScanner" to="Doors/Generic_Door6" method="unlock"]
 [connection signal="keycard_scanned" from="KeycardScanner" to="Doors/Generic_Door7" method="unlock"]
 [connection signal="puzzle_passed" from="CodePuzzle/TestPuzzle" to="Doors/Generic_Door17" method="unlock"]
 [connection signal="puzzle_passed" from="CodePuzzle/TestPuzzle" to="CodePuzzle" method="puzzle_passed"]
+[connection signal="close_door1" from="Janitor" to="Doors/Generic_Door31" method="close"]
+[connection signal="close_door1" from="Janitor" to="Doors/Generic_Door32" method="close"]
+[connection signal="close_door2" from="Janitor" to="Doors/Generic_Door17" method="lock"]
+[connection signal="close_door2" from="Janitor" to="Doors/Generic_Door17" method="close"]
+[connection signal="close_door3" from="Janitor" to="Doors/Generic_Door6" method="lock"]
+[connection signal="close_door3" from="Janitor" to="Doors/Generic_Door6" method="close"]
+[connection signal="close_door3" from="Janitor" to="Doors/Generic_Door7" method="lock"]
+[connection signal="close_door3" from="Janitor" to="Doors/Generic_Door7" method="close"]
+[connection signal="open_door1" from="Janitor" to="Doors/Generic_Door31" method="open"]
+[connection signal="open_door1" from="Janitor" to="Doors/Generic_Door32" method="open"]
+[connection signal="open_door2" from="Janitor" to="Doors/Generic_Door17" method="unlock"]
+[connection signal="open_door2" from="Janitor" to="Doors/Generic_Door17" method="open"]
+[connection signal="open_door3" from="Janitor" to="Doors/Generic_Door6" method="unlock"]
+[connection signal="open_door3" from="Janitor" to="Doors/Generic_Door6" method="open"]
+[connection signal="open_door3" from="Janitor" to="Doors/Generic_Door7" method="unlock"]
+[connection signal="open_door3" from="Janitor" to="Doors/Generic_Door7" method="open"]
