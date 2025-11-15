@@ -37,7 +37,8 @@ grow_amount = -4.125
 script = ExtResource("1_xnwlh")
 
 [node name="Cone Vision" parent="." instance=ExtResource("2_h1mgg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.9099426)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.25, 0, 0.5900574)
+sight_line_radius = 5.0
 
 [node name="World" type="GridMap" parent="."]
 mesh_library = ExtResource("2_ef02n")

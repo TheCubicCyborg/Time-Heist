@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dxeefq8nxmasb"]
+[gd_scene load_steps=50 format=3 uid="uid://dxeefq8nxmasb"]
 
 [ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="2_pfxt6"]
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="3_g2cin"]
@@ -41,15 +41,28 @@ grow_amount = -4.125
 
 [sub_resource type="SphereMesh" id="SphereMesh_8uw46"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pfg1b"]
+albedo_color = Color(0.8364584, 0.8111651, 1.540184e-06, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fsrqj"]
+material = SubResource("StandardMaterial3D_pfg1b")
+size = Vector3(1, 2, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gurd7"]
+material = SubResource("StandardMaterial3D_pfg1b")
+size = Vector3(1, 2, 0.1)
+
 [sub_resource type="GDScript" id="GDScript_6nm1w"]
 resource_name = "button"
 script/source = "extends Node3D
 
 signal button_press
 
+var success = preload(\"res://Assets/Materials/Interactable/success.tres\")
+
 func interact():
 	button_press.emit()
-	$MeshInstance3D.mesh.material.albedo = Color(0.0, 1.0, 0.0, 1.0)
+	$MeshInstance3D.mesh.material = success
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w4jvu"]
@@ -62,6 +75,10 @@ albedo_color = Color(0.5933253, 0, 0, 1)
 material = SubResource("StandardMaterial3D_6nm1w")
 size = Vector3(0.2, 0.2, 0.2)
 
+[sub_resource type="BoxMesh" id="BoxMesh_pfg1b"]
+material = SubResource("StandardMaterial3D_6nm1w")
+size = Vector3(0.2, 0.2, 0.2)
+
 [sub_resource type="GDScript" id="GDScript_w4jvu"]
 resource_name = "KeycardScanner"
 script/source = "extends Node3D
@@ -70,10 +87,12 @@ signal keycard_scanned
 var display_note: bool = false
 var display_time_elapsed: float = 0
 
+var success = preload(\"res://Assets/Materials/Interactable/success.tres\")
+
 func interact():
 	if globals.player_has_keycard:
 		keycard_scanned.emit()
-		$MeshInstance3D.mesh.material.albedo = Color(0.0, 1.0, 0.0, 1.0)
+		$MeshInstance3D.mesh.material = success
 	else:
 		display_note = true
 		$Label.visible = true
@@ -91,13 +110,20 @@ func _process(delta):
 [sub_resource type="BoxShape3D" id="BoxShape3D_6nm1w"]
 size = Vector3(0.2, 0.2, 0.2)
 
+[sub_resource type="BoxMesh" id="BoxMesh_1f5s4"]
+material = SubResource("StandardMaterial3D_6nm1w")
+size = Vector3(0.2, 0.2, 0.2)
+
 [sub_resource type="GDScript" id="GDScript_88cv8"]
 resource_name = "CodePuzzle"
 script/source = "extends Node3D
 
+var success = preload(\"res://Assets/Materials/Interactable/success.tres\")
+
+
 func puzzle_passed():
 	print(\"change_color\")
-	$MeshInstance3D.mesh.material.albedo = Color(0.0, 1.0, 0.0, 1.0)
+	$MeshInstance3D.mesh.material = success
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oxmku"]
@@ -140,6 +166,9 @@ const interaction_points = [10.5, 12, 14.5, 16, 18.75, 21.5, 23, 73.75,75.25]
 
 var cur_dest_index = 0
 
+func _ready():
+	globals.time_manager.time_traveled.connect(fix_dest)
+
 func _process(_delta):
 	if cur_dest_index != -1 and follower.progress >= interaction_points[cur_dest_index]:
 		interaction_signals[cur_dest_index].emit()
@@ -147,7 +176,15 @@ func _process(_delta):
 		if cur_dest_index >= interaction_points.size():
 			cur_dest_index = -1
 	
+	if follower.progress < 85:
+		follower.progress = globals.time_manager.cur_time * speed
+
+func fix_dest():
 	follower.progress = globals.time_manager.cur_time * speed
+	var temp = cur_dest_index
+	while temp >= 0 and interaction_points[temp] > follower.progress:
+		temp -= 1
+	cur_dest_index = temp + 1
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88cv8"]
@@ -155,6 +192,18 @@ albedo_color = Color(0.5933253, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oxmku"]
 material = SubResource("StandardMaterial3D_88cv8")
+
+[sub_resource type="GDScript" id="GDScript_pfg1b"]
+resource_name = "ProximityDetector"
+script/source = "extends Area3D
+
+func _on_body_entered(body):
+	if body == globals.player:
+		globals.player_caught()
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fsrqj"]
+size = Vector3(2, 2, 2)
 
 [sub_resource type="Curve3D" id="Curve3D_88cv8"]
 closed = true
@@ -176,8 +225,28 @@ point_count = 4
 resource_name = "Keycard"
 script/source = "extends Node3D
 
+var picked_up:bool = false : #TIMEVAR
+	set(value):
+		if globals.time_manager and globals.time_manager.logging:
+			globals.time_manager.timelog(self,\"picked_up\",picked_up,value)
+		if value:
+			pick_up()
+		else:
+			put_back()
+		picked_up = value
+
 func interact():
 	globals.player_has_keycard = true
+	pick_up()
+
+func janitor_picked_up():
+	picked_up = true
+
+func put_back():
+	$Sprite3D.visible = true
+	$Interactable.process_mode = Node.PROCESS_MODE_INHERIT
+
+func pick_up():
 	$Sprite3D.visible = false
 	$Interactable.process_mode = Node.PROCESS_MODE_DISABLED
 "
@@ -188,7 +257,6 @@ size = Vector3(0.5, 0.5, 0.5)
 [node name="TestScene" type="Node3D"]
 
 [node name="UI Root" parent="." instance=ExtResource("10_6nm1w")]
-debug_mode = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.657362, 0.753575, 0, -0.753575, 0.657362, 0, 0, 0)
@@ -215,7 +283,6 @@ metadata/_editor_floor_ = Vector3(0, -1, 0)
 [node name="Camera_pivot" parent="." instance=ExtResource("8_pfxt6")]
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("8_oxmku")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.25, 0, -2)
 
 [node name="Ball-Throw-it-against-the-wall" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.020811, 1.94134, 3.16438)
@@ -288,9 +355,15 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.5,
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 12.25, 0, -15.25)
 is_locked = true
 
+[node name="Door Mesh" parent="Doors/Generic_Door6/Door RB" index="1"]
+mesh = SubResource("BoxMesh_fsrqj")
+
 [node name="Generic_Door7" parent="Doors" instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 12.25, 0, -16.25)
 is_locked = true
+
+[node name="Door Mesh" parent="Doors/Generic_Door7/Door RB" index="1"]
+mesh = SubResource("BoxMesh_gurd7")
 
 [node name="Generic_Door8" parent="Doors" instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -14.5, 0, -8.75)
@@ -411,7 +484,7 @@ interact_object = NodePath("..")
 shape = SubResource("BoxShape3D_w4jvu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Button2"]
-mesh = SubResource("BoxMesh_w4jvu")
+mesh = SubResource("BoxMesh_pfg1b")
 
 [node name="KeycardScanner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -17)
@@ -425,7 +498,7 @@ interact_object = NodePath("..")
 shape = SubResource("BoxShape3D_6nm1w")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="KeycardScanner"]
-mesh = SubResource("BoxMesh_w4jvu")
+mesh = SubResource("BoxMesh_1f5s4")
 
 [node name="Label" type="Label" parent="KeycardScanner"]
 visible = false
@@ -448,6 +521,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.75, 1, -2.5)
 script = SubResource("GDScript_88cv8")
 
 [node name="TestPuzzle" parent="CodePuzzle" instance=ExtResource("12_mtkwk")]
+correct_answer = "cleantime"
 
 [node name="Interface" parent="CodePuzzle" node_paths=PackedStringArray("ui") instance=ExtResource("13_88cv8")]
 ui = NodePath("../TestPuzzle")
@@ -474,13 +548,23 @@ speed = 3.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_oxmku")
 
-[node name="Cone Vision" parent="Janitor/PathFollow3D/MeshInstance3D" instance=ExtResource("15_pfg1b")]
+[node name="Cone Vision" parent="Janitor/PathFollow3D" instance=ExtResource("15_pfg1b")]
+sight_line_angle = 140.0
+sight_line_radius = 5.0
+time_till_caught = 1.0
+
+[node name="Area3D" type="Area3D" parent="Janitor/PathFollow3D"]
+script = SubResource("GDScript_pfg1b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Janitor/PathFollow3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_fsrqj")
 
 [node name="SecurityGuard1" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, -38)
 curve = SubResource("Curve3D_88cv8")
 script = ExtResource("15_oxmku")
-speed = 2.0
+speed = 4.0
 
 [node name="PathFollow3D" type="PathFollow3D" parent="SecurityGuard1"]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0, 0, 0)
@@ -489,13 +573,24 @@ transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_oxmku")
 
-[node name="Cone Vision" parent="SecurityGuard1/PathFollow3D/MeshInstance3D" instance=ExtResource("15_pfg1b")]
+[node name="Cone Vision" parent="SecurityGuard1/PathFollow3D" instance=ExtResource("15_pfg1b")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
+sight_line_angle = 140.0
+sight_line_radius = 5.0
+time_till_caught = 1.0
+
+[node name="Area3D" type="Area3D" parent="SecurityGuard1/PathFollow3D"]
+script = SubResource("GDScript_pfg1b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SecurityGuard1/PathFollow3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_fsrqj")
 
 [node name="SecurityGuard2" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -23)
 curve = SubResource("Curve3D_oxmku")
 script = ExtResource("15_oxmku")
-speed = 2.0
+speed = 4.0
 
 [node name="PathFollow3D" type="PathFollow3D" parent="SecurityGuard2"]
 
@@ -503,7 +598,18 @@ speed = 2.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_oxmku")
 
-[node name="Cone Vision" parent="SecurityGuard2/PathFollow3D/MeshInstance3D" instance=ExtResource("15_pfg1b")]
+[node name="Cone Vision" parent="SecurityGuard2/PathFollow3D" instance=ExtResource("15_pfg1b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+sight_line_angle = 140.0
+sight_line_radius = 5.0
+time_till_caught = 1.0
+
+[node name="Area3D" type="Area3D" parent="SecurityGuard2/PathFollow3D"]
+script = SubResource("GDScript_pfg1b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SecurityGuard2/PathFollow3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_fsrqj")
 
 [node name="Document" parent="." instance=ExtResource("16_1tqx8")]
 transform = Transform3D(2.77, 0, 0, 0, 2.77, 0, 0, 0, 2.77, 4.5, 0, -19.5)
@@ -547,3 +653,10 @@ shape = SubResource("BoxShape3D_pfg1b")
 [connection signal="open_door3" from="Janitor" to="Doors/Generic_Door6" method="open"]
 [connection signal="open_door3" from="Janitor" to="Doors/Generic_Door7" method="unlock"]
 [connection signal="open_door3" from="Janitor" to="Doors/Generic_Door7" method="open"]
+[connection signal="pick_up_keycard" from="Janitor" to="Keycard" method="janitor_picked_up"]
+[connection signal="body_entered" from="Janitor/PathFollow3D/Area3D" to="Janitor/PathFollow3D/Area3D" method="_on_body_entered"]
+[connection signal="body_entered" from="SecurityGuard1/PathFollow3D/Area3D" to="SecurityGuard1/PathFollow3D/Area3D" method="_on_body_entered"]
+[connection signal="body_entered" from="SecurityGuard2/PathFollow3D/Area3D" to="SecurityGuard2/PathFollow3D/Area3D" method="_on_body_entered"]
+
+[editable path="Doors/Generic_Door6"]
+[editable path="Doors/Generic_Door7"]

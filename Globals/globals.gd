@@ -19,7 +19,7 @@ var ui_manager: UI_Manager
 var player : Player
 
 var camera : Node3D
-var caught_time_remaining : float
+var safe_ratio : float
 
 var allow_interact: bool = true
 
@@ -37,7 +37,9 @@ func _ready():
 	add_child(time_manager)
 
 func player_caught():
-	print("youre caught bitch")
+	get_tree().reload_current_scene()
+	time_manager.restart_time()
+	time_manager.start_time()
 	#END GAME MWAHAHA
 	pass
 

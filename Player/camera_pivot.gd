@@ -51,8 +51,8 @@ func step_rotation(change: int):
 
 #var elapsed = 0.0
 func _process(delta: float) -> void:
-	color_rect.modulate.a = 100.0 * (1.0 - (globals.caught_time_remaining / 2.0))
-	
+	color_rect.modulate.a = 1.0 - globals.safe_ratio
+	#print(globals.caught_time_remaining)
 	#Centers camera pivot on the parent
 	position = globals.player.position
 	
