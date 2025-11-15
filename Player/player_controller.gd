@@ -10,6 +10,7 @@ var sneak_detect = $SneakDetect
 
 @onready var collision := $CollisionShape3D
 @onready var mesh : MeshInstance3D = $PlayerMesh
+@onready var material : StandardMaterial3D = mesh.get_surface_override_material(0) #Testing for crouch
 
 var previous_input : Vector2
 var is_crouching := false

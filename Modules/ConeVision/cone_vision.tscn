@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyhnk6p2fbc87"]
+
+[sub_resource type="GDScript" id="GDScript_23e0v"]
+resource_name = "cone_vision"
+script/source = "extends Area3D
+
+var player_spotted
+@onready var sight_checker := $SightChecker
+@onready var collision := $CollisionPolygon3D
+
+@export var sight_line_angle : int = 180 #degrees
+@export var sight_line_radius : int = 15 #meters
+@export var angle_steps : int = 5
+
+var polygon_points : PackedVector2Array = []
+
+func _ready() -> void:
+	polygon_points.append(Vector2.ZERO)
+	var sweep_angle = -sight_line_angle / 2
+	
+	for j in range(sight_line_angle / 5 + 1):
+		polygon_points.append(Vector2(
+			sight_line_radius * sin(deg_to_rad(sweep_angle)),
+			sight_line_radius * cos(deg_to_rad(sweep_angle))
+		))
+		sweep_angle += 5
+	collision.polygon = polygon_points
+
+func _process(delta: float) -> void:
+	if player_spotted:
+		sight_checker.target_position = Vector3(globals.player.global_position.x,globals.player.global_position.y+0.5,globals.player.global_position.z) - sight_checker.global_position
+		if sight_checker.get_collider() == globals.player:
+			globals.player_caught()
+
+func _on_body_entered(body: Node3D) -> void:
+	player_spotted = true if body == globals.player else player_spotted
+		
+func _on_body_exited(body: Node3D) -> void:
+	player_spotted = false if body == globals.player else player_spotted
+"
+
+[node name="Cone Vision" type="Area3D"]
+script = SubResource("GDScript_23e0v")
+sight_line_radius = 10
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+polygon = PackedVector2Array(-25, 35, 25, 35, 0, 0)
+
+[node name="SightChecker" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 50, 0)
+collision_mask = 9
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

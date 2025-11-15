@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cu2d5aioq3tn2"]
+[gd_scene load_steps=17 format=3 uid="uid://cu2d5aioq3tn2"]
 
 [ext_resource type="Script" uid="uid://dttx216bflsl" path="res://Map/Test_Map/test_map.gd" id="1_xnwlh"]
 [ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="2_ef02n"]
+[ext_resource type="PackedScene" uid="uid://dyhnk6p2fbc87" path="res://Modules/ConeVision/cone_vision.tscn" id="2_h1mgg"]
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="3_yjiye"]
 [ext_resource type="Texture2D" uid="uid://cjwgyolwq6axi" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_ao.png" id="4_57qo1"]
 [ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="5_h1mgg"]
@@ -34,6 +35,9 @@ grow_amount = -4.125
 
 [node name="TestScene" type="Node3D"]
 script = ExtResource("1_xnwlh")
+
+[node name="Cone Vision" parent="." instance=ExtResource("2_h1mgg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.9099426)
 
 [node name="World" type="GridMap" parent="."]
 mesh_library = ExtResource("2_ef02n")

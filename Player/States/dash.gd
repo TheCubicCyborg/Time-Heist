@@ -9,16 +9,14 @@ var walking_state : State
 @export
 var sliding_state : State
 @export
-var sneak_checking_state : State
-@export
-var crouching_state: State
+var sneak_state : State
 
 
 #var added_velocity
 
 func enter() -> void:
 	if player.is_crouching:
-		player.is_crouching = false
+		input_controller.crouch_off()
 	player.speed += player.instant_speed_dashing
 	player.current_acceleration = player.acceleration_dashing
 	player.current_max_speed = player.max_speed_dashing
@@ -45,16 +43,6 @@ func process_physics(delta: float) -> State:
 
 	player.move_and_slide()
 	
-	#OLD CODE
-	#player.speed = lerp(player.speed, 0.0, delta * player.current_acceleration)
-	#var input_dir = input_controller.get_input_direction()
-	#var direction_vector = input_controller.get_direction_vector(input_dir)
-	#player.velocity = player.speed * direction_vector
-	#
-	#player.move_and_slide()
-#
-	#if player.speed < 1:
-		#return idle_state
 	return null
 	
 func process_frame(delta: float) -> State:
@@ -78,7 +66,7 @@ func process_frame(delta: float) -> State:
 	
 	if input_controller.get_input_direction() == Vector2.ZERO:
 		return sliding_state
-	if Input.is_action_pressed("player_dash"):
+	if PlayerInput.is_action_pressed("player_dash"):
 		return null
 	return sliding_state
 

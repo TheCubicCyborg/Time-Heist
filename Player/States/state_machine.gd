@@ -19,9 +19,10 @@ func change_state(new_state : State) -> void:
 	current_state.enter()
 	
 func handle_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("player_crouch"):
-		globals.player.is_crouching = !globals.player.is_crouching
-		return
+	#Pass input to playerinputcontroller first (inputs that dont affect state)
+	globals.player.input_controller.process_input(event)
+	
+	#Now give it to the states
 	var new_state = current_state.process_input(event)
 	if new_state:
 		change_state(new_state)

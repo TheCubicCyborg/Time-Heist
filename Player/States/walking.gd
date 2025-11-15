@@ -10,9 +10,7 @@ var sliding_state : State
 @export
 var dash_state : State
 @export
-var sneak_checking_state : State
-@export
-var crouching_state: State
+var sneak_state : State
 
 func enter() -> void:
 	if player.is_crouching:
@@ -27,12 +25,8 @@ func exit() -> void:
 	pass
 	
 func process_input(event: InputEvent) -> State:
-	if Input.is_action_just_pressed("player_dash"):
+	if PlayerInput.is_action_just_pressed("player_dash"):
 		return dash_state
-	if Input.is_action_just_pressed("player_sneak"):
-		return sneak_checking_state
-	#if Input.is_action_just_pressed("player_crouch"):
-		#return crouching_state
 	return null
 	
 func process_physics(delta: float) -> State:
@@ -53,7 +47,7 @@ func process_physics(delta: float) -> State:
 func process_frame(delta: float) -> State:
 	if input_controller.get_input_direction() == Vector2.ZERO:
 		return sliding_state
-	if player.can_move and Input.is_action_pressed("player_dash"):
+	if PlayerInput.is_action_pressed("player_dash"):
 		return dash_state
 	
 	if player.is_crouching:
