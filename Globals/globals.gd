@@ -19,6 +19,7 @@ var ui_manager: UI_Manager
 var player : Player
 
 var camera : Node3D
+var caught_time_remaining : float
 
 var allow_interact: bool = true
 

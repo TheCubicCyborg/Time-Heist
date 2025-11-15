@@ -17,6 +17,8 @@ var previous_facing_direction : Direction
 var destination_rotation : int
 var current_rotation : float
 
+@onready var color_rect := $CanvasLayer/ColorRect
+
 func _ready() -> void:
 	globals.camera = self
 	
@@ -49,6 +51,8 @@ func step_rotation(change: int):
 
 #var elapsed = 0.0
 func _process(delta: float) -> void:
+	color_rect.modulate.a = 100.0 * (1.0 - (globals.caught_time_remaining / 2.0))
+	
 	#Centers camera pivot on the parent
 	position = globals.player.position
 	
