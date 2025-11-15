@@ -20,7 +20,7 @@ func _process(_delta):
 
 func take_control(UI: Control):
 	control_input = true
-	globals.player.can_move = false
+	globals.controller_of_input = globals.InputController.UI
 	if cur_ui:
 		ui_stack.append(cur_ui)
 	cur_ui = UI
@@ -31,7 +31,7 @@ func release_control():
 	else:
 		cur_ui = null
 		control_input = false
-		globals.player.can_move = true
+		globals.controller_of_input = globals.InputController.GAMEPLAY
 
 func handle_debug_input():
 	if not debug_mode and Input.is_action_just_released("debug_button"):

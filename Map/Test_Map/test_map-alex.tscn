@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dxeefq8nxmasb"]
+[gd_scene load_steps=43 format=3 uid="uid://dxeefq8nxmasb"]
 
 [ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="2_pfxt6"]
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="3_g2cin"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bqogo44h7ydxf" path="res://Modules/UI/Game UI/UIPuzzles/test_puzzle.tscn" id="12_mtkwk"]
 [ext_resource type="PackedScene" uid="uid://pq0bcv62221l" path="res://Modules/Interaction/Interface/interface.tscn" id="13_88cv8"]
 [ext_resource type="Script" uid="uid://cyycim24066r4" path="res://Modules/AI/security_guard.gd" id="15_oxmku"]
+[ext_resource type="PackedScene" uid="uid://dyhnk6p2fbc87" path="res://Modules/ConeVision/cone_vision.tscn" id="15_pfg1b"]
 [ext_resource type="PackedScene" uid="uid://djn3ckwc8enih" path="res://Modules/Interaction/Document/document.tscn" id="16_1tqx8"]
 [ext_resource type="Texture2D" uid="uid://b6oady1ollpgf" path="res://Assets/Sprites/temp-paper-resized.png" id="17_gbn1a"]
 [ext_resource type="Texture2D" uid="uid://dkfkrh8rlgw1e" path="res://Assets/Sprites/keycard.png" id="18_grg8u"]
@@ -473,6 +474,8 @@ speed = 3.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_oxmku")
 
+[node name="Cone Vision" parent="Janitor/PathFollow3D/MeshInstance3D" instance=ExtResource("15_pfg1b")]
+
 [node name="SecurityGuard1" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, -38)
 curve = SubResource("Curve3D_88cv8")
@@ -486,6 +489,8 @@ transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_oxmku")
 
+[node name="Cone Vision" parent="SecurityGuard1/PathFollow3D/MeshInstance3D" instance=ExtResource("15_pfg1b")]
+
 [node name="SecurityGuard2" type="Path3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -23)
 curve = SubResource("Curve3D_oxmku")
@@ -497,6 +502,8 @@ speed = 2.0
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SecurityGuard2/PathFollow3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_oxmku")
+
+[node name="Cone Vision" parent="SecurityGuard2/PathFollow3D/MeshInstance3D" instance=ExtResource("15_pfg1b")]
 
 [node name="Document" parent="." instance=ExtResource("16_1tqx8")]
 transform = Transform3D(2.77, 0, 0, 0, 2.77, 0, 0, 0, 2.77, 4.5, 0, -19.5)

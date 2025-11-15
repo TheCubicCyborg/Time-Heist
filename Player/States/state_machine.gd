@@ -4,10 +4,10 @@ extends Node
 
 var current_state: State
 # Called when the node enters the scene tree for the first time.
-func init(move_component: Node) -> void:
+func init(input_controller: Node) -> void:
 	for child in get_children():
 		child.player = globals.player
-		child.move_component = move_component
+		child.input_controller = input_controller
 	
 	change_state(starting_state)
 
@@ -19,9 +19,10 @@ func change_state(new_state : State) -> void:
 	current_state.enter()
 	
 func handle_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("player_crouch"):
-		globals.player.is_crouching = !globals.player.is_crouching
-		return
+	#Pass input to playerinputcontroller first (inputs that dont affect state)
+	globals.player.input_controller.process_input(event)
+	
+	#Now give it to the states
 	var new_state = current_state.process_input(event)
 	if new_state:
 		change_state(new_state)

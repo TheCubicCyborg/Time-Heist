@@ -7,7 +7,7 @@ extends Area3D
 @export var targetted:Interactable = null
 
 func _physics_process(_delta):
-	if globals.player.can_move and Input.is_action_just_pressed("player_interact") and targetted:
+	if PlayerInput.is_action_just_pressed("player_interact") and targetted:
 		targetted.interact()
 
 

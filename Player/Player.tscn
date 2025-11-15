@@ -1,16 +1,15 @@
-[gd_scene load_steps=17 format=4 uid="uid://b0eilnkhu73fw"]
+[gd_scene load_steps=16 format=4 uid="uid://b0eilnkhu73fw"]
 
 [ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/player_controller.gd" id="1_kpmja"]
 [ext_resource type="PackedScene" uid="uid://8gkxub0dm0s7" path="res://Modules/Interaction/interactable_detector.tscn" id="2_f3eu6"]
 [ext_resource type="PackedScene" uid="uid://bqe3vsxnn8umo" path="res://Player/sneak_detect.tscn" id="4_cbu7u"]
 [ext_resource type="Script" uid="uid://6bxjlk376khp" path="res://Player/States/state_machine.gd" id="5_ku6g1"]
 [ext_resource type="Script" uid="uid://bgmirdlww6rh4" path="res://Player/States/idle.gd" id="6_yr07i"]
-[ext_resource type="Script" uid="uid://g1e51k6pxnwx" path="res://Player/player_move_component.gd" id="7_f3eu6"]
+[ext_resource type="Script" uid="uid://g1e51k6pxnwx" path="res://Player/player_input.gd" id="7_f3eu6"]
 [ext_resource type="Script" uid="uid://djpyaus28oo7t" path="res://Player/States/walking.gd" id="8_j4rxl"]
 [ext_resource type="Script" uid="uid://b7xtgegfse881" path="res://Player/States/sliding.gd" id="8_j23h2"]
 [ext_resource type="Script" uid="uid://cgl4x6uxdkx3o" path="res://Player/States/dash.gd" id="9_0j2ni"]
 [ext_resource type="Script" uid="uid://mpo1oa7inkta" path="res://Player/States/sneak_checking.gd" id="10_v0k0e"]
-[ext_resource type="Script" uid="uid://d4c5qp47gdjv4" path="res://Player/crouch.gd" id="11_5wa8t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtt27"]
 
@@ -80,54 +79,39 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.914, -0.05)
 shape = SubResource("CapsuleShape3D_kpmja")
 
 [node name="SneakDetect" parent="." instance=ExtResource("4_cbu7u")]
+visible = false
 
 [node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("5_ku6g1")
 starting_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "dash_state", "sneak_checking_state", "crouching_state")]
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "dash_state")]
 script = ExtResource("6_yr07i")
 walking_state = NodePath("../walking")
 dash_state = NodePath("../dash")
-sneak_checking_state = NodePath("../sneak_checking")
-crouching_state = NodePath("../crouching")
 
-[node name="walking" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "sliding_state", "dash_state", "sneak_checking_state", "crouching_state")]
+[node name="walking" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "sliding_state", "dash_state")]
 script = ExtResource("8_j4rxl")
 idle_state = NodePath("../idle")
 sliding_state = NodePath("../sliding")
 dash_state = NodePath("../dash")
-sneak_checking_state = NodePath("../sneak_checking")
-crouching_state = NodePath("../crouching")
 
-[node name="sliding" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "idle_state", "dash_state", "sneak_checking_state", "crouching_state")]
+[node name="sliding" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "idle_state", "dash_state")]
 script = ExtResource("8_j23h2")
 walking_state = NodePath("../walking")
 idle_state = NodePath("../idle")
 dash_state = NodePath("../dash")
-sneak_checking_state = NodePath("../sneak_checking")
-crouching_state = NodePath("../crouching")
 
-[node name="dash" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "walking_state", "sliding_state", "sneak_checking_state", "crouching_state")]
+[node name="dash" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "walking_state", "sliding_state")]
 script = ExtResource("9_0j2ni")
 idle_state = NodePath("../idle")
 walking_state = NodePath("../walking")
 sliding_state = NodePath("../sliding")
-sneak_checking_state = NodePath("../sneak_checking")
-crouching_state = NodePath("../crouching")
 
-[node name="sneak_checking" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "crouching_state")]
+[node name="sneak" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state")]
 script = ExtResource("10_v0k0e")
 walking_state = NodePath("../walking")
-crouching_state = NodePath("../crouching")
 
-[node name="crouching" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "idle_state", "sliding_state", "dash_state", "sneak_checking_state")]
-script = ExtResource("11_5wa8t")
-walking_state = NodePath("../walking")
-idle_state = NodePath("../idle")
-sliding_state = NodePath("../sliding")
-dash_state = NodePath("../dash")
-sneak_checking_state = NodePath("../sneak_checking")
-
-[node name="move_component" type="Node" parent="."]
+[node name="input_controller" type="Node" parent="." node_paths=PackedStringArray("sneak_state")]
 script = ExtResource("7_f3eu6")
+sneak_state = NodePath("../state_machine/sneak")
