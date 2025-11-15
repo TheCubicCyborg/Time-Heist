@@ -29,10 +29,10 @@ func close():
 	mesh.visible = true
 
 func lock():
-	is_locked = false
+	is_locked = true
 
 func unlock():
-	is_locked = true
+	is_locked = false
 
 func toggle_lock():
 	is_locked = not is_locked

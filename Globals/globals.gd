@@ -19,6 +19,15 @@ var camera : Node3D
 
 var allow_interact: bool = true
 
+#region temporary test variables
+var player_has_keycard: bool = false
+var janitor_has_keycard: bool = false
+
+#endregion
+
+
+
+
 func _ready():
 	time_manager = preload("res://Modules/TimeTravel/TimeManager.gd").new()
 	add_child(time_manager)
