@@ -8,14 +8,20 @@ var paused: bool = true
 var logging: bool = false
 var time_multiplier:float = 1
 
+const FIXED_REWIND_VALUE = 15
+
+signal time_traveled
 
 func _ready():
 	logging = true
-	pass
+	start_time()
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("rewind"):
+		rewind(FIXED_REWIND_VALUE)
 	if !paused:
 		cur_time += delta * time_multiplier
+	
 
 func toggle_time():
 	paused = not paused
@@ -49,6 +55,7 @@ func rewind(time_sec:float):
 		time_stack.pop_back().undo_delta()
 	logging = true
 	cur_time = goal_time
+	time_traveled.emit()
 
 func start_fast_forward(multiplier: float):
 	time_multiplier = multiplier
