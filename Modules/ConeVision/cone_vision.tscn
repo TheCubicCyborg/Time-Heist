@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 	#print(timer.time_left)
 	if player_spotted:
 		sight_checker.look_at(Vector3(globals.player.global_position.x,1,globals.player.global_position.z))
-		#sight_checker.target_position = Vector3(globals.player.global_position.x,globals.player.global_position.y+0.5,globals.player.global_position.z) - sight_checker.global_position)
+		
 		if sight_checker.get_collider() == globals.player:
 			time_detecting += delta
 		else:
