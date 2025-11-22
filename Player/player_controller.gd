@@ -14,6 +14,7 @@ var sneak_detect = $SneakDetect
 
 var previous_input : Vector2
 var is_crouching := false
+var can_rotate := true
 
 var can_move: bool = true
 
@@ -51,16 +52,22 @@ var max_speed_sliding : float
 var deceleration_sliding : float
 #endregion
 #region Dash Variables
-@export_group("Dashing")
+@export_group("Running")
 @export
-var instant_speed_dashing : float
+var max_speed_running : float
 @export
-var max_speed_dashing : float
+var acceleration_running : float
 @export
-var acceleration_dashing : float
-@export
-var deceleration_dashing : float
+var deceleration_running : float
 #endregion
+#region Roll Variables
+@export_group("Rolling")
+@export
+var roll_speed : float
+@export
+var crouch_roll_speed : float
+@export
+var roll_duration : float
 #endregion
 
 func _ready() -> void:
@@ -85,7 +92,7 @@ func _process(delta: float) -> void:
 	state_machine.handle_frame(delta)
 	
 	var input_dir = input_controller.get_input_direction() # Input direction
-	if input_dir:
+	if can_rotate and input_dir:
 		rotation.y = lerp_angle(rotation.y, atan2(-input_dir.x, -input_dir.y), delta * input_controller.rotation_speed)
 	
 func get_direction_facing() -> Vector3:

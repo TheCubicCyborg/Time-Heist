@@ -8,9 +8,7 @@ var idle_state : State
 @export 
 var sliding_state : State
 @export
-var dash_state : State
-@export
-var sneak_state : State
+var running_state : State
 
 func enter() -> void:
 	if player.is_crouching:
@@ -25,8 +23,8 @@ func exit() -> void:
 	pass
 	
 func process_input(event: InputEvent) -> State:
-	if PlayerInput.is_action_just_pressed("player_dash"):
-		return dash_state
+	#if PlayerInput.is_action_just_pressed("player_dash"):
+		#return dash_state
 	return null
 	
 func process_physics(delta: float) -> State:
@@ -47,8 +45,10 @@ func process_physics(delta: float) -> State:
 func process_frame(delta: float) -> State:
 	if input_controller.get_input_direction() == Vector2.ZERO:
 		return sliding_state
-	if PlayerInput.is_action_pressed("player_dash"):
-		return dash_state
+	if PlayerInput.is_action_pressed("player_roll_walk"):
+		return null
+	#if PlayerInput.is_action_pressed("player_dash"):
+		#return dash_state
 	
 	if player.is_crouching:
 		player.current_acceleration = player.deceleration_crouching
@@ -66,4 +66,4 @@ func process_frame(delta: float) -> State:
 			player.current_acceleration = player.acceleration_crouching
 		else:
 			player.current_acceleration = player.acceleration_walking
-	return null
+	return sliding_state

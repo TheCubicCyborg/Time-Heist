@@ -8,8 +8,8 @@
 [ext_resource type="Script" uid="uid://g1e51k6pxnwx" path="res://Player/player_input.gd" id="7_f3eu6"]
 [ext_resource type="Script" uid="uid://djpyaus28oo7t" path="res://Player/States/walking.gd" id="8_j4rxl"]
 [ext_resource type="Script" uid="uid://b7xtgegfse881" path="res://Player/States/sliding.gd" id="8_j23h2"]
-[ext_resource type="Script" uid="uid://cgl4x6uxdkx3o" path="res://Player/States/dash.gd" id="9_0j2ni"]
-[ext_resource type="Script" uid="uid://mpo1oa7inkta" path="res://Player/States/sneak_checking.gd" id="10_v0k0e"]
+[ext_resource type="Script" uid="uid://c13i3s04vpg01" path="res://Player/States/rolling.gd" id="8_v0k0e"]
+[ext_resource type="Script" uid="uid://cgl4x6uxdkx3o" path="res://Player/States/running.gd" id="9_0j2ni"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtt27"]
 
@@ -54,16 +54,18 @@ height = 1.829
 [node name="CharacterBody3D" type="CharacterBody3D"]
 collision_mask = 9
 script = ExtResource("1_kpmja")
-max_speed_walking = 3.0
+max_speed_walking = 2.5
 acceleration_walking = 2.5
 deceleration_walking = 5.0
 max_speed_crouching = 1.0
 acceleration_crouching = 1.0
 deceleration_crouching = 7.0
-instant_speed_dashing = 2.0
-max_speed_dashing = 4.5
-acceleration_dashing = 2.0
-deceleration_dashing = 3.0
+max_speed_running = 5.0
+acceleration_running = 2.0
+deceleration_running = 3.0
+roll_speed = 5.0
+crouch_roll_speed = 3.0
+roll_duration = 0.4
 
 [node name="PlayerMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_v0k0e")
@@ -85,33 +87,41 @@ visible = false
 script = ExtResource("5_ku6g1")
 starting_state = NodePath("idle")
 
-[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "dash_state")]
+[node name="idle" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "running_state")]
 script = ExtResource("6_yr07i")
 walking_state = NodePath("../walking")
-dash_state = NodePath("../dash")
+running_state = NodePath("../running")
 
-[node name="walking" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "sliding_state", "dash_state")]
+[node name="walking" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "sliding_state", "running_state")]
 script = ExtResource("8_j4rxl")
 idle_state = NodePath("../idle")
 sliding_state = NodePath("../sliding")
-dash_state = NodePath("../dash")
+running_state = NodePath("../running")
 
-[node name="sliding" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "idle_state", "dash_state")]
+[node name="sliding" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "idle_state", "running_state")]
 script = ExtResource("8_j23h2")
 walking_state = NodePath("../walking")
 idle_state = NodePath("../idle")
-dash_state = NodePath("../dash")
+running_state = NodePath("../running")
 
-[node name="dash" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "walking_state", "sliding_state")]
+[node name="rolling" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state", "idle_state", "running_state", "sliding_state")]
+script = ExtResource("8_v0k0e")
+walking_state = NodePath("../walking")
+idle_state = NodePath("../idle")
+running_state = NodePath("../running")
+sliding_state = NodePath("../walking")
+
+[node name="running" type="Node" parent="state_machine" node_paths=PackedStringArray("idle_state", "walking_state", "sliding_state")]
 script = ExtResource("9_0j2ni")
 idle_state = NodePath("../idle")
 walking_state = NodePath("../walking")
 sliding_state = NodePath("../sliding")
 
-[node name="sneak" type="Node" parent="state_machine" node_paths=PackedStringArray("walking_state")]
-script = ExtResource("10_v0k0e")
-walking_state = NodePath("../walking")
-
-[node name="input_controller" type="Node" parent="." node_paths=PackedStringArray("sneak_state")]
+[node name="input_controller" type="Node" parent="." node_paths=PackedStringArray("rolling_state")]
 script = ExtResource("7_f3eu6")
-sneak_state = NodePath("../state_machine/sneak")
+rolling_state = NodePath("../state_machine/rolling")
+
+[node name="roll_window" type="Timer" parent="input_controller"]
+process_callback = 0
+wait_time = 0.3
+one_shot = true

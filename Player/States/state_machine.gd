@@ -33,7 +33,6 @@ func handle_physics(delta: float) -> void:
 		change_state(new_state)
 		
 func handle_frame(delta: float) -> void:
-	#print(globals.player.speed)
 	var new_state = current_state.process_frame(delta)
 	if new_state:
 		change_state(new_state)

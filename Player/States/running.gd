@@ -1,5 +1,5 @@
 extends State
-class_name Dash
+class_name Running
 
 @export_category("States")
 @export
@@ -8,19 +8,14 @@ var idle_state : State
 var walking_state : State
 @export
 var sliding_state : State
-@export
-var sneak_state : State
-
-
-#var added_velocity
 
 func enter() -> void:
 	if player.is_crouching:
-		input_controller.crouch_off()
-	player.speed += player.instant_speed_dashing
-	player.current_acceleration = player.acceleration_dashing
-	player.current_max_speed = player.max_speed_dashing
-	player.velocity = player.speed * (player.get_direction_facing().normalized())
+		player.current_max_speed = player.max_speed_crouching
+		player.current_acceleration = player.acceleration_crouching
+	else:
+		player.current_max_speed = player.max_speed_running
+		player.current_acceleration = player.acceleration_running
 	pass
 	
 func exit() -> void:
@@ -46,32 +41,27 @@ func process_physics(delta: float) -> State:
 	return null
 	
 func process_frame(delta: float) -> State:
+	if input_controller.get_input_direction() == Vector2.ZERO:
+		return sliding_state
+	if PlayerInput.is_action_pressed("player_roll_walk"):
+		return walking_state
+		
 	if player.is_crouching:
 		player.current_acceleration = player.deceleration_crouching
 		player.current_max_speed = player.max_speed_crouching
 	else:
-		player.current_acceleration = player.deceleration_dashing
-		player.current_max_speed = player.max_speed_dashing
+		player.current_acceleration = player.deceleration_running
+		player.current_max_speed = player.max_speed_running
 		
 	if player.speed > player.current_max_speed:
 		if player.is_crouching:
 			player.current_acceleration = player.deceleration_crouching
 		else:
-			player.current_acceleration = player.deceleration_dashing
+			player.current_acceleration = player.deceleration_running
 	else:
 		if player.is_crouching:
 			player.current_acceleration = player.acceleration_crouching
 		else:
-			player.current_acceleration = player.acceleration_dashing
-	
-	if input_controller.get_input_direction() == Vector2.ZERO:
-		return sliding_state
-	if PlayerInput.is_action_pressed("player_dash"):
-		return null
-	return sliding_state
+			player.current_acceleration = player.acceleration_running
 
-func no_small_values(vector : Vector3):
-	var threshhold = 4.5
-	if vector.x <= threshhold and vector.z <= threshhold:
-		return true
-	return false
+	return null
