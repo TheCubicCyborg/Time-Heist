@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cemiaror1bhqt"]
+
+[ext_resource type="Script" uid="uid://dm6xhegbxiaba" path="res://Modules/Tools/camera_tool.gd" id="1_gl3b4"]
+[ext_resource type="PackedScene" uid="uid://b64t4twgcdips" path="res://Modules/Interaction/interactable.tscn" id="2_bmplt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v4o2c"]
+
+[node name="Camera Tool" type="Camera3D"]
+script = ExtResource("1_gl3b4")
+
+[node name="Interactable" parent="." node_paths=PackedStringArray("interact_object") instance=ExtResource("2_bmplt")]
+interact_object = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+shape = SubResource("BoxShape3D_v4o2c")

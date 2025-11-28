@@ -70,9 +70,11 @@ var crouch_roll_speed : float
 var roll_duration : float
 #endregion
 
+var tool1
+var tool2
+
 func _ready() -> void:
 	globals.player = self
-	
 	state_machine.init(input_controller)
 	
 	#MOVE
