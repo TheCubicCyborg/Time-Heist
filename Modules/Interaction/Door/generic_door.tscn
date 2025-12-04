@@ -16,6 +16,8 @@ mesh = NodePath("Door RB/Door Mesh")
 
 [node name="Door RB" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.125)
+collision_layer = 16
+collision_mask = 0
 
 [node name="PhysicalCollider" type="CollisionShape3D" parent="Door RB"]
 shape = SubResource("BoxShape3D_nk12b")
@@ -26,10 +28,8 @@ skeleton = NodePath("")
 
 [node name="Interactable" parent="Door RB" node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("2_im0k3")]
 process_mode = 1
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.125)
 mesh = NodePath("../Door Mesh")
 interact_object = NodePath("../..")
 
 [node name="InteractableCollider" type="CollisionShape3D" parent="Door RB/Interactable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.125)
 shape = SubResource("BoxShape3D_nk12b")

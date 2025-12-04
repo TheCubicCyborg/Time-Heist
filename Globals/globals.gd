@@ -5,7 +5,7 @@ class_name Globals extends Node
 #2: Interaction
 #3: Floor
 #4: Walls
-#5:
+#5: Collidable Interaction
 #6:
 #7:
 #8:

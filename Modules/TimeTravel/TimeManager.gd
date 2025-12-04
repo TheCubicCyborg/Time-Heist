@@ -9,6 +9,8 @@ var logging: bool = false
 var time_multiplier:float = 1
 
 const FIXED_REWIND_VALUE = 15
+const REWIND_MULTIPLIER = 2
+const WAIT_MULTIPLIER = 5
 
 signal time_traveled
 
@@ -17,9 +19,11 @@ func _ready():
 	start_time()
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("rewind"):
-		rewind(FIXED_REWIND_VALUE)
-	if !paused:
+	if Input.is_action_pressed("rewind"):
+		rewind(REWIND_MULTIPLIER * delta)
+	elif Input.is_action_pressed("wait"):
+		cur_time += delta * WAIT_MULTIPLIER
+	elif !paused:
 		cur_time += delta * time_multiplier
 	
 

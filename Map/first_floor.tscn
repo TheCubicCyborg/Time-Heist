@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjjcgr3dvub72"]
+
+[ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="1_p3g42"]
+
+[node name="First Floor" type="Node3D"]
+
+[node name="Walls" type="GridMap" parent="."]
+mesh_library = ExtResource("1_p3g42")
+cell_size = Vector3(0.25, 2, 0.25)
+cell_center_y = false
+collision_layer = 8
+collision_mask = 0
+
+[node name="Rooms" type="Node3D" parent="."]
