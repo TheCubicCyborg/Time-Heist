@@ -7,9 +7,11 @@ var state_machine = $state_machine
 var input_controller = $input_controller
 @onready
 var sneak_detect = $SneakDetect
+@onready
+var animation_player : AnimationPlayer = $Mesh/AnimationPlayer
 
 @onready var collision := $CollisionShape3D
-@onready var mesh : MeshInstance3D = $PlayerMesh
+@onready var mesh : MeshInstance3D = $Mesh/Skeleton3D/torso_001
 @onready var material : StandardMaterial3D = mesh.get_surface_override_material(0) #Testing for crouch
 
 var previous_input : Vector2
@@ -70,8 +72,8 @@ var crouch_roll_speed : float
 var roll_duration : float
 #endregion
 
-var tool1
-var tool2
+var tool1 : Tool
+var tool2 : Tool
 
 func _ready() -> void:
 	globals.player = self

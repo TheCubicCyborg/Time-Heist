@@ -8,11 +8,13 @@ var walking_state : State
 var running_state : State
 
 func enter() -> void:
+	player.animation_player.play("idle")
 	player.velocity = Vector3.ZERO
 	player.speed = 0
 	pass
 	
 func exit() -> void:
+	player.animation_player.stop()
 	pass
 	
 func process_input(event: InputEvent) -> State:

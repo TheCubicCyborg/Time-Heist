@@ -103,4 +103,10 @@ func process_input(event: InputEvent):
 			print("missed it")
 		return
 	#endregion
+	#region Tools
+	if PlayerInput.is_action_just_pressed("player_tool1"):
+		globals.player.tool1.use_tool()
+	if PlayerInput.is_action_just_pressed("player_tool2"):
+		globals.player.tool2.use_tool()
+	#endregion
 		

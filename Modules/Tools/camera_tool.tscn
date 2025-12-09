@@ -5,11 +5,13 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v4o2c"]
 
-[node name="Camera Tool" type="Camera3D"]
+[node name="Camera Tool" type="Node3D"]
 script = ExtResource("1_gl3b4")
 
-[node name="Interactable" parent="." node_paths=PackedStringArray("interact_object") instance=ExtResource("2_bmplt")]
+[node name="Camera" type="Camera3D" parent="."]
+
+[node name="Interactable" parent="Camera" node_paths=PackedStringArray("interact_object") instance=ExtResource("2_bmplt")]
 interact_object = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera/Interactable"]
 shape = SubResource("BoxShape3D_v4o2c")
