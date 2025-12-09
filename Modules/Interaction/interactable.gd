@@ -8,6 +8,7 @@ static var invalid_outline_material:StandardMaterial3D = preload("res://Assets/M
 
 var playing_invalid_animation: bool = false
 var invalid_animation_info: Array = [0.2,0,3,0,false] #blink duration, blink timer, number of blinks, cur_blink, is highlighted
+
 var is_targetted: bool = false
 
 func targetted():
