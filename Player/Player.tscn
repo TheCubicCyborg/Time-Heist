@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=4 uid="uid://b0eilnkhu73fw"]
 
 [ext_resource type="Script" uid="uid://dd5q43br4mghh" path="res://Player/player_controller.gd" id="1_kpmja"]
-[ext_resource type="PackedScene" uid="uid://8gkxub0dm0s7" path="res://Modules/Interaction/interactable_detector.tscn" id="2_f3eu6"]
+[ext_resource type="PackedScene" uid="uid://8gkxub0dm0s7" path="res://Modules/Interaction/Interactor.tscn" id="2_f3eu6"]
 [ext_resource type="PackedScene" uid="uid://bqe3vsxnn8umo" path="res://Player/sneak_detect.tscn" id="4_cbu7u"]
 [ext_resource type="Script" uid="uid://6bxjlk376khp" path="res://Player/States/state_machine.gd" id="5_ku6g1"]
 [ext_resource type="Script" uid="uid://bgmirdlww6rh4" path="res://Player/States/idle.gd" id="6_yr07i"]
@@ -52,7 +52,7 @@ radius = 0.25
 height = 1.829
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
-collision_mask = 9
+collision_mask = 28
 script = ExtResource("1_kpmja")
 max_speed_walking = 3.0
 acceleration_walking = 2.5
@@ -70,16 +70,14 @@ mesh = SubResource("ArrayMesh_v0k0e")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_v0k0e")
 
-[node name="InteractableDetector" parent="PlayerMesh" instance=ExtResource("2_f3eu6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.8)
-collider_size = Vector3(1, 2, 1)
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.914, -0.05)
 shape = SubResource("CapsuleShape3D_kpmja")
 
 [node name="SneakDetect" parent="." instance=ExtResource("4_cbu7u")]
 visible = false
+
+[node name="Interactor" parent="." instance=ExtResource("2_f3eu6")]
 
 [node name="state_machine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("5_ku6g1")

@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://cw2s4bmk01to8"]
 
-[ext_resource type="ArrayMesh" uid="uid://bgsmn7rqt0orv" path="res://Assets/Meshes/SmallWall_Cube.res" id="1_8v12d"]
 [ext_resource type="ArrayMesh" uid="uid://cf64cvvno8yr5" path="res://Assets/Meshes/WideWall_Cube_001.res" id="2_m8hoe"]
 [ext_resource type="ArrayMesh" uid="uid://c2fkji6qvuma2" path="res://Assets/Meshes/Doorway_Cube_002.res" id="3_m8hoe"]
 [ext_resource type="ArrayMesh" uid="uid://qasop43fbedt" path="res://Assets/Meshes/WindowSmallWall_Cube_004.res" id="3_rgqh2"]
 [ext_resource type="ArrayMesh" uid="uid://cajdu0cwfm2md" path="res://Assets/Meshes/WindowWideWall_Cube_003.res" id="4_tmw5u"]
+[ext_resource type="ArrayMesh" uid="uid://btq3ecp66i8ln" path="res://Assets/Meshes/SmallWall_v2_Cube_003.res" id="6_tmw5u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rgqh2"]
 size = Vector3(0.25, 2, 0.25)
@@ -21,7 +21,8 @@ size = Vector3(0.25, 1, 1)
 [node name="MeshLibrary" type="Node3D"]
 
 [node name="SmallWall" type="MeshInstance3D" parent="."]
-mesh = ExtResource("1_8v12d")
+visible = false
+mesh = ExtResource("6_tmw5u")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="SmallWall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -30,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_rgqh2")
 
 [node name="WideWall" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.39338505)
+visible = false
 mesh = ExtResource("2_m8hoe")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="WideWall"]

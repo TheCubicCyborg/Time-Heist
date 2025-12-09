@@ -99,8 +99,3 @@ script = SubResource("GDScript_isv23")
 
 [node name="DocumentViewer" parent="." instance=ExtResource("3_jfs1l")]
 layout_mode = 1
-
-[node name="Interface" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
