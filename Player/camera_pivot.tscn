@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2jmn7fqcsv24"]
+[gd_scene load_steps=5 format=3 uid="uid://c2jmn7fqcsv24"]
 
 [ext_resource type="Script" uid="uid://ddcrxqxycn04f" path="res://Player/camera_pivot.gd" id="1_ehrhw"]
+[ext_resource type="Shader" uid="uid://d1gd8vm0a4uou" path="res://Effects/time_travel_1.gdshader" id="2_iwa17"]
+[ext_resource type="Script" uid="uid://w74t1d1ps1fb" path="res://effects/time_travel_effect.gd" id="3_fvf84"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fvf84"]
+shader = ExtResource("2_iwa17")
+shader_parameter/strength = 0.08
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.0
+shader_parameter/aberration = 0.425
+shader_parameter/width = 0.04
+shader_parameter/feather = 0.135
 
 [node name="Camera_pivot" type="Node3D"]
 script = ExtResource("1_ehrhw")
@@ -18,3 +29,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="TimeTravelRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_fvf84")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_fvf84")
