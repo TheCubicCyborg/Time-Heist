@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b5fj57l7o0ux"
-path="res://.godot/imported/monitorv3.glb-6c0d897a2bb77500270e7ed7e912cbf3.scn"
+uid="uid://dytgs1y3betdq"
+path="res://.godot/imported/CornerLarge_fv.glb-4e451bc68f5618fa5b08e09f409be701.scn"
 
 [deps]
 
-source_file="res://Assets/Models/monitorv3.glb"
-dest_files=["res://.godot/imported/monitorv3.glb-6c0d897a2bb77500270e7ed7e912cbf3.scn"]
+source_file="res://Assets/Models/CornerLarge_fv.glb"
+dest_files=["res://.godot/imported/CornerLarge_fv.glb-4e451bc68f5618fa5b08e09f409be701.scn"]
 
 [params]
 

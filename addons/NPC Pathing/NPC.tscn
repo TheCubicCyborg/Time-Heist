@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cne3kilvgkpxb"]
 
-[ext_resource type="Script" uid="uid://dxhkc2f80jysl" path="res://Modules/AI/NPC.gd" id="1_rndmq"]
+[ext_resource type="Script" uid="uid://dxhkc2f80jysl" path="res://addons/NPC Pathing/NPC.gd" id="1_rndmq"]
 
 [node name="NPC" type="Node3D"]
 script = ExtResource("1_rndmq")
