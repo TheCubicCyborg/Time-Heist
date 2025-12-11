@@ -1,4 +1,4 @@
-extends Control
+extends UI
 
 var debug_button_handled: bool = true
 var fastforwarding: bool = false
@@ -6,9 +6,15 @@ var rewinding: bool = false
 var pausing: bool = false
 var restarting: bool = false
 
+func open():
+	super.open()
+	globals.ui_manager.debug_mode = true
+
+func close():
+	super.close()
+	globals.ui_manager.debug_mode = false
+
 func _process(_delta):
-	if Input.is_action_just_pressed("debug_button"):
-		debug_button_handled = false
 	if Input.is_action_pressed("debug_button"):
 		if not pausing and Input.is_key_pressed(KEY_1):
 			#print("toggle time")
@@ -49,6 +55,3 @@ func _process(_delta):
 		pausing = false
 	if restarting and not Input.is_key_pressed(KEY_5):
 		restarting = false
-	if Input.is_action_just_released("debug_button") and not debug_button_handled:
-		debug_button_handled = true
-		$"..".toggle_debug(false)

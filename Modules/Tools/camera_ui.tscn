@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bicrn8ltytynb"]
+
+[ext_resource type="PackedScene" uid="uid://cemiaror1bhqt" path="res://Modules/Tools/camera_tool.tscn" id="1_2u54v"]
+[ext_resource type="Script" uid="uid://b4p7j4njw3sx7" path="res://Modules/Tools/camera_ui.gd" id="1_jmqmq"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_d6jif"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Camera" type="TextureRect"]
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = 14.0
+offset_right = -47.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_d6jif")
+script = ExtResource("1_jmqmq")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Camera Tool" parent="SubViewport" instance=ExtResource("1_2u54v")]

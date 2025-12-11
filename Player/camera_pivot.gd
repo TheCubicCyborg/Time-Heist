@@ -30,10 +30,10 @@ func _ready() -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
-	if PlayerInput.is_action_pressed("camera_right"):
+	if PlayerInput.is_action_just_pressed("camera_right"):
 		step_rotation(-1)
 		test_print()
-	if PlayerInput.is_action_pressed("camera_left"):
+	if PlayerInput.is_action_just_pressed("camera_left"):
 		step_rotation(+1)
 		test_print()
 
