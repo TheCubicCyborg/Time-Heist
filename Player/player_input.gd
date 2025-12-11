@@ -75,7 +75,6 @@ func crouch_off():
 	globals.player.is_crouching = false
 	globals.player.collision.shape.height += 0.8
 	globals.player.collision.position.y += 0.4
-	globals.player.rotation_speed = 15
 	globals.player.current_rotation_speed = globals.player.rotation_speed
 	#globals.player.mesh.position.y += 0.8
 	#globals.player.material.albedo_color = Color(1.0, 1.0, 1.0, 1.0)
