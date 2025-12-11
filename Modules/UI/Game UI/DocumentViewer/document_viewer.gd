@@ -1,4 +1,4 @@
-extends Control
+extends UI
 
 class_name DocumentViewer
 
