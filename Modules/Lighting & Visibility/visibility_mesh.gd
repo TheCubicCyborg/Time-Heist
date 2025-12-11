@@ -18,7 +18,6 @@ func _ready():
 func _process(_delta):
 	viewport_sprite.position = Vector3(player.position.x,2.001,player.position.z)
 	fake_player.position = Vector2(player.position.x * 100 ,player.position.z * 100)
-
 func generate_tilemap():
 	for i in range(MINX,MAXX + 1):
 		for j in range(MINY,MAXY + 1):
