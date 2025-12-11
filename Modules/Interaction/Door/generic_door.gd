@@ -46,3 +46,7 @@ func interact():
 		return false
 	else:
 		return true
+
+
+func _on_test_puzzle_puzzle_passed():
+	pass # Replace with function body.
