@@ -27,7 +27,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/NPC Pathing/plugin.cfg", "res://addons/time_tracker/plugin.cfg")
+enabled=PackedStringArray("res://addons/time_tracker/plugin.cfg")
 
 [input]
 
@@ -172,3 +172,4 @@ wait={
 [rendering]
 
 renderer/rendering_method="mobile"
+limits/opengl/max_lights_per_object=32
