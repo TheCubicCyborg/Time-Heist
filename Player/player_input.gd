@@ -67,15 +67,18 @@ func crouch_on():
 	globals.player.is_crouching = true
 	globals.player.collision.shape.height -= 0.8
 	globals.player.collision.position.y -= 0.4
-	globals.player.mesh.position.y -= 0.8
-	globals.player.material.albedo_color = Color(0.982, 0.502, 1.0, 1.0)
+	globals.player.current_rotation_speed = globals.player.crouch_rotation_speed
+	#globals.player.mesh.position.y -= 0.8
+	#globals.player.material.albedo_color = Color(0.982, 0.502, 1.0, 1.0)
 	
 func crouch_off():
 	globals.player.is_crouching = false
 	globals.player.collision.shape.height += 0.8
 	globals.player.collision.position.y += 0.4
-	globals.player.mesh.position.y += 0.8
-	globals.player.material.albedo_color = Color(1.0, 1.0, 1.0, 1.0)
+	globals.player.rotation_speed = 15
+	globals.player.current_rotation_speed = globals.player.rotation_speed
+	#globals.player.mesh.position.y += 0.8
+	#globals.player.material.albedo_color = Color(1.0, 1.0, 1.0, 1.0)
 	
 func toggle_crouch():
 	if globals.player.is_crouching:

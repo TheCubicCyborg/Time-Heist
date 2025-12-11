@@ -16,7 +16,7 @@ var crouching_on_enter
 var roll_speed
 
 func enter() -> void:
-	#Play sliding animation
+	#player.anim_tree.set("parameters/PlayerAnimations/Roll/request",AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 	player.can_rotate = false
 	
 	#saves if crouching state
@@ -26,6 +26,8 @@ func enter() -> void:
 		roll_speed = player.roll_speed
 	else:
 		roll_speed = player.crouch_roll_speed
+	
+	player.anim_tree.set("parameters/roll/TimeScale/scale",roll_speed/2.5)
 		
 	roll_timer = 0.0
 	

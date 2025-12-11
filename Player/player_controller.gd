@@ -9,6 +9,8 @@ var input_controller = $input_controller
 var sneak_detect = $SneakDetect
 @onready
 var animation_player : AnimationPlayer = $Mesh/AnimationPlayer
+@onready
+var anim_tree : AnimationTree = $Mesh/AnimationTree
 
 @onready var collision := $CollisionShape3D
 @onready var mesh : MeshInstance3D = $Mesh/Skeleton3D/torso_001
@@ -24,8 +26,11 @@ var can_move: bool = true
 var speed : float
 var current_max_speed : float
 var current_acceleration : float
+var current_rotation_speed : float
 @export
 var rotation_speed : float = 15.0
+@export
+var crouch_rotation_speed : float = 7.5
 
 @export_category("State Speeds")
 #region Walking Variables
@@ -79,9 +84,13 @@ func _ready() -> void:
 	globals.player = self
 	state_machine.init(input_controller)
 	
+	current_rotation_speed = rotation_speed
+	
 	#MOVE
 	sneak_detect.head.position.y = collision.shape.height / 4 * 3
 	sneak_detect.hip.position.y = collision.shape.height / 4
+	
+	anim_tree.set("parameters/Movement/transition_request", "Idle")
 	
 	pass
 
@@ -97,7 +106,7 @@ func _process(delta: float) -> void:
 	
 	var input_dir = input_controller.get_input_direction() # Input direction
 	if can_rotate and input_dir:
-		rotation.y = lerp_angle(rotation.y, atan2(-input_dir.x, -input_dir.y), delta * input_controller.rotation_speed)
+		rotation.y = lerp_angle(rotation.y, atan2(-input_dir.x, -input_dir.y), delta * current_rotation_speed)
 	
 func get_direction_facing() -> Vector3:
 	return -get_global_transform().basis.z

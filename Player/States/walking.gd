@@ -11,7 +11,7 @@ var sliding_state : State
 var running_state : State
 
 func enter() -> void:
-	player.animation_player.play("walking")
+	#player.anim_tree.set("parameters/PlayerAnimations/Movement/transition_request","Walking")
 	
 	if player.is_crouching:
 		player.current_max_speed = player.max_speed_crouching
@@ -22,7 +22,6 @@ func enter() -> void:
 	pass
 	
 func exit() -> void:
-	player.animation_player.stop()
 	pass
 	
 func process_input(event: InputEvent) -> State:

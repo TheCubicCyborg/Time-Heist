@@ -13,8 +13,8 @@ func _ready() -> void:
 		%PeopleContainer, %PlacesContainer
 	]
 	
-	people.pressed.connect(view_panel.bind(panels[0]))
-	places.pressed.connect(view_panel.bind(panels[1]))
+	people.focus_entered.connect(view_panel.bind(panels[0]))
+	places.focus_entered.connect(view_panel.bind(panels[1]))
 	
 	people.grab_focus()
 	view_panel(panels[0])
