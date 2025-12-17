@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="TimeHeist"
-run/main_scene="uid://0o2xjnq7qhqi"
+run/main_scene="uid://bjjcgr3dvub72"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 

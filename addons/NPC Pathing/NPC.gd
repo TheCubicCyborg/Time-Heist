@@ -3,13 +3,16 @@ extends Node3D
 class_name NPC
 
 @export var path: NPCPath
-var time_manager: TimeManager
+
+#@export var path: NPCPath
+var handler: PathHandler
 
 func _ready():
-	time_manager = globals.time_manager
+	handler = PathHandler.new().init(self)
+	
 
-func _process(delta):
-	pass
+func _process(_delta):
+	handler.process()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	pass

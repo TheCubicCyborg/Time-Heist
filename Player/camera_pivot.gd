@@ -1,8 +1,9 @@
 extends Node3D
 
-@export var X_ROTATION : float = -60
+@export var CAMERA_ROTATION_X : float = -60
 @export var CAM_ROT_SPEED : float = 5
-@export var CAMERA_DISTANCE : float = 7
+@export var CAMERA_DISTANCE_BACK : float = 7
+@export var CAMERA_DISTANCE_UP : float = 3
 
 enum Direction { 
 	NORTH = 0,
@@ -22,8 +23,11 @@ var current_rotation : float
 func _ready() -> void:
 	globals.camera = self
 	
-	get_child(0).position.z = CAMERA_DISTANCE
-	rotation_degrees.x = X_ROTATION
+	get_child(0).position.z = CAMERA_DISTANCE_BACK
+	get_child(0).position.y = CAMERA_DISTANCE_UP
+	get_child(0).rotation_degrees.x = CAMERA_ROTATION_X
+	
+	#rotation_degrees.x = X_ROTATION
 	
 	rotation_degrees.y = facing_direction * 90
 	destination_rotation = facing_direction * 90

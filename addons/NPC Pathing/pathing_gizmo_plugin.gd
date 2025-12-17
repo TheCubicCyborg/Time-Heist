@@ -2,7 +2,7 @@
 extends EditorNode3DGizmoPlugin
 
 
-const NPC = preload("res://Modules/AI/NPC.gd")
+const NPC = preload("res://addons/NPC Pathing/NPC.gd")
 const PathingGizmo = preload("res://addons/NPC Pathing/pathing_gizmo.gd")
 
 func _get_gizmo_name():
