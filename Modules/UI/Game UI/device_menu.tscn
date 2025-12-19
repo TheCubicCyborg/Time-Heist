@@ -15,17 +15,15 @@ var tabs : Array = [MenuTabPanel]
 @export var focused_tab : int = 0
 
 func _ready() -> void:
-	tabs = [
-		$DeviceFiles, $DeviceFiles2, $DeviceFiles3, $DeviceFiles4
-	]
+	tabs = get_children()
 	select_tab(focused_tab)
 
 func handle_input():
 	if Input.is_action_just_pressed(\"ui_focus_next\"):
-		focused_tab = (focused_tab + 1) % 4
+		focused_tab = (focused_tab + 1) % tabs.size()
 		select_tab(focused_tab)
 	if Input.is_action_just_pressed(\"ui_focus_prev\"):
-		focused_tab = (focused_tab - 1) % 4
+		focused_tab = (focused_tab - 1) % tabs.size()
 		select_tab(focused_tab)
 		
 func select_tab(selected_tab : int):
