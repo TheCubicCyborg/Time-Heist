@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bigh7xaj6n6yj"]
+[gd_scene load_steps=6 format=3 uid="uid://bigh7xaj6n6yj"]
 
 [ext_resource type="Script" uid="uid://rjinxblp7bsc" path="res://Modules/UI/Game UI/Device/device_files.gd" id="1_40ogp"]
 [ext_resource type="ButtonGroup" uid="uid://qtjcsgjg0ef5" path="res://Assets/UI/Time Travel Menu/device_files_folders.tres" id="1_w34wi"]
 [ext_resource type="Texture2D" uid="uid://kon7grknc0m0" path="res://Assets/UI/Main Menu/5560F638-770D-4B23-A73B-C47E189BD1F4.jpeg" id="2_w34wi"]
 [ext_resource type="Texture2D" uid="uid://dkgssmw57sk3g" path="res://Assets/UI/Time Travel Menu/doc bar.png" id="4_dwdlg"]
+[ext_resource type="PackedScene" uid="uid://dui7y0up6fidp" path="res://Modules/UI/Game UI/Device/device_document_viewer.tscn" id="4_xvwb1"]
 
 [node name="DeviceFiles" type="Control" node_paths=PackedStringArray("main_focus")]
 layout_mode = 3
@@ -41,7 +42,9 @@ size_flags_stretch_ratio = 0.3
 [node name="People" type="Button" parent="HBoxContainer/FoldersMargin/Folders"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_right = NodePath("../../../FilesMargin/VBoxContainer/PeopleContainer/Files/Button2")
+focus_neighbor_top = NodePath("../Places")
+focus_neighbor_right = NodePath("../../../FilesMargin/VBoxContainer/PeopleContainer/Files/People1")
+focus_neighbor_bottom = NodePath("../Places")
 toggle_mode = true
 button_group = ExtResource("1_w34wi")
 text = "People"
@@ -49,7 +52,9 @@ text = "People"
 [node name="Places" type="Button" parent="HBoxContainer/FoldersMargin/Folders"]
 unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_right = NodePath("../../../FilesMargin/VBoxContainer/PlacesContainer/Files/Button")
+focus_neighbor_top = NodePath("../People")
+focus_neighbor_right = NodePath("../../../FilesMargin/VBoxContainer/PlacesContainer/Files/Places1")
+focus_neighbor_bottom = NodePath(".")
 toggle_mode = true
 button_group = ExtResource("1_w34wi")
 text = "Places"
@@ -80,36 +85,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button2" type="Button" parent="HBoxContainer/FilesMargin/VBoxContainer/PeopleContainer/Files"]
+[node name="People1" type="Button" parent="HBoxContainer/FilesMargin/VBoxContainer/PeopleContainer/Files"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 focus_neighbor_left = NodePath("../../../../../FoldersMargin/Folders/People")
-focus_neighbor_bottom = NodePath("../Button3")
+focus_neighbor_bottom = NodePath("../People2")
 text = "Person File 2"
 
-[node name="Button3" type="Button" parent="HBoxContainer/FilesMargin/VBoxContainer/PeopleContainer/Files"]
+[node name="People2" type="Button" parent="HBoxContainer/FilesMargin/VBoxContainer/PeopleContainer/Files"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 focus_neighbor_left = NodePath("../../../../../FoldersMargin/Folders/People")
-focus_neighbor_top = NodePath("../Button2")
-focus_neighbor_bottom = NodePath("../Button4")
+focus_neighbor_top = NodePath("../People1")
 text = "Person File 3"
-
-[node name="Button4" type="Button" parent="HBoxContainer/FilesMargin/VBoxContainer/PeopleContainer/Files"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-focus_neighbor_left = NodePath("../../../../../FoldersMargin/Folders/People")
-focus_neighbor_top = NodePath("../Button3")
-focus_neighbor_bottom = NodePath("../Button5")
-text = "Person File 4"
-
-[node name="Button5" type="Button" parent="HBoxContainer/FilesMargin/VBoxContainer/PeopleContainer/Files"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-focus_neighbor_left = NodePath("../../../../../FoldersMargin/Folders/People")
-focus_neighbor_top = NodePath("../Button4")
-focus_neighbor_bottom = NodePath("../Button2")
-text = "Person File 5"
 
 [node name="PlacesContainer" type="ScrollContainer" parent="HBoxContainer/FilesMargin/VBoxContainer"]
 unique_name_in_owner = true
@@ -122,7 +110,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="HBoxContainer/FilesMargin/VBoxContainer/PlacesContainer/Files"]
+[node name="Places1" type="Button" parent="HBoxContainer/FilesMargin/VBoxContainer/PlacesContainer/Files"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 focus_neighbor_left = NodePath("../../../../../FoldersMargin/Folders/Places")
@@ -140,7 +128,18 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer/FileMargin"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HBoxContainer/FileMargin/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(640, 1042)
+render_target_update_mode = 4
+
+[node name="DeviceDocumentViewer" parent="HBoxContainer/FileMargin/SubViewportContainer/SubViewport" instance=ExtResource("4_xvwb1")]
+
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/FileMargin"]
+visible = false
 layout_mode = 2
 texture = ExtResource("2_w34wi")
 expand_mode = 5

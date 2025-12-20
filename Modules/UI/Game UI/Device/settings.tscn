@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://begdut20cbu15"]
+
+[ext_resource type="Script" uid="uid://tdcuwudsecor" path="res://Modules/UI/Game UI/Device/settings.gd" id="1_pnwlj"]
+
+[node name="Settings" type="Control" node_paths=PackedStringArray("main_focus")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pnwlj")
+main_focus = NodePath("VBoxContainer/Settings")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.1
+anchor_right = 0.8
+anchor_bottom = 0.9
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Erm... Idk"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit Game"

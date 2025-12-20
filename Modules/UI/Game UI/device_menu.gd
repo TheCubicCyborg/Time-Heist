@@ -2,7 +2,7 @@ extends UI
 class_name DeviceMenu
 
 @export var focused_button : Control
-@onready var menu_tabs: TabContainer = $MarginContainer/HBoxContainer/TextureRect/VBoxContainer/MenuTabs
+@onready var menu_tabs: TabContainer = $MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs
 
 #var tabs : Array[]
 
