@@ -13,6 +13,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_40ogp")
 main_focus = NodePath("HBoxContainer/FoldersMargin/Folders/People")
 
@@ -133,7 +135,7 @@ layout_mode = 2
 
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/FileMargin/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(640, 1042)
+size = Vector2i(630, 1040)
 render_target_update_mode = 4
 
 [node name="DeviceDocumentViewer" parent="HBoxContainer/FileMargin/SubViewportContainer/SubViewport" instance=ExtResource("4_xvwb1")]
