@@ -67,7 +67,7 @@ expand_mode = 1
 stretch_mode = 3
 
 [node name="TextureRect" type="ColorRect" parent="MarginContainer/HBoxContainer"]
-modulate = Color(0.5061931, 0.9999998, 0.9965007, 0.73333335)
+modulate = Color(0.5058824, 1, 0.99607843, 0.8117647)
 custom_minimum_size = Vector2(1420, 0)
 layout_mode = 2
 
@@ -93,6 +93,7 @@ focus_mode = 2
 theme = SubResource("Theme_wq3jl")
 current_tab = 0
 all_tabs_in_front = true
+tab_focus_mode = 0
 script = SubResource("GDScript_4t7mm")
 
 [node name="DeviceFiles" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" instance=ExtResource("4_4t7mm")]

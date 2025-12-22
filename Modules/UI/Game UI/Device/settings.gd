@@ -1,7 +1,7 @@
 extends MenuTabPanel
 
 @onready var animation_player := $AnimationPlayer
-@onready var settings := $HBoxContainer/ScrollContainer
+@onready var settings := $HBoxContainer/SettingsVerticality
 
 func _ready() -> void:
 	settings.hide()
