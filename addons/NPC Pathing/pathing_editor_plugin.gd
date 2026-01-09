@@ -1,4 +1,3 @@
-# MyCustomEditorPlugin.gd
 @tool
 extends EditorPlugin
 

@@ -9,18 +9,20 @@ var npc
 func init(_npc: NPC):
 	npc = _npc
 	cur_action_idx = 0
-	cur_action = npc.path.array[cur_action_idx]
+	if npc.path:
+		cur_action = npc.path.array[cur_action_idx]
 	time_manager = globals.time_manager
 	return self
 
 func process():
-	if time_manager.cur_time < cur_action.start_time:
-		go_to_previous_timed_action()
-	elif time_manager.cur_time >= cur_action.end_time:
-		go_to_next_timed_action()
-	
-	if cur_action is TimedAction:
-		cur_action.do_action(self)
+	if npc and npc.path:
+		if time_manager.cur_time < cur_action.start_time:
+			go_to_previous_timed_action()
+		elif time_manager.cur_time >= cur_action.end_time:
+			go_to_next_timed_action()
+		
+		if cur_action is TimedAction:
+			cur_action.do_action(self)
 
 func go_to_next_timed_action():
 	cur_action_idx += 1

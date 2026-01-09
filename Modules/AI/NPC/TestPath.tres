@@ -1,0 +1,66 @@
+[gd_resource type="Resource" script_class="NPCPath" load_steps=13 format=3 uid="uid://rha1vvtugqpq"]
+
+[ext_resource type="Script" uid="uid://chl7askpcvpc5" path="res://addons/NPC Pathing/Actions/NPCAction.gd" id="1_6oht3"]
+[ext_resource type="Script" uid="uid://cd6mhgfjg8q5w" path="res://addons/NPC Pathing/Actions/TimedAction.gd" id="2_xhh3t"]
+[ext_resource type="Script" uid="uid://dpt8qo73av2c7" path="res://addons/NPC Pathing/Actions/MoveAction.gd" id="3_4wq8s"]
+[ext_resource type="Script" uid="uid://cgqj5lwroa2bl" path="res://addons/NPC Pathing/Actions/InteractAction.gd" id="4_8dmvr"]
+[ext_resource type="Script" uid="uid://bqifg6qorkypy" path="res://addons/NPC Pathing/Actions/NPCPath.gd" id="5_mkkpe"]
+
+[sub_resource type="Resource" id="Resource_ah0ni"]
+script = ExtResource("2_xhh3t")
+start_time = inf_neg
+name = "Start Path"
+metadata/_custom_type_script = "uid://cd6mhgfjg8q5w"
+
+[sub_resource type="Resource" id="Resource_sby2f"]
+script = ExtResource("3_4wq8s")
+speed = 1.0
+direction = Vector3(0, 0, 1)
+end_time = 10.0
+name = "Move 0,0,10"
+metadata/_custom_type_script = "uid://dpt8qo73av2c7"
+
+[sub_resource type="Resource" id="Resource_khdrh"]
+script = ExtResource("2_xhh3t")
+start_time = 10.0
+end_time = 15.0
+name = "Wait 5"
+metadata/_custom_type_script = "uid://cd6mhgfjg8q5w"
+
+[sub_resource type="Resource" id="Resource_nhqvp"]
+script = ExtResource("3_4wq8s")
+speed = 2.0
+start_position = Vector3(0, 0, 10)
+direction = Vector3(1, 0, 0)
+start_time = 15.0
+end_time = 20.0
+name = "Move 10,0,10"
+metadata/_custom_type_script = "uid://dpt8qo73av2c7"
+
+[sub_resource type="Resource" id="Resource_w2fhl"]
+script = ExtResource("4_8dmvr")
+interactable = NodePath("../TestCube/Interactable")
+name = "Interact With Test Cube"
+metadata/_custom_type_script = "uid://cgqj5lwroa2bl"
+
+[sub_resource type="Resource" id="Resource_gctdr"]
+script = ExtResource("3_4wq8s")
+speed = 10.0
+start_position = Vector3(10, 0, 10)
+direction = Vector3(-1, 0, -1)
+start_time = 20.0
+end_time = 21.0
+name = "Move Diagonally"
+metadata/_custom_type_script = "uid://dpt8qo73av2c7"
+
+[sub_resource type="Resource" id="Resource_3aima"]
+script = ExtResource("2_xhh3t")
+start_time = 21.0
+end_time = inf
+name = "End Path"
+metadata/_custom_type_script = "uid://cd6mhgfjg8q5w"
+
+[resource]
+script = ExtResource("5_mkkpe")
+array = Array[ExtResource("1_6oht3")]([SubResource("Resource_ah0ni"), SubResource("Resource_sby2f"), SubResource("Resource_khdrh"), SubResource("Resource_nhqvp"), SubResource("Resource_w2fhl"), SubResource("Resource_gctdr"), SubResource("Resource_3aima")])
+metadata/_custom_type_script = "uid://bqifg6qorkypy"

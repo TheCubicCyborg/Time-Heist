@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cyif8uwvd8l5"]
+
+[ext_resource type="PackedScene" uid="uid://cne3kilvgkpxb" path="res://Modules/AI/NPC/NPC.tscn" id="1_0mxr5"]
+[ext_resource type="Script" uid="uid://d0afbfeblscar" path="res://Modules/Interaction/interactable.gd" id="1_urgcb"]
+[ext_resource type="Resource" uid="uid://rha1vvtugqpq" path="res://Modules/AI/NPC/TestPath.tres" id="3_htp1d"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_m53t8"]
+
+[sub_resource type="GDScript" id="GDScript_urgcb"]
+resource_name = "test_cube"
+script/source = "extends MeshInstance3D
+
+func interact():
+	print(\"interacted with test_cube\")
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ah0ni"]
+
+[node name="Pathing Test World" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 20, 0)
+
+[node name="TestCube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 10)
+mesh = SubResource("BoxMesh_m53t8")
+script = SubResource("GDScript_urgcb")
+
+[node name="Interactable" type="Area3D" parent="TestCube" node_paths=PackedStringArray("mesh", "interact_object")]
+script = ExtResource("1_urgcb")
+mesh = NodePath("..")
+interact_object = NodePath("..")
+metadata/_custom_type_script = "uid://d0afbfeblscar"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestCube/Interactable"]
+shape = SubResource("BoxShape3D_ah0ni")
+
+[node name="NPC" parent="." instance=ExtResource("1_0mxr5")]
+path = ExtResource("3_htp1d")
