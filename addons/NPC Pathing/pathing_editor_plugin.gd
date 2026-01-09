@@ -8,8 +8,8 @@ var gizmo_plugin = PathingGizmoPlugin.new()
 var toolbar_instance: Control
 
 func _process(delta):
-	if not toolbar_instance.visible and Input.is_key_pressed(KEY_1):
-		toolbar_instance.visible = true
+	if Engine.is_editor_hint():
+		pass
 
 func _enter_tree():
 	add_node_3d_gizmo_plugin(gizmo_plugin)
@@ -21,4 +21,5 @@ func _enter_tree():
 func _exit_tree():
 	remove_control_from_container(EditorPlugin.CONTAINER_SPATIAL_EDITOR_MENU,toolbar_instance)
 	toolbar_instance.queue_free()
+	remove_node_3d_gizmo_plugin(gizmo_plugin)
 	print("removed")

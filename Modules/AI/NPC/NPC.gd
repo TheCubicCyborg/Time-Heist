@@ -1,18 +1,28 @@
+@tool
 extends Node3D
 
 class_name NPC
 
-@export var path: NPCPath
+@export var path: NPCPath:
+	set(value):
+		path = value
+		update_gizmos()
 
 #@export var path: NPCPath
 var handler: PathHandler
 
 func _ready():
-	handler = PathHandler.new().init(self)
+	if Engine.is_editor_hint():
+		pass
+	else:
+		handler = PathHandler.new().init(self)
 	
 
 func _process(_delta):
-	handler.process()
+	if Engine.is_editor_hint():
+		pass
+	else:
+		handler.process()
 
 func _physics_process(_delta):
 	pass
