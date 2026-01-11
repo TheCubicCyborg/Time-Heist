@@ -37,3 +37,8 @@ shape = SubResource("BoxShape3D_ah0ni")
 
 [node name="NPC" parent="." instance=ExtResource("1_0mxr5")]
 path = ExtResource("3_htp1d")
+
+[node name="Path3D" type="Path3D" parent="."]
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.9068809, 0.056111224, 0.4176345, -1.862645e-09, 0.99109477, -0.1331584, -0.42138705, 0.12075881, 0.8988049, -6.474106, -1.2006912, 15.544258)

@@ -12,7 +12,7 @@ func _init():
 	create_material("line", Color(0.264, 0.622, 0.341, 1.0))
 	create_material("wait", Color(0.366, 0.559, 0.851, 1.0))
 	create_material("interact", Color(0.834, 0.415, 0.359, 1.0))
-	#create_handle_material("handles")
+	create_handle_material("handles")
 
 
 func _create_gizmo(node):
