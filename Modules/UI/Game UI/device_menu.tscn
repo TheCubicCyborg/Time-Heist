@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://djm2xkntdba18"]
+[gd_scene load_steps=9 format=3 uid="uid://djm2xkntdba18"]
 
 [ext_resource type="Script" uid="uid://bd4wvbt4n011e" path="res://Modules/UI/Game UI/device_menu.gd" id="1_hgc2y"]
 [ext_resource type="Texture2D" uid="uid://c3uwunfq42tg8" path="res://Assets/UI/Time Travel Menu/time machine side left.png" id="1_wq3jl"]
 [ext_resource type="Texture2D" uid="uid://q007275otxah" path="res://Assets/UI/Time Travel Menu/time machine side right.png" id="3_y3rn4"]
 [ext_resource type="PackedScene" uid="uid://bigh7xaj6n6yj" path="res://Modules/UI/Game UI/Device/device_files.tscn" id="4_4t7mm"]
+[ext_resource type="PackedScene" uid="uid://dc0glsn1mwwwq" path="res://Modules/UI/Game UI/Device/inventory.tscn" id="4_7dje4"]
 [ext_resource type="PackedScene" uid="uid://begdut20cbu15" path="res://Modules/UI/Game UI/Device/settings.tscn" id="4_hgc2y"]
 
 [sub_resource type="Theme" id="Theme_wq3jl"]
@@ -100,10 +101,15 @@ script = SubResource("GDScript_4t7mm")
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Settings" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" instance=ExtResource("4_hgc2y")]
+[node name="Inventory" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" instance=ExtResource("4_7dje4")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="Settings" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" instance=ExtResource("4_hgc2y")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="SidePanelR" type="TextureRect" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(250, 0)

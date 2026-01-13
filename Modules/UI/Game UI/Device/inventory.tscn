@@ -1,0 +1,101 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc0glsn1mwwwq"]
+
+[ext_resource type="Script" uid="uid://31ibymxtbwo0" path="res://inventory.gd" id="1_dvwll"]
+
+[node name="Inventory" type="Control" node_paths=PackedStringArray("main_focus")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dvwll")
+main_focus = NodePath("HBoxContainer/Inventory/GridContainer/Item1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Inventory" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Info" type="Control" parent="HBoxContainer/Inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Tools" type="Control" parent="HBoxContainer/Inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 10
+
+[node name="Item1" type="Control" parent="HBoxContainer/Inventory/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control2" type="Control" parent="HBoxContainer/Inventory/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control3" type="Control" parent="HBoxContainer/Inventory/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control4" type="Control" parent="HBoxContainer/Inventory/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control5" type="Control" parent="HBoxContainer/Inventory/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control6" type="Control" parent="HBoxContainer/Inventory/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control7" type="Control" parent="HBoxContainer/Inventory/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control8" type="Control" parent="HBoxContainer/Inventory/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control9" type="Control" parent="HBoxContainer/Inventory/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control10" type="Control" parent="HBoxContainer/Inventory/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control11" type="Control" parent="HBoxContainer/Inventory/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Clearance" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
