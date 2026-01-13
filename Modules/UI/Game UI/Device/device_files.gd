@@ -1,7 +1,4 @@
-extends Control
-class_name MenuTabPanel
-
-@export var main_focus : Control
+extends MenuTabPanel
 
 var panels : Array[ScrollContainer] = []
 
@@ -9,37 +6,33 @@ var documents : Array = [preload("res://Assets/UI/Time Travel Menu/Files_Test/pe
 
 @onready var people: Button = %People
 @onready var places: Button = %Places
+@onready var document_viewer := $MarginContainer/HBoxContainer/SubViewportContainer/SubViewport/DeviceDocumentViewer
 
-@onready var person_1: Button = $HBoxContainer/FilesMargin/VBoxContainer/PeopleContainer/Files/Button2
-@onready var person_2: Button = $HBoxContainer/FilesMargin/VBoxContainer/PeopleContainer/Files/Button3
-@onready var person_3: Button = $HBoxContainer/FilesMargin/VBoxContainer/PeopleContainer/Files/Button4
-@onready var person_4: Button = $HBoxContainer/FilesMargin/VBoxContainer/PeopleContainer/Files/Button5
+@onready var person_1: Button = $MarginContainer/HBoxContainer/VBoxContainer/PeopleContainer/Files/People1
+@onready var person_2: Button = $MarginContainer/HBoxContainer/VBoxContainer/PeopleContainer/Files/People2
 
-@onready var place_1: Button = $HBoxContainer/FilesMargin/VBoxContainer/PlacesContainer/Files/Button
+@onready var place_1: Button = $MarginContainer/HBoxContainer/VBoxContainer/PlacesContainer/Files/Places1
 
 
-@onready var doc_viewer = $HBoxContainer/FileMargin/TextureRect
+@onready var doc_viewer = $MarginContainer/HBoxContainer/TextureRect
 
 func _ready() -> void:
 	panels = [
 		%PeopleContainer, %PlacesContainer
 	]
 	
+	$MarginContainer/HBoxContainer/SubViewportContainer/SubViewport.size = $MarginContainer/HBoxContainer/SubViewportContainer.size
+	
 	people.focus_entered.connect(view_panel.bind(panels[0]))
 	places.focus_entered.connect(view_panel.bind(panels[1]))
 	
-	person_1.focus_entered.connect(view_doc.bind(documents[3]))
-	person_2.focus_entered.connect(view_doc.bind(documents[0]))
-	person_3.focus_entered.connect(view_doc.bind(documents[1]))
-	person_4.focus_entered.connect(view_doc.bind(documents[2]))
+	person_1.focus_entered.connect(view_doc.bind(0))
+	person_2.focus_entered.connect(view_doc.bind(1))
 	
-	place_1.focus_entered.connect(view_doc.bind(documents[4]))
+	place_1.focus_entered.connect(view_doc.bind(1))
 	
 	people.grab_focus()
 	view_panel(panels[0])
-	
-func select():
-	main_focus.grab_focus()
 	
 func view_panel(panel_to_view:ScrollContainer):
 	for panel in panels:
@@ -47,6 +40,8 @@ func view_panel(panel_to_view:ScrollContainer):
 	
 	panel_to_view.show()
 	
-func view_doc(doc_to_view:Texture):
-	doc_viewer.texture = doc_to_view
+func view_doc(doc_to_view:int):
+	document_viewer.set_document_texture(doc_to_view)
+	
+#func select()
 	
