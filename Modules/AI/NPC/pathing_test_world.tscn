@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cyif8uwvd8l5"]
+[gd_scene load_steps=6 format=3 uid="uid://cyif8uwvd8l5"]
 
 [ext_resource type="PackedScene" uid="uid://cne3kilvgkpxb" path="res://Modules/AI/NPC/NPC.tscn" id="1_0mxr5"]
 [ext_resource type="Script" uid="uid://d0afbfeblscar" path="res://Modules/Interaction/interactable.gd" id="1_urgcb"]
-[ext_resource type="Resource" uid="uid://rha1vvtugqpq" path="res://Modules/AI/NPC/TestPath.tres" id="3_htp1d"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m53t8"]
 
@@ -36,7 +35,6 @@ metadata/_custom_type_script = "uid://d0afbfeblscar"
 shape = SubResource("BoxShape3D_ah0ni")
 
 [node name="NPC" parent="." instance=ExtResource("1_0mxr5")]
-path = ExtResource("3_htp1d")
 
 [node name="Path3D" type="Path3D" parent="."]
 
