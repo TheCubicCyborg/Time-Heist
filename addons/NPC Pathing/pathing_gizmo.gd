@@ -12,11 +12,14 @@ var moving_handle_ix: int = -1
 var selected_handle_ix: int = -1
 var secondary_selected: bool = false
 
+var creating_vertex: bool = false
+
 func _redraw():
 	clear()
 	if not get_node_3d().path:
 		return
-	if path_vertices.is_empty():
+	if path_vertices.is_empty() or get_node_3d().path_changed:
+		get_node_3d().path_changed = false
 		read_from_path()
 	
 	#get materials
@@ -46,9 +49,12 @@ func _redraw():
 	if not path_lines.is_empty():
 		add_handles(line_handle_positions,handle_material,PackedInt32Array(),false,true)
 
-func read_from_path():
+func clear_path():
 	path_vertices.clear()
 	path_lines.clear()
+
+func read_from_path():
+	clear_path()
 	
 	var cur_action_ix: int = 0
 	var cur_position: Vector3 = Vector3.ZERO
@@ -66,52 +72,77 @@ func read_from_path():
 
 func _begin_handle_action(id, secondary):
 	if not secondary:
+		if id == 0:
+			moving_handle_ix = -1
+			selected_handle_ix = 0
+			secondary_selected = false
+			return
 		if Input.is_key_pressed(KEY_CTRL): #Create new line and vertex forward
 			branch_forward(id)
+			creating_vertex = true
 		elif Input.is_key_pressed(KEY_SHIFT): #Create new line and vertex backward
 			branch_backward(id)
+			creating_vertex = true
 		else:
 			moving_handle_ix = id
 		selected_handle_ix = moving_handle_ix
 		secondary_selected = false
-		
-		if moving_handle_ix == 0: #Can't move the root, must move NPC's transform instead.
-			moving_handle_ix = -1
 	else:
 		selected_handle_ix = id
 		secondary_selected = true
 
 func branch_forward(id:int):
 	moving_handle_ix = id + 1
-	var branching_vertex = path_vertices[id]
-	var next_vertex = path_vertices[id+1]
-	var new_vertex: PathVertex = PathVertex.new(next_vertex.action_start_ix,branching_vertex.position)
-	var new_line: PathLine = PathLine.new(branching_vertex.position,branching_vertex.position)
+	var new_vertex: PathVertex = PathVertex.new(path_vertices[id+1].action_start_ix,path_vertices[id].position)
+	var new_line: PathLine = PathLine.new(path_vertices[id].position,path_vertices[id].position)
 	path_vertices.insert(id+1,new_vertex)
 	path_lines.insert(id,new_line)
-
 
 func branch_backward(id:int):
 	moving_handle_ix = id
 	if id == 0: #Cannot branch backwards off of root.
 		return
-	
-	pass
+	var new_vertex: PathVertex = PathVertex.new(path_vertices[id].action_start_ix,path_vertices[id].position)
+	var new_line: PathLine = PathLine.new(path_vertices[id].position,path_vertices[id].position)
+	path_vertices.insert(id,new_vertex)
+	path_lines.insert(id,new_line)
 
 func _set_handle(id, secondary, camera, point):
-	#var origin = camera.project_ray_origin(point)
-	#var direction = camera.project_ray_normal(point)
-	#var plane = Plane(Vector3.UP)
-	#var position = plane.intersects_ray(origin,direction)
-	#handle_points[moving_handle] = position
-	#if moving_handle > 0:
-		#lines[moving_handle-1].end = position
-	#if moving_handle < handle_points.size()-1:
-		#lines[moving_handle].start = position
+	if moving_handle_ix == -1:
+		return
+	var origin = camera.project_ray_origin(point)
+	var direction = camera.project_ray_normal(point)
+	var plane = Plane(Vector3.UP)
+	var position = plane.intersects_ray(origin,direction)
+	path_vertices[moving_handle_ix].position = position
+	if moving_handle_ix > 0:
+		path_lines[moving_handle_ix-1].end = position
+	if moving_handle_ix < path_vertices.size()-1:
+		path_lines[moving_handle_ix].start = position
 	_redraw()
 
 func _commit_handle(id, secondary, restore, cancel):
-	save_to_path()
+	if moving_handle_ix == -1:
+		return
+	var npc: NPC = get_node_3d()
+	for i in range(moving_handle_ix+1,path_vertices.size()):
+		path_vertices[i].action_start_ix += 1
+	var moving_vertex = path_vertices[moving_handle_ix]
+	var prev_line = path_lines[moving_handle_ix-1]
+	if moving_handle_ix == path_vertices.size()-1:
+		if creating_vertex: # Creating new last vertex
+			pass
+		else: #Moving last vertex
+			var move_action: MoveAction = npc.path.array[moving_vertex.action_start_ix]
+	else:
+		var next_line = path_lines[moving_handle_ix]
+		if creating_vertex: #Creating new vertex
+			pass
+		else: #moving a vertex
+			pass
+	
+	
+	creating_vertex = false
 	moving_handle_ix = -1
 
 	#var new_move_action = MoveAction.new()
@@ -123,10 +154,6 @@ func _commit_handle(id, secondary, restore, cancel):
 	#get_node_3d().path.array.insert(next_vertex.action_start_ix,new_move_action)
 	#for i in range(id+2,path_vertices.size()):
 		#path_vertices[i].action_start_ix += 1
-
-
-func save_to_path():
-	pass
 
 func _get_handle_name(id, secondary):
 	return "Handle " + str(id)
@@ -146,16 +173,22 @@ class PathVertex:
 		position = _position
 
 class PathLine:
-	var start: Vector3
-	var end: Vector3
+	var start: Vector3:
+		set(value):
+			start = value
+			calculate_values()
+	var end: Vector3:
+		set(value):
+			end = value
+			calculate_values()
 	var midpoint: Vector3
 	var dir_vec: Vector3
 	var length: float
 	func _init(_start:Vector3, _end:Vector3):
-		set_values(_start,_end)
-	func set_values(_start:Vector3,_end:Vector3):
 		start = _start
 		end = _end
+		calculate_values()
+	func calculate_values():
 		midpoint = (start + end) * 0.5
 		dir_vec = end-start
 		length = dir_vec.length()

@@ -5,6 +5,7 @@ class_name NPC
 
 @export var path: NPCPath:
 	set(value):
+		print("NPC set function")
 		if value:
 			var copy = value.duplicate(true)
 			if copy.array.is_empty():
@@ -12,9 +13,11 @@ class_name NPC
 			path = copy
 		else:
 			path = value
+		path_changed = true
 		update_gizmos()
 
-#@export var path: NPCPath
+var path_changed: bool = false #For use with gizmo
+
 var handler: PathHandler
 
 func _ready():
