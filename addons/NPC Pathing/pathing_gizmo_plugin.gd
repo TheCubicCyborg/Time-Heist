@@ -17,7 +17,7 @@ func _init():
 
 func _create_gizmo(node):
 	if node is NPC:
-		print("created")
+		#print("created")
 		return PathingGizmo.new()
 	else:
 		return null

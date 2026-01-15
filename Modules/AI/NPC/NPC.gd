@@ -5,7 +5,6 @@ class_name NPC
 
 @export var path: NPCPath:
 	set(value):
-		print("NPC set function")
 		if value:
 			var copy = value.duplicate(true)
 			if copy.array.is_empty():

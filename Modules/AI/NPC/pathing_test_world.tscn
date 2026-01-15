@@ -99,6 +99,7 @@ metadata/_custom_type_script = "uid://d0afbfeblscar"
 shape = SubResource("BoxShape3D_ah0ni")
 
 [node name="NPC" parent="." instance=ExtResource("1_0mxr5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0013399124, 0.008835793, -0.051161766)
 path = SubResource("Resource_7oa7a")
 
 [node name="Path3D" type="Path3D" parent="."]

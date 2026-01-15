@@ -72,14 +72,14 @@ func read_from_path():
 
 func _begin_handle_action(id, secondary):
 	if not secondary:
-		if id == 0:
+		if Input.is_key_pressed(KEY_CTRL): #Create new line and vertex forward
+			branch_forward(id)
+			creating_vertex = true
+		elif id == 0:
 			moving_handle_ix = -1
 			selected_handle_ix = 0
 			secondary_selected = false
 			return
-		if Input.is_key_pressed(KEY_CTRL): #Create new line and vertex forward
-			branch_forward(id)
-			creating_vertex = true
 		elif Input.is_key_pressed(KEY_SHIFT): #Create new line and vertex backward
 			branch_backward(id)
 			creating_vertex = true
@@ -90,10 +90,16 @@ func _begin_handle_action(id, secondary):
 	else:
 		selected_handle_ix = id
 		secondary_selected = true
+	print("notify changed")
+	notify_property_list_changed()
 
 func branch_forward(id:int):
 	moving_handle_ix = id + 1
-	var new_vertex: PathVertex = PathVertex.new(path_vertices[id+1].action_start_ix,path_vertices[id].position)
+	var new_vertex: PathVertex
+	if id == path_vertices.size()-1:
+		new_vertex = PathVertex.new(get_node_3d().path.array.size(),path_vertices[id].position)
+	else:
+		new_vertex = PathVertex.new(path_vertices[id+1].action_start_ix,path_vertices[id].position)
 	var new_line: PathLine = PathLine.new(path_vertices[id].position,path_vertices[id].position)
 	path_vertices.insert(id+1,new_vertex)
 	path_lines.insert(id,new_line)
@@ -125,35 +131,38 @@ func _commit_handle(id, secondary, restore, cancel):
 	if moving_handle_ix == -1:
 		return
 	var npc: NPC = get_node_3d()
-	for i in range(moving_handle_ix+1,path_vertices.size()):
-		path_vertices[i].action_start_ix += 1
 	var moving_vertex = path_vertices[moving_handle_ix]
+	
+	if creating_vertex: #Created a new vertex
+		var new_move_action: MoveAction = MoveAction.new()
+		if moving_handle_ix == path_vertices.size()-1:
+			new_move_action.start_time = npc.path.array[moving_vertex.action_start_ix].end_time
+			new_move_action.end_time = new_move_action.start_time + 5.0
+		else:
+			var splitting_move_action: MoveAction = npc.path.array[moving_vertex.action_start_ix]
+			var break_ratio = path_lines[moving_handle_ix-1].length/(path_lines[moving_handle_ix-1].length + path_lines[moving_handle_ix].length)
+			var break_point = splitting_move_action.start_time + (splitting_move_action.end_time-splitting_move_action.start_time) * break_ratio
+			new_move_action.start_time = splitting_move_action.start_time
+			new_move_action.end_time = break_point
+			splitting_move_action.start_time = break_point
+		npc.path.array.insert(moving_vertex.action_start_ix,new_move_action)
+		for i in range(moving_handle_ix+1,path_vertices.size()):
+			path_vertices[i].action_start_ix += 1
+	#set move action parameters
 	var prev_line = path_lines[moving_handle_ix-1]
-	if moving_handle_ix == path_vertices.size()-1:
-		if creating_vertex: # Creating new last vertex
-			pass
-		else: #Moving last vertex
-			var move_action: MoveAction = npc.path.array[moving_vertex.action_start_ix]
-	else:
+	var prev_move_action: MoveAction = npc.path.array[moving_vertex.action_start_ix]
+	prev_move_action.start_position = prev_line.start
+	prev_move_action.direction = prev_line.dir_vec
+	prev_move_action.speed = prev_line.length/(prev_move_action.end_time-prev_move_action.start_time)
+	if moving_handle_ix < path_vertices.size()-1: #If there is a line after / Not the last vertex
+		var next_vertex = path_vertices[moving_handle_ix+1]
 		var next_line = path_lines[moving_handle_ix]
-		if creating_vertex: #Creating new vertex
-			pass
-		else: #moving a vertex
-			pass
-	
-	
+		var next_move_action: MoveAction = npc.path.array[next_vertex.action_start_ix]
+		next_move_action.start_position = next_line.start
+		next_move_action.direction = next_line.dir_vec
+		next_move_action.speed = next_line.length/(next_move_action.end_time-next_move_action.start_time)
 	creating_vertex = false
 	moving_handle_ix = -1
-
-	#var new_move_action = MoveAction.new()
-	#new_move_action.speed = 0
-	#new_move_action.start_position = new_line.start
-	#new_move_action.direction = new_line.dir_vec
-	#new_move_action.start_time = get_node_3d().path.array[next_vertex.action_start_ix].start_time
-	#new_move_action.end_time = get_node_3d().path.array[next_vertex.action_start_ix].start_time
-	#get_node_3d().path.array.insert(next_vertex.action_start_ix,new_move_action)
-	#for i in range(id+2,path_vertices.size()):
-		#path_vertices[i].action_start_ix += 1
 
 func _get_handle_name(id, secondary):
 	return "Handle " + str(id)
@@ -163,35 +172,3 @@ func _get_handle_value(id, secondary):
 
 func _is_handle_highlighted(id, secondary):
 	return secondary_selected == secondary and id == selected_handle_ix
-
-class PathVertex:
-	var action_start_ix: int
-	var actions: Array[NPCAction] = []
-	var position: Vector3
-	func _init(_start_index: int, _position:Vector3):
-		action_start_ix = _start_index
-		position = _position
-
-class PathLine:
-	var start: Vector3:
-		set(value):
-			start = value
-			calculate_values()
-	var end: Vector3:
-		set(value):
-			end = value
-			calculate_values()
-	var midpoint: Vector3
-	var dir_vec: Vector3
-	var length: float
-	func _init(_start:Vector3, _end:Vector3):
-		start = _start
-		end = _end
-		calculate_values()
-	func calculate_values():
-		midpoint = (start + end) * 0.5
-		dir_vec = end-start
-		length = dir_vec.length()
-		dir_vec = dir_vec.normalized()
-	func _to_string():
-		return "Start: " + str(start) + ", End: " + str(end)
