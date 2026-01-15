@@ -6,9 +6,6 @@ class_name DeviceMenu
 
 #var tabs : Array[]
 
-func _process(delta: float) -> void: #TEMPORARY
-	handle_input()
-
 func _ready() -> void:
 	pass
 
