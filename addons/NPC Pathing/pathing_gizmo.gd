@@ -86,18 +86,18 @@ func _begin_handle_action(id, secondary):
 		else:
 			moving_handle_ix = id
 		selected_handle_ix = moving_handle_ix
+		EditorInterface.get_inspector().edit(path_vertices[selected_handle_ix])
 		secondary_selected = false
 	else:
 		selected_handle_ix = id
+		EditorInterface.get_inspector().edit(path_lines[selected_handle_ix])
 		secondary_selected = true
-	print("notify changed")
-	notify_property_list_changed()
 
 func branch_forward(id:int):
 	moving_handle_ix = id + 1
 	var new_vertex: PathVertex
 	if id == path_vertices.size()-1:
-		new_vertex = PathVertex.new(get_node_3d().path.array.size(),path_vertices[id].position)
+		new_vertex = PathVertex.new(get_node_3d().path.array.size()-1,path_vertices[id].position)
 	else:
 		new_vertex = PathVertex.new(path_vertices[id+1].action_start_ix,path_vertices[id].position)
 	var new_line: PathLine = PathLine.new(path_vertices[id].position,path_vertices[id].position)
@@ -128,6 +128,7 @@ func _set_handle(id, secondary, camera, point):
 	_redraw()
 
 func _commit_handle(id, secondary, restore, cancel):
+	print("commit handle")
 	if moving_handle_ix == -1:
 		return
 	var npc: NPC = get_node_3d()
@@ -138,6 +139,7 @@ func _commit_handle(id, secondary, restore, cancel):
 		if moving_handle_ix == path_vertices.size()-1:
 			new_move_action.start_time = npc.path.array[moving_vertex.action_start_ix].end_time
 			new_move_action.end_time = new_move_action.start_time + 5.0
+			moving_vertex.action_start_ix += 1
 		else:
 			var splitting_move_action: MoveAction = npc.path.array[moving_vertex.action_start_ix]
 			var break_ratio = path_lines[moving_handle_ix-1].length/(path_lines[moving_handle_ix-1].length + path_lines[moving_handle_ix].length)

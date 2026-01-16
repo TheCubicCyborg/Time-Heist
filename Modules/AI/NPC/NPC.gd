@@ -5,14 +5,7 @@ class_name NPC
 
 @export var path: NPCPath:
 	set(value):
-		if value:
-			var copy = value.duplicate(true)
-			if copy.array.is_empty():
-				copy.array.push_back(TimedAction.new())
-			path = copy
-		else:
-			path = value
-		path_changed = true
+		path = value
 		update_gizmos()
 
 var path_changed: bool = false #For use with gizmo

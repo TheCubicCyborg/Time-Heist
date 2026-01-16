@@ -1,4 +1,10 @@
+extends Resource
+
 class_name PathLine
+
+@export var speed: float = 0
+@export var start_time: float = 0
+@export var end_time: float = 0
 
 var start: Vector3:
 	set(value):
