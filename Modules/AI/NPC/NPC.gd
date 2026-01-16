@@ -8,22 +8,12 @@ class_name NPC
 		path = value
 		update_gizmos()
 
-var path_changed: bool = false #For use with gizmo
-
-var handler: PathHandler
-
-func _ready():
-	if Engine.is_editor_hint():
-		pass
-	else:
-		handler = PathHandler.new().init(self)
-	
-
 func _process(_delta):
 	if Engine.is_editor_hint():
 		pass
 	else:
-		handler.process()
+		#handler.process()
+		pass
 
-func _physics_process(_delta):
+class PathIterator:
 	pass

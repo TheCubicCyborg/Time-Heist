@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="NPCPath" load_steps=13 format=3 uid="uid://rha1vvtugqpq"]
 
 [ext_resource type="Script" uid="uid://chl7askpcvpc5" path="res://addons/NPC Pathing/Actions/NPCAction.gd" id="1_6oht3"]
-[ext_resource type="Script" uid="uid://cd6mhgfjg8q5w" path="res://addons/NPC Pathing/Actions/TimedAction.gd" id="2_xhh3t"]
+[ext_resource type="Script" uid="uid://cd6mhgfjg8q5w" path="res://addons/NPC Pathing/Actions/WaitAction.gd" id="2_6oht3"]
 [ext_resource type="Script" uid="uid://dpt8qo73av2c7" path="res://addons/NPC Pathing/Actions/MoveAction.gd" id="3_4wq8s"]
 [ext_resource type="Script" uid="uid://cgqj5lwroa2bl" path="res://addons/NPC Pathing/Actions/InteractAction.gd" id="4_8dmvr"]
 [ext_resource type="Script" uid="uid://bqifg6qorkypy" path="res://addons/NPC Pathing/Actions/NPCPath.gd" id="5_mkkpe"]
 
 [sub_resource type="Resource" id="Resource_ah0ni"]
-script = ExtResource("2_xhh3t")
+script = ExtResource("2_6oht3")
 end_time = 0.0
 name = "Start Path"
 metadata/_custom_type_script = "uid://cd6mhgfjg8q5w"
@@ -22,7 +22,7 @@ name = "Move 0,0,10"
 metadata/_custom_type_script = "uid://dpt8qo73av2c7"
 
 [sub_resource type="Resource" id="Resource_khdrh"]
-script = ExtResource("2_xhh3t")
+script = ExtResource("2_6oht3")
 start_time = 10.0
 end_time = 15.0
 name = "Wait 5"
@@ -55,7 +55,7 @@ name = "Move to 0,0,10"
 metadata/_custom_type_script = "uid://dpt8qo73av2c7"
 
 [sub_resource type="Resource" id="Resource_3aima"]
-script = ExtResource("2_xhh3t")
+script = ExtResource("2_6oht3")
 start_time = 21.0
 name = "End Path"
 metadata/_custom_type_script = "uid://cd6mhgfjg8q5w"
