@@ -4,173 +4,96 @@ extends EditorNode3DGizmo
 var path_mesh = preload("res://addons/NPC Pathing/Meshes/PathMesh.tres")
 var arrow_mesh = preload("res://addons/NPC Pathing/Meshes/ArrowMesh.tres")
 
-var path_vertices: Array[PathVertex] = []
-var path_lines: Array[PathLine] = []
-
-var moving_handle_ix: int = -1
-
-var selected_handle_ix: int = -1
-var secondary_selected: bool = false
-
-var creating_vertex: bool = false
+var moving_vertex: PathVertex
+var selected_component: PathComponent
 
 func _redraw():
-	clear()
-	if not get_node_3d().path:
-		return
-	if path_vertices.is_empty() or get_node_3d().path_changed:
-		get_node_3d().path_changed = false
-		read_from_path()
+	var path: NPCPath = get_node_3d().path
 	
-	#get materials
+	clear()
+	if not path:
+		return
 	var line_material = get_plugin().get_material("line", self)
 	var handle_material := get_plugin().get_material("handle",self)
 	
-	#initialize arrays
-	var line_handle_positions := PackedVector3Array()
+	var root_array = PackedVector3Array()
+	root_array.push_back(path.at(0).position)
+	add_handles(root_array,handle_material,PackedInt32Array(),false,true)
+	
 	var vertex_positions := PackedVector3Array()
+	var vertex_ids := PackedInt32Array()
+	var line_positions := PackedVector3Array()
+	var line_ids := PackedInt32Array()
 	
-	#add line meshes
-	for line in path_lines:
-		if line.length != 0:
-			var rotation: Vector3 = Vector3(-PI/2,Vector3.FORWARD.signed_angle_to(line.dir_vec,Vector3.UP),0)
-			var basis = Basis.from_scale(Vector3(1,line.length/2,1))
-			basis = basis.rotated(Vector3.RIGHT, rotation.x)
-			basis = basis.rotated(Vector3.UP, rotation.y)
-			var transform: Transform3D = Transform3D(basis,line.midpoint)
-			line_handle_positions.push_back(line.midpoint)
-			add_mesh(path_mesh,line_material,transform)
-			add_mesh(arrow_mesh,line_material,Transform3D(Basis.from_euler(rotation),line.end - line.dir_vec.normalized() * 0.3))
+	for i in range(2,path.size(),2):
+		line_positions.push_back(draw_line(i-2,i,path,line_material))
+		vertex_positions.push_back(path.at(i).position)
+		line_ids.push_back(i-1)
+		vertex_ids.push_back(i)
 	
-	for vertex: PathVertex in path_vertices:
-		vertex_positions.push_back(vertex.position)
-	
-	add_handles(vertex_positions,handle_material,PackedInt32Array(),false,false)
-	if not path_lines.is_empty():
-		add_handles(line_handle_positions,handle_material,PackedInt32Array(),false,true)
+	if vertex_positions.size() > 0:
+		if path.loop:
+			line_positions.push_back(draw_line(path.size()-2,0,path,line_material))
+			line_ids.push_back(path.size()-1)
+		add_handles(vertex_positions,handle_material,vertex_ids)
+		add_handles(line_positions,handle_material,line_ids)
 
-func clear_path():
-	path_vertices.clear()
-	path_lines.clear()
-
-func read_from_path():
-	clear_path()
-	
-	var cur_action_ix: int = 0
-	var cur_position: Vector3 = Vector3.ZERO
-	
-	path_vertices.push_back(PathVertex.new(cur_action_ix,cur_position))
-	
-	for action in get_node_3d().path.array:
-		if action is MoveAction:
-			cur_position = action.start_position + action.direction * action.speed * (action.end_time-action.start_time)
-			path_lines.push_back(PathLine.new(action.start_position,cur_position))
-			path_vertices.push_back(PathVertex.new(cur_action_ix,cur_position))
-		else:
-			path_vertices.back().actions.push_back(action)
-		cur_action_ix += 1
+func draw_line(start_ix: int, end_ix: int,path:NPCPath,line_material):
+	var prev_vert: PathVertex = path.at(start_ix)
+	var cur_vert: PathVertex = path.at(end_ix)
+	var line_vec = cur_vert.position - prev_vert.position
+	var line_midpoint = (cur_vert.position + prev_vert.position) * 0.5
+	var rotation: Vector3 = Vector3(-PI/2,Vector3.FORWARD.signed_angle_to(line_vec,Vector3.UP),0)
+	var basis = Basis.from_scale(Vector3(1,line_vec.length()/2,1))
+	basis = basis.rotated(Vector3.RIGHT, rotation.x)
+	basis = basis.rotated(Vector3.UP, rotation.y)
+	var transform: Transform3D = Transform3D(basis,line_midpoint)
+	add_mesh(path_mesh,line_material,transform)
+	add_mesh(arrow_mesh,line_material,Transform3D(Basis.from_euler(rotation),cur_vert.position - line_vec.normalized() * 0.3))
+	return line_midpoint
 
 func _begin_handle_action(id, secondary):
-	if not secondary:
+	var path = get_node_3d().path
+	if id % 2 == 0:
 		if Input.is_key_pressed(KEY_CTRL): #Create new line and vertex forward
-			branch_forward(id)
-			creating_vertex = true
+			moving_vertex = path.branch_forward(id)
 		elif id == 0:
-			moving_handle_ix = -1
-			selected_handle_ix = 0
-			secondary_selected = false
+			select_component(path.at(0))
 			return
 		elif Input.is_key_pressed(KEY_SHIFT): #Create new line and vertex backward
-			branch_backward(id)
-			creating_vertex = true
+			moving_vertex = path.branch_backward(id)
 		else:
-			moving_handle_ix = id
-		selected_handle_ix = moving_handle_ix
-		EditorInterface.get_inspector().edit(path_vertices[selected_handle_ix])
-		secondary_selected = false
+			moving_vertex = path.at(id)
+		select_component(moving_vertex)
 	else:
-		selected_handle_ix = id
-		EditorInterface.get_inspector().edit(path_lines[selected_handle_ix])
-		secondary_selected = true
+		select_component(path.at(id))
 
-func branch_forward(id:int):
-	moving_handle_ix = id + 1
-	var new_vertex: PathVertex
-	if id == path_vertices.size()-1:
-		new_vertex = PathVertex.new(get_node_3d().path.array.size()-1,path_vertices[id].position)
-	else:
-		new_vertex = PathVertex.new(path_vertices[id+1].action_start_ix,path_vertices[id].position)
-	var new_line: PathLine = PathLine.new(path_vertices[id].position,path_vertices[id].position)
-	path_vertices.insert(id+1,new_vertex)
-	path_lines.insert(id,new_line)
-
-func branch_backward(id:int):
-	moving_handle_ix = id
-	if id == 0: #Cannot branch backwards off of root.
-		return
-	var new_vertex: PathVertex = PathVertex.new(path_vertices[id].action_start_ix,path_vertices[id].position)
-	var new_line: PathLine = PathLine.new(path_vertices[id].position,path_vertices[id].position)
-	path_vertices.insert(id,new_vertex)
-	path_lines.insert(id,new_line)
+func select_component(component: PathComponent):
+	selected_component = component
+	EditorInterface.get_inspector().edit(component)
 
 func _set_handle(id, secondary, camera, point):
-	if moving_handle_ix == -1:
-		return
-	var origin = camera.project_ray_origin(point)
-	var direction = camera.project_ray_normal(point)
-	var plane = Plane(Vector3.UP)
-	var position = plane.intersects_ray(origin,direction)
-	path_vertices[moving_handle_ix].position = position
-	if moving_handle_ix > 0:
-		path_lines[moving_handle_ix-1].end = position
-	if moving_handle_ix < path_vertices.size()-1:
-		path_lines[moving_handle_ix].start = position
-	_redraw()
+	var path: NPCPath = get_node_3d().path
+	if moving_vertex:
+		var origin = camera.project_ray_origin(point)
+		var direction = camera.project_ray_normal(point)
+		var plane = Plane(Vector3.UP)
+		var position = plane.intersects_ray(origin,direction)
+		position = position.snapped(Vector3(1,0,1) * path.snap)
+		moving_vertex.position = position
+		_redraw()
 
 func _commit_handle(id, secondary, restore, cancel):
-	print("commit handle")
-	if moving_handle_ix == -1:
-		return
-	var npc: NPC = get_node_3d()
-	var moving_vertex = path_vertices[moving_handle_ix]
-	
-	if creating_vertex: #Created a new vertex
-		var new_move_action: MoveAction = MoveAction.new()
-		if moving_handle_ix == path_vertices.size()-1:
-			new_move_action.start_time = npc.path.array[moving_vertex.action_start_ix].end_time
-			new_move_action.end_time = new_move_action.start_time + 5.0
-			moving_vertex.action_start_ix += 1
-		else:
-			var splitting_move_action: MoveAction = npc.path.array[moving_vertex.action_start_ix]
-			var break_ratio = path_lines[moving_handle_ix-1].length/(path_lines[moving_handle_ix-1].length + path_lines[moving_handle_ix].length)
-			var break_point = splitting_move_action.start_time + (splitting_move_action.end_time-splitting_move_action.start_time) * break_ratio
-			new_move_action.start_time = splitting_move_action.start_time
-			new_move_action.end_time = break_point
-			splitting_move_action.start_time = break_point
-		npc.path.array.insert(moving_vertex.action_start_ix,new_move_action)
-		for i in range(moving_handle_ix+1,path_vertices.size()):
-			path_vertices[i].action_start_ix += 1
-	#set move action parameters
-	var prev_line = path_lines[moving_handle_ix-1]
-	var prev_move_action: MoveAction = npc.path.array[moving_vertex.action_start_ix]
-	prev_move_action.start_position = prev_line.start
-	prev_move_action.direction = prev_line.dir_vec
-	prev_move_action.speed = prev_line.length/(prev_move_action.end_time-prev_move_action.start_time)
-	if moving_handle_ix < path_vertices.size()-1: #If there is a line after / Not the last vertex
-		var next_vertex = path_vertices[moving_handle_ix+1]
-		var next_line = path_lines[moving_handle_ix]
-		var next_move_action: MoveAction = npc.path.array[next_vertex.action_start_ix]
-		next_move_action.start_position = next_line.start
-		next_move_action.direction = next_line.dir_vec
-		next_move_action.speed = next_line.length/(next_move_action.end_time-next_move_action.start_time)
-	creating_vertex = false
-	moving_handle_ix = -1
+	moving_vertex = null
 
 func _get_handle_name(id, secondary):
 	return "Handle " + str(id)
 
 func _get_handle_value(id, secondary):
-	return path_vertices[id].position
+	if selected_component is PathVertex:
+		return selected_component.position
+	elif selected_component is PathLine:
+		return selected_component.speed
 
 func _is_handle_highlighted(id, secondary):
-	return secondary_selected == secondary and id == selected_handle_ix
+	return selected_component and id == selected_component.id
