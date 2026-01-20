@@ -29,8 +29,10 @@ var janitor_has_keycard: bool = false
 
 #endregion
 
-
-
+#region ui
+var normal_cursor = preload("res://Assets/UI/Computer/Cursor_normal.png")
+var clicking_cursor = preload("res://Assets/UI/Computer/Cursor_click.png")
+#endregion
 
 func _ready():
 	time_manager = preload("res://Modules/TimeTravel/TimeManager.gd").new()

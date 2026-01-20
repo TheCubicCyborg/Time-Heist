@@ -132,6 +132,7 @@ size = Vector2i(644, 1040)
 render_target_update_mode = 4
 
 [node name="DeviceDocumentViewer" parent="MarginContainer/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_xvwb1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.03, 0)
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
 visible = false
