@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="NPCPath" load_steps=2 format=3 uid="uid://dhs1kniqyde76"]
+
+[ext_resource type="Script" uid="uid://bqksnw54upvlw" path="res://addons/NPC Pathing/PathPt2/NPCPath.gd" id="4_t8333"]
+
+[resource]
+script = ExtResource("4_t8333")
+snap = 1

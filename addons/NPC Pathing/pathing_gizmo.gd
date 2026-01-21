@@ -81,7 +81,6 @@ func _set_handle(id, secondary, camera, point):
 		var position = plane.intersects_ray(origin,direction)
 		position = position.snapped(Vector3(1,0,1) * path.snap)
 		moving_vertex.position = position
-		_redraw()
 
 func _commit_handle(id, secondary, restore, cancel):
 	moving_vertex = null

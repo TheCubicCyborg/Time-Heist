@@ -1,7 +1,7 @@
 @tool
 class_name NPCPath extends Resource
 
-@export var path_components: Array[PathComponent]
+var path_components: Array[PathComponent]
 
 @export var snap: int = 0
 @export var loop: bool = false:
@@ -38,3 +38,6 @@ func at(ix: int):
 
 func size():
 	return path_components.size()
+
+func vertex_changed():
+	emit_changed()
