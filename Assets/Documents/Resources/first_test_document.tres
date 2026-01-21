@@ -7,5 +7,5 @@
 script = ExtResource("2_i8jkc")
 title = "First Test Document"
 document_image = ExtResource("1_gm4so")
-relevant_tags = Array[String](["Person"])
+relevant_tags = Array[String](["People"])
 metadata/_custom_type_script = "uid://c4r7d4bl70rat"

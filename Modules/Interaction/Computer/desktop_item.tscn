@@ -5,15 +5,19 @@
 [sub_resource type="GDScript" id="GDScript_vk37n"]
 resource_name = "desktop_item"
 script/source = "extends Control
+class_name DesktopItem
 
 @onready var icon: TextureRect = $VBoxContainer/Icon
 @onready var title: Label = $VBoxContainer/Title
+
+#signal open_app(icon: DesktopItem, app_scene: Control)
 
 enum ItemType {Folder, App, File}
 
 @export var item_type : ItemType
 @export var file : DocumentInfo
-@export var ui : UI
+@export var tab : Control
+var active : bool
 
 @export var override_icon : Texture
 @export var override_title : String
@@ -28,28 +32,25 @@ func _ready() -> void:
 		icon.texture = override_icon
 	if override_title:
 		title.text = override_title
-		
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-
-# WHY NO WORK?
 func _on_mouse_entered() -> void:
-	print(\"entered\")
-	Input.set_custom_mouse_cursor(globals.clicking_cursor,Input.CURSOR_POINTING_HAND)
+	Input.set_custom_mouse_cursor(globals.clicking_cursor)
 	pass
 
 func _on_mouse_exited() -> void:
-	Input.set_custom_mouse_cursor(globals.normal_cursor,Input.CURSOR_ARROW)
+	Input.set_custom_mouse_cursor(globals.normal_cursor)
 	pass
 
 func _on_button_pressed() -> void:
-	print(\"pressed\")
-	ui.open()
+	if tab and not active:
+		tab.show()
+		#emit_signal(\"open_app\", self, ui_instance)
 "
 
 [node name="Desktop Item" type="Control"]
@@ -62,19 +63,6 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_vk37n")
-
-[node name="Button" type="Button" parent="."]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -65.0
-offset_top = -78.0
-offset_right = 66.0
-offset_bottom = 79.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 clip_contents = true
@@ -92,8 +80,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer"]
+clip_contents = true
 layout_mode = 2
 texture = ExtResource("1_2wp50")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -101,6 +92,19 @@ text = "Desktop Item"
 horizontal_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -78.0
+offset_right = 66.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

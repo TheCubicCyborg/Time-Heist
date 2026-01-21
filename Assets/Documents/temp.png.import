@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6oady1ollpgf"
-path.s3tc="res://.godot/imported/temp-paper-resized.png-a8c20024ae1d3a4da9eb52598b105f15.s3tc.ctex"
+path.s3tc="res://.godot/imported/temp.png-81d9b0279e3d6acd56907a80eb69dd4f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Sprites/temp-paper-resized.png"
-dest_files=["res://.godot/imported/temp-paper-resized.png-a8c20024ae1d3a4da9eb52598b105f15.s3tc.ctex"]
+source_file="res://Assets/Documents/temp.png"
+dest_files=["res://.godot/imported/temp.png-81d9b0279e3d6acd56907a80eb69dd4f.s3tc.ctex"]
 
 [params]
 

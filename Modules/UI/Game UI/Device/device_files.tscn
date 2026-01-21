@@ -1,8 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bigh7xaj6n6yj"]
+[gd_scene load_steps=4 format=3 uid="uid://bigh7xaj6n6yj"]
 
 [ext_resource type="Script" uid="uid://rjinxblp7bsc" path="res://Modules/UI/Game UI/Device/device_files.gd" id="1_40ogp"]
-[ext_resource type="ButtonGroup" uid="uid://qtjcsgjg0ef5" path="res://Assets/UI/Time Travel Menu/device_files_folders.tres" id="1_w34wi"]
-[ext_resource type="Texture2D" uid="uid://kon7grknc0m0" path="res://Assets/UI/Main Menu/5560F638-770D-4B23-A73B-C47E189BD1F4.jpeg" id="2_w34wi"]
 [ext_resource type="Texture2D" uid="uid://dkgssmw57sk3g" path="res://Assets/UI/Time Travel Menu/doc bar.png" id="4_dwdlg"]
 [ext_resource type="PackedScene" uid="uid://dui7y0up6fidp" path="res://Modules/UI/Game UI/Device/device_document_viewer.tscn" id="4_xvwb1"]
 
@@ -16,7 +14,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_40ogp")
-main_focus = NodePath("MarginContainer/HBoxContainer/FoldersMargin/Folders/People")
+main_focus = NodePath("MarginContainer/HBoxContainer/FoldersMargin/Folder Buttons")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -41,102 +39,43 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 theme_override_constants/margin_top = 100
 
-[node name="Folders" type="VBoxContainer" parent="MarginContainer/HBoxContainer/FoldersMargin"]
+[node name="Folder Buttons" type="VBoxContainer" parent="MarginContainer/HBoxContainer/FoldersMargin"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 
-[node name="People" type="Button" parent="MarginContainer/HBoxContainer/FoldersMargin/Folders"]
-unique_name_in_owner = true
-layout_mode = 2
-focus_neighbor_top = NodePath("../Places")
-focus_neighbor_right = NodePath("../../../VBoxContainer/PeopleContainer/Files/People1")
-focus_neighbor_bottom = NodePath("../Places")
-toggle_mode = true
-button_group = ExtResource("1_w34wi")
-text = "People"
-
-[node name="Places" type="Button" parent="MarginContainer/HBoxContainer/FoldersMargin/Folders"]
-unique_name_in_owner = true
-layout_mode = 2
-focus_neighbor_top = NodePath("../People")
-focus_neighbor_right = NodePath("../../../VBoxContainer/PlacesContainer/Files/Places1")
-focus_neighbor_bottom = NodePath("../People")
-toggle_mode = true
-button_group = ExtResource("1_w34wi")
-text = "Places"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="MidPanel" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MidPanel"]
 layout_mode = 2
 texture = ExtResource("4_dwdlg")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="PeopleContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-clip_contents = false
+[node name="NoDocuments" type="Label" parent="MarginContainer/HBoxContainer/MidPanel"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 30
+text = "No documents to view!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Files" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/PeopleContainer"]
+[node name="Folders" type="Control" parent="MarginContainer/HBoxContainer/MidPanel"]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="People1" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/PeopleContainer/Files"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-focus_neighbor_left = NodePath("../../../../FoldersMargin/Folders/People")
-focus_neighbor_bottom = NodePath("../People2")
-text = "Person File 2"
-
-[node name="People2" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/PeopleContainer/Files"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-focus_neighbor_left = NodePath("../../../../FoldersMargin/Folders/People")
-focus_neighbor_top = NodePath("../People1")
-text = "Person File 3"
-
-[node name="PlacesContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Files" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/PlacesContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Places1" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/PlacesContainer/Files"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
-focus_neighbor_left = NodePath("../../../../FoldersMargin/Folders/Places")
-focus_neighbor_top = NodePath(".")
-focus_neighbor_bottom = NodePath(".")
-text = "Place File 1"
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer"]
+[node name="RightPanel" type="SubViewportContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/RightPanel"]
 handle_input_locally = false
 size = Vector2i(644, 1040)
 render_target_update_mode = 4
 
-[node name="DeviceDocumentViewer" parent="MarginContainer/HBoxContainer/SubViewportContainer/SubViewport" instance=ExtResource("4_xvwb1")]
+[node name="DeviceDocumentViewer" parent="MarginContainer/HBoxContainer/RightPanel/SubViewport" instance=ExtResource("4_xvwb1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.03, 0)
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("2_w34wi")
-expand_mode = 5
-stretch_mode = 5

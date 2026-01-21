@@ -29,7 +29,7 @@ func take_control(ui: Control):
 	cur_ui = ui
 
 func release_control():
-	if not ui_stack.is_empty():
+	if ui_stack.size() > 1:
 		cur_ui = ui_stack.pop_back()
 	else:
 		cur_ui = null

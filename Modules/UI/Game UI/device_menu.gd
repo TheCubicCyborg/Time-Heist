@@ -12,6 +12,7 @@ func _ready() -> void:
 func open():
 	super.open()
 	focused_button.grab_focus()
+	$MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs/DeviceFiles.select() #TEMP!
 	globals.ui_manager.take_control(self)
 	
 func close():
