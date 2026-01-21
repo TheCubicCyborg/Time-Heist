@@ -11,5 +11,4 @@ class_name Document
 
 func interact():
 	globals.ui_manager.document_viewer.display_document(document_info.document_id)
-	print("happening twice?")
 	globals.collect(document_info)

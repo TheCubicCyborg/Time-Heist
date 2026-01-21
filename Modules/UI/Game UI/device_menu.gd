@@ -1,24 +1,32 @@
 extends UI
 class_name DeviceMenu
 
-@export var focused_button : Control
 @onready var menu_tabs: TabContainer = $MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs
+var tabs : Array[MenuTabPanel]
+@export var focused_tab : int = 0
 
-#var tabs : Array[]
+#$MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs/DeviceFiles.select() #TEMP!
 
 func _ready() -> void:
-	pass
+	for tab in menu_tabs.get_children():
+		tabs.append(tab)
+	select_tab(focused_tab)
 
 func open():
 	super.open()
-	focused_button.grab_focus()
-	$MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs/DeviceFiles.select() #TEMP!
-	globals.ui_manager.take_control(self)
-	
-func close():
-	super.close()
-	globals.ui_manager.release_control()
+	select_tab(focused_tab)
 
 func handle_input():
 	super.handle_input()
-	menu_tabs.handle_input()
+	if Input.is_action_just_pressed("ui_tab_forward"):
+		focused_tab = (focused_tab + 1) % tabs.size()
+		select_tab(focused_tab)
+	if Input.is_action_just_pressed("ui_tab_backwards"):
+		focused_tab = (focused_tab - 1 + tabs.size()) % tabs.size()
+		select_tab(focused_tab)
+		
+func select_tab(selected_tab : int):
+	#for tab in tabs:
+		#tab.hide()
+	tabs[selected_tab].show()
+	tabs[selected_tab].select()

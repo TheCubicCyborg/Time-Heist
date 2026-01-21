@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://djm2xkntdba18"]
+[gd_scene load_steps=9 format=3 uid="uid://djm2xkntdba18"]
 
 [ext_resource type="Script" uid="uid://bd4wvbt4n011e" path="res://Modules/UI/Game UI/device_menu.gd" id="1_hgc2y"]
 [ext_resource type="Texture2D" uid="uid://c3uwunfq42tg8" path="res://Assets/UI/Time Travel Menu/time machine side left.png" id="1_wq3jl"]
@@ -10,33 +10,8 @@
 
 [sub_resource type="Theme" id="Theme_wq3jl"]
 
-[sub_resource type="GDScript" id="GDScript_4t7mm"]
-resource_name = "menu_tabs"
-script/source = "extends TabContainer
-
-var tabs : Array = [MenuTabPanel]
-@export var focused_tab : int = 0
-
-func _ready() -> void:
-	tabs = get_children()
-	select_tab(focused_tab)
-
-func handle_input():
-	if Input.is_action_just_pressed(\"ui_tab_forward\"):
-		focused_tab = (focused_tab + 1) % tabs.size()
-		select_tab(focused_tab)
-	if Input.is_action_just_pressed(\"ui_tab_backwards\"):
-		focused_tab = (focused_tab - 1 + tabs.size()) % tabs.size()
-		select_tab(focused_tab)
-		
-func select_tab(selected_tab : int):
-	for tab in tabs:
-		tab.hide()
-	tabs[selected_tab].show()
-	tabs[selected_tab].select()
-"
-
-[node name="Control" type="Control" node_paths=PackedStringArray("focused_button")]
+[node name="Control" type="Control" node_paths=PackedStringArray("default_focus")]
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,7 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hgc2y")
-focused_button = NodePath("MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs")
+default_focus = NodePath("MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -95,23 +70,22 @@ theme = SubResource("Theme_wq3jl")
 current_tab = 0
 all_tabs_in_front = true
 tab_focus_mode = 0
-script = SubResource("GDScript_4t7mm")
 
 [node name="DeviceFiles" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" instance=ExtResource("4_4t7mm")]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Cameras" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" instance=ExtResource("4_m01ss")]
+[node name="CamerasPanel" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" instance=ExtResource("4_m01ss")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Inventory" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" instance=ExtResource("4_7dje4")]
+[node name="InventoryPanel" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" instance=ExtResource("4_7dje4")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Settings" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" instance=ExtResource("4_hgc2y")]
+[node name="SettingsPanel" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" instance=ExtResource("4_hgc2y")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3

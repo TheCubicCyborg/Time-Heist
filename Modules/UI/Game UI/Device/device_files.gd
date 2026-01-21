@@ -1,9 +1,9 @@
 extends MenuTabPanel
+class_name DeviceFiles
 
 #var documents : Array = [preload("res://Assets/UI/Time Travel Menu/Files_Test/person2.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/person3.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/person4.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/person_1.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/place1.jpg")]
 @onready var folder_buttons: VBoxContainer = $"MarginContainer/HBoxContainer/FoldersMargin/Folder Buttons"
 @onready var folders: Control = $"MarginContainer/HBoxContainer/MidPanel/Folders"
-@onready var uncategorized: DeviceFilesList = $MarginContainer/HBoxContainer/MidPanel/Folders/Uncategorized
 var device_files_list : PackedScene = preload("res://Modules/UI/Game UI/Device/device_files_list.tscn")
 
 @onready var document_viewer := $MarginContainer/HBoxContainer/RightPanel/SubViewport/DeviceDocumentViewer
@@ -28,8 +28,6 @@ func view_panel(panel_to_view:DeviceFilesList):
 	
 func view_doc(doc_to_view:int):
 	document_viewer.set_document_texture(doc_to_view)
-	
-#func select()
 
 func update_doc_list(doc : DocumentInfo):
 	check_for_new_tags(doc)

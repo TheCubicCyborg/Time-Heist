@@ -1,4 +1,5 @@
 extends MenuTabPanel
+class_name InventoryPanel
 
 func _ready() -> void:
 	pass # Replace with function body.

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://31ibymxtbwo0" path="res://inventory.gd" id="1_dvwll"]
 [ext_resource type="PackedScene" uid="uid://do3dkc4b11tel" path="res://Modules/UI/Game UI/Device/inventory_slot.tscn" id="2_etkkw"]
 
-[node name="Inventory" type="Control" node_paths=PackedStringArray("main_focus")]
+[node name="InventoryPanel" type="Control" node_paths=PackedStringArray("main_focus")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

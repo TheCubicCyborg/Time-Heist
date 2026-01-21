@@ -23,13 +23,13 @@ var safe_ratio : float = 1
 
 var allow_interact: bool = true
 
+var cameras : Array[SubViewport]
+
 var collected_documents: Array[DocumentInfo]
 func collect(doc : DocumentInfo):
 	if not doc in collected_documents:
 		collected_documents.append(doc)
 		emit_signal("added_doc", doc)
-	
-signal added_doc(doc : DocumentInfo)
 
 #region temporary test variables
 var player_has_keycard: bool = false
@@ -54,5 +54,5 @@ func player_caught():
 	pass
 
 #region Signals
-
+signal added_doc(doc : DocumentInfo)
 #endregion
