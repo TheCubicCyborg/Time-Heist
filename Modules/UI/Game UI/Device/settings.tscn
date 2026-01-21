@@ -164,7 +164,7 @@ _data = {
 &"settings_open": SubResource("Animation_pnwlj")
 }
 
-[node name="Settings" type="Control" node_paths=PackedStringArray("main_focus")]
+[node name="SettingsPanel" type="Control" node_paths=PackedStringArray("main_focus")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

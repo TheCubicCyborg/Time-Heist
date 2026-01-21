@@ -1,4 +1,5 @@
 extends MenuTabPanel
+class_name SettingsPanel
 
 @onready var animation_player := $AnimationPlayer
 @onready var settings := $HBoxContainer/SettingsVerticality

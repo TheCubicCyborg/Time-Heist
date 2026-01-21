@@ -8,6 +8,7 @@ var target_rotation: Vector3
 
 func _ready():
 	target_rotation = document.rotation
+	document.texture = null
 
 func _process(delta): #change to be handle_function()
 	var input := Vector2.ZERO

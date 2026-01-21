@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dyhnk6p2fbc87" path="res://Modules/ConeVision/cone_vision.tscn" id="15_kwsvl"]
 [ext_resource type="Script" uid="uid://cyycim24066r4" path="res://Modules/AI/security_guard.gd" id="16_c2wu1"]
 [ext_resource type="PackedScene" uid="uid://djn3ckwc8enih" path="res://Modules/Interaction/Document/document.tscn" id="17_mwmvx"]
-[ext_resource type="Texture2D" uid="uid://b6oady1ollpgf" path="res://Assets/Sprites/temp-paper-resized.png" id="18_ct5pj"]
+[ext_resource type="Texture2D" uid="uid://b6oady1ollpgf" path="res://Assets/Documents/temp.png" id="18_ct5pj"]
 [ext_resource type="Texture2D" uid="uid://dkfkrh8rlgw1e" path="res://Assets/Sprites/keycard.png" id="19_brgcy"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_terai"]

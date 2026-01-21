@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bjjcgr3dvub72"]
+[gd_scene load_steps=29 format=3 uid="uid://bjjcgr3dvub72"]
 
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="1_0c7so"]
 [ext_resource type="PackedScene" uid="uid://bm4y2kiv4odnp" path="res://Modules/UI/ui_manager.tscn" id="1_cr80g"]
@@ -19,7 +19,6 @@
 [ext_resource type="Resource" uid="uid://bfjfesbg0arfi" path="res://Assets/Documents/Resources/first_test_document.tres" id="18_cr80g"]
 [ext_resource type="PackedScene" uid="uid://djn3ckwc8enih" path="res://Modules/Interaction/Document/document.tscn" id="18_yl26t"]
 [ext_resource type="Texture2D" uid="uid://b6oady1ollpgf" path="res://Assets/Documents/temp.png" id="19_cr80g"]
-[ext_resource type="Resource" uid="uid://dde08b7s131h7" path="res://Assets/Documents/Resources/second_test_document.tres" id="20_cr80g"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_vmato"]
 
@@ -451,11 +450,6 @@ gridmap = NodePath("../Walls")
 [node name="Document" parent="." instance=ExtResource("18_yl26t")]
 transform = Transform3D(2.77, 0, 0, 0, 2.77, 0, 0, 0, 2.77, 5.5, 0, 12.5)
 document_info = ExtResource("18_cr80g")
-texture = ExtResource("19_cr80g")
-
-[node name="Document2" parent="." instance=ExtResource("18_yl26t")]
-transform = Transform3D(2.77, 0, 0, 0, 2.77, 0, 0, 0, 2.77, 9.332871, 0, 13.534893)
-document_info = ExtResource("20_cr80g")
 texture = ExtResource("19_cr80g")
 
 [node name="SubViewport" type="SubViewport" parent="."]
