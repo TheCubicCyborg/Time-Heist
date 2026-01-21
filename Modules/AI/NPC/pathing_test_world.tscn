@@ -40,4 +40,3 @@ shape = SubResource("BoxShape3D_ah0ni")
 
 [node name="NPC" parent="." instance=ExtResource("1_0mxr5")]
 path = SubResource("Resource_l8i8w")
-metadata/_edit_lock_ = true

@@ -8,7 +8,7 @@ var path_components: Array[PathComponent]
 	set(value):
 		loop = value
 		if value:
-			path_components.push_back(PathLine.new(size(),self))
+			path_components.push_back(PathLine.new(at(size()-1),at(0),size(),self))
 		else:
 			path_components.remove_at(size()-1)
 		emit_changed()
@@ -18,17 +18,26 @@ func _init():
 	path_components.push_back(PathVertex.new(0,self))
 
 func branch_forward(ix: int):
-	path_components.insert(ix+1,PathLine.new(ix+1,self))
+	var branch_vertex = at(ix)
 	var return_vertex = PathVertex.new(ix+2,self)
+	var new_line = PathLine.new(branch_vertex,return_vertex,ix+1,self)
+	if ix < size()-1:
+		var next_line: PathLine = at(ix+1)
+		next_line.prev_vertex = return_vertex
+	path_components.insert(ix+1,new_line)
 	path_components.insert(ix+2,return_vertex)
 	for i in range(ix+3,size()):
 		path_components[i].id += 2
 	return return_vertex
 
 func branch_backward(ix: int):
+	var branch_vertex = at(ix)
 	var return_vertex = PathVertex.new(ix,self)
+	var new_line: PathLine = PathLine.new(return_vertex,branch_vertex,ix+1,self)
+	var prev_line: PathLine = at(ix-1)
+	prev_line.next_vertex = return_vertex
 	path_components.insert(ix,return_vertex)
-	path_components.insert(ix+1,PathLine.new(ix+1,self))
+	path_components.insert(ix+1,new_line)
 	for i in range(ix+2,size()):
 		path_components[i].id += 2
 	return return_vertex

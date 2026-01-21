@@ -25,31 +25,32 @@ func _redraw():
 	var line_positions := PackedVector3Array()
 	var line_ids := PackedInt32Array()
 	
-	for i in range(2,path.size(),2):
-		line_positions.push_back(draw_line(i-2,i,path,line_material))
-		vertex_positions.push_back(path.at(i).position)
-		line_ids.push_back(i-1)
-		vertex_ids.push_back(i)
+	for i in range(1,path.size()):
+		var component = path.at(i)
+		if component is PathVertex:
+			vertex_positions.push_back(path.at(i).position)
+			vertex_ids.push_back(i)
+		elif component is PathLine:
+			line_positions.push_back(draw_line(component, line_material))
+			line_ids.push_back(i)
 	
 	if vertex_positions.size() > 0:
 		if path.loop:
-			line_positions.push_back(draw_line(path.size()-2,0,path,line_material))
+			line_positions.push_back(draw_line(path.at(path.size()-1), line_material))
 			line_ids.push_back(path.size()-1)
 		add_handles(vertex_positions,handle_material,vertex_ids)
 		add_handles(line_positions,handle_material,line_ids)
 
-func draw_line(start_ix: int, end_ix: int,path:NPCPath,line_material):
-	var prev_vert: PathVertex = path.at(start_ix)
-	var cur_vert: PathVertex = path.at(end_ix)
-	var line_vec = cur_vert.position - prev_vert.position
-	var line_midpoint = (cur_vert.position + prev_vert.position) * 0.5
+func draw_line(line: PathLine, line_material):
+	var line_vec = line.next_vertex.position - line.prev_vertex.position
+	var line_midpoint = (line.next_vertex.position + line.prev_vertex.position) * 0.5
 	var rotation: Vector3 = Vector3(-PI/2,Vector3.FORWARD.signed_angle_to(line_vec,Vector3.UP),0)
 	var basis = Basis.from_scale(Vector3(1,line_vec.length()/2,1))
 	basis = basis.rotated(Vector3.RIGHT, rotation.x)
 	basis = basis.rotated(Vector3.UP, rotation.y)
 	var transform: Transform3D = Transform3D(basis,line_midpoint)
 	add_mesh(path_mesh,line_material,transform)
-	add_mesh(arrow_mesh,line_material,Transform3D(Basis.from_euler(rotation),cur_vert.position - line_vec.normalized() * 0.3))
+	add_mesh(arrow_mesh,line_material,Transform3D(Basis.from_euler(rotation),line.next_vertex.position - line_vec.normalized() * 0.3))
 	return line_midpoint
 
 func _begin_handle_action(id, secondary):
@@ -78,9 +79,14 @@ func _set_handle(id, secondary, camera, point):
 		var origin = camera.project_ray_origin(point)
 		var direction = camera.project_ray_normal(point)
 		var plane = Plane(Vector3.UP)
-		var position = plane.intersects_ray(origin,direction)
+		var position: Vector3 = plane.intersects_ray(origin,direction)
 		position = position.snapped(Vector3(1,0,1) * path.snap)
 		moving_vertex.position = position
+		var prev_vertex: PathVertex = path.at(moving_vertex.id-2)
+		var prev_line: PathLine = path.at(moving_vertex.id-1)
+		var add_time = (position.distance_to(prev_vertex.position))/prev_line.speed
+		moving_vertex.time_start = prev_vertex.time_end + add_time
+		moving_vertex.time_end = prev_vertex.time_end + moving_vertex.get_duration() + add_time
 
 func _commit_handle(id, secondary, restore, cancel):
 	moving_vertex = null

@@ -22,3 +22,10 @@ func _validate_property(property: Dictionary):
 			property.usage |= PROPERTY_USAGE_READ_ONLY
 		if property.name == "position":
 			property.usage |= PROPERTY_USAGE_READ_ONLY
+
+func get_duration():
+	var duration: float = 0
+	for action in vertex_actions:
+		if action is WaitVertexAction:
+			duration += action.duration
+	return duration
