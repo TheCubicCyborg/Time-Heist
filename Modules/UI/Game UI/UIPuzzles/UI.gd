@@ -2,7 +2,7 @@ extends Control
 
 class_name UI
 
-var is_open : bool
+var is_open : bool = true
 @export var default_focus : Control
 
 func open():

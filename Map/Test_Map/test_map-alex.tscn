@@ -129,11 +129,11 @@ func puzzle_passed():
 [sub_resource type="BoxShape3D" id="BoxShape3D_oxmku"]
 size = Vector3(0.2, 0.6, 0.6)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtkwk"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fsrqj"]
 albedo_color = Color(0.5933253, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mtkwk"]
-material = SubResource("StandardMaterial3D_mtkwk")
+material = SubResource("StandardMaterial3D_fsrqj")
 size = Vector3(0.2, 0.6, 0.6)
 
 [sub_resource type="Curve3D" id="Curve3D_1tqx8"]
@@ -524,6 +524,7 @@ script = SubResource("GDScript_88cv8")
 
 [node name="TestPuzzle" parent="CodePuzzle" instance=ExtResource("12_mtkwk")]
 correct_answer = "cleantime"
+metadata/_edit_use_anchors_ = true
 
 [node name="Interface" parent="CodePuzzle" node_paths=PackedStringArray("ui") instance=ExtResource("13_88cv8")]
 ui = NodePath("../TestPuzzle")
