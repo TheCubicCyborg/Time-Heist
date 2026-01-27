@@ -58,5 +58,11 @@ func at(ix: int):
 func size():
 	return path_components.size()
 
-func vertex_changed():
+func component_changed(id_changed:int):
+	#print("component changed")
+	print("component id: ", id_changed, " changed")
+	validate_times(id_changed)
 	emit_changed()
+
+func validate_times(id_changed:int):
+	pass

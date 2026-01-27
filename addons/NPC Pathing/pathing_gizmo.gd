@@ -64,10 +64,8 @@ func _begin_handle_action(id, secondary):
 		elif Input.is_key_pressed(KEY_SHIFT): #Create new line and vertex backward
 			moving_vertex = path.branch_backward(id)
 		elif Input.is_key_pressed(KEY_ALT):
-			path.delete_vertex(id)
-			select_component(path.at(id-2))
-			_redraw()
-			return
+			moving_vertex = path.delete_vertex(id)
+			#_redraw()
 		else:
 			moving_vertex = path.at(id)
 		select_component(moving_vertex)
@@ -76,8 +74,7 @@ func _begin_handle_action(id, secondary):
 
 func select_component(component: PathComponent):
 	selected_component = component
-	if component:
-		EditorInterface.get_inspector().edit(component)
+	EditorInterface.get_inspector().edit(component)
 
 func _set_handle(id, secondary, camera, point):
 	var path: NPCPath = get_node_3d().path
