@@ -6,7 +6,6 @@ class_name UI_Manager
 @export var debug_mode: bool = false
 @onready var camera_ui = $Camera
 @onready var device_menu = $DeviceMenu
-#var control_input: bool = false
 var ui_stack: Array[Control] = []
 var cur_ui: Control = null
 

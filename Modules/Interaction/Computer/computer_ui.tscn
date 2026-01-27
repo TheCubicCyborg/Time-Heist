@@ -1,10 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://chgq1whavi3qi"]
+[gd_scene load_steps=3 format=3 uid="uid://chgq1whavi3qi"]
 
 [ext_resource type="Script" uid="uid://ck3oeogct52e1" path="res://Modules/Interaction/Computer/computer_ui.gd" id="1_01okh"]
 [ext_resource type="Texture2D" uid="uid://c0kml80xyvydp" path="res://Assets/UI/Computer/desktop_image.png" id="2_tjnva"]
-[ext_resource type="PackedScene" uid="uid://b1xuaj1s3dwef" path="res://Modules/Interaction/Computer/desktop_item.tscn" id="5_jlv0e"]
-[ext_resource type="PackedScene" uid="uid://q5g0v26dm1my" path="res://Modules/Interaction/Computer/computer_tab.tscn" id="5_rrous"]
-[ext_resource type="Resource" uid="uid://bfjfesbg0arfi" path="res://Assets/Documents/Resources/first_test_document.tres" id="5_xx8es"]
 
 [node name="Computer UI" type="Control"]
 layout_mode = 3
@@ -35,45 +32,3 @@ anchor_bottom = 1.0
 offset_top = -70.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="Icons" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Email" parent="Icons" node_paths=PackedStringArray("tab") instance=ExtResource("5_jlv0e")]
-layout_mode = 1
-item_type = 1
-tab = NodePath("Email Tab")
-override_title = "Email"
-
-[node name="Email Tab" parent="Icons/Email" instance=ExtResource("5_rrous")]
-visible = false
-layout_mode = 1
-
-[node name="Texts" parent="Icons" instance=ExtResource("5_jlv0e")]
-layout_mode = 1
-offset_left = -290.0
-offset_top = -177.0
-offset_right = -290.0
-offset_bottom = -177.0
-item_type = 1
-override_title = "Texts"
-
-[node name="Texts2" parent="Icons" instance=ExtResource("5_jlv0e")]
-layout_mode = 1
-offset_left = -333.0
-offset_top = 88.0
-offset_right = -333.0
-offset_bottom = 88.0
-item_type = 2
-file = ExtResource("5_xx8es")
-override_title = "Blueprints"
-
-[node name="Tabs" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0

@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://dingev4kxu2j0"]
+
+[ext_resource type="Script" uid="uid://cyid2xchi8fsp" path="res://Modules/Interaction/Computer/Email App/email_button.gd" id="1_80oal"]
+[ext_resource type="Texture2D" uid="uid://co4jpppqbvflr" path="res://icon.svg" id="2_bjrwd"]
+
+[node name="EmailButton" type="Control"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 3
+anchor_bottom = 0.11100001
+offset_right = 600.0
+offset_bottom = 0.11998749
+grow_vertical = 2
+size_flags_horizontal = 3
+focus_mode = 2
+script = ExtResource("1_80oal")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14509805, 0.14509805, 0.14509805, 0.6117647)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -6.5
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Title"
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="From" type="Label" parent="MarginContainer/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "From: who"
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Desc" type="Label" parent="MarginContainer/VBoxContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Desc"
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="NewMail" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 34.0
+offset_bottom = 33.0
+texture = ExtResource("2_bjrwd")
+expand_mode = 1
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]

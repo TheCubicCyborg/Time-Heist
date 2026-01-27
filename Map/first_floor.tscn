@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bjjcgr3dvub72"]
+[gd_scene load_steps=36 format=3 uid="uid://bjjcgr3dvub72"]
 
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="1_0c7so"]
 [ext_resource type="PackedScene" uid="uid://bm4y2kiv4odnp" path="res://Modules/UI/ui_manager.tscn" id="1_cr80g"]
@@ -21,6 +21,11 @@
 [ext_resource type="Texture2D" uid="uid://b6oady1ollpgf" path="res://Assets/Documents/temp.png" id="19_cr80g"]
 [ext_resource type="Resource" uid="uid://dde08b7s131h7" path="res://Assets/Documents/Resources/second_test_document.tres" id="20_cr80g"]
 [ext_resource type="PackedScene" uid="uid://d34pm0fchacnp" path="res://Modules/Interaction/Computer/computer.tscn" id="21_xfhbw"]
+[ext_resource type="PackedScene" uid="uid://chgq1whavi3qi" path="res://Modules/Interaction/Computer/computer_ui.tscn" id="22_rxtpu"]
+[ext_resource type="PackedScene" uid="uid://b1xuaj1s3dwef" path="res://Modules/Interaction/Computer/desktop_item.tscn" id="23_rew54"]
+[ext_resource type="PackedScene" uid="uid://q5g0v26dm1my" path="res://Modules/Interaction/Computer/computer_tab.tscn" id="24_2dfqy"]
+[ext_resource type="PackedScene" uid="uid://bnhismy4o74yd" path="res://Modules/Interaction/Computer/Email App/email_tab.tscn" id="25_he45r"]
+[ext_resource type="Script" uid="uid://c4r7d4bl70rat" path="res://Assets/Documents/document_resource.gd" id="26_rew54"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_vmato"]
 
@@ -67,18 +72,6 @@ size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6wjy"]
 size = Vector3(0.38, 2, 1.28)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_hfiml"]
-viewport_path = NodePath("Screen/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxtpu"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_hfiml")
-
-[sub_resource type="QuadMesh" id="QuadMesh_rew54"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_rxtpu")
-size = Vector2(0.57, 0.35)
 
 [node name="First Floor" type="Node3D" node_paths=PackedStringArray("cameras")]
 script = ExtResource("1_vkurv")
@@ -487,26 +480,35 @@ render_target_update_mode = 4
 [node name="Camera3D" type="Camera3D" parent="SubViewport2"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.66743636, 1.017169, 11.366655)
 
-[node name="Computer" parent="." instance=ExtResource("21_xfhbw")]
-transform = Transform3D(0.61645883, 0, -0.78738713, 0, 1, 0, 0.78738713, 0, 0.61645883, -4.375702, 1, 17.740742)
+[node name="Computer" parent="." node_paths=PackedStringArray("computer_ui") instance=ExtResource("21_xfhbw")]
+transform = Transform3D(-0.3362735, 0, -0.94176435, 0, 1, 0, 0.94176435, 0, -0.3362735, -4.3653135, 0.9756807, 15.955596)
+computer_ui = NodePath("Computer UI2")
 
-[node name="Interface" parent="Computer" index="2" node_paths=PackedStringArray("ui")]
-ui = NodePath("../Computer UI")
+[node name="Computer UI2" parent="Computer" node_paths=PackedStringArray("icons") instance=ExtResource("22_rxtpu")]
+icons = [NodePath("Email")]
 
-[node name="Screen" parent="Computer" index="3"]
-mesh = SubResource("QuadMesh_rew54")
+[node name="Email" parent="Computer/Computer UI2" node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
+layout_mode = 1
+offset_left = -480.0
+offset_top = -280.0
+offset_right = -480.0
+offset_bottom = -280.0
+override_title = "Email"
+item_type = 1
+tab = NodePath("Computer Tab")
 
-[node name="Computer2" parent="." instance=ExtResource("21_xfhbw")]
-transform = Transform3D(-0.12228516, 0, -0.992495, 0, 1, 0, 0.992495, 0, -0.12228516, -4.375702, 1, 16.805115)
+[node name="Computer Tab" parent="Computer/Computer UI2/Email" node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+layout_mode = 1
+offset_left = -178.0
+offset_top = -132.0
+offset_right = 1022.0
+offset_bottom = 668.0
+content = NodePath("Email_Tab")
 
-[node name="Interface" parent="Computer2" index="2" node_paths=PackedStringArray("ui")]
-ui = NodePath("../Computer UI")
-
-[node name="Screen" parent="Computer2" index="3"]
-mesh = SubResource("QuadMesh_rew54")
+[node name="Email_Tab" parent="Computer/Computer UI2/Email/Computer Tab" instance=ExtResource("25_he45r")]
+layout_mode = 1
+emails = Array[ExtResource("26_rew54")]([ExtResource("18_cr80g"), ExtResource("20_cr80g")])
 
 [connection signal="body_entered" from="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" to="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" method="_on_body_entered"]
 
 [editable path="Rooms/FrontDeskBackRoom/Doors/Behind Desk Door1"]
-[editable path="Computer"]
-[editable path="Computer2"]
