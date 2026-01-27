@@ -1,7 +1,7 @@
 @tool
 class_name NPCPath extends Resource
 
-var path_components: Array[PathComponent]
+@export var path_components: Array[PathComponent]
 
 @export var snap: int = 0
 @export var loop: bool = false:
@@ -41,6 +41,16 @@ func branch_backward(ix: int):
 	for i in range(ix+2,size()):
 		path_components[i].id += 2
 	return return_vertex
+
+func delete_vertex(ix: int):
+	var prev_vert: PathVertex = path_components[ix-2]
+	if ix < size()-1:
+		var next_line: PathLine = path_components[ix + 1]
+		next_line.prev_vertex = prev_vert
+	path_components.remove_at(ix)
+	path_components.remove_at(ix-1)
+	for i in range(ix-1,size()):
+		path_components[i].id -= 2
 
 func at(ix: int):
 	return path_components[ix]

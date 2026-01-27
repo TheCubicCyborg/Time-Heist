@@ -1,7 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cyif8uwvd8l5"]
+[gd_scene load_steps=12 format=3 uid="uid://cyif8uwvd8l5"]
 
 [ext_resource type="PackedScene" uid="uid://cne3kilvgkpxb" path="res://Modules/AI/NPC/NPC.tscn" id="1_0mxr5"]
 [ext_resource type="Script" uid="uid://d0afbfeblscar" path="res://Modules/Interaction/interactable.gd" id="1_urgcb"]
+[ext_resource type="Script" uid="uid://br704tdr56wo1" path="res://addons/NPC Pathing/PathPt2/PathComponent.gd" id="3_ah0ni"]
+[ext_resource type="Script" uid="uid://d07sq7me61pcj" path="res://addons/NPC Pathing/PathPt2/PathVertex.gd" id="4_0d2mm"]
+[ext_resource type="Script" uid="uid://bveu2y00mhldy" path="res://addons/NPC Pathing/PathPt2/VertexAction.gd" id="5_sby2f"]
 [ext_resource type="Script" uid="uid://bqksnw54upvlw" path="res://addons/NPC Pathing/PathPt2/NPCPath.gd" id="6_khdrh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m53t8"]
@@ -16,8 +19,12 @@ func interact():
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ah0ni"]
 
-[sub_resource type="Resource" id="Resource_l8i8w"]
+[sub_resource type="Resource" id="Resource_khdrh"]
+script = ExtResource("4_0d2mm")
+
+[sub_resource type="Resource" id="Resource_nhqvp"]
 script = ExtResource("6_khdrh")
+path_components = Array[ExtResource("3_ah0ni")]([SubResource("Resource_khdrh")])
 
 [node name="Pathing Test World" type="Node3D"]
 
@@ -39,4 +46,4 @@ metadata/_custom_type_script = "uid://d0afbfeblscar"
 shape = SubResource("BoxShape3D_ah0ni")
 
 [node name="NPC" parent="." instance=ExtResource("1_0mxr5")]
-path = SubResource("Resource_l8i8w")
+path = SubResource("Resource_nhqvp")
