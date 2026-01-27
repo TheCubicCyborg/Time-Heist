@@ -8,13 +8,11 @@ var idle_state : State
 @export 
 var sliding_state : State
 @export
-var dash_state : State
-@export
-var sneak_checking_state : State
-@export
-var crouching_state: State
+var running_state : State
 
 func enter() -> void:
+	#player.anim_tree.set("parameters/PlayerAnimations/Movement/transition_request","Walking")
+	
 	if player.is_crouching:
 		player.current_max_speed = player.max_speed_crouching
 		player.current_acceleration = player.acceleration_crouching
@@ -27,12 +25,8 @@ func exit() -> void:
 	pass
 	
 func process_input(event: InputEvent) -> State:
-	if Input.is_action_just_pressed("player_dash"):
-		return dash_state
-	if Input.is_action_just_pressed("player_sneak"):
-		return sneak_checking_state
-	#if Input.is_action_just_pressed("player_crouch"):
-		#return crouching_state
+	#if PlayerInput.is_action_just_pressed("player_dash"):
+		#return dash_state
 	return null
 	
 func process_physics(delta: float) -> State:
@@ -40,8 +34,8 @@ func process_physics(delta: float) -> State:
 	if not player.is_on_floor():
 		player.velocity += player.get_gravity() * delta
 
-	var input_dir = move_component.get_input_direction() # Input direction
-	var direction_vector = move_component.get_direction_vector(input_dir) # Direction vector
+	var input_dir = input_controller.get_input_direction() # Input direction
+	var direction_vector = input_controller.get_direction_vector(input_dir) # Direction vector
 	
 	player.speed = lerp(player.speed, player.current_max_speed, player.current_acceleration * delta)
 	player.velocity = player.speed * direction_vector
@@ -51,10 +45,12 @@ func process_physics(delta: float) -> State:
 	return null
 	
 func process_frame(delta: float) -> State:
-	if move_component.get_input_direction() == Vector2.ZERO:
+	if input_controller.get_input_direction() == Vector2.ZERO:
 		return sliding_state
-	if player.can_move and Input.is_action_pressed("player_dash"):
-		return dash_state
+	if PlayerInput.is_action_pressed("player_roll_walk"):
+		return null
+	#if PlayerInput.is_action_pressed("player_dash"):
+		#return dash_state
 	
 	if player.is_crouching:
 		player.current_acceleration = player.deceleration_crouching
@@ -72,7 +68,4 @@ func process_frame(delta: float) -> State:
 			player.current_acceleration = player.acceleration_crouching
 		else:
 			player.current_acceleration = player.acceleration_walking
-		
-	if player.speed == 0.0:
-		return idle_state
-	return null
+	return sliding_state

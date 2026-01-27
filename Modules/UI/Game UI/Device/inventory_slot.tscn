@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://do3dkc4b11tel"]
+
+[ext_resource type="Texture2D" uid="uid://co4jpppqbvflr" path="res://icon.svg" id="1_autb1"]
+
+[node name="Control" type="Panel"]
+custom_minimum_size = Vector2(128, 128)
+anchors_preset = -1
+anchor_right = 0.067
+anchor_bottom = 0.119
+offset_right = -0.6399994
+offset_bottom = -0.5200043
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(64, 64)
+scale = Vector2(0.90625006, 0.90625006)
+texture = ExtResource("1_autb1")

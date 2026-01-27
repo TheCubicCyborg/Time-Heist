@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://0o2xjnq7qhqi"]
+
+[ext_resource type="Script" uid="uid://dv3pmyjmcfrbs" path="res://Modules/UI/Main Menu UI/main_menu.gd" id="1_udvrb"]
+[ext_resource type="Texture2D" uid="uid://rk2jgw3f23q" path="res://Assets/UI/Main Menu/Screenshot 2025-11-21 at 01.35.53.png" id="2_u5mth"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_udvrb")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 700)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_u5mth")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="NewGame" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../Play")
+text = "New Save"
+
+[node name="Play" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../NewGame")
+focus_neighbor_right = NodePath("../Settings")
+text = "Play"
+
+[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../Play")
+text = "Settings"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Play" to="." method="_on_play_pressed"]

@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyhnk6p2fbc87"]
+
+[sub_resource type="GDScript" id="GDScript_23e0v"]
+resource_name = "cone_vision"
+script/source = "extends Area3D
+
+var player_spotted
+@onready var sight_checker := $SightChecker
+@onready var collision := $CollisionPolygon3D
+
+var time_detecting: float = 0
+
+@export var sight_line_angle : float = 180 #degrees
+@export var sight_line_radius : float = 15 #meters
+@export var time_till_caught : float = 2
+@export var angle_steps : float = 5
+
+var polygon_points : PackedVector2Array = []
+
+func _ready() -> void:
+	globals.safe_ratio = 1
+	#Set ray cast length
+	sight_checker.target_position.z = -sight_line_radius
+	
+	#Create mesh
+	polygon_points.append(Vector2.ZERO)
+	var sweep_angle = -sight_line_angle / 2
+	
+	for j in range(sight_line_angle / 5 + 1):
+		polygon_points.append(Vector2(
+			sight_line_radius * sin(deg_to_rad(sweep_angle)),
+			-sight_line_radius * cos(deg_to_rad(sweep_angle))
+		))
+		sweep_angle += 5
+	collision.polygon = polygon_points
+
+func _process(delta: float) -> void:
+	#print(timer.time_left)
+	if player_spotted:
+		sight_checker.look_at(Vector3(globals.player.global_position.x,1,globals.player.global_position.z))
+		
+		if sight_checker.get_collider() == globals.player:
+			time_detecting += delta
+		else:
+			time_detecting = 0
+		globals.safe_ratio = (time_till_caught-time_detecting)/time_till_caught
+		
+		if time_detecting >= time_till_caught:
+			caught()
+	
+
+func _on_body_entered(body: Node3D) -> void:
+	if body == globals.player:
+		player_spotted = true
+		
+func _on_body_exited(body: Node3D) -> void:
+	if body == globals.player:
+		player_spotted = false 
+		time_detecting = 0
+		globals.safe_ratio = (time_till_caught-time_detecting)/time_till_caught
+	
+func caught() -> void:
+	globals.player_caught()
+"
+
+[node name="Cone Vision" type="Area3D"]
+script = SubResource("GDScript_23e0v")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+polygon = PackedVector2Array(-25, 35, 25, 35, 0, 0)
+
+[node name="SightChecker" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, -50)
+collision_mask = 9
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -17,6 +17,8 @@ var previous_facing_direction : Direction
 var destination_rotation : int
 var current_rotation : float
 
+@onready var color_rect := $CanvasLayer/ColorRect
+
 func _ready() -> void:
 	globals.camera = self
 	
@@ -28,16 +30,16 @@ func _ready() -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("camera_right"):
+	if PlayerInput.is_action_just_pressed("camera_right"):
 		step_rotation(-1)
 		test_print()
-	if event.is_action_pressed("camera_left"):
+	if PlayerInput.is_action_just_pressed("camera_left"):
 		step_rotation(+1)
 		test_print()
 
 func step_rotation(change: int):
 	#For character input remapping
-	globals.player.move_component.should_update_map = true
+	globals.player.input_controller.should_update_map = true
 	
 	destination_rotation = (destination_rotation + change*90)
 	previous_facing_direction = facing_direction
@@ -49,6 +51,8 @@ func step_rotation(change: int):
 
 #var elapsed = 0.0
 func _process(delta: float) -> void:
+	color_rect.modulate.a = 1.0 - globals.safe_ratio
+	#print(globals.caught_time_remaining)
 	#Centers camera pivot on the parent
 	position = globals.player.position
 	

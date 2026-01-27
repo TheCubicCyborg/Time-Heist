@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bm4y2kiv4odnp"]
+[gd_scene load_steps=9 format=3 uid="uid://bm4y2kiv4odnp"]
 
 [ext_resource type="Script" uid="uid://b25imoa11adq2" path="res://Modules/UI/ui_manager.gd" id="1_yaem8"]
 [ext_resource type="Script" uid="uid://b1b742guris2v" path="res://Modules/UI/Game UI/debug_ui.gd" id="2_u3icv"]
 [ext_resource type="PackedScene" uid="uid://o8bawnwr8utr" path="res://Modules/UI/Game UI/DocumentViewer/document_viewer.tscn" id="3_jfs1l"]
+[ext_resource type="PackedScene" uid="uid://djm2xkntdba18" path="res://Modules/UI/Game UI/device_menu.tscn" id="5_keavj"]
 
 [sub_resource type="GDScript" id="GDScript_yaem8"]
 resource_name = "TimeDisplay"
@@ -47,7 +48,7 @@ func _process(_delta):
 	text = \"Speed: \" + cur_speed
 "
 
-[node name="UI Root" type="Control"]
+[node name="UI Manager" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,6 +59,7 @@ script = ExtResource("1_yaem8")
 
 [node name="DEBUG UI" type="Control" parent="."]
 process_mode = 4
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,10 +99,16 @@ offset_bottom = 87.37
 text = "Speed Display"
 script = SubResource("GDScript_isv23")
 
-[node name="DocumentViewer" parent="." instance=ExtResource("3_jfs1l")]
-layout_mode = 1
-
 [node name="Interface" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="DeviceMenu" parent="." instance=ExtResource("5_keavj")]
+visible = false
+layout_mode = 1
+
+[node name="DocumentViewer" parent="." instance=ExtResource("3_jfs1l")]
+visible = false
+layout_mode = 1
