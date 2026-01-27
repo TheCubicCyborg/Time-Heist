@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://clco7c3docdte"]
+[gd_scene load_steps=28 format=3 uid="uid://clco7c3docdte"]
 
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="1_mj1eb"]
 [ext_resource type="Texture2D" uid="uid://cjwgyolwq6axi" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_ao.png" id="2_fotk3"]
@@ -9,8 +9,17 @@
 [ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/camera_pivot.tscn" id="7_kl7s0"]
 [ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/Player.tscn" id="8_515ed"]
 [ext_resource type="PackedScene" uid="uid://bk11o2jtj5d7g" path="res://Modules/Interaction/Door/generic_door.tscn" id="9_kblvk"]
-[ext_resource type="PackedScene" uid="uid://bm4y2kiv4odnp" path="res://Modules/UI/ui_root.tscn" id="10_0l4f8"]
+[ext_resource type="PackedScene" uid="uid://bm4y2kiv4odnp" path="res://Modules/UI/ui_manager.tscn" id="10_0l4f8"]
 [ext_resource type="PackedScene" uid="uid://j4buig8m5yp3" path="res://Assets/Models/cubicle_six_v3.glb" id="11_fotk3"]
+[ext_resource type="PackedScene" uid="uid://oyq0g5wotgxh" path="res://Assets/Models/Door_v20.gltf" id="12_b4kwg"]
+[ext_resource type="Texture2D" uid="uid://cr0iqg2qlblwi" path="res://Assets/Materials/PS Graphics Textures/Door_Material/DoorTexture_v2.jpg" id="13_pbiog"]
+[ext_resource type="Texture2D" uid="uid://bbqnirkhwmk13" path="res://Assets/Materials/PS Graphics Textures/Door_Material/SP_Door_v2_DoorMaterial_Metallic.png" id="14_kblvk"]
+[ext_resource type="Texture2D" uid="uid://bvuxttvey2urc" path="res://Assets/Materials/PS Graphics Textures/Door_Material/SP_Door_v2_DoorMaterial_Normal.png" id="15_0l4f8"]
+[ext_resource type="Texture2D" uid="uid://kr8lnxbuo0ic" path="res://Assets/Materials/PS Graphics Textures/Door_Material/SP_Door_v2_DoorMaterial_Roughness.png" id="16_b4kwg"]
+[ext_resource type="Texture2D" uid="uid://dlayhj5ofag26" path="res://Assets/Materials/PS Graphics Textures/DoorKnob_Material/SP_DoorKnobBase.png" id="17_r7dq5"]
+[ext_resource type="Texture2D" uid="uid://d088p62h1xy4w" path="res://Assets/Materials/PS Graphics Textures/DoorKnob_Material/SP_Door_v2_DoorKnob Material_Metallic.png" id="18_cta6c"]
+[ext_resource type="Texture2D" uid="uid://dkhy8et0iavh" path="res://Assets/Materials/PS Graphics Textures/DoorKnob_Material/SP_Door_v2_DoorKnob Material_Normal.png" id="19_emwqo"]
+[ext_resource type="Texture2D" uid="uid://crjwmqnhbtpiy" path="res://Assets/Materials/PS Graphics Textures/DoorKnob_Material/SP_Door_v2_DoorKnob Material_Roughness.png" id="20_0tx84"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_terai"]
 
@@ -32,6 +41,22 @@ grow_amount = -4.125
 [sub_resource type="SphereShape3D" id="SphereShape3D_uf72f"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_8uw46"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2pqco"]
+albedo_texture = ExtResource("13_pbiog")
+metallic = 1.0
+metallic_texture = ExtResource("14_kblvk")
+roughness_texture = ExtResource("16_b4kwg")
+normal_enabled = true
+normal_texture = ExtResource("15_0l4f8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1y2uw"]
+albedo_texture = ExtResource("17_r7dq5")
+metallic = 1.0
+metallic_texture = ExtResource("18_cta6c")
+roughness_texture = ExtResource("20_0tx84")
+normal_enabled = true
+normal_texture = ExtResource("19_emwqo")
 
 [node name="TestScene" type="Node3D"]
 
@@ -235,3 +260,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.75)
 
 [node name="cubicle_six_v10" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_fotk3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -11.75)
+
+[node name="Door_v20" parent="." instance=ExtResource("12_b4kwg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -2.25)
+
+[node name="Door" parent="Door_v20/DoorHinge" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2pqco")
+
+[node name="DoorKnob" parent="Door_v20/DoorHinge/Door/Knob Pivot" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1y2uw")
+
+[editable path="Door_v20"]

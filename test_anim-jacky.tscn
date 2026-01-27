@@ -1,10 +1,3 @@
-[gd_scene load_steps=3 format=3 uid="uid://4cn7olw611o7"]
-
-[ext_resource type="PackedScene" uid="uid://tspn7g0qmc24" path="res://Assets/Models/Door_v14.gltf" id="1_4xrx6"]
-[ext_resource type="PackedScene" uid="uid://c655jkkcj7rvd" path="res://Assets/Models/Door_v15.gltf" id="2_ny63d"]
+[gd_scene format=3 uid="uid://4cn7olw611o7"]
 
 [node name="Node3D" type="Node3D"]
-
-[node name="Door_v14" parent="." instance=ExtResource("1_4xrx6")]
-
-[node name="Door_v15" parent="." instance=ExtResource("2_ny63d")]
