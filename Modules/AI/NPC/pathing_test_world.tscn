@@ -26,25 +26,25 @@ script = ExtResource("4_0d2mm")
 [sub_resource type="Resource" id="Resource_sby2f"]
 script = ExtResource("6_0d2mm")
 speed = 1.0
-time_end = 9.192389
+time_end = 8.867074
 
 [sub_resource type="Resource" id="Resource_khdrh"]
 script = ExtResource("4_0d2mm")
-position = Vector3(-6.5, 0, 6.5)
-time_start = 9.192389
-time_end = 9.192389
+position = Vector3(-6.75, -9.536743e-07, 5.75)
+time_start = 8.867074
+time_end = 8.867074
 
 [sub_resource type="Resource" id="Resource_nhqvp"]
 script = ExtResource("6_0d2mm")
-speed = 1.0
-time_start = 9.192389
-time_end = 22.750135
+speed = 2.0
+time_start = 8.867074
+time_end = 16.750998
 
 [sub_resource type="Resource" id="Resource_3aima"]
 script = ExtResource("4_0d2mm")
-position = Vector3(7, 0, 7.75)
-time_start = 15.971262
-time_end = 15.971262
+position = Vector3(9, 0, 5)
+time_start = 16.750998
+time_end = 16.750998
 
 [sub_resource type="Resource" id="Resource_w2fhl"]
 script = ExtResource("6_khdrh")

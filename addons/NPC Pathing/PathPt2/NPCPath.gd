@@ -87,13 +87,15 @@ func branch_backward(ix: int):
 	updating_path = false
 	return return_vertex
 
-func redo_branch(ix: int, position: Vector3, forward: bool):
+func redo_branch(vertex: PathVertex, line: PathLine):
 	var branch_vert: PathVertex
-	if forward:
-		branch_vert = branch_forward(ix-2)
-	else:
-		branch_vert = branch_backward(ix)
-	branch_vert.position = position
+	path_components.insert(line.id,line)
+	path_components.insert(vertex.id,vertex)
+	if vertex.id < size()-1:
+		var next_line: PathLine = at(vertex.id+1)
+		next_line.prev_vertex = vertex
+	var time_dif = vertex.get_duration() + line.get_length()/line.speed
+	_shift_time_by_from(time_dif,vertex.id+1)
 
 func delete_vertex(ix: int):
 	updating_path = true

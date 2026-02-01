@@ -76,8 +76,14 @@ func _begin_handle_action(id, secondary):
 		elif Input.is_key_pressed(KEY_SHIFT): #Create new line and vertex backward
 			deferred_action = GIZMO_ACTION.BRANCH_BACKWARD
 		elif Input.is_key_pressed(KEY_ALT):
-			path.delete_vertex(id)
-			select_component(null)
+			undo_redo.create_action("Delete Vertex")
+			undo_redo.add_do_method(path,"delete_vertex",id)
+			undo_redo.add_do_method(self,"select_component",null)
+			undo_redo.add_do_method(self,"_redraw")
+			undo_redo.add_undo_method(path,"redo_branch",path.at(id),path.at(id-1))
+			undo_redo.add_undo_method(self,"select_component",path.at(id))
+			undo_redo.add_undo_method(self,"_redraw")
+			undo_redo.commit_action()
 			return
 		else:
 			deferred_action = GIZMO_ACTION.MOVE
@@ -142,9 +148,11 @@ func _commit_handle(id, secondary, restore, cancel):
 		GIZMO_ACTION.MOVE:
 			undo_redo.add_do_property(moving_vertex,"position",moving_vertex.position)
 		GIZMO_ACTION.BRANCH_FORWARD:
-			undo_redo.add_do_method(get_path(),"redo_branch",moving_vertex.id,moving_vertex.position,true)
+			undo_redo.add_do_method(get_path(),"redo_branch",moving_vertex,get_path().at(moving_vertex.id-1))
+			undo_redo.add_do_method(self,"_redraw")
 		GIZMO_ACTION.BRANCH_BACKWARD:
-			undo_redo.add_do_method(get_path(),"redo_branch",moving_vertex.id,moving_vertex.position,false)
+			undo_redo.add_do_method(get_path(),"redo_branch",moving_vertex,get_path().at(moving_vertex.id-1))
+			undo_redo.add_do_method(self,"_redraw")
 	cur_action = GIZMO_ACTION.NONE
 	moving_vertex = null
 	get_path().updating_path = false
