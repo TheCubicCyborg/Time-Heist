@@ -4,7 +4,7 @@ class_name PathLine extends PathComponent
 @export var speed: float:
 	set(value):
 		speed = value
-		emit_component_changed()
+		emit_component_changed("speed")
 
 var prev_vertex: PathVertex
 var next_vertex: PathVertex
@@ -18,3 +18,13 @@ func _init(_prev_vertex = null,_next_vertex = null, _id: int = 0, path:NPCPath =
 
 func _to_string():
 	return "Line speed:  " + str(speed)
+
+func recalculate_speed():
+	var duration: float = time_end - time_start
+	if is_zero_approx(duration):
+		speed = INF
+	else:
+		speed = get_length()/duration
+
+func get_length():
+	return prev_vertex.position.distance_to(next_vertex.position)

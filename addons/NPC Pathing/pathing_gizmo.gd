@@ -65,7 +65,6 @@ func _begin_handle_action(id, secondary):
 			moving_vertex = path.branch_backward(id)
 		elif Input.is_key_pressed(KEY_ALT):
 			moving_vertex = path.delete_vertex(id)
-			#_redraw()
 		else:
 			moving_vertex = path.at(id)
 		select_component(moving_vertex)
@@ -78,6 +77,7 @@ func select_component(component: PathComponent):
 
 func _set_handle(id, secondary, camera, point):
 	var path: NPCPath = get_node_3d().path
+	path.updating_path = true
 	if moving_vertex:
 		var origin = camera.project_ray_origin(point)
 		var direction = camera.project_ray_normal(point)
@@ -92,6 +92,7 @@ func _set_handle(id, secondary, camera, point):
 		moving_vertex.time_end = prev_vertex.time_end + moving_vertex.get_duration() + add_time
 
 func _commit_handle(id, secondary, restore, cancel):
+	moving_vertex.path.validate_times(moving_vertex.id,"time_start")
 	moving_vertex = null
 
 func _get_handle_name(id, secondary):

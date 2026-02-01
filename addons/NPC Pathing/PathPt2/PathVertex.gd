@@ -4,7 +4,7 @@ class_name PathVertex extends PathComponent
 @export var position: Vector3:
 	set(value):
 		position = value
-		emit_component_changed()
+		emit_component_changed("position")
 
 @export var vertex_actions: Array[VertexAction]
 
