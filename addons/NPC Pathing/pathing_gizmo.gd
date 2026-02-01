@@ -1,17 +1,29 @@
 # my_custom_gizmo.gd
-extends EditorNode3DGizmo
+class_name PathingGizmo extends EditorNode3DGizmo
 
 var path_mesh = preload("res://addons/NPC Pathing/Meshes/PathMesh.tres")
 var arrow_mesh = preload("res://addons/NPC Pathing/Meshes/ArrowMesh.tres")
 
-var moving_vertex: PathVertex
-var selected_component: PathComponent
+var moving_vertex: PathVertex = null
+var selected_component: PathComponent = null
+
+enum GIZMO_ACTION {NONE,MOVE,BRANCH_FORWARD,BRANCH_BACKWARD}
+var deferred_action: GIZMO_ACTION = GIZMO_ACTION.NONE
+var cur_action: GIZMO_ACTION = GIZMO_ACTION.NONE
+
+var undo_redo: EditorUndoRedoManager
+
+func _init(_undo_redo: EditorUndoRedoManager):
+	undo_redo = _undo_redo
 
 func _redraw():
+	#print("redraw")
 	var path: NPCPath = get_node_3d().path
 	
 	clear()
 	if not path:
+		selected_component = null
+		moving_vertex = null
 		return
 	var line_material = get_plugin().get_material("line", self)
 	var handle_material := get_plugin().get_material("handle",self)
@@ -55,45 +67,88 @@ func draw_line(line: PathLine, line_material):
 
 func _begin_handle_action(id, secondary):
 	var path = get_node_3d().path
+	var select_id: int = id
 	if id % 2 == 0:
 		if Input.is_key_pressed(KEY_CTRL): #Create new line and vertex forward
-			moving_vertex = path.branch_forward(id)
+			deferred_action = GIZMO_ACTION.BRANCH_FORWARD
 		elif id == 0:
-			select_component(path.at(0))
-			return
+			pass
 		elif Input.is_key_pressed(KEY_SHIFT): #Create new line and vertex backward
-			moving_vertex = path.branch_backward(id)
+			deferred_action = GIZMO_ACTION.BRANCH_BACKWARD
 		elif Input.is_key_pressed(KEY_ALT):
-			moving_vertex = path.delete_vertex(id)
+			path.delete_vertex(id)
+			select_component(null)
+			return
 		else:
-			moving_vertex = path.at(id)
-		select_component(moving_vertex)
-	else:
-		select_component(path.at(id))
+			deferred_action = GIZMO_ACTION.MOVE
+	select_component(path.at(id))
 
 func select_component(component: PathComponent):
 	selected_component = component
 	EditorInterface.get_inspector().edit(component)
 
 func _set_handle(id, secondary, camera, point):
-	var path: NPCPath = get_node_3d().path
-	path.updating_path = true
+	check_deferred_action()
+	
+	var path: NPCPath = get_path()
 	if moving_vertex:
+		#Handle position
 		var origin = camera.project_ray_origin(point)
 		var direction = camera.project_ray_normal(point)
 		var plane = Plane(Vector3.UP)
 		var position: Vector3 = plane.intersects_ray(origin,direction)
 		position = position.snapped(Vector3(1,0,1) * path.snap)
 		moving_vertex.position = position
-		var prev_vertex: PathVertex = path.at(moving_vertex.id-2)
+		
+		#Handle time
+		#print(moving_vertex.id-1)
 		var prev_line: PathLine = path.at(moving_vertex.id-1)
-		var add_time = (position.distance_to(prev_vertex.position))/prev_line.speed
-		moving_vertex.time_start = prev_vertex.time_end + add_time
-		moving_vertex.time_end = prev_vertex.time_end + moving_vertex.get_duration() + add_time
+		var prev_vert: PathVertex = prev_line.prev_vertex
+		var add_time = (position.distance_to(prev_vert.position))/prev_line.speed
+		moving_vertex.time_start = prev_vert.time_end + add_time
+		moving_vertex.time_end = moving_vertex.time_start + moving_vertex.get_duration()
+		_redraw()
+
+func check_deferred_action():
+	match deferred_action:
+		GIZMO_ACTION.NONE:
+			return
+		GIZMO_ACTION.MOVE:
+			undo_redo.create_action("Move Vertex")
+			moving_vertex = selected_component
+			undo_redo.add_undo_property(moving_vertex,"position",moving_vertex.position)
+		GIZMO_ACTION.BRANCH_FORWARD:
+			undo_redo.create_action("Branch Forward")
+			moving_vertex = get_path().branch_forward(selected_component.id)
+			undo_redo.add_undo_method(get_path(),"delete_vertex",moving_vertex.id)
+			undo_redo.add_undo_method(self,"_redraw")
+		GIZMO_ACTION.BRANCH_BACKWARD:
+			undo_redo.create_action("Branch Backward")
+			moving_vertex = get_path().branch_backward(selected_component.id)
+			undo_redo.add_undo_method(get_path(),"delete_vertex",moving_vertex.id)
+			undo_redo.add_undo_method(self,"_redraw")
+	undo_redo.add_do_method(self,"select_component",moving_vertex)
+	undo_redo.add_undo_method(self,"select_component",selected_component)
+	get_path().updating_path = true
+	cur_action = deferred_action
+	deferred_action = GIZMO_ACTION.NONE
+	
 
 func _commit_handle(id, secondary, restore, cancel):
-	moving_vertex.path.validate_times(moving_vertex.id,"time_start")
+	if cur_action == GIZMO_ACTION.NONE:
+		return
+	get_path().commit_vertex(moving_vertex,cur_action)
+	match cur_action:
+		GIZMO_ACTION.MOVE:
+			undo_redo.add_do_property(moving_vertex,"position",moving_vertex.position)
+		GIZMO_ACTION.BRANCH_FORWARD:
+			undo_redo.add_do_method(get_path(),"redo_branch",moving_vertex.id,moving_vertex.position,true)
+		GIZMO_ACTION.BRANCH_BACKWARD:
+			undo_redo.add_do_method(get_path(),"redo_branch",moving_vertex.id,moving_vertex.position,false)
+	cur_action = GIZMO_ACTION.NONE
 	moving_vertex = null
+	get_path().updating_path = false
+	undo_redo.commit_action(false)
 
 func _get_handle_name(id, secondary):
 	return "Handle " + str(id)
@@ -106,3 +161,6 @@ func _get_handle_value(id, secondary):
 
 func _is_handle_highlighted(id, secondary):
 	return selected_component and id == selected_component.id
+
+func get_path() -> NPCPath:
+	return get_node_3d().path

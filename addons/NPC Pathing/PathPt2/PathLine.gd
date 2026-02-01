@@ -3,8 +3,11 @@ class_name PathLine extends PathComponent
 
 @export var speed: float:
 	set(value):
-		speed = value
-		emit_component_changed("speed")
+		if path and path.updating_path:
+			speed = value
+			emit_changed()
+		else:
+			emit_manual_change("speed",value)
 
 var prev_vertex: PathVertex
 var next_vertex: PathVertex
@@ -28,3 +31,9 @@ func recalculate_speed():
 
 func get_length():
 	return prev_vertex.position.distance_to(next_vertex.position)
+
+func _validate_property(property: Dictionary):
+	if property.name == "time_start":
+		property.usage |= PROPERTY_USAGE_READ_ONLY
+	if property.name == "time_end":
+		property.usage |= PROPERTY_USAGE_READ_ONLY

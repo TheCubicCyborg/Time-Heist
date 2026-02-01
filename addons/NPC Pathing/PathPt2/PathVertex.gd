@@ -3,20 +3,16 @@ class_name PathVertex extends PathComponent
 
 @export var position: Vector3:
 	set(value):
-		position = value
-		emit_component_changed("position")
+		if path and path.updating_path:
+			position = value
+			emit_changed()
+		else:
+			emit_manual_change("position",value)
 
 @export var vertex_actions: Array[VertexAction]
 
 func _to_string():
 	return "Vertex at " + str(position)
-
-func _validate_property(property: Dictionary):
-	if id == 0:
-		if property.name == "time_start":
-			property.usage |= PROPERTY_USAGE_READ_ONLY
-		if property.name == "position":
-			property.usage |= PROPERTY_USAGE_READ_ONLY
 
 func get_duration():
 	var duration: float = 0
@@ -24,3 +20,10 @@ func get_duration():
 		if action is WaitVertexAction:
 			duration += action.duration
 	return duration
+
+func _validate_property(property: Dictionary):
+	if id == 0:
+		if property.name == "time_start":
+			property.usage |= PROPERTY_USAGE_READ_ONLY
+		if property.name == "position":
+			property.usage |= PROPERTY_USAGE_READ_ONLY
