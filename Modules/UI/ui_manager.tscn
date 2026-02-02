@@ -48,7 +48,7 @@ func _process(_delta):
 	text = \"Speed: \" + cur_speed
 "
 
-[node name="UI Root" type="Control"]
+[node name="UI Manager" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,6 +59,7 @@ script = ExtResource("1_yaem8")
 
 [node name="DEBUG UI" type="Control" parent="."]
 process_mode = 4
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -99,12 +100,15 @@ text = "Speed Display"
 script = SubResource("GDScript_isv23")
 
 [node name="Interface" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="DeviceMenu" parent="." instance=ExtResource("5_keavj")]
+visible = false
 layout_mode = 1
 
 [node name="DocumentViewer" parent="." instance=ExtResource("3_jfs1l")]
+visible = false
 layout_mode = 1
