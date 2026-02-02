@@ -75,7 +75,6 @@ func crouch_off():
 	globals.player.is_crouching = false
 	globals.player.collision.shape.height += 0.8
 	globals.player.collision.position.y += 0.4
-	globals.player.rotation_speed = 15
 	globals.player.current_rotation_speed = globals.player.rotation_speed
 	#globals.player.mesh.position.y += 0.8
 	#globals.player.material.albedo_color = Color(1.0, 1.0, 1.0, 1.0)
@@ -108,8 +107,12 @@ func process_input(event: InputEvent):
 	#endregion
 	#region Tools
 	if PlayerInput.is_action_just_pressed("player_tool1"):
-		globals.player.tool1.use_tool()
+		#globals.player.tool1.use_tool()
+		#TEST
+		document_database.get_document(0)._print()
 	if PlayerInput.is_action_just_pressed("player_tool2"):
-		globals.player.tool2.use_tool()
+		#globals.player.tool2.use_tool()
+		#TEST
+		document_database.get_document(1)._print()
 	#endregion
 		

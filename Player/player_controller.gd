@@ -30,7 +30,7 @@ var current_rotation_speed : float
 @export
 var rotation_speed : float = 15.0
 @export
-var crouch_rotation_speed : float = 7.5
+var crouch_rotation_speed : float = 6
 
 @export_category("State Speeds")
 #region Walking Variables
