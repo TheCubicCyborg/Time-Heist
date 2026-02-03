@@ -26,10 +26,6 @@ globals="*res://Globals/globals.gd"
 document_database="*res://Globals/document_database.gd"
 global_inventory="*uid://bd6hj8r16s6lx"
 
-[debug]
-
-settings/stdout/print_gpu_profile=true
-
 [display]
 
 window/size/viewport_width=1920

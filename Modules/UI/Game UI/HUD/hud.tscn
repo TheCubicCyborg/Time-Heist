@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://b8umb5d42v56y"]
+
+[ext_resource type="Texture2D" uid="uid://ck1i4sr0w4o20" path="res://Assets/UI/HUD/timemachineuiassetempty.png" id="1_xrti2"]
+[ext_resource type="Texture2D" uid="uid://dc2y6bypod0bh" path="res://Assets/UI/HUD/timemachineuiassetCIRCLE (1).png" id="2_6qein"]
+
+[node name="HUD" type="Control" unique_id=528506545]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TimeJuice" type="TextureProgressBar" parent="." unique_id=467930012]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+value = 45.0
+fill_mode = 4
+radial_initial_angle = 330.0
+texture_under = ExtResource("1_xrti2")
+texture_progress = ExtResource("2_6qein")
+texture_progress_offset = Vector2(82, -43.355)
