@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bjjcgr3dvub72"]
+[gd_scene load_steps=40 format=3 uid="uid://bjjcgr3dvub72"]
 
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="1_0c7so"]
 [ext_resource type="PackedScene" uid="uid://bm4y2kiv4odnp" path="res://Modules/UI/ui_manager.tscn" id="1_cr80g"]
@@ -26,6 +26,10 @@
 [ext_resource type="PackedScene" uid="uid://q5g0v26dm1my" path="res://Modules/Interaction/Computer/computer_tab.tscn" id="24_2dfqy"]
 [ext_resource type="PackedScene" uid="uid://bnhismy4o74yd" path="res://Modules/Interaction/Computer/Email App/email_tab.tscn" id="25_he45r"]
 [ext_resource type="Script" uid="uid://c4r7d4bl70rat" path="res://Assets/Documents/document_resource.gd" id="26_rew54"]
+[ext_resource type="Resource" uid="uid://4qtrr47gldo5" path="res://Assets/Documents/Resources/dictionary_temp.tres" id="27_2dfqy"]
+[ext_resource type="Texture2D" uid="uid://yd82mkstnr4e" path="res://Assets/Documents/Textures/0_First_Test_Document.png" id="28_4o43n"]
+[ext_resource type="Texture2D" uid="uid://0cjiq2gdh6kt" path="res://Assets/Documents/Textures/3_dictionary.png" id="30_4o43n"]
+[ext_resource type="PackedScene" uid="uid://cijyt3whigooo" path="res://Modules/Interaction/Computer/File App/file_tab.tscn" id="30_kjo2c"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_vmato"]
 
@@ -481,11 +485,11 @@ render_target_update_mode = 4
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.66743636, 1.017169, 11.366655)
 
 [node name="Computer" parent="." node_paths=PackedStringArray("computer_ui") instance=ExtResource("21_xfhbw")]
-transform = Transform3D(-0.3362735, 0, -0.94176435, 0, 1, 0, 0.94176435, 0, -0.3362735, -4.3653135, 0.9756807, 15.955596)
+transform = Transform3D(-0.3362735, 0, -0.94176435, 0, 1, 0, 0.94176435, 0, -0.3362735, -3.1650617, 0.9756807, 6.8823137)
 computer_ui = NodePath("Computer UI2")
 
 [node name="Computer UI2" parent="Computer" node_paths=PackedStringArray("icons") instance=ExtResource("22_rxtpu")]
-icons = [NodePath("Email")]
+icons = [NodePath("Email"), NodePath("File"), NodePath("File2")]
 
 [node name="Email" parent="Computer/Computer UI2" node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
 layout_mode = 1
@@ -495,9 +499,9 @@ offset_right = -480.0
 offset_bottom = -280.0
 override_title = "Email"
 item_type = 1
-tab = NodePath("Computer Tab")
+tab = NodePath("DesktopTab")
 
-[node name="Computer Tab" parent="Computer/Computer UI2/Email" node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+[node name="DesktopTab" parent="Computer/Computer UI2/Email" node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
 layout_mode = 1
 offset_left = -178.0
 offset_top = -132.0
@@ -505,9 +509,52 @@ offset_right = 1022.0
 offset_bottom = 668.0
 content = NodePath("Email_Tab")
 
-[node name="Email_Tab" parent="Computer/Computer UI2/Email/Computer Tab" instance=ExtResource("25_he45r")]
+[node name="Email_Tab" parent="Computer/Computer UI2/Email/DesktopTab" instance=ExtResource("25_he45r")]
 layout_mode = 1
-emails = Array[ExtResource("26_rew54")]([ExtResource("18_cr80g"), ExtResource("20_cr80g")])
+focus_mode = 2
+emails = Array[ExtResource("26_rew54")]([ExtResource("18_cr80g"), ExtResource("20_cr80g"), ExtResource("27_2dfqy")])
+
+[node name="File" parent="Computer/Computer UI2" node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
+layout_mode = 1
+override_icon = ExtResource("28_4o43n")
+override_title = "First Test Document"
+item_type = 3
+file = ExtResource("18_cr80g")
+tab = NodePath("Computer Tab")
+
+[node name="Computer Tab" parent="Computer/Computer UI2/File" node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+layout_mode = 1
+offset_left = -600.0
+offset_top = -400.0
+offset_right = 600.0
+offset_bottom = 400.0
+content = NodePath("File Tab")
+
+[node name="File Tab" parent="Computer/Computer UI2/File/Computer Tab" instance=ExtResource("30_kjo2c")]
+layout_mode = 1
+file = ExtResource("18_cr80g")
+
+[node name="File2" parent="Computer/Computer UI2" node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
+layout_mode = 1
+offset_left = 714.0
+offset_top = -131.0
+offset_right = 714.0
+offset_bottom = -131.0
+override_icon = ExtResource("30_4o43n")
+override_title = "Dictionary"
+item_type = 3
+file = ExtResource("27_2dfqy")
+tab = NodePath("Computer Tab")
+
+[node name="Computer Tab" parent="Computer/Computer UI2/File2" node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+layout_mode = 1
+content = NodePath("File Tab")
+
+[node name="File Tab" parent="Computer/Computer UI2/File2/Computer Tab" instance=ExtResource("30_kjo2c")]
+layout_mode = 1
+offset_top = -1.0
+offset_bottom = -1.0
+file = ExtResource("27_2dfqy")
 
 [connection signal="body_entered" from="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" to="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" method="_on_body_entered"]
 

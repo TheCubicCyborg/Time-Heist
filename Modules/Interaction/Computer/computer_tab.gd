@@ -4,7 +4,7 @@ class_name DesktopTab
 @onready var panel: Panel = $VBoxContainer/Panel
 @onready var bar: ColorRect = $VBoxContainer/Bar
 
-@export var content : Control #make a tabcontent class
+@export var content : TabContent #make a tabcontent class
 
 var dragging : bool = false
 var offset : Vector2
@@ -25,7 +25,20 @@ func _on_drag_pressed():
 
 func _on_drag_button_up() -> void:
 	dragging = false
+	
+func get_random_position() -> Vector2:
+	var x = randi_range(10,800)
+	var y = randi_range(10,400)
+	return Vector2(x,y)
 #endregion
 
 func _on_close_pressed() -> void:
+	close_tab()
+	
+func open_tab():
+	show()
+	global_position = get_random_position()
+	content.open_process()
+
+func close_tab():
 	hide()

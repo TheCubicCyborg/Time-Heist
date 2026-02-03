@@ -5,14 +5,12 @@ class_name EmailButton
 @onready var from: Label = $MarginContainer/VBoxContainer/From
 @onready var desc: Label = $MarginContainer/VBoxContainer/Desc
 @onready var new_mail: TextureRect = $NewMail
-@onready var color_rect: ColorRect = $ColorRect
 
 var viewed : bool = false:
 	set(value):
 		if value:
 			viewed = value
 			new_mail.hide()
-			color_rect.color.a = 255
 			
 			
 var email_info : DocumentInfo
@@ -27,6 +25,8 @@ func set_email_info(doc : DocumentInfo):
 	desc.text = doc.email_desc
 	
 func _on_focus_entered() -> void:
-	viewed = true;
-	globals.collect(email_info)
+	if not viewed:
+		viewed = true;
+		globals.collect(email_info)
+	#color_rect.color.a = 255
 	pass # Replace with function body.

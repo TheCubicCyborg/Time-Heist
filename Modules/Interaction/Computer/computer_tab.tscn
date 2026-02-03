@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://q5g0v26dm1my"]
+[gd_scene load_steps=2 format=3 uid="uid://q5g0v26dm1my"]
 
 [ext_resource type="Script" uid="uid://cvsjvf2hm0j0v" path="res://Modules/Interaction/Computer/computer_tab.gd" id="1_t7psn"]
-[ext_resource type="PackedScene" uid="uid://bnhismy4o74yd" path="res://Modules/Interaction/Computer/Email App/email_tab.tscn" id="2_7gulw"]
 
 [node name="Computer Tab" type="Control"]
 z_index = 1
@@ -63,9 +62,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.6441449, 0.73867965, 0.9601926, 1)
-
-[node name="Email_Tab" parent="VBoxContainer/Panel" instance=ExtResource("2_7gulw")]
-layout_mode = 1
 
 [connection signal="button_up" from="VBoxContainer/Bar/Drag" to="." method="_on_drag_button_up"]
 [connection signal="pressed" from="VBoxContainer/Bar/Drag" to="." method="_on_drag_pressed"]

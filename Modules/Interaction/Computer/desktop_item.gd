@@ -58,5 +58,4 @@ func _on_mouse_exited() -> void:
 
 func _on_button_pressed() -> void:
 	if tab and not active:
-		tab.show()
-		#emit_signal("open_app", self, ui_instance)
+		tab.open_tab()
