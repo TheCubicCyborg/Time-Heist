@@ -200,5 +200,4 @@ rotate_document_down={
 
 [rendering]
 
-renderer/rendering_method="mobile"
 limits/opengl/max_lights_per_object=32
