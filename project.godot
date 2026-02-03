@@ -25,10 +25,6 @@ config/icon="res://icon.svg"
 globals="*res://Globals/globals.gd"
 document_database="*res://Globals/document_database.gd"
 
-[debug]
-
-settings/stdout/print_gpu_profile=true
-
 [display]
 
 window/size/viewport_width=1920

@@ -586,7 +586,7 @@ sky_mode = 2
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=427487649]
 environment = SubResource("Environment_mil7u")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=2132065314]
+[node name="Postprocess" type="ColorRect" parent="." unique_id=2132065314]
 z_index = -256
 material = SubResource("ShaderMaterial_vgt4j")
 anchors_preset = 15
