@@ -17,6 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="TimeHeist"
 run/main_scene="uid://dy25tiuqx8m1m"
 config/features=PackedStringArray("4.6", "Mobile")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
@@ -24,6 +25,10 @@ config/icon="res://icon.svg"
 globals="*res://Globals/globals.gd"
 document_database="*res://Globals/document_database.gd"
 global_inventory="*uid://bd6hj8r16s6lx"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 
