@@ -1,15 +1,17 @@
 shader_type canvas_item;
 
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest;
+// Use SCREEN_TEXTURE if applied to a ColorRect.
+//uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest;
 
 // The number of "pixels" of color that it is quantized into.
-uniform vec2 screen_res = vec2(800.0, 450.0); 
+uniform vec2 screen_res = vec2(960.0, 540.0); 
 uniform float color_levels = 8.0;
-uniform float dither_strength = 4;
+uniform float dither_strength = 0.5;
 
 void fragment() {
-    vec2 uv = floor(SCREEN_UV * screen_res) / screen_res;
-    vec3 original_color = texture(SCREEN_TEXTURE, uv).rgb;
+    //vec2 uv = floor(SCREEN_UV * screen_res) / screen_res;
+    vec2 uv = UV;
+	vec3 original_color = texture(TEXTURE, uv).rgb;
 	
 	ivec2 uv_pixels = ivec2(uv * screen_res);
     int x = uv_pixels.x % 4;
