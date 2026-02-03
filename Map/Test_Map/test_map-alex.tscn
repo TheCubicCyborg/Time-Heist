@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dxeefq8nxmasb"]
+[gd_scene format=3 uid="uid://dxeefq8nxmasb"]
 
 [ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="2_pfxt6"]
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="3_g2cin"]
@@ -254,24 +254,24 @@ func pick_up():
 [sub_resource type="BoxShape3D" id="BoxShape3D_pfg1b"]
 size = Vector3(0.5, 0.5, 0.5)
 
-[node name="TestScene" type="Node3D"]
+[node name="TestScene" type="Node3D" unique_id=734866607]
 
-[node name="UI Root" parent="." instance=ExtResource("10_6nm1w")]
+[node name="UI Root" parent="." unique_id=1297963666 instance=ExtResource("10_6nm1w")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=532553625]
 transform = Transform3D(1, 0, 0, 0, 0.657362, 0.753575, 0, -0.753575, 0.657362, 0, 0, 0)
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1948179828]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=833843943]
 visible = false
 shape = SubResource("WorldBoundaryShape3D_terai")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1787870693]
 mesh = SubResource("PlaneMesh_terai")
 surface_material_override/0 = SubResource("StandardMaterial3D_lhttk")
 
-[node name="World" type="GridMap" parent="."]
+[node name="World" type="GridMap" parent="." unique_id=1900849447]
 mesh_library = ExtResource("2_pfxt6")
 cell_size = Vector3(0.25, 3, 0.25)
 cell_center_y = false
@@ -282,227 +282,227 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
-[node name="Camera_pivot" parent="." instance=ExtResource("8_pfxt6")]
+[node name="Camera_pivot" parent="." unique_id=1809994371 instance=ExtResource("8_pfxt6")]
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("8_oxmku")]
+[node name="CharacterBody3D" parent="." unique_id=87220058 instance=ExtResource("8_oxmku")]
 
-[node name="Ball-Throw-it-against-the-wall" type="RigidBody3D" parent="."]
+[node name="Ball-Throw-it-against-the-wall" type="RigidBody3D" parent="." unique_id=17901378]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.020811, 1.94134, 3.16438)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball-Throw-it-against-the-wall"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball-Throw-it-against-the-wall" unique_id=613652005]
 shape = SubResource("SphereShape3D_uf72f")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball-Throw-it-against-the-wall"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball-Throw-it-against-the-wall" unique_id=729763763]
 mesh = SubResource("SphereMesh_8uw46")
 
-[node name="Doors" type="Node3D" parent="."]
+[node name="Doors" type="Node3D" parent="." unique_id=730955977]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
 
-[node name="Generic_Door" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door" parent="Doors" unique_id=1970335246 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4.25)
 
-[node name="Generic_Door20" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door20" parent="Doors" unique_id=398356839 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -17.75)
 is_locked = true
 
-[node name="Generic_Door21" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door21" parent="Doors" unique_id=1702133963 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -17.75)
 is_locked = true
 
-[node name="Generic_Door22" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door22" parent="Doors" unique_id=843363016 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0, -21.5)
 
-[node name="Generic_Door23" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door23" parent="Doors" unique_id=1684180868 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -21.5)
 
-[node name="Generic_Door24" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door24" parent="Doors" unique_id=292807313 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -17.75)
 
-[node name="Generic_Door26" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door26" parent="Doors" unique_id=1535041370 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.25, 0, -17.75)
 is_locked = true
 
-[node name="Generic_Door27" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door27" parent="Doors" unique_id=1071568552 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.258816, 0, -17.75)
 
-[node name="Generic_Door28" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door28" parent="Doors" unique_id=807111591 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -17.75)
 is_locked = true
 
-[node name="Generic_Door29" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door29" parent="Doors" unique_id=785712659 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 0, -17.75)
 
-[node name="Generic_Door30" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door30" parent="Doors" unique_id=1367343009 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.25, 0, -23.25)
 
-[node name="Generic_Door31" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door31" parent="Doors" unique_id=1635490362 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.75, 0, 0.5)
 
-[node name="Generic_Door32" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door32" parent="Doors" unique_id=367237697 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.75, 0, 0.5)
 
-[node name="Generic_Door2" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door2" parent="Doors" unique_id=1247635952 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.75, 0, -5)
 
-[node name="Generic_Door3" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door3" parent="Doors" unique_id=479764355 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.5, 0, -8.25)
 
-[node name="Generic_Door4" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door4" parent="Doors" unique_id=677590117 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.75, 0, -10)
 
-[node name="Generic_Door5" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door5" parent="Doors" unique_id=1091085769 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4.5, 0, -13)
 
-[node name="Generic_Door6" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door6" parent="Doors" unique_id=758161386 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 12.25, 0, -15.25)
 is_locked = true
 
 [node name="Door Mesh" parent="Doors/Generic_Door6/Door RB" index="1"]
 mesh = SubResource("BoxMesh_fsrqj")
 
-[node name="Generic_Door7" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door7" parent="Doors" unique_id=118374919 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 12.25, 0, -16.25)
 is_locked = true
 
 [node name="Door Mesh" parent="Doors/Generic_Door7/Door RB" index="1"]
 mesh = SubResource("BoxMesh_gurd7")
 
-[node name="Generic_Door8" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door8" parent="Doors" unique_id=366999322 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -14.5, 0, -8.75)
 
-[node name="Generic_Door9" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door9" parent="Doors" unique_id=1411467628 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15.25, 0, -6.25)
 
-[node name="Generic_Door10" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door10" parent="Doors" unique_id=458315933 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15.25, 0, -5.25)
 
-[node name="Generic_Door11" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door11" parent="Doors" unique_id=294412307 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.5, 0, -6.25)
 
-[node name="Generic_Door12" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door12" parent="Doors" unique_id=227565158 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.5, 0, -5.25)
 
-[node name="Generic_Door13" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door13" parent="Doors" unique_id=786275681 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.5, 0, -2)
 
-[node name="Generic_Door14" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door14" parent="Doors" unique_id=1714316035 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.5, 0, -1)
 
-[node name="Generic_Door15" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door15" parent="Doors" unique_id=1402891238 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15.25, 0, -2)
 
-[node name="Generic_Door16" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door16" parent="Doors" unique_id=1149735587 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15.25, 0, -1)
 
-[node name="Generic_Door17" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door17" parent="Doors" unique_id=1294493848 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -25.75, 0, -1.5)
 is_locked = true
 
-[node name="Generic_Door18" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door18" parent="Doors" unique_id=683079284 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -25.75, 0, -8.25)
 
-[node name="Generic_Door19" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door19" parent="Doors" unique_id=306918203 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -25.75, 0, -9.25)
 
-[node name="Generic_Door25" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door25" parent="Doors" unique_id=2072318863 instance=ExtResource("10_g2cin")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25, 0, -21.5)
 is_locked = true
 
-[node name="Generic_Door33" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door33" parent="Doors" unique_id=8849317 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.25, 0, -31.75)
 
-[node name="Generic_Door34" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door34" parent="Doors" unique_id=546791311 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -19.25, 0, -27)
 
-[node name="Generic_Door35" parent="Doors" instance=ExtResource("10_g2cin")]
+[node name="Generic_Door35" parent="Doors" unique_id=86603309 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9.25, 0, -27)
 
-[node name="OpenOfficeNode" type="Node3D" parent="."]
+[node name="OpenOfficeNode" type="Node3D" parent="." unique_id=598930776]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23.75)
 
-[node name="Section_Two" type="Node3D" parent="OpenOfficeNode"]
+[node name="Section_Two" type="Node3D" parent="OpenOfficeNode" unique_id=306719580]
 
-[node name="cubicle_six_v11" parent="OpenOfficeNode/Section_Two" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v11" parent="OpenOfficeNode/Section_Two" unique_id=1410149058 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16.75)
 
-[node name="cubicle_six_v12" parent="OpenOfficeNode/Section_Two" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v12" parent="OpenOfficeNode/Section_Two" unique_id=1369845724 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -16.75)
 
-[node name="cubicle_six_v13" parent="OpenOfficeNode/Section_Two" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v13" parent="OpenOfficeNode/Section_Two" unique_id=545925863 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -11.75)
 
-[node name="cubicle_six_v14" parent="OpenOfficeNode/Section_Two" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v14" parent="OpenOfficeNode/Section_Two" unique_id=109785357 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, -11.75)
 
-[node name="Section_One" type="Node3D" parent="OpenOfficeNode"]
+[node name="Section_One" type="Node3D" parent="OpenOfficeNode" unique_id=1429234433]
 
-[node name="cubicle_six_v3" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v3" parent="OpenOfficeNode/Section_One" unique_id=195724586 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.75)
 
-[node name="cubicle_six_v4" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v4" parent="OpenOfficeNode/Section_One" unique_id=368183511 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -1.75)
 
-[node name="cubicle_six_v5" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v5" parent="OpenOfficeNode/Section_One" unique_id=1584616064 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.75)
 
-[node name="cubicle_six_v6" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v6" parent="OpenOfficeNode/Section_One" unique_id=1448292790 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -6.75)
 
-[node name="cubicle_six_v7" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v7" parent="OpenOfficeNode/Section_One" unique_id=26532719 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.75)
 
-[node name="cubicle_six_v8" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v8" parent="OpenOfficeNode/Section_One" unique_id=886281017 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -16.75)
 
-[node name="cubicle_six_v9" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v9" parent="OpenOfficeNode/Section_One" unique_id=550711591 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.75)
 
-[node name="cubicle_six_v10" parent="OpenOfficeNode/Section_One" instance=ExtResource("11_88cv8")]
+[node name="cubicle_six_v10" parent="OpenOfficeNode/Section_One" unique_id=1648746227 instance=ExtResource("11_88cv8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -11.75)
 
-[node name="Button" type="Node3D" parent="."]
+[node name="Button" type="Node3D" parent="." unique_id=226562577]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 1, -19.25)
 script = SubResource("GDScript_6nm1w")
 
-[node name="Interactable" parent="Button" node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
+[node name="Interactable" parent="Button" unique_id=2004910676 node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
 mesh = NodePath("../MeshInstance3D")
 interact_object = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Button/Interactable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button/Interactable" unique_id=290285931]
 shape = SubResource("BoxShape3D_w4jvu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Button"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Button" unique_id=573784103]
 mesh = SubResource("BoxMesh_w4jvu")
 
-[node name="Button2" type="Node3D" parent="."]
+[node name="Button2" type="Node3D" parent="." unique_id=285109984]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.75, 1, -1.75)
 script = SubResource("GDScript_6nm1w")
 
-[node name="Interactable" parent="Button2" node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
+[node name="Interactable" parent="Button2" unique_id=132789491 node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
 mesh = NodePath("../MeshInstance3D")
 interact_object = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Button2/Interactable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button2/Interactable" unique_id=271893609]
 shape = SubResource("BoxShape3D_w4jvu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Button2"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Button2" unique_id=586012423]
 mesh = SubResource("BoxMesh_pfg1b")
 
-[node name="KeycardScanner" type="Node3D" parent="."]
+[node name="KeycardScanner" type="Node3D" parent="." unique_id=1187784419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -17)
 script = SubResource("GDScript_w4jvu")
 
-[node name="Interactable" parent="KeycardScanner" node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
+[node name="Interactable" parent="KeycardScanner" unique_id=1731245365 node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
 mesh = NodePath("../MeshInstance3D")
 interact_object = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KeycardScanner/Interactable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KeycardScanner/Interactable" unique_id=1097519643]
 shape = SubResource("BoxShape3D_6nm1w")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="KeycardScanner"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="KeycardScanner" unique_id=460384773]
 mesh = SubResource("BoxMesh_1f5s4")
 
-[node name="Label" type="Label" parent="KeycardScanner"]
+[node name="Label" type="Label" parent="KeycardScanner" unique_id=2116186289]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -518,119 +518,119 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Need Keycard!"
 
-[node name="CodePuzzle" type="Node3D" parent="."]
+[node name="CodePuzzle" type="Node3D" parent="." unique_id=1729792538]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.75, 1, -2.5)
 script = SubResource("GDScript_88cv8")
 
-[node name="TestPuzzle" parent="CodePuzzle" instance=ExtResource("12_mtkwk")]
+[node name="TestPuzzle" parent="CodePuzzle" unique_id=843744083 instance=ExtResource("12_mtkwk")]
 correct_answer = "cleantime"
 metadata/_edit_use_anchors_ = true
 
-[node name="Interface" parent="CodePuzzle" node_paths=PackedStringArray("ui") instance=ExtResource("13_88cv8")]
+[node name="Interface" parent="CodePuzzle" unique_id=1832109242 node_paths=PackedStringArray("ui") instance=ExtResource("13_88cv8")]
 ui = NodePath("../TestPuzzle")
 
-[node name="Interactable" parent="CodePuzzle" node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
+[node name="Interactable" parent="CodePuzzle" unique_id=2022142365 node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
 mesh = NodePath("../MeshInstance3D")
 interact_object = NodePath("../Interface")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CodePuzzle/Interactable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CodePuzzle/Interactable" unique_id=161605502]
 shape = SubResource("BoxShape3D_oxmku")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CodePuzzle"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CodePuzzle" unique_id=423768928]
 mesh = SubResource("BoxMesh_mtkwk")
 
-[node name="Janitor" type="Path3D" parent="."]
+[node name="Janitor" type="Path3D" parent="." unique_id=192795257]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.25, 0, 12)
 curve = SubResource("Curve3D_1tqx8")
 script = SubResource("GDScript_oxmku")
 speed = 3.0
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Janitor"]
+[node name="PathFollow3D" type="PathFollow3D" parent="Janitor" unique_id=769307536]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Janitor/PathFollow3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Janitor/PathFollow3D" unique_id=768155464]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_oxmku")
 
-[node name="Cone Vision" parent="Janitor/PathFollow3D" instance=ExtResource("15_pfg1b")]
+[node name="Cone Vision" parent="Janitor/PathFollow3D" unique_id=1112902558 instance=ExtResource("15_pfg1b")]
 sight_line_angle = 140.0
 sight_line_radius = 5.0
 time_till_caught = 1.0
 
-[node name="Area3D" type="Area3D" parent="Janitor/PathFollow3D"]
+[node name="Area3D" type="Area3D" parent="Janitor/PathFollow3D" unique_id=577194497]
 script = SubResource("GDScript_pfg1b")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Janitor/PathFollow3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Janitor/PathFollow3D/Area3D" unique_id=1378029227]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_fsrqj")
 
-[node name="SecurityGuard1" type="Path3D" parent="."]
+[node name="SecurityGuard1" type="Path3D" parent="." unique_id=1418021532]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, -38)
 curve = SubResource("Curve3D_88cv8")
 script = ExtResource("15_oxmku")
 speed = 4.0
 
-[node name="PathFollow3D" type="PathFollow3D" parent="SecurityGuard1"]
+[node name="PathFollow3D" type="PathFollow3D" parent="SecurityGuard1" unique_id=766034114]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SecurityGuard1/PathFollow3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SecurityGuard1/PathFollow3D" unique_id=1893577372]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_oxmku")
 
-[node name="Cone Vision" parent="SecurityGuard1/PathFollow3D" instance=ExtResource("15_pfg1b")]
+[node name="Cone Vision" parent="SecurityGuard1/PathFollow3D" unique_id=445812662 instance=ExtResource("15_pfg1b")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
 sight_line_angle = 140.0
 sight_line_radius = 5.0
 time_till_caught = 1.0
 
-[node name="Area3D" type="Area3D" parent="SecurityGuard1/PathFollow3D"]
+[node name="Area3D" type="Area3D" parent="SecurityGuard1/PathFollow3D" unique_id=1633086194]
 script = SubResource("GDScript_pfg1b")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SecurityGuard1/PathFollow3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SecurityGuard1/PathFollow3D/Area3D" unique_id=1830144137]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_fsrqj")
 
-[node name="SecurityGuard2" type="Path3D" parent="."]
+[node name="SecurityGuard2" type="Path3D" parent="." unique_id=27438372]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -23)
 curve = SubResource("Curve3D_oxmku")
 script = ExtResource("15_oxmku")
 speed = 4.0
 
-[node name="PathFollow3D" type="PathFollow3D" parent="SecurityGuard2"]
+[node name="PathFollow3D" type="PathFollow3D" parent="SecurityGuard2" unique_id=1842992540]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SecurityGuard2/PathFollow3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SecurityGuard2/PathFollow3D" unique_id=711891448]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_oxmku")
 
-[node name="Cone Vision" parent="SecurityGuard2/PathFollow3D" instance=ExtResource("15_pfg1b")]
+[node name="Cone Vision" parent="SecurityGuard2/PathFollow3D" unique_id=7381782 instance=ExtResource("15_pfg1b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 sight_line_angle = 140.0
 sight_line_radius = 5.0
 time_till_caught = 1.0
 
-[node name="Area3D" type="Area3D" parent="SecurityGuard2/PathFollow3D"]
+[node name="Area3D" type="Area3D" parent="SecurityGuard2/PathFollow3D" unique_id=206463789]
 script = SubResource("GDScript_pfg1b")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SecurityGuard2/PathFollow3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SecurityGuard2/PathFollow3D/Area3D" unique_id=1094254789]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_fsrqj")
 
-[node name="Document" parent="." instance=ExtResource("16_1tqx8")]
+[node name="Document" parent="." unique_id=1662575651 instance=ExtResource("16_1tqx8")]
 transform = Transform3D(2.77, 0, 0, 0, 2.77, 0, 0, 0, 2.77, 4.5, 0, -19.5)
 texture = ExtResource("17_gbn1a")
 
-[node name="Keycard" type="Node3D" parent="."]
+[node name="Keycard" type="Node3D" parent="." unique_id=374122431]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36, 0.001, -1.5)
 script = SubResource("GDScript_grg8u")
 
-[node name="Sprite3D" type="Sprite3D" parent="Keycard"]
+[node name="Sprite3D" type="Sprite3D" parent="Keycard" unique_id=1421660980]
 transform = Transform3D(0.075, 0, 0, 0, -3.2783543e-09, -0.075, 0, 0.075, -3.2783543e-09, 0, 0, 0)
 texture = ExtResource("18_grg8u")
 
-[node name="Interactable" parent="Keycard" node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
+[node name="Interactable" parent="Keycard" unique_id=1069068090 node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("11_6nm1w")]
 mesh = NodePath("../Sprite3D")
 interact_object = NodePath("..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Keycard/Interactable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Keycard/Interactable" unique_id=1338594213]
 shape = SubResource("BoxShape3D_pfg1b")
 
 [connection signal="button_press" from="Button" to="Doors/Generic_Door20" method="unlock"]

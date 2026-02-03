@@ -1,28 +1,45 @@
-[gd_scene load_steps=2 format=3 uid="uid://dyhnk6p2fbc87"]
+[gd_scene format=3 uid="uid://dyhnk6p2fbc87"]
 
 [sub_resource type="GDScript" id="GDScript_23e0v"]
 resource_name = "cone_vision"
-script/source = "extends Area3D
+script/source = "@tool
+extends Area3D
 
 var player_spotted
 @onready var sight_checker := $SightChecker
 @onready var collision := $CollisionPolygon3D
+@onready var laser: Path3D = $Laser
 
 var time_detecting: float = 0
 
-@export var sight_line_angle : float = 180 #degrees
-@export var sight_line_radius : float = 15 #meters
+@export var sight_line_angle : float = 220: #degrees
+	set(value):
+		sight_line_angle = value
+		create_mesh()
+@export var sight_line_radius : float = 75: #meters
+	set(value):
+		sight_line_radius = value
+		create_mesh()
 @export var time_till_caught : float = 2
-@export var angle_steps : float = 5
+@export var angle_steps : float = 5:
+	set(value):
+		angle_steps = value
+		create_mesh()
 
 var polygon_points : PackedVector2Array = []
 
 func _ready() -> void:
-	globals.safe_ratio = 1
-	#Set ray cast length
-	sight_checker.target_position.z = -sight_line_radius
-	
-	#Create mesh
+	if not Engine.is_editor_hint():
+		globals.safe_ratio = 1
+		#Set ray cast length
+		sight_checker.target_position.z = -sight_line_radius
+		
+		create_mesh()
+		collision.polygon = polygon_points
+
+func create_mesh():
+	print(\"creating cone mesh\")
+	polygon_points = []
 	polygon_points.append(Vector2.ZERO)
 	var sweep_angle = -sight_line_angle / 2
 	
@@ -32,21 +49,24 @@ func _ready() -> void:
 			-sight_line_radius * cos(deg_to_rad(sweep_angle))
 		))
 		sweep_angle += 5
-	collision.polygon = polygon_points
-
+	if Engine.is_editor_hint():	
+		collision.polygon = polygon_points
+	
 func _process(delta: float) -> void:
 	#print(timer.time_left)
-	if player_spotted:
-		sight_checker.look_at(Vector3(globals.player.global_position.x,1,globals.player.global_position.z))
-		
-		if sight_checker.get_collider() == globals.player:
-			time_detecting += delta
-		else:
-			time_detecting = 0
-		globals.safe_ratio = (time_till_caught-time_detecting)/time_till_caught
-		
-		if time_detecting >= time_till_caught:
-			caught()
+	if not Engine.is_editor_hint():
+		if player_spotted:
+			sight_checker.look_at(Vector3(globals.player.global_position.x,1,globals.player.global_position.z))
+			laser.curve.set_point_in(1,Vector3(globals.player.global_position.x,1,globals.player.global_position.z))
+			
+			if sight_checker.get_collider() == globals.player:
+				time_detecting += delta
+			else:
+				time_detecting = 0
+			globals.safe_ratio = (time_till_caught-time_detecting)/time_till_caught
+			
+			if time_detecting >= time_till_caught:
+				caught()
 	
 
 func _on_body_entered(body: Node3D) -> void:
@@ -63,17 +83,29 @@ func caught() -> void:
 	globals.player_caught()
 "
 
-[node name="Cone Vision" type="Area3D"]
+[sub_resource type="Curve3D" id="Curve3D_23e0v"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="Cone Vision" type="Area3D" unique_id=1869490121]
 script = SubResource("GDScript_23e0v")
+sight_line_angle = 240.0
+sight_line_radius = 95.0
 
-[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="." unique_id=955152349]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-polygon = PackedVector2Array(-25, 35, 25, 35, 0, 0)
+polygon = PackedVector2Array(0, 0, -82.272415, 47.5, -86.09924, 40.148735, -89.2708, 32.491913, -91.762955, 24.587809, -93.55674, 16.496576, -94.6385, 8.279796, -95, -5.8170725e-15, -94.6385, -8.279796, -93.55674, -16.496576, -91.762955, -24.587809, -89.2708, -32.491913, -86.09924, -40.148735, -82.272415, -47.5, -77.81944, -54.48976, -72.77422, -61.064823, -67.17515, -67.17515, -61.064823, -72.77422, -54.48976, -77.81944, -47.5, -82.272415, -40.148735, -86.09924, -32.491913, -89.2708, -24.587809, -91.762955, -16.496576, -93.55674, -8.279796, -94.6385, 0, -95, 8.279796, -94.6385, 16.496576, -93.55674, 24.587809, -91.762955, 32.491913, -89.2708, 40.148735, -86.09924, 47.5, -82.272415, 54.48976, -77.81944, 61.064823, -72.77422, 67.17515, -67.17515, 72.77422, -61.064823, 77.81944, -54.48976, 82.272415, -47.5, 86.09924, -40.148735, 89.2708, -32.491913, 91.762955, -24.587809, 93.55674, -16.496576, 94.6385, -8.279796, 95, -5.8170725e-15, 94.6385, 8.279796, 93.55674, 16.496576, 91.762955, 24.587809, 89.2708, 32.491913, 86.09924, 40.148735, 82.272415, 47.5)
 
-[node name="SightChecker" type="RayCast3D" parent="."]
+[node name="SightChecker" type="RayCast3D" parent="." unique_id=716854366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 0, -50)
 collision_mask = 9
+
+[node name="Laser" type="Path3D" parent="." unique_id=250721408]
+curve = SubResource("Curve3D_23e0v")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
