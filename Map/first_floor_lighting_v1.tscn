@@ -96,6 +96,7 @@ glow_enabled = true
 shader = ExtResource("31_6y1c3")
 shader_parameter/screen_res = Vector2(960, 540)
 shader_parameter/color_levels = 8.0
+shader_parameter/dither_strength = 0.05
 
 [node name="First Floor" type="Node3D" unique_id=173480370 node_paths=PackedStringArray("cameras")]
 script = ExtResource("1_mil7u")
@@ -178,7 +179,7 @@ light_color = Color(0.35686275, 0.9411765, 0.5254902, 1)
 light_energy = 5.0
 light_specular = 0.0
 shadow_enabled = true
-omni_range = 10.0
+omni_range = 7.5
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Rooms/Main Lobby/Lights" unique_id=502765662]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 14)
@@ -186,7 +187,7 @@ light_color = Color(0.35686275, 0.9411765, 0.5254902, 1)
 light_energy = 5.0
 light_specular = 0.0
 shadow_enabled = true
-omni_range = 10.0
+omni_range = 7.5
 
 [node name="OmniLight3D9" type="OmniLight3D" parent="Rooms/Main Lobby/Lights" unique_id=68326242]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 5, 21)
@@ -194,7 +195,7 @@ light_color = Color(0.35686275, 0.9411765, 0.5254902, 1)
 light_energy = 5.0
 light_specular = 0.0
 shadow_enabled = true
-omni_range = 10.0
+omni_range = 7.5
 
 [node name="OmniLight3D10" type="OmniLight3D" parent="Rooms/Main Lobby/Lights" unique_id=705429509]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 5, 21)
@@ -202,7 +203,7 @@ light_color = Color(0.35686275, 0.9411765, 0.5254902, 1)
 light_energy = 5.0
 light_specular = 0.0
 shadow_enabled = true
-omni_range = 10.0
+omni_range = 7.5
 
 [node name="OmniLight3D7" type="OmniLight3D" parent="Rooms/Main Lobby/Lights" unique_id=2080648114]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 5, 21)
@@ -210,7 +211,7 @@ light_color = Color(0.35686275, 0.9411765, 0.5254902, 1)
 light_energy = 5.0
 light_specular = 0.0
 shadow_enabled = true
-omni_range = 10.0
+omni_range = 7.5
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="Rooms/Main Lobby/Lights" unique_id=1126014345]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 28)
@@ -218,7 +219,7 @@ light_color = Color(0.35686275, 0.9411765, 0.5254902, 1)
 light_energy = 5.0
 light_specular = 0.0
 shadow_enabled = true
-omni_range = 10.0
+omni_range = 7.5
 
 [node name="Guards" type="Node3D" parent="Rooms/Main Lobby" unique_id=1451499980]
 

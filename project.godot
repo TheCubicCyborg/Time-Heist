@@ -27,7 +27,7 @@ document_database="*res://Globals/document_database.gd"
 
 [debug]
 
-settings/stdout/print_fps=true
+settings/stdout/print_gpu_profile=true
 
 [display]
 
