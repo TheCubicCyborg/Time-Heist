@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://j4buig8m5yp3" path="res://Assets/Models/cubicle_six_v3.glb" id="11_88cv8"]
 [ext_resource type="PackedScene" uid="uid://bqogo44h7ydxf" path="res://Modules/UI/Game UI/UIPuzzles/test_puzzle.tscn" id="12_mtkwk"]
 [ext_resource type="PackedScene" uid="uid://pq0bcv62221l" path="res://Modules/Interaction/Interface/interface.tscn" id="13_88cv8"]
-[ext_resource type="Script" uid="uid://cyycim24066r4" path="res://Modules/AI/security_guard.gd" id="15_oxmku"]
+[ext_resource type="Script" uid="uid://cyycim24066r4" path="res://Modules/AI/NPC/security_guard.gd" id="15_oxmku"]
 [ext_resource type="PackedScene" uid="uid://dyhnk6p2fbc87" path="res://Modules/ConeVision/cone_vision.tscn" id="15_pfg1b"]
 [ext_resource type="PackedScene" uid="uid://djn3ckwc8enih" path="res://Modules/Interaction/Document/document.tscn" id="16_1tqx8"]
 [ext_resource type="Texture2D" uid="uid://b6oady1ollpgf" path="res://Assets/Documents/temp.png" id="17_gbn1a"]
