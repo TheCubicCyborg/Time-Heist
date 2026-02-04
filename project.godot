@@ -202,4 +202,5 @@ rotate_document_down={
 
 [rendering]
 
+lights_and_shadows/positional_shadow/atlas_16_bits=false
 limits/opengl/max_lights_per_object=32

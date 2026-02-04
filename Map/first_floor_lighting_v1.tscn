@@ -41,6 +41,7 @@ ambient_light_color = Color(0.2632, 0.41160002, 0.56, 1)
 ambient_light_energy = 0.4
 tonemap_mode = 2
 ssao_enabled = true
+ssao_intensity = 1.0
 glow_enabled = true
 glow_intensity = 0.4
 glow_bloom = 0.5
@@ -52,6 +53,7 @@ shader = ExtResource("31_6y1c3")
 shader_parameter/screen_res = Vector2(960, 540)
 shader_parameter/color_levels = 8.0
 shader_parameter/dither_strength = 0.05
+shader_parameter/luma_bias = 0.02
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_vmato"]
 
@@ -120,6 +122,7 @@ cameras = [null, null]
 environment = SubResource("Environment_mil7u")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=520587131]
+texture_filter = 1
 material = SubResource("ShaderMaterial_vgt4j")
 anchors_preset = 15
 anchor_right = 1.0
@@ -207,58 +210,96 @@ is_locked = true
 [node name="Lights" type="Node3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby" unique_id=1001292934]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Lights" unique_id=1210845881]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.186257, 0.70541525)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0.70541525)
 light_color = Color(0.50770867, 0.45986217, 0.89156145, 1)
 light_energy = 5.0
+light_size = 1.0
 light_specular = 0.0
 shadow_enabled = true
-shadow_blur = 5.0
-omni_range = 7.5
+shadow_bias = 0.05
+shadow_normal_bias = 1.5
+shadow_blur = 1.5
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+omni_range = 13.0
+omni_shadow_mode = 0
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Lights" unique_id=502765662]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.789885, 13.1969185)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 13.1969185)
 light_color = Color(0.50770867, 0.45986217, 0.89156145, 1)
 light_energy = 5.0
+light_size = 1.0
 light_specular = 0.0
 shadow_enabled = true
-shadow_blur = 5.0
-omni_range = 7.5
+shadow_bias = 0.05
+shadow_normal_bias = 1.5
+shadow_blur = 1.5
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+omni_range = 13.0
 
 [node name="OmniLight3D9" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Lights" unique_id=68326242]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 5, 21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 6, 21)
 light_color = Color(0.50770867, 0.45986217, 0.89156145, 1)
 light_energy = 5.0
+light_size = 1.0
 light_specular = 0.0
 shadow_enabled = true
-shadow_blur = 5.0
-omni_range = 7.5
+shadow_bias = 0.05
+shadow_normal_bias = 1.5
+shadow_blur = 1.5
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+omni_range = 13.0
 
 [node name="OmniLight3D10" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Lights" unique_id=705429509]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 5, 21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 6, 21)
 light_color = Color(0.50770867, 0.45986217, 0.89156145, 1)
 light_energy = 5.0
+light_size = 1.0
 light_specular = 0.0
 shadow_enabled = true
-shadow_blur = 5.0
-omni_range = 7.5
+shadow_bias = 0.05
+shadow_normal_bias = 1.5
+shadow_blur = 1.5
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+omni_range = 13.0
 
 [node name="OmniLight3D7" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Lights" unique_id=2080648114]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 5, 21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 6, 21)
 light_color = Color(0.50770867, 0.45986217, 0.89156145, 1)
 light_energy = 5.0
+light_size = 1.0
 light_specular = 0.0
 shadow_enabled = true
-shadow_blur = 5.0
-omni_range = 7.5
+shadow_bias = 0.05
+shadow_normal_bias = 1.5
+shadow_blur = 1.5
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+omni_range = 13.0
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Lights" unique_id=1126014345]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 28)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 28)
 light_color = Color(0.50770867, 0.45986217, 0.89156145, 1)
 light_energy = 5.0
+light_size = 1.0
 light_specular = 0.0
 shadow_enabled = true
-shadow_blur = 5.0
-omni_range = 7.5
+shadow_bias = 0.05
+shadow_normal_bias = 1.5
+shadow_blur = 1.5
+distance_fade_enabled = true
+distance_fade_begin = 20.0
+distance_fade_length = 5.0
+omni_range = 13.0
+omni_shadow_mode = 0
 
 [node name="Guards" type="Node3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby" unique_id=1451499980]
 
@@ -619,7 +660,8 @@ light_color = Color(0.6431373, 0.7647059, 0.8235294, 1)
 light_energy = 1.2
 shadow_enabled = true
 shadow_bias = 0.01
-shadow_blur = 1.5
+shadow_blur = 3.955
+directional_shadow_mode = 0
 sky_mode = 2
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="SubViewportContainer/SubViewport" unique_id=1883496129]
