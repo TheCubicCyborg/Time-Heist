@@ -30,6 +30,8 @@
 [ext_resource type="Texture2D" uid="uid://yd82mkstnr4e" path="res://Assets/Documents/Textures/0_First_Test_Document.png" id="28_4o43n"]
 [ext_resource type="Texture2D" uid="uid://0cjiq2gdh6kt" path="res://Assets/Documents/Textures/3_dictionary.png" id="30_4o43n"]
 [ext_resource type="PackedScene" uid="uid://cijyt3whigooo" path="res://Modules/Interaction/Computer/File App/file_tab.tscn" id="30_kjo2c"]
+[ext_resource type="PackedScene" uid="uid://b6wv5r50sr8bh" path="res://Modules/Interaction/Item/item.tscn" id="31_kjo2c"]
+[ext_resource type="Resource" uid="uid://2u7ypb7xpscs" path="res://Assets/Items/Resources/apple.tres" id="32_xyxbf"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_vmato"]
 
@@ -204,6 +206,7 @@ mesh = SubResource("CapsuleMesh_riaqh")
 
 [node name="Cone Vision" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=951547481 instance=ExtResource("9_a88kd")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
+sight_line_angle = 100.0
 
 [node name="Area3D" type="Area3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=964640159]
 script = SubResource("GDScript_d6wjy")
@@ -555,6 +558,10 @@ layout_mode = 1
 offset_top = -1.0
 offset_bottom = -1.0
 file = ExtResource("27_2dfqy")
+
+[node name="Item" parent="." unique_id=93420287 instance=ExtResource("31_kjo2c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7551153, 0, 0)
+item = ExtResource("32_xyxbf")
 
 [connection signal="body_entered" from="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" to="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" method="_on_body_entered"]
 

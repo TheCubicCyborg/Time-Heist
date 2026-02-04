@@ -55,4 +55,6 @@ func player_caught():
 
 #region Signals
 signal added_doc(doc : DocumentInfo)
+signal collect_item(item : PickupItem)
+signal use_item(item : PickupItem)
 #endregion
