@@ -41,7 +41,7 @@ _subresources={
 "animations": {
 "mixamo_com": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Player/Animation/walking.res",
+"save_to_file/fallback_path": "res://Player/Animation/old_walking.res",
 "save_to_file/keep_custom_tracks": false,
 "save_to_file/path": "uid://b11edrug05vit",
 "settings/loop_mode": 1,
