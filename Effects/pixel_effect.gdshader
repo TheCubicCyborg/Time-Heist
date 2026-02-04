@@ -6,6 +6,8 @@ shader_type canvas_item;
 // The number of "pixels" of color that it is quantized into.
 //uniform vec2 screen_res = vec2(960.0, 540.0); 
 uniform float color_levels = 8.0;
+uniform sampler2D lookup_table : source_color;
+
 uniform float dither_strength = 0.5;
 uniform float contrast : hint_range(0.0, 2.0) = 1.1;
 uniform float saturation : hint_range(0.0, 2.0) = 1.2;
@@ -40,7 +42,8 @@ void fragment() {
     float luma = dot(color, vec3(0.299, 0.587, 0.114));
     float bucketed_luma = floor(luma * color_levels) / color_levels;
 
-    vec3 final_color = color * (bucketed_luma / max(luma, 0.001));
+    //vec3 final_color = color * (bucketed_luma / max(luma, 0.001));
+	vec3 final_color = texture(lookup_table, vec2(bucketed_luma, 0.0)).rgb;
     //vec3 final_color = floor(original_color * color_levels) / color_levels;
 	
     COLOR = vec4(final_color, 1.0);
