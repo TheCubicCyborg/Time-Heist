@@ -4,18 +4,24 @@ shader_type canvas_item;
 //uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest;
 
 // The number of "pixels" of color that it is quantized into.
-uniform vec2 screen_res = vec2(960.0, 540.0); 
+//uniform vec2 screen_res = vec2(960.0, 540.0); 
 uniform float color_levels = 8.0;
 uniform float dither_strength = 0.5;
+uniform float contrast : hint_range(0.0, 2.0) = 1.1;
+uniform float saturation : hint_range(0.0, 2.0) = 1.2;
 uniform float luma_bias : hint_range(-0.1, 0.1) = 0.02;
 
 void fragment() {
     //vec2 uv = floor(SCREEN_UV * screen_res) / screen_res;
     vec2 uv = UV;
-	vec3 original_color = texture(TEXTURE, uv).rgb;
-	original_color += luma_bias;
+	vec3 color = texture(TEXTURE, uv).rgb;
 	
-	ivec2 uv_pixels = ivec2(uv * screen_res);
+	color = (color - 0.5) * contrast + 0.5;
+    float gray = dot(color, vec3(0.299, 0.587, 0.114));
+    color = mix(vec3(gray), color, saturation);
+	color += luma_bias;
+	
+	ivec2 uv_pixels = ivec2(floor(uv / TEXTURE_PIXEL_SIZE));
     int x = uv_pixels.x % 4;
     int y = uv_pixels.y % 4;
 	
@@ -29,12 +35,12 @@ void fragment() {
 	float band_size = 1.0 / color_levels;
 	
 	float dither_shift = (bayer_matrix[y * 4 + x] / 16.0) - 0.5;
-	original_color += dither_shift * (band_size * dither_strength);
+	color += dither_shift * (band_size * dither_strength);
     
-    float luma = dot(original_color, vec3(0.299, 0.587, 0.114));
+    float luma = dot(color, vec3(0.299, 0.587, 0.114));
     float bucketed_luma = floor(luma * color_levels) / color_levels;
 
-    vec3 final_color = original_color * (bucketed_luma / max(luma, 0.001));
+    vec3 final_color = color * (bucketed_luma / max(luma, 0.001));
     //vec3 final_color = floor(original_color * color_levels) / color_levels;
 	
     COLOR = vec4(final_color, 1.0);

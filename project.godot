@@ -204,3 +204,4 @@ rotate_document_down={
 
 lights_and_shadows/positional_shadow/atlas_16_bits=false
 limits/opengl/max_lights_per_object=32
+2d/snap/snap_2d_vertices_to_pixel=true
