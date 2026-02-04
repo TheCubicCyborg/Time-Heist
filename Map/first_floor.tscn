@@ -457,6 +457,7 @@ visible = false
 shadow_enabled = true
 
 [node name="VisibilityMesh" parent="." unique_id=170809200 node_paths=PackedStringArray("player", "gridmap") instance=ExtResource("9_s57rb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.9148035, 0)
 visible = false
 player = NodePath("../CharacterBody3D")
 gridmap = NodePath("../Walls")

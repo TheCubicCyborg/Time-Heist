@@ -3,6 +3,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpdto"]
 resource_name = "Palette"
 vertex_color_use_as_albedo = true
+albedo_color = Color(0.98039216, 0.1882353, 0.1254902, 1)
 emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wiy4b"]

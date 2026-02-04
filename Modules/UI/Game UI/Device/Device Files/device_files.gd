@@ -4,7 +4,7 @@ class_name DeviceFiles
 #var documents : Array = [preload("res://Assets/UI/Time Travel Menu/Files_Test/person2.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/person3.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/person4.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/person_1.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/place1.jpg")]
 @onready var folder_buttons: VBoxContainer = $"MarginContainer/HBoxContainer/FoldersMargin/Folder Buttons"
 @onready var folders: Control = $"MarginContainer/HBoxContainer/MidPanel/Folders"
-var device_files_list : PackedScene = preload("res://Modules/UI/Game UI/Device/device_files_list.tscn")
+var device_files_list : PackedScene = preload("res://Modules/UI/Game UI/Device/Device Files/device_files_list.tscn")
 
 @onready var document_viewer := $MarginContainer/HBoxContainer/RightPanel/SubViewport/DeviceDocumentViewer
 

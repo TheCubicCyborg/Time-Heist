@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bd4wvbt4n011e" path="res://Modules/UI/Game UI/device_menu.gd" id="1_hgc2y"]
 [ext_resource type="Texture2D" uid="uid://c3uwunfq42tg8" path="res://Assets/UI/Time Travel Menu/time machine side left.png" id="1_wq3jl"]
 [ext_resource type="Texture2D" uid="uid://q007275otxah" path="res://Assets/UI/Time Travel Menu/time machine side right.png" id="3_y3rn4"]
-[ext_resource type="PackedScene" uid="uid://bigh7xaj6n6yj" path="res://Modules/UI/Game UI/Device/device_files.tscn" id="4_4t7mm"]
-[ext_resource type="PackedScene" uid="uid://dc0glsn1mwwwq" path="res://Modules/UI/Game UI/Device/inventory.tscn" id="4_7dje4"]
+[ext_resource type="PackedScene" uid="uid://bigh7xaj6n6yj" path="res://Modules/UI/Game UI/Device/Device Files/device_files.tscn" id="4_4t7mm"]
+[ext_resource type="PackedScene" uid="uid://dc0glsn1mwwwq" path="res://Modules/UI/Game UI/Device/Inventory/inventory_panel.tscn" id="4_7dje4"]
 [ext_resource type="PackedScene" uid="uid://begdut20cbu15" path="res://Modules/UI/Game UI/Device/settings.tscn" id="4_hgc2y"]
 [ext_resource type="PackedScene" uid="uid://dtgpwledwl8i4" path="res://Modules/UI/Game UI/Device/cameras.tscn" id="4_m01ss"]
 

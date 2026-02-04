@@ -12,8 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://bk11o2jtj5d7g" path="res://Modules/Interaction/Door/generic_door.tscn" id="10_g2cin"]
 [ext_resource type="PackedScene" uid="uid://b64t4twgcdips" path="res://Modules/Interaction/interactable.tscn" id="11_6nm1w"]
 [ext_resource type="PackedScene" uid="uid://j4buig8m5yp3" path="res://Assets/Models/cubicle_six_v3.glb" id="11_88cv8"]
+[ext_resource type="PackedScene" uid="uid://bil2lllkaw31i" path="res://Modules/Interaction/Door/keycard_scanner.tscn" id="11_fsrqj"]
+[ext_resource type="Script" uid="uid://dgvkvasouhadn" path="res://Assets/Items/items_resource.gd" id="12_jisbu"]
 [ext_resource type="PackedScene" uid="uid://bqogo44h7ydxf" path="res://Modules/UI/Game UI/UIPuzzles/test_puzzle.tscn" id="12_mtkwk"]
 [ext_resource type="PackedScene" uid="uid://pq0bcv62221l" path="res://Modules/Interaction/Interface/interface.tscn" id="13_88cv8"]
+[ext_resource type="Resource" uid="uid://2u7ypb7xpscs" path="res://Assets/Items/Resources/apple.tres" id="13_dbtwq"]
+[ext_resource type="PackedScene" uid="uid://b6wv5r50sr8bh" path="res://Modules/Interaction/Item/item.tscn" id="14_svu8f"]
 [ext_resource type="Script" uid="uid://cyycim24066r4" path="res://Modules/AI/NPC/security_guard.gd" id="15_oxmku"]
 [ext_resource type="PackedScene" uid="uid://dyhnk6p2fbc87" path="res://Modules/ConeVision/cone_vision.tscn" id="15_pfg1b"]
 [ext_resource type="PackedScene" uid="uid://djn3ckwc8enih" path="res://Modules/Interaction/Document/document.tscn" id="16_1tqx8"]
@@ -283,8 +287,12 @@ data = {
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
 [node name="Camera_pivot" parent="." unique_id=1809994371 instance=ExtResource("8_pfxt6")]
+CAMERA_ROTATION_X = -50.0
+CAMERA_DISTANCE_BACK = 2.0
+CAMERA_DISTANCE_UP = 6.0
 
 [node name="CharacterBody3D" parent="." unique_id=87220058 instance=ExtResource("8_oxmku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.813044, 0, -0.7813778)
 
 [node name="Ball-Throw-it-against-the-wall" type="RigidBody3D" parent="." unique_id=17901378]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.020811, 1.94134, 3.16438)
@@ -367,8 +375,18 @@ is_locked = true
 [node name="Door Mesh" parent="Doors/Generic_Door7/Door RB" index="1"]
 mesh = SubResource("BoxMesh_gurd7")
 
-[node name="Generic_Door8" parent="Doors" unique_id=366999322 instance=ExtResource("10_g2cin")]
+[node name="Apple Door" parent="Doors" unique_id=366999322 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -14.5, 0, -8.75)
+is_locked = true
+
+[node name="Keycard Scanner" parent="Doors" unique_id=1750000146 instance=ExtResource("11_fsrqj")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -14.830124, 1.2409666, -10.294512)
+needed_item = Array[ExtResource("12_jisbu")]([ExtResource("13_dbtwq")])
+locked_label = "You need something yummy"
+
+[node name="Item" parent="Doors" unique_id=93420287 instance=ExtResource("14_svu8f")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -18.76898, 0.9867064, -10.678475)
+item = ExtResource("13_dbtwq")
 
 [node name="Generic_Door9" parent="Doors" unique_id=1411467628 instance=ExtResource("10_g2cin")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -15.25, 0, -6.25)
@@ -554,7 +572,6 @@ mesh = SubResource("CapsuleMesh_oxmku")
 [node name="Cone Vision" parent="Janitor/PathFollow3D" unique_id=1112902558 instance=ExtResource("15_pfg1b")]
 sight_line_angle = 140.0
 sight_line_radius = 5.0
-time_till_caught = 1.0
 
 [node name="Area3D" type="Area3D" parent="Janitor/PathFollow3D" unique_id=577194497]
 script = SubResource("GDScript_pfg1b")
@@ -580,7 +597,6 @@ mesh = SubResource("CapsuleMesh_oxmku")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
 sight_line_angle = 140.0
 sight_line_radius = 5.0
-time_till_caught = 1.0
 
 [node name="Area3D" type="Area3D" parent="SecurityGuard1/PathFollow3D" unique_id=1633086194]
 script = SubResource("GDScript_pfg1b")
@@ -605,7 +621,6 @@ mesh = SubResource("CapsuleMesh_oxmku")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 sight_line_angle = 140.0
 sight_line_radius = 5.0
-time_till_caught = 1.0
 
 [node name="Area3D" type="Area3D" parent="SecurityGuard2/PathFollow3D" unique_id=206463789]
 script = SubResource("GDScript_pfg1b")
@@ -633,6 +648,7 @@ interact_object = NodePath("..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Keycard/Interactable" unique_id=1338594213]
 shape = SubResource("BoxShape3D_pfg1b")
 
+[connection signal="keycard_scanned" from="Doors/Keycard Scanner" to="Doors/Apple Door" method="unlock"]
 [connection signal="button_press" from="Button" to="Doors/Generic_Door20" method="unlock"]
 [connection signal="button_press" from="Button" to="Doors/Generic_Door21" method="unlock"]
 [connection signal="button_press" from="Button2" to="Doors/Generic_Door17" method="unlock"]

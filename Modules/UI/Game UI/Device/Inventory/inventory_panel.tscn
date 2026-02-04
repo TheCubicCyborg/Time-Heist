@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dc0glsn1mwwwq"]
 
-[ext_resource type="Script" uid="uid://31ibymxtbwo0" path="res://inventory.gd" id="1_dvwll"]
+[ext_resource type="Script" uid="uid://31ibymxtbwo0" path="res://Modules/UI/Game UI/Device/Inventory/inventory_panel.gd" id="1_uxjxt"]
 
 [node name="InventoryPanel" type="Control" unique_id=881891003 node_paths=PackedStringArray("main_focus")]
 layout_mode = 3
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_dvwll")
+script = ExtResource("1_uxjxt")
 main_focus = NodePath("HBoxContainer/Inventory")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1187803673]
