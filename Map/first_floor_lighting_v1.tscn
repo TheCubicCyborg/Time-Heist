@@ -47,6 +47,7 @@ glow_intensity = 0.4
 glow_bloom = 0.5
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.02
+volumetric_fog_length = 16.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vgt4j"]
 shader = ExtResource("31_6y1c3")
@@ -146,6 +147,7 @@ render_target_update_mode = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Floor" unique_id=805613725]
 shape = SubResource("WorldBoundaryShape3D_vmato")
+debug_fill = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Floor" unique_id=437629100]
 mesh = SubResource("PlaneMesh_vk860")
@@ -566,6 +568,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -2.25)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.25)
 
 [node name="Lights" type="Node3D" parent="SubViewportContainer/SubViewport/Rooms/Parking Garage" unique_id=1890148917]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport/Rooms/Parking Garage/Lights" unique_id=505374058]
+transform = Transform3D(1, 0, 0, 0, -0.052998304, 0.99859464, 0, -0.99859464, -0.052998304, 0, 8.232662, -11.806311)
+light_color = Color(0.50770867, 0.45986217, 0.89156145, 1)
+light_energy = 10.0
+light_size = 0.25
+light_specular = 0.0
+shadow_enabled = true
+shadow_blur = 0.5
+spot_range = 31.135
+spot_attenuation = 0.5
+spot_angle = 30.0
+spot_angle_attenuation = 2.4622889
 
 [node name="Camera_pivot" parent="SubViewportContainer/SubViewport" unique_id=1056852455 instance=ExtResource("14_6rmyi")]
 CAMERA_ROTATION_X = -50.0
