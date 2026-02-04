@@ -7,11 +7,13 @@ shader_type canvas_item;
 uniform vec2 screen_res = vec2(960.0, 540.0); 
 uniform float color_levels = 8.0;
 uniform float dither_strength = 0.5;
+uniform float luma_bias : hint_range(-0.1, 0.1) = 0.02;
 
 void fragment() {
     //vec2 uv = floor(SCREEN_UV * screen_res) / screen_res;
     vec2 uv = UV;
 	vec3 original_color = texture(TEXTURE, uv).rgb;
+	original_color += luma_bias;
 	
 	ivec2 uv_pixels = ivec2(uv * screen_res);
     int x = uv_pixels.x % 4;
