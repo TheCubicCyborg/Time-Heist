@@ -42,9 +42,9 @@ void fragment() {
     float luma = dot(color, vec3(0.299, 0.587, 0.114));
     float bucketed_luma = floor(luma * color_levels) / color_levels;
 
-    //vec3 final_color = color * (bucketed_luma / max(luma, 0.001));
-	vec3 final_color = texture(lookup_table, vec2(bucketed_luma, 0.0)).rgb;
-    //vec3 final_color = floor(original_color * color_levels) / color_levels;
+    vec3 final_color = color * (bucketed_luma / max(luma, 0.001));
+	//vec3 final_color = texture(lookup_table, vec2(bucketed_luma, 0.0)).rgb;
+    //vec3 final_color = floor(color * color_levels) / color_levels;
 	
     COLOR = vec4(final_color, 1.0);
 }
