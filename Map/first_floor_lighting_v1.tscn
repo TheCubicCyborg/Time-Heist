@@ -36,7 +36,7 @@
 background_color = Color(0.09385053, 0.11577933, 0.14867228, 1)
 ambient_light_source = 2
 ambient_light_color = Color(0.2632, 0.41160002, 0.56, 1)
-ambient_light_energy = 0.4
+ambient_light_energy = 0.0
 tonemap_mode = 2
 ssao_enabled = true
 ssao_intensity = 1.0
@@ -48,22 +48,23 @@ volumetric_fog_density = 0.01
 volumetric_fog_length = 16.0
 
 [sub_resource type="Gradient" id="Gradient_6y1c3"]
-offsets = PackedFloat32Array(0, 0.14285715, 0.2857143, 0.42857143, 0.5714286, 0.71428573, 0.85714287, 1)
-colors = PackedColorArray(0.06666667, 0.19607843, 0.25490198, 1, 0.11764706, 0.22745098, 0.34901962, 1, 0.19607843, 0.2627451, 0.43529412, 1, 0.30588236, 0.29803923, 0.5058824, 1, 0.44313726, 0.3372549, 0.54509807, 1, 0.59607846, 0.38431373, 0.56078434, 1, 0.75686276, 0.4509804, 0.56078434, 1, 0.9563212, 0.74506575, 0.7455377, 1)
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.06666667, 0.13333334, 0.2, 0.26666668, 0.33333334, 0.4, 0.46666667, 0.53333336, 0.6, 0.6666667, 0.73333335, 0.8, 0.8666667, 0.93333334, 1)
+colors = PackedColorArray(0.2509804, 0.22352941, 0.1882353, 1, 0.27058825, 0.25882354, 0.21568628, 1, 0.2901961, 0.29803923, 0.2509804, 1, 0.30980393, 0.34117648, 0.29803923, 1, 0.33333334, 0.3882353, 0.34901962, 1, 0.3647059, 0.43529412, 0.4117647, 1, 0.4, 0.48235294, 0.47843137, 1, 0.44705883, 0.5294118, 0.5529412, 1, 0.5058824, 0.5803922, 0.627451, 1, 0.5764706, 0.627451, 0.69803923, 1, 0.65882355, 0.68235296, 0.76862746, 1, 0.7529412, 0.7372549, 0.827451, 1, 0.8509804, 0.79607844, 0.88235295, 1, 0.95686275, 0.8627451, 0.93333334, 1, 1, 0.93333334, 0.9764706, 1, 1, 1, 1, 1)
 metadata/_snap_enabled = true
-metadata/_snap_count = 7
+metadata/_snap_count = 15
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_vgt4j"]
 gradient = SubResource("Gradient_6y1c3")
-width = 8
+width = 16
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vgt4j"]
 shader = ExtResource("31_6y1c3")
 shader_parameter/color_levels = 8.0
 shader_parameter/lookup_table = SubResource("GradientTexture1D_vgt4j")
-shader_parameter/dither_strength = 0.1
-shader_parameter/contrast = 1.1
-shader_parameter/saturation = 1.2
+shader_parameter/dither_strength = 0.3
+shader_parameter/contrast = 1.0000000475
+shader_parameter/saturation = 1.0000000475
 shader_parameter/luma_bias = 0.02
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_vmato"]
@@ -116,6 +117,8 @@ size = Vector3(2, 2, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6wjy"]
 size = Vector3(0.38, 2, 1.28)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_6y1c3"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_6y1c3"]
 size = Vector3(3.23, 0.5, 0.5)
 
@@ -142,12 +145,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
-stretch_shrink = 2
+stretch_shrink = 3
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=854776423]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(960, 540)
+size = Vector2i(640, 360)
 size_2d_override = Vector2i(640, 360)
 size_2d_override_stretch = true
 render_target_update_mode = 4
@@ -221,22 +224,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4, 0
 is_locked = true
 
 [node name="Lights" type="Node3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby" unique_id=1001292934]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Lights" unique_id=1210845881]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.014862, 0.70541525)
-light_color = Color(0.50770867, 0.45986217, 0.89156145, 1)
-light_energy = 5.0
-light_size = 1.0
-light_specular = 0.0
-shadow_enabled = true
-shadow_bias = 0.15
-shadow_reverse_cull_face = true
-shadow_blur = 0.3
-distance_fade_enabled = true
-distance_fade_begin = 20.0
-distance_fade_length = 5.0
-omni_range = 10.0
-omni_shadow_mode = 0
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Lights" unique_id=502765662]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.014862, 13.1969185)
@@ -317,6 +304,19 @@ distance_fade_begin = 20.0
 distance_fade_length = 5.0
 omni_range = 10.0
 omni_shadow_mode = 0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Lights" unique_id=1575892210]
+transform = Transform3D(1, 0, 0, 0, -0.052998304, 0.99859464, 0, -0.99859464, -0.052998304, 0, 8.232662, 2.8644576)
+light_color = Color(0.50770867, 0.45986217, 0.89156145, 1)
+light_energy = 10.0
+light_size = 0.25
+light_specular = 0.0
+shadow_enabled = true
+shadow_blur = 0.5
+spot_range = 31.135
+spot_attenuation = 0.5
+spot_angle = 60.0
+spot_angle_attenuation = 2.4622889
 
 [node name="Guards" type="Node3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby" unique_id=1451499980]
 
@@ -591,12 +591,17 @@ spot_attenuation = 0.5
 spot_angle = 30.0
 spot_angle_attenuation = 2.4622889
 
+[node name="CharacterBody3D" parent="SubViewportContainer/SubViewport" unique_id=1161399797 instance=ExtResource("15_iqqyy")]
+
 [node name="Camera_pivot" parent="SubViewportContainer/SubViewport" unique_id=1056852455 instance=ExtResource("14_6rmyi")]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 4, 0)
 CAMERA_ROTATION_X = -50.0
 CAMERA_DISTANCE_BACK = 2.0
-CAMERA_DISTANCE_UP = 6.0
+CAMERA_DISTANCE_UP = 3.5
 
-[node name="CharacterBody3D" parent="SubViewportContainer/SubViewport" unique_id=1161399797 instance=ExtResource("15_iqqyy")]
+[node name="SpringArm3D" parent="SubViewportContainer/SubViewport/Camera_pivot" index="1" unique_id=267427160]
+shape = SubResource("SphereShape3D_6y1c3")
+margin = 0.5
 
 [node name="Document" parent="SubViewportContainer/SubViewport" unique_id=245764792 instance=ExtResource("17_m4of1")]
 transform = Transform3D(2.77, 0, 0, 0, 2.77, 0, 0, 0, 2.77, 5.5, 0, 12.5)
@@ -679,15 +684,6 @@ layout_mode = 1
 offset_top = -1.0
 offset_bottom = -1.0
 file = ExtResource("27_sgxhe")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" unique_id=162100452]
-light_color = Color(0.6431373, 0.7647059, 0.8235294, 1)
-light_energy = 1.2
-shadow_enabled = true
-shadow_bias = 0.01
-shadow_blur = 3.955
-directional_shadow_mode = 0
-sky_mode = 2
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="SubViewportContainer/SubViewport" unique_id=1883496129]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.96343)

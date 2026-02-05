@@ -17,15 +17,17 @@ var previous_facing_direction : Direction
 
 var destination_rotation : int
 var current_rotation : float
+@onready var spring_arm := $SpringArm3D
+@onready var camera := $SpringArm3D/Camera3D
+var current_camera_z : float
 
 @onready var color_rect := $CanvasLayer/ColorRect
 
 func _ready() -> void:
 	globals.camera = self
-	
-	get_child(0).position.z = CAMERA_DISTANCE_BACK
-	get_child(0).position.y = CAMERA_DISTANCE_UP
-	get_child(0).rotation_degrees.x = CAMERA_ROTATION_X
+	spring_arm.spring_length = CAMERA_DISTANCE_BACK
+	current_camera_z = spring_arm.spring_length
+	rotation_degrees.x = CAMERA_ROTATION_X
 	
 	#rotation_degrees.x = X_ROTATION
 	
@@ -58,13 +60,17 @@ func _process(delta: float) -> void:
 	color_rect.modulate.a = 1.0 - globals.safe_ratio
 	#print(globals.caught_time_remaining)
 	#Centers camera pivot on the parent
-	position = globals.player.position
+	position = globals.player.position + Vector3(0, CAMERA_DISTANCE_UP, 0)
 	
 	if rotation_degrees.y != float(destination_rotation):
 		rotation_degrees.y = lerp(rotation_degrees.y, float(destination_rotation), delta * CAM_ROT_SPEED)
 	else:
 		rotation_degrees.y = int(rotation_degrees.y) % 360
 	pass
+	
+	var target_z = spring_arm.get_hit_length()
+	current_camera_z = lerp(current_camera_z, target_z, delta * 10.0)
+	camera.position.z = current_camera_z
 
 func test_print():
 	print(facing_direction)

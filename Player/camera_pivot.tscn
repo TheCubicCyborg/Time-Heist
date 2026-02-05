@@ -16,9 +16,7 @@ shader_parameter/feather = 0.135
 [node name="Camera_pivot" type="Node3D" unique_id=889867913]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("1_ehrhw")
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=878657763]
-near = 0.5
+CAMERA_DISTANCE_UP = 1.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=359990561]
 
@@ -40,3 +38,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("3_fvf84")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=267427160]
+collision_mask = 8
+spring_length = 3.0
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=878657763]
+near = 0.005
+far = 1000.0
