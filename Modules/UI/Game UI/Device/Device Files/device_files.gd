@@ -10,7 +10,7 @@ var device_files_list : PackedScene = preload("res://Modules/UI/Game UI/Device/D
 
 func _ready() -> void:
 	#Add already owned documents
-	for doc in globals.collected_documents:
+	for doc in global_inventory.documents:
 		check_for_new_tags(doc)
 		add_new_doc(doc)
 	globals.added_doc.connect(update_doc_list)

@@ -37,11 +37,120 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
 
-[node name="Clearance" type="VBoxContainer" parent="HBoxContainer/Inventory" unique_id=1683413976]
+[node name="Clearance" type="GridContainer" parent="HBoxContainer/Inventory" unique_id=1994816049]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 0.6
+size_flags_stretch_ratio = 0.5
+columns = 2
+
+[node name="Security" type="Panel" parent="HBoxContainer/Inventory/Clearance" unique_id=1384283985]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Inventory/Clearance/Security" unique_id=1103478648]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3164139, 0.7105515, 0.46574497, 1)
+
+[node name="Label" type="Label" parent="HBoxContainer/Inventory/Clearance/Security" unique_id=187217973]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Security"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lab" type="Panel" parent="HBoxContainer/Inventory/Clearance" unique_id=2083719237]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Inventory/Clearance/Lab" unique_id=1600993430]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.63929945, 0.7315927, 0.77827734, 1)
+
+[node name="Label" type="Label" parent="HBoxContainer/Inventory/Clearance/Lab" unique_id=1357133161]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Lab"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Upper Office" type="Panel" parent="HBoxContainer/Inventory/Clearance" unique_id=2088005091]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Inventory/Clearance/Upper Office" unique_id=2067525088]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.664617, 0.5461116, 0.8691985, 1)
+
+[node name="Label" type="Label" parent="HBoxContainer/Inventory/Clearance/Upper Office" unique_id=1067995210]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Upper Office"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Utility" type="Panel" parent="HBoxContainer/Inventory/Clearance" unique_id=1734371859]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/Inventory/Clearance/Utility" unique_id=1376431534]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.83417994, 0.5235299, 0.46272343, 1)
+
+[node name="Label" type="Label" parent="HBoxContainer/Inventory/Clearance/Utility" unique_id=492215968]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Utility"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=419748439]
 layout_mode = 2

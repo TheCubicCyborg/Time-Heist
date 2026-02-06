@@ -27,6 +27,6 @@ func set_email_info(doc : DocumentInfo):
 func _on_focus_entered() -> void:
 	if not viewed:
 		viewed = true;
-		globals.collect(email_info)
+		globals.emit_signal("added_doc", email_info)
 	#color_rect.color.a = 255
 	pass # Replace with function body.

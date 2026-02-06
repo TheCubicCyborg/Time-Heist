@@ -11,5 +11,7 @@ class_name Item
 		item = value;
 
 func interact():
-	globals.emit_signal("collect_item", item)
 	queue_free()
+	globals.emit_signal("collect_item", item)
+	#TEMP
+	globals.emit_signal("collect_clearance", globals.Clearances.Security)
