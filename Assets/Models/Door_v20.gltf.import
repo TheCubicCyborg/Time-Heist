@@ -37,6 +37,19 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"materials": {
+"DoorKnob": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/Materials/PS Graphics Textures/Door_Material/knob_material.tres",
+"use_external/path": "uid://bps7barfjsgtm"
+},
+"DoorMaterial": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Assets/Materials/PS Graphics Textures/Door_Material/door_material.tres",
+"use_external/path": "uid://bnu20tryb3xh8"
+}
+}
+}
 gltf/naming_version=2
 gltf/embedded_image_handling=1
