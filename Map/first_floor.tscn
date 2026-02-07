@@ -1,9 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://buslgkgbo32h6"]
+[gd_scene load_steps=40 format=3 uid="uid://bjjcgr3dvub72"]
 
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="1_0c7so"]
 [ext_resource type="PackedScene" uid="uid://bm4y2kiv4odnp" path="res://Modules/UI/ui_manager.tscn" id="1_cr80g"]
 [ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="1_p3g42"]
-[ext_resource type="Script" path="res://Map/first_floor.gd" id="1_vkurv"]
+[ext_resource type="Script" uid="uid://cari4qrwf2nax" path="res://Map/first_floor.gd" id="1_vkurv"]
 [ext_resource type="Texture2D" uid="uid://cjwgyolwq6axi" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_ao.png" id="2_cjf52"]
 [ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="3_bfkqv"]
 [ext_resource type="Texture2D" uid="uid://iysiiph8g0nq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_normal-ogl.png" id="4_s57rb"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/camera_pivot.tscn" id="7_bfkqv"]
 [ext_resource type="PackedScene" uid="uid://bk11o2jtj5d7g" path="res://Modules/Interaction/Door/generic_door.tscn" id="7_xr2co"]
 [ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/Player.tscn" id="8_s57rb"]
-[ext_resource type="Script" uid="uid://cyycim24066r4" path="res://Modules/AI/security_guard.gd" id="8_vk860"]
+[ext_resource type="Script" uid="uid://cyycim24066r4" path="res://Modules/AI/NPC/security_guard.gd" id="8_vk860"]
 [ext_resource type="PackedScene" uid="uid://dyhnk6p2fbc87" path="res://Modules/ConeVision/cone_vision.tscn" id="9_a88kd"]
 [ext_resource type="PackedScene" uid="uid://cx4334ce06mly" path="res://Modules/Lighting & Visibility/visibility_mesh.tscn" id="9_s57rb"]
 [ext_resource type="PackedScene" uid="uid://darcn6k2u88v2" path="res://Assets/Models/Stock Assets/Nature_Deco.fbx" id="10_0a44u"]
@@ -21,7 +21,15 @@
 [ext_resource type="Texture2D" uid="uid://b6oady1ollpgf" path="res://Assets/Documents/temp.png" id="19_cr80g"]
 [ext_resource type="Resource" uid="uid://dde08b7s131h7" path="res://Assets/Documents/Resources/second_test_document.tres" id="20_cr80g"]
 [ext_resource type="PackedScene" uid="uid://d34pm0fchacnp" path="res://Modules/Interaction/Computer/computer.tscn" id="21_xfhbw"]
-[ext_resource type="PackedScene" uid="uid://oyq0g5wotgxh" path="res://Assets/Models/Door_v20.gltf" id="22_ayi5o"]
+[ext_resource type="PackedScene" uid="uid://chgq1whavi3qi" path="res://Modules/Interaction/Computer/computer_ui.tscn" id="22_rxtpu"]
+[ext_resource type="PackedScene" uid="uid://b1xuaj1s3dwef" path="res://Modules/Interaction/Computer/desktop_item.tscn" id="23_rew54"]
+[ext_resource type="PackedScene" uid="uid://q5g0v26dm1my" path="res://Modules/Interaction/Computer/computer_tab.tscn" id="24_2dfqy"]
+[ext_resource type="PackedScene" uid="uid://bnhismy4o74yd" path="res://Modules/Interaction/Computer/Email App/email_tab.tscn" id="25_he45r"]
+[ext_resource type="Script" uid="uid://c4r7d4bl70rat" path="res://Assets/Documents/document_resource.gd" id="26_rew54"]
+[ext_resource type="Resource" uid="uid://4qtrr47gldo5" path="res://Assets/Documents/Resources/dictionary_temp.tres" id="27_2dfqy"]
+[ext_resource type="Texture2D" uid="uid://yd82mkstnr4e" path="res://Assets/Documents/Textures/0_First_Test_Document.png" id="28_4o43n"]
+[ext_resource type="Texture2D" uid="uid://0cjiq2gdh6kt" path="res://Assets/Documents/Textures/3_dictionary.png" id="30_4o43n"]
+[ext_resource type="PackedScene" uid="uid://cijyt3whigooo" path="res://Modules/Interaction/Computer/File App/file_tab.tscn" id="30_kjo2c"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_vmato"]
 
@@ -68,20 +76,6 @@ size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6wjy"]
 size = Vector3(0.38, 2, 1.28)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_hfiml"]
-viewport_path = NodePath("Screen/SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rxtpu"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_hfiml")
-
-[sub_resource type="QuadMesh" id="QuadMesh_rew54"]
-resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_rxtpu")
-size = Vector2(0.57, 0.35)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ihm2"]
 
 [node name="First Floor" type="Node3D" node_paths=PackedStringArray("cameras")]
 script = ExtResource("1_vkurv")
@@ -451,6 +445,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.25)
 [node name="Lights" type="Node3D" parent="Rooms/Parking Garage"]
 
 [node name="Camera_pivot" parent="." instance=ExtResource("7_bfkqv")]
+CAMERA_ROTATION_X = -50.0
+CAMERA_DISTANCE_BACK = 2.0
+CAMERA_DISTANCE_UP = 6.0
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("8_s57rb")]
 
@@ -490,33 +487,78 @@ render_target_update_mode = 4
 [node name="Camera3D" type="Camera3D" parent="SubViewport2"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.66743636, 1.017169, 11.366655)
 
-[node name="Computer" parent="." instance=ExtResource("21_xfhbw")]
-transform = Transform3D(0.61645883, 0, -0.78738713, 0, 1, 0, 0.78738713, 0, 0.61645883, -4.375702, 1, 17.740742)
+[node name="Computer" parent="." node_paths=PackedStringArray("computer_ui") instance=ExtResource("21_xfhbw")]
+transform = Transform3D(-0.3362735, 0, -0.94176435, 0, 1, 0, 0.94176435, 0, -0.3362735, -3.1650617, 0.9756807, 6.8823137)
+computer_ui = NodePath("Computer UI2")
 
-[node name="Interface" parent="Computer" index="2" node_paths=PackedStringArray("ui")]
-ui = NodePath("../Computer UI")
+[node name="Computer UI2" parent="Computer" node_paths=PackedStringArray("icons") instance=ExtResource("22_rxtpu")]
+icons = [NodePath("Email"), NodePath("File"), NodePath("File2")]
 
-[node name="Screen" parent="Computer" index="3"]
-mesh = SubResource("QuadMesh_rew54")
+[node name="Email" parent="Computer/Computer UI2" node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
+layout_mode = 1
+offset_left = -480.0
+offset_top = -280.0
+offset_right = -480.0
+offset_bottom = -280.0
+override_title = "Email"
+item_type = 1
+tab = NodePath("DesktopTab")
 
-[node name="Computer2" parent="." instance=ExtResource("21_xfhbw")]
-transform = Transform3D(-0.12228516, 0, -0.992495, 0, 1, 0, 0.992495, 0, -0.12228516, -4.375702, 1, 16.805115)
+[node name="DesktopTab" parent="Computer/Computer UI2/Email" node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+layout_mode = 1
+offset_left = -178.0
+offset_top = -132.0
+offset_right = 1022.0
+offset_bottom = 668.0
+content = NodePath("Email_Tab")
 
-[node name="Interface" parent="Computer2" index="2" node_paths=PackedStringArray("ui")]
-ui = NodePath("../Computer UI")
+[node name="Email_Tab" parent="Computer/Computer UI2/Email/DesktopTab" instance=ExtResource("25_he45r")]
+layout_mode = 1
+focus_mode = 2
+emails = Array[ExtResource("26_rew54")]([ExtResource("18_cr80g"), ExtResource("20_cr80g"), ExtResource("27_2dfqy")])
 
-[node name="Screen" parent="Computer2" index="3"]
-mesh = SubResource("QuadMesh_rew54")
+[node name="File" parent="Computer/Computer UI2" node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
+layout_mode = 1
+override_icon = ExtResource("28_4o43n")
+override_title = "First Test Document"
+item_type = 3
+file = ExtResource("18_cr80g")
+tab = NodePath("Computer Tab")
 
-[node name="Door_v20" parent="." instance=ExtResource("22_ayi5o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -0.25)
+[node name="Computer Tab" parent="Computer/Computer UI2/File" node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+layout_mode = 1
+offset_left = -600.0
+offset_top = -400.0
+offset_right = 600.0
+offset_bottom = 400.0
+content = NodePath("File Tab")
 
-[node name="Door" parent="Door_v20/DoorHinge" index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_6ihm2")
+[node name="File Tab" parent="Computer/Computer UI2/File/Computer Tab" instance=ExtResource("30_kjo2c")]
+layout_mode = 1
+file = ExtResource("18_cr80g")
+
+[node name="File2" parent="Computer/Computer UI2" node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
+layout_mode = 1
+offset_left = 714.0
+offset_top = -131.0
+offset_right = 714.0
+offset_bottom = -131.0
+override_icon = ExtResource("30_4o43n")
+override_title = "Dictionary"
+item_type = 3
+file = ExtResource("27_2dfqy")
+tab = NodePath("Computer Tab")
+
+[node name="Computer Tab" parent="Computer/Computer UI2/File2" node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+layout_mode = 1
+content = NodePath("File Tab")
+
+[node name="File Tab" parent="Computer/Computer UI2/File2/Computer Tab" instance=ExtResource("30_kjo2c")]
+layout_mode = 1
+offset_top = -1.0
+offset_bottom = -1.0
+file = ExtResource("27_2dfqy")
 
 [connection signal="body_entered" from="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" to="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" method="_on_body_entered"]
 
 [editable path="Rooms/FrontDeskBackRoom/Doors/Behind Desk Door1"]
-[editable path="Computer"]
-[editable path="Computer2"]
-[editable path="Door_v20"]

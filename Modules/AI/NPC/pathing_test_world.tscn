@@ -1,0 +1,91 @@
+[gd_scene load_steps=17 format=3 uid="uid://cyif8uwvd8l5"]
+
+[ext_resource type="PackedScene" uid="uid://cne3kilvgkpxb" path="res://Modules/AI/NPC/NPC.tscn" id="1_0mxr5"]
+[ext_resource type="Script" uid="uid://d0afbfeblscar" path="res://Modules/Interaction/interactable.gd" id="1_urgcb"]
+[ext_resource type="Script" uid="uid://br704tdr56wo1" path="res://addons/NPC Pathing/PathClasses/PathComponent.gd" id="3_0d2mm"]
+[ext_resource type="Script" uid="uid://d07sq7me61pcj" path="res://addons/NPC Pathing/PathClasses/PathVertex.gd" id="4_sby2f"]
+[ext_resource type="Script" uid="uid://bveu2y00mhldy" path="res://addons/NPC Pathing/PathClasses/VertexAction.gd" id="5_khdrh"]
+[ext_resource type="Script" uid="uid://bfuy4q5dyjpbi" path="res://addons/NPC Pathing/PathClasses/PathLine.gd" id="6_nhqvp"]
+[ext_resource type="Script" uid="uid://bqksnw54upvlw" path="res://addons/NPC Pathing/PathClasses/NPCPath.gd" id="7_3aima"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_m53t8"]
+
+[sub_resource type="GDScript" id="GDScript_urgcb"]
+resource_name = "test_cube"
+script/source = "extends MeshInstance3D
+
+func interact():
+	print(\"interacted with test_cube\")
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ah0ni"]
+
+[sub_resource type="Resource" id="Resource_w2fhl"]
+resource_local_to_scene = true
+script = ExtResource("4_sby2f")
+
+[sub_resource type="Resource" id="Resource_npck5"]
+resource_local_to_scene = true
+script = ExtResource("4_sby2f")
+position = Vector3(0, 0, 5.75)
+time_start = 5.75
+time_end = 5.75
+id = 2
+
+[sub_resource type="Resource" id="Resource_7oa7a"]
+resource_local_to_scene = true
+script = ExtResource("6_nhqvp")
+speed = 1.0
+prev_vertex = SubResource("Resource_w2fhl")
+next_vertex = SubResource("Resource_npck5")
+time_end = 5.75
+id = 1
+
+[sub_resource type="Resource" id="Resource_jyu0l"]
+resource_local_to_scene = true
+script = ExtResource("4_sby2f")
+position = Vector3(5.25, 0, 5.75)
+time_start = 11.0
+time_end = 11.0
+id = 4
+
+[sub_resource type="Resource" id="Resource_7sp3u"]
+resource_local_to_scene = true
+script = ExtResource("6_nhqvp")
+speed = 1.0
+prev_vertex = SubResource("Resource_npck5")
+next_vertex = SubResource("Resource_jyu0l")
+time_start = 5.75
+time_end = 11.0
+id = 3
+
+[sub_resource type="Resource" id="Resource_lj00a"]
+resource_local_to_scene = true
+script = ExtResource("7_3aima")
+path_components = Array[ExtResource("3_0d2mm")]([SubResource("Resource_w2fhl"), SubResource("Resource_7oa7a"), SubResource("Resource_npck5"), SubResource("Resource_7sp3u"), SubResource("Resource_jyu0l")])
+
+[node name="Pathing Test World" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 20, 0)
+
+[node name="TestCube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 10)
+mesh = SubResource("BoxMesh_m53t8")
+script = SubResource("GDScript_urgcb")
+
+[node name="Interactable" type="Area3D" parent="TestCube" node_paths=PackedStringArray("mesh", "interact_object")]
+script = ExtResource("1_urgcb")
+mesh = NodePath("..")
+interact_object = NodePath("..")
+metadata/_custom_type_script = "uid://d0afbfeblscar"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestCube/Interactable"]
+shape = SubResource("BoxShape3D_ah0ni")
+
+[node name="NPC" parent="." instance=ExtResource("1_0mxr5")]
+transform = Transform3D(1, 0, 0, 0, 0.9999826, 0.005899179, 0, -0.005899179, 0.9999826, 0, 0, 0)
+path = SubResource("Resource_lj00a")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.57513374, -0.37195083, 0.7286108, -1.4901161e-08, 0.8906576, 0.4546746, -0.8180594, -0.26149872, 0.5122472, 0, 0, 0)

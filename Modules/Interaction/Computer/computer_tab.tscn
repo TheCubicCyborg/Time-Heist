@@ -1,42 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://q5g0v26dm1my"]
+[gd_scene load_steps=2 format=3 uid="uid://q5g0v26dm1my"]
 
-[ext_resource type="PackedScene" uid="uid://bnhismy4o74yd" path="res://Modules/Interaction/Computer/email_tab.tscn" id="1_t7psn"]
-
-[sub_resource type="GDScript" id="GDScript_88c0r"]
-resource_name = "computer_tab"
-script/source = "extends UI
-class_name DesktopTab
-
-@onready var panel: Panel = $VBoxContainer/Panel
-@onready var bar: ColorRect = $VBoxContainer/Bar
-
-@export var content : PackedScene
-
-var dragging : bool = false
-var offset : Vector2
-
-func _ready() -> void:
-	hide()
-	var content_instance = content.instantiate()
-	panel.add_child(content_instance)
-	pass
-
-#region dragging
-func _physics_process(delta: float) -> void:
-	if dragging:
-		global_position = get_global_mouse_position() - offset
-
-func _on_drag_pressed():
-	dragging = true
-	offset = get_global_mouse_position() - global_position
-
-func _on_drag_button_up() -> void:
-	dragging = false
-#endregion
-
-func _on_close_pressed() -> void:
-	hide()
-"
+[ext_resource type="Script" uid="uid://cvsjvf2hm0j0v" path="res://Modules/Interaction/Computer/computer_tab.gd" id="1_t7psn"]
 
 [node name="Computer Tab" type="Control"]
 z_index = 1
@@ -47,8 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_88c0r")
-content = ExtResource("1_t7psn")
+script = ExtResource("1_t7psn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
