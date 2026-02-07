@@ -1,3 +1,24 @@
-[gd_scene format=3 uid="uid://dy25tiuqx8m1m"]
+[gd_scene load_steps=2 format=3 uid="uid://dy25tiuqx8m1m"]
+
+[ext_resource type="Script" uid="uid://cbn2aivlaf362" path="res://Scenes/Root Scene/scene_manager.gd" id="1_diq8v"]
 
 [node name="TimeHeist" type="Node"]
+
+[node name="SceneManager" type="Node" parent="."]
+script = ExtResource("1_diq8v")
+
+[node name="SceneHolder" type="Node" parent="."]
+
+[node name="temp" type="Node" parent="SceneHolder"]
+
+[node name="Holder" type="Node" parent="."]
+
+[node name="persistent ui? (temp)" type="Label" parent="Holder"]
+modulate = Color(0.8820887, 0.2173545, 0.20605037, 1)
+offset_left = 907.0
+offset_top = 991.0
+offset_right = 1046.1305
+offset_bottom = 1071.0
+text = "test123"
+horizontal_alignment = 1
+vertical_alignment = 1

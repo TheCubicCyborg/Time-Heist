@@ -5,7 +5,11 @@
 
 [resource]
 script = ExtResource("2_i8jkc")
+is_email = true
 title = "First Test Document"
 document_image = ExtResource("1_gm4so")
 relevant_tags = Array[String](["People"])
+email_heading = "IMPORTANT stuff please open"
+email_from = "Julian"
+email_desc = "hello john i am writing you this email..."
 metadata/_custom_type_script = "uid://c4r7d4bl70rat"
