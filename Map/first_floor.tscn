@@ -31,7 +31,11 @@
 [ext_resource type="Texture2D" uid="uid://0cjiq2gdh6kt" path="res://Assets/Documents/Textures/3_dictionary.png" id="30_4o43n"]
 [ext_resource type="PackedScene" uid="uid://cijyt3whigooo" path="res://Modules/Interaction/Computer/File App/file_tab.tscn" id="30_kjo2c"]
 [ext_resource type="PackedScene" uid="uid://b6wv5r50sr8bh" path="res://Modules/Interaction/Item/item.tscn" id="31_kjo2c"]
+[ext_resource type="PackedScene" uid="uid://dkcsig15pybbc" path="res://Modules/Interaction/Computer/Text App/text_tab.tscn" id="31_w6uou"]
+[ext_resource type="Script" uid="uid://cwa1su0fsxi7t" path="res://Assets/TextConvos/text_convo_resource.gd" id="32_f11mn"]
 [ext_resource type="Resource" uid="uid://2u7ypb7xpscs" path="res://Assets/Items/Resources/apple.tres" id="32_xyxbf"]
+[ext_resource type="Resource" uid="uid://d1c0vmen0nu4u" path="res://Assets/TextConvos/Resources/test_convo.tres" id="33_hl847"]
+[ext_resource type="Resource" uid="uid://d2kllmd7ltgfs" path="res://Assets/TextConvos/Resources/text_convo_two.tres" id="34_f11mn"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_vmato"]
 
@@ -207,6 +211,7 @@ mesh = SubResource("CapsuleMesh_riaqh")
 [node name="Cone Vision" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=951547481 instance=ExtResource("9_a88kd")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
 sight_line_angle = 100.0
+smaller_sight_line_radius = 15.0
 
 [node name="Area3D" type="Area3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=964640159]
 script = SubResource("GDScript_d6wjy")
@@ -489,11 +494,11 @@ render_target_update_mode = 4
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.66743636, 1.017169, 11.366655)
 
 [node name="Computer" parent="." unique_id=1166512115 node_paths=PackedStringArray("computer_ui") instance=ExtResource("21_xfhbw")]
-transform = Transform3D(-0.3362735, 0, -0.94176435, 0, 1, 0, 0.94176435, 0, -0.3362735, -3.1650617, 0.9756807, 6.8823137)
+transform = Transform3D(-0.3362735, 0, -0.94176435, 0, 1, 0, 0.94176435, 0, -0.3362735, -3.1650617, 0.9756807, -1.4123049)
 computer_ui = NodePath("Computer UI2")
 
 [node name="Computer UI2" parent="Computer" unique_id=417306020 node_paths=PackedStringArray("icons") instance=ExtResource("22_rxtpu")]
-icons = [NodePath("Email"), NodePath("File"), NodePath("File2")]
+icons = [NodePath("Email"), NodePath("File"), NodePath("File2"), NodePath("Text")]
 
 [node name="Email" parent="Computer/Computer UI2" unique_id=529975338 node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
 layout_mode = 1
@@ -506,6 +511,7 @@ item_type = 1
 tab = NodePath("DesktopTab")
 
 [node name="DesktopTab" parent="Computer/Computer UI2/Email" unique_id=1897922406 node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+visible = false
 layout_mode = 1
 offset_left = -178.0
 offset_top = -132.0
@@ -527,6 +533,7 @@ file = ExtResource("18_cr80g")
 tab = NodePath("Computer Tab")
 
 [node name="Computer Tab" parent="Computer/Computer UI2/File" unique_id=2100645123 node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+visible = false
 layout_mode = 1
 offset_left = -600.0
 offset_top = -400.0
@@ -551,6 +558,7 @@ file = ExtResource("27_2dfqy")
 tab = NodePath("Computer Tab")
 
 [node name="Computer Tab" parent="Computer/Computer UI2/File2" unique_id=633259373 node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+visible = false
 layout_mode = 1
 content = NodePath("File Tab")
 
@@ -559,6 +567,26 @@ layout_mode = 1
 offset_top = -1.0
 offset_bottom = -1.0
 file = ExtResource("27_2dfqy")
+
+[node name="Text" parent="Computer/Computer UI2" unique_id=982267182 node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
+layout_mode = 1
+offset_left = -413.0
+offset_top = 116.0
+offset_right = -413.0
+offset_bottom = 116.0
+override_title = "Messages"
+item_type = 2
+tab = NodePath("Computer Tab")
+
+[node name="Computer Tab" parent="Computer/Computer UI2/Text" unique_id=1716726960 node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+visible = false
+layout_mode = 1
+content = NodePath("Text Tab")
+
+[node name="Text Tab" parent="Computer/Computer UI2/Text/Computer Tab" unique_id=1299058217 instance=ExtResource("31_w6uou")]
+layout_mode = 1
+convos = Array[ExtResource("32_f11mn")]([ExtResource("33_hl847"), ExtResource("34_f11mn")])
+which_person = Array[int]([0, 1])
 
 [node name="Item" parent="." unique_id=93420287 instance=ExtResource("31_kjo2c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7551153, 0, 0)
