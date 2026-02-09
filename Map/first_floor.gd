@@ -1,5 +1,4 @@
-extends Node3D
-class_name Floor
+extends Floor
 
 @export var cameras : Array[SubViewport]
 
