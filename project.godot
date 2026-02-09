@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 globals="*res://Globals/globals.gd"
 document_database="*res://Globals/document_database.gd"
+DialogueManager="*uid://c3rodes2l3gxb"
 
 [display]
 
@@ -32,7 +33,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/NPC Pathing/plugin.cfg", "res://addons/time_tracker/plugin.cfg")
+enabled=PackedStringArray("res://addons/NPC Pathing/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/time_tracker/plugin.cfg")
 
 [input]
 
@@ -189,6 +190,10 @@ rotate_document_down={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194322,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://Dialogue/first_test.dialogue", "res://Dialogue/test.dialogue")
 
 [layer_names]
 
