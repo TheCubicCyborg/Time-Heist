@@ -1,11 +1,9 @@
 ~ start
-Lauren: [[Hi|Hello|Howdy]], this is some super cool dialogue.
-Linda: Here are some choices.
-- Go to class
-	Laureb: You chose to go to class :\)
-- Skip class
-	Lauren: You chose to skip :\(
-- Try again... => start
-- Goodbye => END
-LAUREN: For more information go to my cheer game
+Lauren: Hi welcome to our cool equipment shop
+Linda: Are u interested in some equipment?
+- Yes
+	do open_menu()
+	Linda: I hope you enjoy your equipment, bye => END
+- No
+	Lauren: Ok bye.. => END
 => END
