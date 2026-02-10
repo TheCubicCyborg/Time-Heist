@@ -13,6 +13,9 @@ const REWIND_MULTIPLIER = 2
 const WAIT_MULTIPLIER = 5
 
 signal time_traveled
+signal stopped_time_travel
+
+var is_time_traveling = false
 
 func _ready():
 	logging = true
@@ -20,12 +23,18 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_pressed("rewind"):
+		is_time_traveling = true
 		rewind(REWIND_MULTIPLIER * delta)
 	elif Input.is_action_pressed("wait"):
 		cur_time += delta * WAIT_MULTIPLIER
+		if is_time_traveling:
+			stopped_time_travel.emit()
+			is_time_traveling = false
 	elif !paused:
 		cur_time += delta * time_multiplier
-	
+		if is_time_traveling:
+			stopped_time_travel.emit()
+			is_time_traveling = false
 
 func toggle_time():
 	paused = not paused

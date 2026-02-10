@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bm4y2kiv4odnp"]
+[gd_scene format=3 uid="uid://bm4y2kiv4odnp"]
 
 [ext_resource type="Script" uid="uid://b25imoa11adq2" path="res://Modules/UI/ui_manager.gd" id="1_yaem8"]
 [ext_resource type="Script" uid="uid://b1b742guris2v" path="res://Modules/UI/Game UI/debug_ui.gd" id="2_u3icv"]
 [ext_resource type="PackedScene" uid="uid://o8bawnwr8utr" path="res://Modules/UI/Game UI/DocumentViewer/document_viewer.tscn" id="3_jfs1l"]
+[ext_resource type="PackedScene" uid="uid://b8umb5d42v56y" path="res://Modules/UI/Game UI/HUD/hud.tscn" id="5_df44s"]
 [ext_resource type="PackedScene" uid="uid://djm2xkntdba18" path="res://Modules/UI/Game UI/device_menu.tscn" id="5_keavj"]
 
 [sub_resource type="GDScript" id="GDScript_yaem8"]
@@ -48,7 +49,7 @@ func _process(_delta):
 	text = \"Speed: \" + cur_speed
 "
 
-[node name="UI Manager" type="Control"]
+[node name="UI Manager" type="Control" unique_id=1478464990]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,7 +58,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yaem8")
 
-[node name="DEBUG UI" type="Control" parent="."]
+[node name="DEBUG UI" type="Control" parent="." unique_id=1553451654]
 process_mode = 4
 visible = false
 layout_mode = 1
@@ -68,14 +69,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_u3icv")
 
-[node name="Time Display" type="Label" parent="DEBUG UI"]
+[node name="Time Display" type="Label" parent="DEBUG UI" unique_id=1629058186]
 layout_mode = 0
 offset_right = 302.0
 offset_bottom = 23.0
 text = "Time Display"
 script = SubResource("GDScript_yaem8")
 
-[node name="State Display" type="Label" parent="DEBUG UI"]
+[node name="State Display" type="Label" parent="DEBUG UI" unique_id=1732052527]
 layout_mode = 0
 offset_top = 18.63
 offset_right = 387.0
@@ -83,7 +84,7 @@ offset_bottom = 42.0
 text = "State Display"
 script = SubResource("GDScript_u3icv")
 
-[node name="Crouching Display" type="Label" parent="DEBUG UI"]
+[node name="Crouching Display" type="Label" parent="DEBUG UI" unique_id=1972601677]
 layout_mode = 0
 offset_top = 41.0
 offset_right = 387.0
@@ -91,7 +92,7 @@ offset_bottom = 64.37
 text = "Crouching Display"
 script = SubResource("GDScript_nr7cl")
 
-[node name="Speed Display" type="Label" parent="DEBUG UI"]
+[node name="Speed Display" type="Label" parent="DEBUG UI" unique_id=620182975]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 387.0
@@ -99,16 +100,25 @@ offset_bottom = 87.37
 text = "Speed Display"
 script = SubResource("GDScript_isv23")
 
-[node name="Interface" type="Control" parent="."]
+[node name="Interface" type="Control" parent="." unique_id=722000712]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="DeviceMenu" parent="." instance=ExtResource("5_keavj")]
+[node name="DeviceMenu" parent="." unique_id=1059738567 instance=ExtResource("5_keavj")]
 visible = false
 layout_mode = 1
 
-[node name="DocumentViewer" parent="." instance=ExtResource("3_jfs1l")]
+[node name="DocumentViewer" parent="." unique_id=1468834605 instance=ExtResource("3_jfs1l")]
 visible = false
+z_index = 1
 layout_mode = 1
+
+[node name="HUD" parent="." unique_id=528506545 instance=ExtResource("5_df44s")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
