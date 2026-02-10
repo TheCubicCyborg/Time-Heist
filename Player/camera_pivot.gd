@@ -1,9 +1,9 @@
 extends Node3D
 
-@export var CAMERA_ROTATION_X : float = -60
+@export var CAMERA_ROTATION_X : float = -50
 @export var CAM_ROT_SPEED : float = 5
-@export var CAMERA_DISTANCE_BACK : float = 7
-@export var CAMERA_DISTANCE_UP : float = 3
+@export var CAMERA_DISTANCE_BACK : float = 2
+@export var CAMERA_DISTANCE_UP : float = 6
 
 enum Direction { 
 	NORTH = 0,

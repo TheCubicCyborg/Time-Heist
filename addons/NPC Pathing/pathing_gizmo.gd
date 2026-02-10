@@ -69,7 +69,7 @@ func _begin_handle_action(id, secondary):
 	var path = get_node_3d().path
 	var select_id: int = id
 	if id % 2 == 0:
-		if Input.is_key_pressed(KEY_CTRL): #Create new line and vertex forward
+		if Input.is_key_pressed(KEY_CTRL) or Input.is_key_pressed(KEY_META): #Create new line and vertex forward
 			deferred_action = GIZMO_ACTION.BRANCH_FORWARD
 		elif id == 0:
 			pass
@@ -104,7 +104,7 @@ func _set_handle(id, secondary, camera, point):
 		var plane = Plane(Vector3.UP)
 		var position: Vector3 = plane.intersects_ray(origin,direction)
 		position = position.snapped(Vector3(1,0,1) * path.snap)
-		moving_vertex.position = position
+		moving_vertex.position = position - get_node_3d().position
 		
 		#Handle time
 		#print(moving_vertex.id-1)
