@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cijyt3whigooo"]
+[gd_scene format=3 uid="uid://cijyt3whigooo"]
 
 [ext_resource type="Script" uid="uid://beoxlsvtknp72" path="res://Modules/Interaction/Computer/File App/file_tab.gd" id="1_w0ko8"]
 
-[node name="File Tab" type="Control"]
+[node name="File Tab" type="Control" unique_id=1552531707]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w0ko8")
 
-[node name="FileViewer" type="TextureRect" parent="."]
+[node name="FileViewer" type="TextureRect" parent="." unique_id=722397910]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

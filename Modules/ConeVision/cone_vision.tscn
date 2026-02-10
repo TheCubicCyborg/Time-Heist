@@ -1,52 +1,89 @@
-[gd_scene load_steps=2 format=3 uid="uid://dyhnk6p2fbc87"]
+[gd_scene format=3 uid="uid://dyhnk6p2fbc87"]
 
 [sub_resource type="GDScript" id="GDScript_23e0v"]
 resource_name = "cone_vision"
-script/source = "extends Area3D
+script/source = "@tool
+extends Area3D
 
 var player_spotted
 @onready var sight_checker := $SightChecker
 @onready var collision := $CollisionPolygon3D
+@onready var laser: MeshInstance3D = $Laser
+@onready var laser_mesh: ImmediateMesh = laser.mesh
 
 var time_detecting: float = 0
 
-@export var sight_line_angle : float = 180 #degrees
-@export var sight_line_radius : float = 15 #meters
+@export var sight_line_angle : float = 220: #degrees
+	set(value):
+		sight_line_angle = value
+		create_mesh()
+@export var sight_line_radius : float = 75: #meters
+	set(value):
+		sight_line_radius = value
+		create_mesh()
+@export var smaller_sight_line_radius : float = 20: #meters
+	set(value):
+		smaller_sight_line_radius = value
+		create_mesh()
 @export var time_till_caught : float = 2
-@export var angle_steps : float = 5
+@export var angle_steps : float = 5:
+	set(value):
+		angle_steps = value
+		create_mesh()
 
 var polygon_points : PackedVector2Array = []
 
 func _ready() -> void:
-	globals.safe_ratio = 1
-	#Set ray cast length
-	sight_checker.target_position.z = -sight_line_radius
-	
-	#Create mesh
-	polygon_points.append(Vector2.ZERO)
-	var sweep_angle = -sight_line_angle / 2
-	
-	for j in range(sight_line_angle / 5 + 1):
-		polygon_points.append(Vector2(
-			sight_line_radius * sin(deg_to_rad(sweep_angle)),
-			-sight_line_radius * cos(deg_to_rad(sweep_angle))
-		))
-		sweep_angle += 5
-	collision.polygon = polygon_points
+	if not Engine.is_editor_hint():
+		globals.safe_ratio = 1
+		#Set ray cast length
+		sight_checker.target_position.z = -sight_line_radius
+		
+		create_mesh()
+		collision.polygon = polygon_points
 
+func create_mesh():
+	var rest_of_sweep = 360 - sight_line_angle
+	polygon_points = []
+	#polygon_points.append(Vector2.ZERO)
+	var sweep_angle = -sight_line_angle / 2
+	var rest_of_sweep_angle = -rest_of_sweep / 2
+	
+	for j in range(sight_line_angle / angle_steps + 1):
+		polygon_points.append(Vector2(
+			-sight_line_radius * sin(deg_to_rad(sweep_angle)),
+			sight_line_radius * cos(deg_to_rad(sweep_angle))
+		))
+		sweep_angle += angle_steps
+	for i in range(rest_of_sweep / angle_steps + 1):
+		polygon_points.append(Vector2(
+			smaller_sight_line_radius * sin(deg_to_rad(rest_of_sweep_angle)),
+			-smaller_sight_line_radius * cos(deg_to_rad(rest_of_sweep_angle))
+		))
+		rest_of_sweep_angle += angle_steps
+	if Engine.is_editor_hint():	
+		collision.polygon = polygon_points
+	
 func _process(delta: float) -> void:
 	#print(timer.time_left)
-	if player_spotted:
-		sight_checker.look_at(Vector3(globals.player.global_position.x,1,globals.player.global_position.z))
-		
-		if sight_checker.get_collider() == globals.player:
-			time_detecting += delta
-		else:
-			time_detecting = 0
-		globals.safe_ratio = (time_till_caught-time_detecting)/time_till_caught
-		
-		if time_detecting >= time_till_caught:
-			caught()
+	if not Engine.is_editor_hint():
+		if player_spotted:
+			sight_checker.look_at(Vector3(globals.player.global_position.x,1,globals.player.global_position.z))
+			#laser.curve.set_point_in(1,Vector3(globals.player.global_position.x,1,globals.player.global_position.z))
+			
+			if sight_checker.get_collider() == globals.player:
+				time_detecting += delta
+				laser_mesh.clear_surfaces()
+				draw_line()
+			else:
+				time_detecting = 0
+				laser_mesh.clear_surfaces()
+			globals.safe_ratio = (time_till_caught-time_detecting)/time_till_caught
+			
+			if time_detecting >= time_till_caught:
+				caught()
+				
+			
 	
 
 func _on_body_entered(body: Node3D) -> void:
@@ -58,22 +95,47 @@ func _on_body_exited(body: Node3D) -> void:
 		player_spotted = false 
 		time_detecting = 0
 		globals.safe_ratio = (time_till_caught-time_detecting)/time_till_caught
+		laser_mesh.clear_surfaces()
 	
 func caught() -> void:
 	globals.player_caught()
+
+func draw_line():
+	var start_point = Vector3.ZERO  # local origin of the laser node
+	var end_point = to_local(globals.player.global_position) + Vector3(0, 0.5, 0) # if you want y=1 offset
+	# Begin drawing the line
+	laser_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	laser_mesh.surface_set_color(Color(1.0, 0.376, 0.308, 1.0))
+	# Add the vertices
+	laser_mesh.surface_add_vertex(start_point)
+	laser_mesh.surface_add_vertex(end_point)
+	# Finish drawing
+	laser_mesh.surface_end()
 "
 
-[node name="Cone Vision" type="Area3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_23e0v"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_23e0v"]
+
+[node name="Cone Vision" type="Area3D" unique_id=1869490121]
 script = SubResource("GDScript_23e0v")
+sight_line_angle = 150.0
+time_till_caught = 1.0
 
-[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="." unique_id=955152349]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
-polygon = PackedVector2Array(-25, 35, 25, 35, 0, 0)
+polygon = PackedVector2Array(72.444435, 19.411428, 70.476944, 25.65151, 67.97308, 31.69637, 64.951904, 37.5, 61.436405, 43.018234, 57.453335, 48.209072, 53.03301, 53.03301, 48.209072, 57.453335, 43.018234, 61.436405, 37.5, 64.951904, 31.69637, 67.97308, 25.65151, 70.476944, 19.411428, 72.444435, 13.023613, 73.86058, 6.5366807, 74.7146, 0, 75, -6.5366807, 74.7146, -13.023613, 73.86058, -19.411428, 72.444435, -25.65151, 70.476944, -31.69637, 67.97308, -37.5, 64.951904, -43.018234, 61.436405, -48.209072, 57.453335, -53.03301, 53.03301, -57.453335, 48.209072, -61.436405, 43.018234, -64.951904, 37.5, -67.97308, 31.69637, -70.476944, 25.65151, -72.444435, 19.411428, -19.318516, 5.176381, -19.696156, 3.4729636, -19.923895, 1.7431148, -20, -1.2246064e-15, -19.923895, -1.7431148, -19.696156, -3.4729636, -19.318516, -5.176381, -18.793852, -6.840403, -18.126156, -8.452365, -17.320509, -10, -16.383041, -11.471529, -15.3208885, -12.855752, -14.142136, -14.142136, -12.855752, -15.3208885, -11.471529, -16.383041, -10, -17.320509, -8.452365, -18.126156, -6.840403, -18.793852, -5.176381, -19.318516, -3.4729636, -19.696156, -1.7431148, -19.923895, 0, -20, 1.7431148, -19.923895, 3.4729636, -19.696156, 5.176381, -19.318516, 6.840403, -18.793852, 8.452365, -18.126156, 10, -17.320509, 11.471529, -16.383041, 12.855752, -15.3208885, 14.142136, -14.142136, 15.3208885, -12.855752, 16.383041, -11.471529, 17.320509, -10, 18.126156, -8.452365, 18.793852, -6.840403, 19.318516, -5.176381, 19.696156, -3.4729636, 19.923895, -1.7431148, 20, -1.2246064e-15, 19.923895, 1.7431148, 19.696156, 3.4729636, 19.318516, 5.176381)
 
-[node name="SightChecker" type="RayCast3D" parent="."]
+[node name="SightChecker" type="RayCast3D" parent="." unique_id=716854366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 0, -50)
 collision_mask = 9
+
+[node name="Laser" type="MeshInstance3D" parent="." unique_id=836442765]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+material_override = SubResource("StandardMaterial3D_23e0v")
+mesh = SubResource("ImmediateMesh_23e0v")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

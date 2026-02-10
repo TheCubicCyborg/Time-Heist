@@ -25,11 +25,19 @@ var allow_interact: bool = true
 
 var cameras : Array[SubViewport]
 
-var collected_documents: Array[DocumentInfo]
-func collect(doc : DocumentInfo):
-	if not doc in collected_documents:
-		collected_documents.append(doc)
-		emit_signal("added_doc", doc)
+#var collected_documents: Array[DocumentInfo]
+#func collect(doc : DocumentInfo):
+	#if not doc in collected_documents:
+		#collected_documents.append(doc)
+		#emit_signal("added_doc", doc)
+		
+enum Clearances {
+	Security,
+	Lab,
+	Upper_Office,
+	Utility,
+	Other
+}
 
 #region temporary test variables
 var player_has_keycard: bool = false
@@ -55,4 +63,7 @@ func player_caught():
 
 #region Signals
 signal added_doc(doc : DocumentInfo)
+signal collect_item(item : PickupItem)
+signal collect_clearance(clearance : Clearances)
+signal use_item(item : PickupItem)
 #endregion

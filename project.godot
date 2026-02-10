@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 globals="*res://Globals/globals.gd"
 document_database="*res://Globals/document_database.gd"
+global_inventory="*uid://bd6hj8r16s6lx"
 
 [display]
 

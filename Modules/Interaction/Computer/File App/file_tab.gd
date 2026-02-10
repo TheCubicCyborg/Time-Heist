@@ -8,4 +8,4 @@ func _ready() -> void:
 
 func open_process():
 	super.open_process()
-	globals.collect(file)
+	globals.emit_signal("added_doc",file)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2jmn7fqcsv24"]
+[gd_scene format=3 uid="uid://c2jmn7fqcsv24"]
 
 [ext_resource type="Script" uid="uid://ddcrxqxycn04f" path="res://Player/camera_pivot.gd" id="1_ehrhw"]
 [ext_resource type="Shader" uid="uid://d1gd8vm0a4uou" path="res://Effects/time_travel_1.gdshader" id="2_iwa17"]
@@ -13,15 +13,15 @@ shader_parameter/aberration = 0.425
 shader_parameter/width = 0.04
 shader_parameter/feather = 0.135
 
-[node name="Camera_pivot" type="Node3D"]
+[node name="Camera_pivot" type="Node3D" unique_id=144358182]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("1_ehrhw")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1895428662]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2142778369]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1091248617]
 modulate = Color(1, 0.26666668, 0.2784314, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,7 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TimeTravelRect" type="ColorRect" parent="CanvasLayer"]
+[node name="TimeTravelRect" type="ColorRect" parent="CanvasLayer" unique_id=2083416251]
 material = SubResource("ShaderMaterial_fvf84")
 anchors_preset = 15
 anchor_right = 1.0
