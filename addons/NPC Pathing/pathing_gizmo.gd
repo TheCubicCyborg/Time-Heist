@@ -29,7 +29,7 @@ func _redraw():
 	var handle_material := get_plugin().get_material("handle",self)
 	
 	var root_array = PackedVector3Array()
-	root_array.push_back(path.at(0).position)
+	root_array.push_back(path.at(0).position - get_node_3d().position)
 	add_handles(root_array,handle_material,PackedInt32Array(),false,true)
 	
 	var vertex_positions := PackedVector3Array()
@@ -40,7 +40,7 @@ func _redraw():
 	for i in range(1,path.size()):
 		var component = path.at(i)
 		if component is PathVertex:
-			vertex_positions.push_back(path.at(i).position)
+			vertex_positions.push_back(path.at(i).position - get_node_3d().position)
 			vertex_ids.push_back(i)
 		elif component is PathLine:
 			line_positions.push_back(draw_line(component, line_material))
@@ -56,13 +56,14 @@ func _redraw():
 func draw_line(line: PathLine, line_material):
 	var line_vec = line.next_vertex.position - line.prev_vertex.position
 	var line_midpoint = (line.next_vertex.position + line.prev_vertex.position) * 0.5
+	line_midpoint += -get_node_3d().position
 	var rotation: Vector3 = Vector3(-PI/2,Vector3.FORWARD.signed_angle_to(line_vec,Vector3.UP),0)
 	var basis = Basis.from_scale(Vector3(1,line_vec.length()/2,1))
 	basis = basis.rotated(Vector3.RIGHT, rotation.x)
 	basis = basis.rotated(Vector3.UP, rotation.y)
 	var transform: Transform3D = Transform3D(basis,line_midpoint)
 	add_mesh(path_mesh,line_material,transform)
-	add_mesh(arrow_mesh,line_material,Transform3D(Basis.from_euler(rotation),line.next_vertex.position - line_vec.normalized() * 0.3))
+	add_mesh(arrow_mesh,line_material,Transform3D(Basis.from_euler(rotation),(line.next_vertex.position - line_vec.normalized() * 0.3) - get_node_3d().position))
 	return line_midpoint
 
 func _begin_handle_action(id, secondary):
@@ -104,7 +105,7 @@ func _set_handle(id, secondary, camera, point):
 		var plane = Plane(Vector3.UP)
 		var position: Vector3 = plane.intersects_ray(origin,direction)
 		position = position.snapped(Vector3(1,0,1) * path.snap)
-		moving_vertex.position = position - get_node_3d().position
+		moving_vertex.position = position
 		
 		#Handle time
 		#print(moving_vertex.id-1)

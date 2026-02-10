@@ -15,6 +15,9 @@ var reached_path_end: bool = false
 		path = value
 		update_gizmos()
 		if path: 
+			path.updating_path = true
+			path.path_components[0].position = position
+			path.updating_path = false
 			if not path.changed.is_connected(update_gizmos):
 				path.changed.connect(update_gizmos)
 
