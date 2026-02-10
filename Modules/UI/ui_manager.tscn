@@ -112,6 +112,7 @@ layout_mode = 1
 
 [node name="DocumentViewer" parent="." unique_id=1468834605 instance=ExtResource("3_jfs1l")]
 visible = false
+z_index = 1
 layout_mode = 1
 
 [node name="HUD" parent="." unique_id=528506545 instance=ExtResource("5_df44s")]

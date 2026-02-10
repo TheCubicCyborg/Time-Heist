@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bigh7xaj6n6yj" path="res://Modules/UI/Game UI/Device/Device Files/device_files.tscn" id="4_4t7mm"]
 [ext_resource type="PackedScene" uid="uid://dc0glsn1mwwwq" path="res://Modules/UI/Game UI/Device/Inventory/inventory_panel.tscn" id="4_7dje4"]
 [ext_resource type="PackedScene" uid="uid://begdut20cbu15" path="res://Modules/UI/Game UI/Device/settings.tscn" id="4_hgc2y"]
-[ext_resource type="PackedScene" uid="uid://dtgpwledwl8i4" path="res://Modules/UI/Game UI/Device/cameras.tscn" id="4_m01ss"]
 
 [sub_resource type="Theme" id="Theme_wq3jl"]
 
@@ -75,20 +74,15 @@ tab_focus_mode = 0
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="CamerasPanel" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" unique_id=1542979507 instance=ExtResource("4_m01ss")]
+[node name="InventoryPanel" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" unique_id=473098046 instance=ExtResource("4_7dje4")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="InventoryPanel" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" unique_id=473098046 instance=ExtResource("4_7dje4")]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
 [node name="SettingsPanel" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" unique_id=1743540238 instance=ExtResource("4_hgc2y")]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 3
+metadata/_tab_index = 2
 
 [node name="SidePanelR" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1458306387]
 custom_minimum_size = Vector2(250, 0)

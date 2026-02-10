@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="5_fg3dq"]
 [ext_resource type="Texture2D" uid="uid://iysiiph8g0nq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_normal-ogl.png" id="6_644tb"]
 [ext_resource type="Texture2D" uid="uid://bi1v4o5qgvkpp" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_roughness.png" id="7_o5sgd"]
-[ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="8_m2r4p"]
+[ext_resource type="MeshLibrary" uid="uid://dy0vxnd1qseb5" path="res://Assets/MeshLibrary.tres" id="8_m2r4p"]
 [ext_resource type="PackedScene" uid="uid://bk11o2jtj5d7g" path="res://Modules/Interaction/Door/generic_door.tscn" id="9_0mrj1"]
 [ext_resource type="Script" uid="uid://cyycim24066r4" path="res://Modules/AI/NPC/security_guard.gd" id="10_ty5h4"]
 [ext_resource type="PackedScene" uid="uid://dyhnk6p2fbc87" path="res://Modules/ConeVision/cone_vision.tscn" id="11_itpn1"]
@@ -127,8 +127,6 @@ size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6wjy"]
 size = Vector3(0.38, 2, 1.28)
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_6y1c3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6y1c3"]
 size = Vector3(3.23, 0.5, 0.5)
@@ -331,9 +329,6 @@ mesh = SubResource("CapsuleMesh_riaqh")
 
 [node name="Cone Vision" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=2011756655 instance=ExtResource("11_itpn1")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
-sight_line_angle = 140.0
-sight_line_radius = 5.0
-time_till_caught = 1.0
 
 [node name="Area3D" type="Area3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=453919285]
 script = SubResource("GDScript_d6wjy")
@@ -603,13 +598,8 @@ spot_angle_attenuation = 2.4622889
 
 [node name="Camera_pivot" parent="SubViewportContainer/SubViewport" unique_id=1056852455 instance=ExtResource("14_6rmyi")]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 4, 0)
-CAMERA_ROTATION_X = -50.0
 CAMERA_DISTANCE_BACK = 3.0
 CAMERA_DISTANCE_UP = 3.5
-
-[node name="SpringArm3D" parent="SubViewportContainer/SubViewport/Camera_pivot" index="1" unique_id=267427160]
-shape = SubResource("SphereShape3D_6y1c3")
-margin = 0.5
 
 [node name="Document" parent="SubViewportContainer/SubViewport" unique_id=245764792 instance=ExtResource("17_m4of1")]
 transform = Transform3D(2.77, 0, 0, 0, 2.77, 0, 0, 0, 2.77, 5.5, 0, 12.5)
