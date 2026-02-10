@@ -25,6 +25,10 @@ globals="*res://Globals/globals.gd"
 document_database="*res://Globals/document_database.gd"
 DialogueManager="*uid://c3rodes2l3gxb"
 
+[dialogue_manager]
+
+runtime/balloon_path="res://Dialogue/balloon.tscn"
+
 [display]
 
 window/size/viewport_width=1920
