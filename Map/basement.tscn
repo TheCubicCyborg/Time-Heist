@@ -259,88 +259,71 @@ path_components = Array[ExtResource("19_hevkm")]([SubResource("Resource_vpam8"),
 default_speed = 3.0
 
 [sub_resource type="Resource" id="Resource_yp5qg"]
-resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(0, 0, -23.486408)
-
-[sub_resource type="Resource" id="Resource_gej7e"]
 script = ExtResource("23_vpam8")
-start_time = 0.6182041
-end_time = 120.6182041
+end_time = 120.0
 duration = 120.0
 metadata/_custom_type_script = "uid://c8pv0a0in0u3y"
 
 [sub_resource type="Resource" id="Resource_gf0yk"]
 resource_local_to_scene = true
 script = ExtResource("20_vpam8")
-position = Vector3(0, 0, -22.25)
-vertex_actions = Array[ExtResource("21_10ora")]([SubResource("Resource_gej7e")])
-time_start = 0.6182041
-time_end = 120.6182041
-id = 2
+position = Vector3(0, 0, -23.486408)
+vertex_actions = Array[ExtResource("21_10ora")]([SubResource("Resource_yp5qg")])
+time_end = 120.0
 
-[sub_resource type="Resource" id="Resource_fr304"]
-resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_yp5qg")
-next_vertex = SubResource("Resource_gf0yk")
-time_end = 0.6182041
-id = 1
-
-[sub_resource type="Resource" id="Resource_ytwgw"]
+[sub_resource type="Resource" id="Resource_bs4ni"]
 resource_local_to_scene = true
 script = ExtResource("20_vpam8")
 position = Vector3(0, 0, -6.5)
-time_start = 128.4932041
-time_end = 128.4932041
-id = 4
+time_start = 128.4932041168213
+time_end = 128.4932041168213
+id = 2
 
-[sub_resource type="Resource" id="Resource_bs4ni"]
+[sub_resource type="Resource" id="Resource_7rh5n"]
 resource_local_to_scene = true
 script = ExtResource("22_hevkm")
 speed = 2.0
 prev_vertex = SubResource("Resource_gf0yk")
-next_vertex = SubResource("Resource_ytwgw")
-time_start = 120.6182041
-time_end = 128.4932041
-id = 3
-
-[sub_resource type="Resource" id="Resource_7rh5n"]
-resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(-4.5, 0, -6.5)
-time_start = 130.7432041
-time_end = 130.7432041
-id = 6
+next_vertex = SubResource("Resource_bs4ni")
+time_start = 120.0
+time_end = 128.4932041168213
+id = 1
 
 [sub_resource type="Resource" id="Resource_tc08r"]
 resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_ytwgw")
-next_vertex = SubResource("Resource_7rh5n")
-time_start = 128.4932041
-time_end = 130.7432041
-id = 5
+script = ExtResource("20_vpam8")
+position = Vector3(-4.5, 0, -6.5)
+time_start = 130.7432041168213
+time_end = 130.7432041168213
+id = 4
 
 [sub_resource type="Resource" id="Resource_by356"]
 resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(-4.5, 0, -8.5)
-time_start = 131.7432041
-time_end = 131.7432041
-id = 8
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_bs4ni")
+next_vertex = SubResource("Resource_tc08r")
+time_start = 128.4932041168213
+time_end = 130.7432041168213
+id = 3
 
 [sub_resource type="Resource" id="Resource_qigad"]
 resource_local_to_scene = true
+script = ExtResource("20_vpam8")
+position = Vector3(-4.5, 0, -8.5)
+time_start = 131.7432041168213
+time_end = 131.7432041168213
+id = 6
+
+[sub_resource type="Resource" id="Resource_vcmck"]
+resource_local_to_scene = true
 script = ExtResource("22_hevkm")
 speed = 2.0
-prev_vertex = SubResource("Resource_7rh5n")
-next_vertex = SubResource("Resource_by356")
-time_start = 130.7432041
-time_end = 131.7432041
-id = 7
+prev_vertex = SubResource("Resource_tc08r")
+next_vertex = SubResource("Resource_qigad")
+time_start = 130.7432041168213
+time_end = 131.7432041168213
+id = 5
 
 [sub_resource type="Resource" id="Resource_hijc5"]
 script = ExtResource("23_vpam8")
@@ -348,96 +331,96 @@ end_time = 7.0
 duration = 7.0
 metadata/_custom_type_script = "uid://c8pv0a0in0u3y"
 
-[sub_resource type="Resource" id="Resource_vcmck"]
+[sub_resource type="Resource" id="Resource_xp36o"]
 resource_local_to_scene = true
 script = ExtResource("20_vpam8")
 position = Vector3(-2.75, 0, -8.5)
 vertex_actions = Array[ExtResource("21_10ora")]([SubResource("Resource_hijc5")])
-time_start = 132.6182041
-time_end = 139.6182041
-id = 10
-
-[sub_resource type="Resource" id="Resource_xp36o"]
-resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_by356")
-next_vertex = SubResource("Resource_vcmck")
-time_start = 131.7432041
-time_end = 132.6182041
-id = 9
+time_start = 132.6182041168213
+time_end = 139.6182041168213
+id = 8
 
 [sub_resource type="Resource" id="Resource_fi86d"]
 resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(-4.75, 0, -8.5)
-time_start = 140.6182041
-time_end = 140.6182041
-id = 12
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_qigad")
+next_vertex = SubResource("Resource_xp36o")
+time_start = 131.7432041168213
+time_end = 132.6182041168213
+id = 7
 
 [sub_resource type="Resource" id="Resource_w820a"]
 resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_vcmck")
-next_vertex = SubResource("Resource_fi86d")
-time_start = 139.6182041
-time_end = 140.6182041
-id = 11
+script = ExtResource("20_vpam8")
+position = Vector3(-4.75, 0, -8.5)
+time_start = 140.6182041168213
+time_end = 140.6182041168213
+id = 10
 
 [sub_resource type="Resource" id="Resource_n0k1u"]
 resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(-4.75, 0, -6.5)
-time_start = 141.6182041
-time_end = 141.6182041
-id = 14
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_xp36o")
+next_vertex = SubResource("Resource_w820a")
+time_start = 139.6182041168213
+time_end = 140.6182041168213
+id = 9
 
 [sub_resource type="Resource" id="Resource_3baeh"]
 resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_fi86d")
-next_vertex = SubResource("Resource_n0k1u")
-time_start = 140.6182041
-time_end = 141.6182041
-id = 13
+script = ExtResource("20_vpam8")
+position = Vector3(-4.75, 0, -6.5)
+time_start = 141.6182041168213
+time_end = 141.6182041168213
+id = 12
 
 [sub_resource type="Resource" id="Resource_enxt3"]
 resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(3.5, 0, -6.5)
-time_start = 145.7432041
-time_end = 145.7432041
-id = 16
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_w820a")
+next_vertex = SubResource("Resource_3baeh")
+time_start = 140.6182041168213
+time_end = 141.6182041168213
+id = 11
 
 [sub_resource type="Resource" id="Resource_68ftb"]
 resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_n0k1u")
-next_vertex = SubResource("Resource_enxt3")
-time_start = 141.6182041
-time_end = 145.7432041
-id = 15
+script = ExtResource("20_vpam8")
+position = Vector3(3.5, 0, -6.5)
+time_start = 145.7432041168213
+time_end = 145.7432041168213
+id = 14
 
 [sub_resource type="Resource" id="Resource_7yihm"]
 resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(3.5, 0, 0)
-time_start = 148.9932041
-time_end = 148.9932041
-id = 18
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_3baeh")
+next_vertex = SubResource("Resource_68ftb")
+time_start = 141.6182041168213
+time_end = 145.7432041168213
+id = 13
 
 [sub_resource type="Resource" id="Resource_1t2ea"]
 resource_local_to_scene = true
+script = ExtResource("20_vpam8")
+position = Vector3(3.5, 0, 0)
+time_start = 148.9932041168213
+time_end = 148.9932041168213
+id = 16
+
+[sub_resource type="Resource" id="Resource_48b2b"]
+resource_local_to_scene = true
 script = ExtResource("22_hevkm")
 speed = 2.0
-prev_vertex = SubResource("Resource_enxt3")
-next_vertex = SubResource("Resource_7yihm")
-time_start = 145.7432041
-time_end = 148.9932041
-id = 17
+prev_vertex = SubResource("Resource_68ftb")
+next_vertex = SubResource("Resource_1t2ea")
+time_start = 145.7432041168213
+time_end = 148.9932041168213
+id = 15
 
 [sub_resource type="Resource" id="Resource_3qyj5"]
 script = ExtResource("23_vpam8")
@@ -445,24 +428,24 @@ end_time = 3.0
 duration = 3.0
 metadata/_custom_type_script = "uid://c8pv0a0in0u3y"
 
-[sub_resource type="Resource" id="Resource_48b2b"]
+[sub_resource type="Resource" id="Resource_dedov"]
 resource_local_to_scene = true
 script = ExtResource("20_vpam8")
 position = Vector3(8.75, 0, 0)
 vertex_actions = Array[ExtResource("21_10ora")]([SubResource("Resource_3qyj5")])
-time_start = 151.6182041
-time_end = 154.6182041
-id = 20
+time_start = 151.6182041168213
+time_end = 154.6182041168213
+id = 18
 
-[sub_resource type="Resource" id="Resource_dedov"]
+[sub_resource type="Resource" id="Resource_yufcn"]
 resource_local_to_scene = true
 script = ExtResource("22_hevkm")
 speed = 2.0
-prev_vertex = SubResource("Resource_7yihm")
-next_vertex = SubResource("Resource_48b2b")
-time_start = 148.9932041
-time_end = 151.6182041
-id = 19
+prev_vertex = SubResource("Resource_1t2ea")
+next_vertex = SubResource("Resource_dedov")
+time_start = 148.9932041168213
+time_end = 151.6182041168213
+id = 17
 
 [sub_resource type="Resource" id="Resource_25jkx"]
 script = ExtResource("23_vpam8")
@@ -471,137 +454,137 @@ end_time = 171.7135858367554
 duration = 15.0
 metadata/_custom_type_script = "uid://c8pv0a0in0u3y"
 
-[sub_resource type="Resource" id="Resource_yufcn"]
+[sub_resource type="Resource" id="Resource_rcsap"]
 resource_local_to_scene = true
 script = ExtResource("20_vpam8")
 position = Vector3(12.75, 0, -1.25)
 vertex_actions = Array[ExtResource("21_10ora")]([SubResource("Resource_25jkx")])
-time_start = 156.7135858367554
-time_end = 171.7135858367554
-id = 22
-
-[sub_resource type="Resource" id="Resource_rcsap"]
-resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_48b2b")
-next_vertex = SubResource("Resource_yufcn")
-time_start = 154.6182041
-time_end = 156.7135858367554
-id = 21
+time_start = 156.7135858535767
+time_end = 171.7135858535767
+id = 20
 
 [sub_resource type="Resource" id="Resource_y3aku"]
 resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(11.5, 0, 0)
-time_start = 172.5974693130127
-time_end = 172.5974693130127
-id = 24
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_dedov")
+next_vertex = SubResource("Resource_rcsap")
+time_start = 154.6182041168213
+time_end = 156.7135858535767
+id = 19
 
 [sub_resource type="Resource" id="Resource_g84wo"]
 resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_yufcn")
-next_vertex = SubResource("Resource_y3aku")
-time_start = 171.7135858367554
-time_end = 172.5974693130127
-id = 23
+script = ExtResource("20_vpam8")
+position = Vector3(11.5, 0, 0)
+time_start = 172.59746932983398
+time_end = 172.59746932983398
+id = 22
 
 [sub_resource type="Resource" id="Resource_vqau1"]
 resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(4.25, 0, 0)
-time_start = 176.2224693130127
-time_end = 176.2224693130127
-id = 26
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_rcsap")
+next_vertex = SubResource("Resource_g84wo")
+time_start = 171.7135858535767
+time_end = 172.59746932983398
+id = 21
 
 [sub_resource type="Resource" id="Resource_qw4v7"]
 resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_y3aku")
-next_vertex = SubResource("Resource_vqau1")
-time_start = 172.5974693130127
-time_end = 176.2224693130127
-id = 25
+script = ExtResource("20_vpam8")
+position = Vector3(4.25, 0, 0)
+time_start = 176.22246932983398
+time_end = 176.22246932983398
+id = 24
 
 [sub_resource type="Resource" id="Resource_6o35s"]
 resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(4.25, 0, -6.5)
-time_start = 179.4724693130127
-time_end = 179.4724693130127
-id = 28
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_g84wo")
+next_vertex = SubResource("Resource_qw4v7")
+time_start = 172.59746932983398
+time_end = 176.22246932983398
+id = 23
 
 [sub_resource type="Resource" id="Resource_nw0rg"]
 resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_vqau1")
-next_vertex = SubResource("Resource_6o35s")
-time_start = 176.2224693130127
-time_end = 179.4724693130127
-id = 27
+script = ExtResource("20_vpam8")
+position = Vector3(4.25, 0, -6.5)
+time_start = 179.47246932983398
+time_end = 179.47246932983398
+id = 26
 
 [sub_resource type="Resource" id="Resource_jpnc7"]
 resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(-4.25, 0, -6.5)
-time_start = 183.7224693130127
-time_end = 183.7224693130127
-id = 30
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_qw4v7")
+next_vertex = SubResource("Resource_nw0rg")
+time_start = 176.22246932983398
+time_end = 179.47246932983398
+id = 25
 
 [sub_resource type="Resource" id="Resource_wp5fi"]
 resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_6o35s")
-next_vertex = SubResource("Resource_jpnc7")
-time_start = 179.4724693130127
-time_end = 183.7224693130127
-id = 29
+script = ExtResource("20_vpam8")
+position = Vector3(-4.25, 0, -6.5)
+time_start = 183.72246932983398
+time_end = 183.72246932983398
+id = 28
 
 [sub_resource type="Resource" id="Resource_jnvlf"]
 resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(-4.25, 0, -8.75)
-time_start = 184.8474693130127
-time_end = 184.8474693130127
-id = 32
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_nw0rg")
+next_vertex = SubResource("Resource_wp5fi")
+time_start = 179.47246932983398
+time_end = 183.72246932983398
+id = 27
 
 [sub_resource type="Resource" id="Resource_cnbys"]
 resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_jpnc7")
-next_vertex = SubResource("Resource_jnvlf")
-time_start = 183.7224693130127
-time_end = 184.8474693130127
-id = 31
+script = ExtResource("20_vpam8")
+position = Vector3(-4.25, 0, -8.75)
+time_start = 184.84746932983398
+time_end = 184.84746932983398
+id = 30
 
 [sub_resource type="Resource" id="Resource_oauq4"]
 resource_local_to_scene = true
-script = ExtResource("20_vpam8")
-position = Vector3(-2.75, 0, -8.75)
-time_start = 185.5974693130127
-time_end = 185.5974693130127
-id = 34
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_wp5fi")
+next_vertex = SubResource("Resource_cnbys")
+time_start = 183.72246932983398
+time_end = 184.84746932983398
+id = 29
 
 [sub_resource type="Resource" id="Resource_h8gek"]
 resource_local_to_scene = true
-script = ExtResource("22_hevkm")
-speed = 2.0
-prev_vertex = SubResource("Resource_jnvlf")
-next_vertex = SubResource("Resource_oauq4")
-time_start = 184.8474693130127
-time_end = 185.5974693130127
-id = 33
+script = ExtResource("20_vpam8")
+position = Vector3(-2.75, 0, -8.75)
+time_start = 185.59746932983398
+time_end = 185.59746932983398
+id = 32
 
 [sub_resource type="Resource" id="Resource_urtj6"]
 resource_local_to_scene = true
+script = ExtResource("22_hevkm")
+speed = 2.0
+prev_vertex = SubResource("Resource_cnbys")
+next_vertex = SubResource("Resource_h8gek")
+time_start = 184.84746932983398
+time_end = 185.59746932983398
+id = 31
+
+[sub_resource type="Resource" id="Resource_tpsh6"]
+resource_local_to_scene = true
 script = ExtResource("22_qx8o1")
-path_components = Array[ExtResource("19_hevkm")]([SubResource("Resource_yp5qg"), SubResource("Resource_fr304"), SubResource("Resource_gf0yk"), SubResource("Resource_bs4ni"), SubResource("Resource_ytwgw"), SubResource("Resource_tc08r"), SubResource("Resource_7rh5n"), SubResource("Resource_qigad"), SubResource("Resource_by356"), SubResource("Resource_xp36o"), SubResource("Resource_vcmck"), SubResource("Resource_w820a"), SubResource("Resource_fi86d"), SubResource("Resource_3baeh"), SubResource("Resource_n0k1u"), SubResource("Resource_68ftb"), SubResource("Resource_enxt3"), SubResource("Resource_1t2ea"), SubResource("Resource_7yihm"), SubResource("Resource_dedov"), SubResource("Resource_48b2b"), SubResource("Resource_rcsap"), SubResource("Resource_yufcn"), SubResource("Resource_g84wo"), SubResource("Resource_y3aku"), SubResource("Resource_qw4v7"), SubResource("Resource_vqau1"), SubResource("Resource_nw0rg"), SubResource("Resource_6o35s"), SubResource("Resource_wp5fi"), SubResource("Resource_jpnc7"), SubResource("Resource_cnbys"), SubResource("Resource_jnvlf"), SubResource("Resource_h8gek"), SubResource("Resource_oauq4")])
+path_components = Array[ExtResource("19_hevkm")]([SubResource("Resource_gf0yk"), SubResource("Resource_7rh5n"), SubResource("Resource_bs4ni"), SubResource("Resource_by356"), SubResource("Resource_tc08r"), SubResource("Resource_vcmck"), SubResource("Resource_qigad"), SubResource("Resource_fi86d"), SubResource("Resource_xp36o"), SubResource("Resource_n0k1u"), SubResource("Resource_w820a"), SubResource("Resource_enxt3"), SubResource("Resource_3baeh"), SubResource("Resource_7yihm"), SubResource("Resource_68ftb"), SubResource("Resource_48b2b"), SubResource("Resource_1t2ea"), SubResource("Resource_yufcn"), SubResource("Resource_dedov"), SubResource("Resource_y3aku"), SubResource("Resource_rcsap"), SubResource("Resource_vqau1"), SubResource("Resource_g84wo"), SubResource("Resource_6o35s"), SubResource("Resource_qw4v7"), SubResource("Resource_jpnc7"), SubResource("Resource_nw0rg"), SubResource("Resource_jnvlf"), SubResource("Resource_wp5fi"), SubResource("Resource_oauq4"), SubResource("Resource_cnbys"), SubResource("Resource_urtj6"), SubResource("Resource_h8gek")])
 default_speed = 2.0
 
 [node name="Basement" type="Node3D" unique_id=462452041]
@@ -666,4 +649,4 @@ path = SubResource("Resource_eyrm5")
 
 [node name="Lib2" parent="." unique_id=1545662741 instance=ExtResource("18_18nyf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23.486408)
-path = SubResource("Resource_urtj6")
+path = SubResource("Resource_tpsh6")
