@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://bk11o2jtj5d7g" path="res://Modules/Interaction/Door/generic_door.tscn" id="7_xr2co"]
 [ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/Player.tscn" id="8_s57rb"]
 [ext_resource type="Script" uid="uid://cyycim24066r4" path="res://Modules/AI/NPC/security_guard.gd" id="8_vk860"]
-[ext_resource type="PackedScene" uid="uid://dyhnk6p2fbc87" path="res://Modules/ConeVision/cone_vision.tscn" id="9_a88kd"]
 [ext_resource type="PackedScene" uid="uid://cx4334ce06mly" path="res://Modules/Lighting & Visibility/visibility_mesh.tscn" id="9_s57rb"]
 [ext_resource type="PackedScene" uid="uid://darcn6k2u88v2" path="res://Assets/Models/Stock Assets/Nature_Deco.fbx" id="10_0a44u"]
 [ext_resource type="PackedScene" uid="uid://cxkrnvew26ajm" path="res://Assets/Models/Stock Assets/Nature_Deco_Bamboo1.fbx" id="11_riaqh"]
@@ -205,13 +204,8 @@ speed = 4.0
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=1715130975]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_riaqh")
-
-[node name="Cone Vision" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=951547481 instance=ExtResource("9_a88kd")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
-sight_line_angle = 100.0
-smaller_sight_line_radius = 15.0
+mesh = SubResource("CapsuleMesh_riaqh")
 
 [node name="Area3D" type="Area3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=964640159]
 script = SubResource("GDScript_d6wjy")
@@ -450,9 +444,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.25)
 [node name="Lights" type="Node3D" parent="Rooms/Parking Garage" unique_id=1538693991]
 
 [node name="Camera_pivot" parent="." unique_id=476900760 instance=ExtResource("7_bfkqv")]
-CAMERA_ROTATION_X = -50.0
-CAMERA_DISTANCE_BACK = 2.0
-CAMERA_DISTANCE_UP = 6.0
 
 [node name="CharacterBody3D" parent="." unique_id=1656449044 instance=ExtResource("8_s57rb")]
 
@@ -595,3 +586,4 @@ item = ExtResource("32_xyxbf")
 [connection signal="body_entered" from="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" to="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" method="_on_body_entered"]
 
 [editable path="Rooms/FrontDeskBackRoom/Doors/Behind Desk Door1"]
+[editable path="Rooms/FrontDeskBackRoom/Doors/Behind Desk Door1/Door RB/Door_v20"]

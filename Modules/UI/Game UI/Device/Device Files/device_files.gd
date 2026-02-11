@@ -13,7 +13,7 @@ func _ready() -> void:
 	for doc in global_inventory.documents:
 		check_for_new_tags(doc)
 		add_new_doc(doc)
-	globals.added_doc.connect(update_doc_list)
+	global_inventory.update_device_files.connect(update_doc_list)
 		
 	if folder_buttons.get_child_count() != 0:
 		folder_buttons.get_child(0).grab_focus()
