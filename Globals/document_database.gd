@@ -44,14 +44,14 @@ func register_document(doc: DocumentInfo, path: String):
 		return
 
 	if by_id.has(doc.document_id):
-		var existing: DocumentInfo = by_id[doc.document_id]
+		#var existing: DocumentInfo = by_id[doc.document_id]
 		push_warning("Duplicate document_id '%s'. Keeping first, ignoring: %s" % [doc.document_id, path])
 		return
 
 	by_id[doc.document_id] = doc
 	all.append(doc)
 
-func get_resource_paths(folder: String, out_paths: Array[String], recursive: bool):
+func get_resource_paths(folder: String, out_paths: Array[String], is_recursive: bool):
 	var dir := DirAccess.open(folder)
 	if dir == null:
 		push_warning("Document folder not found: %s" % folder)
@@ -59,18 +59,18 @@ func get_resource_paths(folder: String, out_paths: Array[String], recursive: boo
 
 	dir.list_dir_begin()
 	while true:
-		var name := dir.get_next()
-		if name == "": #Base case
+		var path_name := dir.get_next()
+		if path_name == "": #Base case
 			break
 
-		if name.begins_with("."): #Ignore these documents
+		if path_name.begins_with("."): #Ignore these documents
 			continue
 
-		var full_path := folder.path_join(name)
+		var full_path := folder.path_join(path_name)
 
 		if dir.current_is_dir(): #If finds a folder, recurse into it
-			if recursive:
-				get_resource_paths(full_path, out_paths, recursive)
+			if is_recursive:
+				get_resource_paths(full_path, out_paths, is_recursive)
 		else:
 			# Only load .tres
 			if full_path.ends_with(".tres"):
