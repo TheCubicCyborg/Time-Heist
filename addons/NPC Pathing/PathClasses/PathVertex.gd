@@ -28,7 +28,9 @@ func _to_string():
 func num_actions():
 	return vertex_actions.size()
 
-func action(ix: int) -> VertexAction:
+func action(ix: int) -> VertexAction:	
+	if ix >= vertex_actions.size():
+		return null
 	return vertex_actions[ix]
 
 func get_duration():
