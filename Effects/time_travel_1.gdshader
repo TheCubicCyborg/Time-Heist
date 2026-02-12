@@ -15,7 +15,7 @@ uniform vec4 tint : source_color = vec4(0.8, 0.9, 1.0, 1.0);   // Bright, almost
 uniform float brightness : hint_range(1.0, 5.0) = 1.5;         // Blow out the highlights
 
 void fragment() {
-    vec2 center = vec2(0.5, 0.5);
+    vec2 center = vec2(0.5, 0.7);
     vec2 uv = SCREEN_UV;
     vec2 dir = center - uv; 
     float dist = length(dir);

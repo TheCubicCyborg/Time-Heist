@@ -112,10 +112,10 @@ size = Vector3(0.38, 2, 1.28)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d6ckj"]
 shader = ExtResource("18_vgt4j")
 shader_parameter/intensity = 0.0
-shader_parameter/chromatic_spread = 50.0
-shader_parameter/warp_amount = 0.10000000475
-shader_parameter/radial_blur_power = 0.10000000475
-shader_parameter/tint = Color(0.9098039, 1, 0.5921569, 1)
+shader_parameter/chromatic_spread = 25.0000011875
+shader_parameter/warp_amount = 0.050000002375
+shader_parameter/radial_blur_power = 0.050000002375
+shader_parameter/tint = Color(0.58944964, 0.83287865, 0.9724043, 1)
 shader_parameter/brightness = 5.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_6y1c3"]
@@ -318,7 +318,7 @@ visible = false
 mesh = SubResource("CapsuleMesh_riaqh")
 
 [node name="Cone Vision" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=2011756655 instance=ExtResource("11_itpn1")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 0, 1, 0)
 
 [node name="Area3D" type="Area3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=453919285]
 script = SubResource("GDScript_d6wjy")
