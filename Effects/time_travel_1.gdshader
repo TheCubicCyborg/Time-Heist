@@ -22,12 +22,10 @@ void fragment() {
     
     vec2 dir_norm = (dist > 0.0) ? dir / dist : vec2(0.0);
     
-    // 2. Warp/Pinch Effect (The "Light Tunnel")
     // We pull pixels towards the center based on intensity
     float warp_factor = pow(dist, 2.0) * warp_amount * intensity;
     vec2 warped_uv = uv + dir * warp_factor;
 
-    // 3. Prismatic Chromatic Aberration (The "Waylay" Look)
     // Instead of just splitting R/G/B, we blur them radially towards the center
     float spread = chromatic_spread * intensity * 0.005;
     
@@ -38,7 +36,6 @@ void fragment() {
     // Sample Blue (stays closer to anchor)
     vec4 b_col = texture(SCREEN_TEXTURE, warped_uv);
     
-    // 4. Radial Blur (Simulating High Speed)
     // We mix a few samples along the vector to create a trail
     vec4 blur_acc = vec4(0.0);
     int samples = 8;
@@ -50,18 +47,10 @@ void fragment() {
     }
     vec4 blurred_tex = blur_acc / float(samples);
     
-    // 5. Combine (Composite the Sharp Prism over the Blur)
     vec3 final_color = vec3(r_col.r, g_col.g, b_col.b);
-    
-    // Mix clean prism with the radial blur for softness
     final_color = mix(final_color, blurred_tex.rgb, 0.5);
-    
-    // 6. Tint and Brightness (The "Pure Light" form)
-    // Desaturate slightly to make it look like bright light, then tint
     float luminance = dot(final_color, vec3(0.299, 0.587, 0.114));
     vec3 white_light = vec3(luminance) * brightness;
-    
-    // Interpolate: Normal Screen -> Prismatic Distortion -> Pure White Light
     final_color = mix(final_color, white_light, intensity * 0.5);
     final_color *= tint.rgb;
 
