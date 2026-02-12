@@ -22,20 +22,19 @@ func _play_anim() -> void:
 		#subviewport_container.material = time_travel_post_fx
 	
 	var tween : Tween = create_tween()
-	tween.tween_method(_set_shader_radius, 0.0, 0.6, duration)
+	tween.tween_method(_set_shader_radius, 0.0, 0.6, duration).set_ease(Tween.EASE_IN_OUT)
 	await tween.finished
 	
 	while is_playing_effect:
 		await _pulsate_effect()
 	
 	var tween1 : Tween = create_tween()	
-	tween1.tween_method(_set_shader_radius, 0.6, 0.0, duration)
+	tween1.tween_method(_set_shader_radius, 0.6, 0.0, duration).set_ease(Tween.EASE_IN_OUT)
 	#if subviewport_container:
 		#subviewport_container.material = old_mat
 	visible = false
 		
 	
-
 func _pulsate_effect() -> void:
 	var tween : Tween = create_tween()
 	tween.tween_method(_set_shader_radius, 0.6, 0.58, 0.02)
