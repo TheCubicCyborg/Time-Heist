@@ -30,7 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://yd82mkstnr4e" path="res://Assets/Documents/Textures/0_First_Test_Document.png" id="28_x70ib"]
 [ext_resource type="PackedScene" uid="uid://cijyt3whigooo" path="res://Modules/Interaction/Computer/File App/file_tab.tscn" id="29_gh7xj"]
 [ext_resource type="Texture2D" uid="uid://0cjiq2gdh6kt" path="res://Assets/Documents/Textures/3_dictionary.png" id="30_q31yb"]
-[ext_resource type="Shader" uid="uid://du6p5iskx60ms" path="res://Effects/pixel_effect.gdshader" id="31_6y1c3"]
+[ext_resource type="Shader" path="res://Effects/pixel_effect.gdshader" id="31_6y1c3"]
 
 [sub_resource type="Gradient" id="Gradient_vgt4j"]
 offsets = PackedFloat32Array(0, 0.1539924, 1)

@@ -1,6 +1,8 @@
 @tool
 class_name NPC extends Node3D
 
+@export var color : Color
+
 var prev_paths:Array[String]
 
 var time_manager: TimeManager
@@ -25,6 +27,7 @@ func interact_with(nodepath: NodePath):
 	get_node(nodepath).interact()
 
 func _ready():
+	$MeshInstance3D.mesh.material.albedo_color = color
 	if not Engine.is_editor_hint():
 		time_manager = globals.time_manager
 		if path.size() > 0:
@@ -74,11 +77,11 @@ func _process(_delta):
 			if not reached_path_end:
 				if cur_component is PathVertex:
 					var cur_action = cur_component.action(cur_action_ix)
-					while cur_action is InteractVertexAction or (cur_action is WaitVertexAction and cur_action.end_time <= cur_time):
+					while cur_action != null and cur_action_ix < cur_component.num_actions() and (cur_action is InteractVertexAction or (cur_action is WaitVertexAction and cur_action.end_time <= cur_time)):
 						if cur_action is InteractVertexAction:
 							cur_action.interact()
-						cur_action_ix += 1
 						cur_action = cur_component.action(cur_action_ix)
+						cur_action_ix += 1
 				elif cur_component is PathLine:
 					position = cur_component.get_position_at_time(cur_time)
 		else: #time did not move?
