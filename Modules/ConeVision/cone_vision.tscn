@@ -7,12 +7,14 @@ extends Area3D
 
 var player_spotted
 @onready var sight_checker := $SightChecker
-@onready var collision := $CollisionPolygon3D
+@onready var big_range : CollisionPolygon3D = $BigRange
+@onready var small_range: CollisionShape3D = $SmallRange
 @onready var laser: MeshInstance3D = $Laser
 @onready var laser_mesh: ImmediateMesh = laser.mesh
 
 var time_detecting: float = 0
 
+@export_group(\"Big View\")
 @export var sight_line_angle : float = 130: #degrees
 	set(value):
 		sight_line_angle = value
@@ -30,6 +32,12 @@ var time_detecting: float = 0
 	set(value):
 		angle_steps = value
 		create_mesh()
+		
+@export_group(\"Small View\")
+@export var radius : float = 4: #meters
+	set(value):
+		radius = value
+		create_mesh()
 
 var polygon_points : PackedVector2Array = []
 
@@ -40,7 +48,7 @@ func _ready() -> void:
 		sight_checker.target_position.z = -sight_line_radius
 		
 		create_mesh()
-		collision.polygon = polygon_points
+		big_range.polygon = polygon_points
 
 func create_mesh():
 	var rest_of_sweep = 360 - sight_line_angle
@@ -61,8 +69,11 @@ func create_mesh():
 			-smaller_sight_line_radius * cos(deg_to_rad(rest_of_sweep_angle))
 		))
 		rest_of_sweep_angle += angle_steps
+		
+	#Make small range
+	small_range.shape.radius = radius
 	if Engine.is_editor_hint():	
-		collision.polygon = polygon_points
+		big_range.polygon = polygon_points
 	
 func _process(delta: float) -> void:
 	#print(timer.time_left)
@@ -113,6 +124,9 @@ func draw_line():
 	laser_mesh.surface_end()
 "
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_23e0v"]
+radius = 4.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_23e0v"]
 vertex_color_use_as_albedo = true
 
@@ -121,10 +135,13 @@ vertex_color_use_as_albedo = true
 [node name="Cone Vision" type="Area3D" unique_id=1869490121]
 script = SubResource("GDScript_23e0v")
 
-[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="." unique_id=955152349]
+[node name="BigRange" type="CollisionPolygon3D" parent="." unique_id=955152349]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 polygon = PackedVector2Array(13.594617, 6.339274, 12.990381, 7.5, 12.287281, 8.603646, 11.490666, 9.641814, 10.606602, 10.606602, 9.641814, 11.490666, 8.603646, 12.287281, 7.5, 12.990381, 6.339274, 13.594617, 5.130302, 14.095389, 3.8822856, 14.488888, 2.6047227, 14.772117, 1.3073361, 14.942921, 0, 15, -1.3073361, 14.942921, -2.6047227, 14.772117, -3.8822856, 14.488888, -5.130302, 14.095389, -6.339274, 13.594617, -7.5, 12.990381, -8.603646, 12.287281, -9.641814, 11.490666, -10.606602, 10.606602, -11.490666, 9.641814, -12.287281, 8.603646, -12.990381, 7.5, -13.594617, 6.339274, -4.531539, 2.1130912, -4.698463, 1.7101008, -4.829629, 1.2940953, -4.924039, 0.8682409, -4.9809737, 0.4357787, -5, -3.061617e-16, -4.9809737, -0.4357787, -4.924039, -0.8682409, -4.829629, -1.2940953, -4.698463, -1.7101008, -4.531539, -2.1130912, -4.3301272, -2.5, -4.0957603, -2.8678823, -3.8302221, -3.213938, -3.535534, -3.535534, -3.213938, -3.8302221, -2.8678823, -4.0957603, -2.5, -4.3301272, -2.1130912, -4.531539, -1.7101008, -4.698463, -1.2940953, -4.829629, -0.8682409, -4.924039, -0.4357787, -4.9809737, 0, -5, 0.4357787, -4.9809737, 0.8682409, -4.924039, 1.2940953, -4.829629, 1.7101008, -4.698463, 2.1130912, -4.531539, 2.5, -4.3301272, 2.8678823, -4.0957603, 3.213938, -3.8302221, 3.535534, -3.535534, 3.8302221, -3.213938, 4.0957603, -2.8678823, 4.3301272, -2.5, 4.531539, -2.1130912, 4.698463, -1.7101008, 4.829629, -1.2940953, 4.924039, -0.8682409, 4.9809737, -0.4357787, 5, -3.061617e-16, 4.9809737, 0.4357787, 4.924039, 0.8682409, 4.829629, 1.2940953, 4.698463, 1.7101008, 4.531539, 2.1130912)
 debug_color = Color(0.9529412, 0.16862746, 0.3647059, 1)
+
+[node name="SmallRange" type="CollisionShape3D" parent="." unique_id=1258817366]
+shape = SubResource("CylinderShape3D_23e0v")
 
 [node name="SightChecker" type="RayCast3D" parent="." unique_id=716854366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

@@ -1,7 +1,10 @@
 @tool
 class_name NPC extends Node3D
 
-@export var color : Color
+@export var color : Color = Color(1.0, 1.0, 1.0, 1.0):
+	set(value):
+		color = value
+		$MeshInstance3D.mesh.material.albedo_color = value
 
 var prev_paths:Array[String]
 
@@ -27,7 +30,6 @@ func interact_with(nodepath: NodePath):
 	get_node(nodepath).interact()
 
 func _ready():
-	$MeshInstance3D.mesh.material.albedo_color = color
 	if not Engine.is_editor_hint():
 		time_manager = globals.time_manager
 		if path.size() > 0:

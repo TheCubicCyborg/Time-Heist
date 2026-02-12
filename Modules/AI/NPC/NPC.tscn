@@ -9,7 +9,6 @@ material = SubResource("StandardMaterial3D_eq44y")
 
 [node name="NPC" type="Node3D" unique_id=854805088]
 script = ExtResource("1_ru1ci")
-color = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1599150335]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
