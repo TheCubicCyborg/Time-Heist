@@ -57,6 +57,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yaem8")
+debug_mode = true
 
 [node name="DEBUG UI" type="Control" parent="." unique_id=1553451654]
 process_mode = 4
