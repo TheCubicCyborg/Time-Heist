@@ -16,6 +16,8 @@ class_name DocumentInfo
 @export var email_heading : String
 @export var email_from : String
 @export var email_desc : String = ""
+@export var email_time : float = 0 #in seconds
+#var sent : bool = false
 #endregion
 
 func _notification(what):

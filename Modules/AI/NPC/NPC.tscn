@@ -3,9 +3,11 @@
 [ext_resource type="Script" uid="uid://dxhkc2f80jysl" path="res://Modules/AI/NPC/NPC.gd" id="1_ru1ci"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eq44y"]
-albedo_color = Color(0.9223072, 0.73728585, 0.715256, 1)
+resource_local_to_scene = true
+albedo_color = Color(0.6603082, 0.668255, 0.8082934, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gvvx1"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_eq44y")
 
 [node name="NPC" type="Node3D" unique_id=854805088]
