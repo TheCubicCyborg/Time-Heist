@@ -1,6 +1,11 @@
 @tool
 class_name NPC extends Node3D
 
+@export var color : Color = Color(1.0, 1.0, 1.0, 1.0):
+	set(value):
+		color = value
+		$MeshInstance3D.mesh.material.albedo_color = value
+
 var prev_paths:Array[String]
 
 var time_manager: TimeManager
@@ -15,6 +20,9 @@ var reached_path_end: bool = false
 		path = value
 		update_gizmos()
 		if path: 
+			path.updating_path = true
+			path.path_components[0].position = position
+			path.updating_path = false
 			if not path.changed.is_connected(update_gizmos):
 				path.changed.connect(update_gizmos)
 
@@ -71,11 +79,11 @@ func _process(_delta):
 			if not reached_path_end:
 				if cur_component is PathVertex:
 					var cur_action = cur_component.action(cur_action_ix)
-					while cur_action is InteractVertexAction or (cur_action is WaitVertexAction and cur_action.end_time <= cur_time):
+					while cur_action != null and cur_action_ix < cur_component.num_actions() and (cur_action is InteractVertexAction or (cur_action is WaitVertexAction and cur_action.end_time <= cur_time)):
 						if cur_action is InteractVertexAction:
 							cur_action.interact()
-						cur_action_ix += 1
 						cur_action = cur_component.action(cur_action_ix)
+						cur_action_ix += 1
 				elif cur_component is PathLine:
 					position = cur_component.get_position_at_time(cur_time)
 		else: #time did not move?

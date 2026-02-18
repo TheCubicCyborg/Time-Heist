@@ -11,4 +11,4 @@ class_name Document
 
 func interact():
 	globals.ui_manager.document_viewer.display_document(document_info.document_id)
-	globals.collect(document_info)
+	globals.emit_signal("added_doc", document_info)

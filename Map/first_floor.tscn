@@ -1,8 +1,8 @@
-[gd_scene load_steps=40 format=3 uid="uid://bjjcgr3dvub72"]
+[gd_scene format=3 uid="uid://bjjcgr3dvub72"]
 
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="1_0c7so"]
 [ext_resource type="PackedScene" uid="uid://bm4y2kiv4odnp" path="res://Modules/UI/ui_manager.tscn" id="1_cr80g"]
-[ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="1_p3g42"]
+[ext_resource type="MeshLibrary" uid="uid://dy0vxnd1qseb5" path="res://Assets/MeshLibrary.tres" id="1_p3g42"]
 [ext_resource type="Script" uid="uid://cari4qrwf2nax" path="res://Map/first_floor.gd" id="1_vkurv"]
 [ext_resource type="Texture2D" uid="uid://cjwgyolwq6axi" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_ao.png" id="2_cjf52"]
 [ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="3_bfkqv"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://bk11o2jtj5d7g" path="res://Modules/Interaction/Door/generic_door.tscn" id="7_xr2co"]
 [ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/Player.tscn" id="8_s57rb"]
 [ext_resource type="Script" uid="uid://cyycim24066r4" path="res://Modules/AI/NPC/security_guard.gd" id="8_vk860"]
-[ext_resource type="PackedScene" uid="uid://dyhnk6p2fbc87" path="res://Modules/ConeVision/cone_vision.tscn" id="9_a88kd"]
 [ext_resource type="PackedScene" uid="uid://cx4334ce06mly" path="res://Modules/Lighting & Visibility/visibility_mesh.tscn" id="9_s57rb"]
 [ext_resource type="PackedScene" uid="uid://darcn6k2u88v2" path="res://Assets/Models/Stock Assets/Nature_Deco.fbx" id="10_0a44u"]
 [ext_resource type="PackedScene" uid="uid://cxkrnvew26ajm" path="res://Assets/Models/Stock Assets/Nature_Deco_Bamboo1.fbx" id="11_riaqh"]
@@ -30,6 +29,12 @@
 [ext_resource type="Texture2D" uid="uid://yd82mkstnr4e" path="res://Assets/Documents/Textures/0_First_Test_Document.png" id="28_4o43n"]
 [ext_resource type="Texture2D" uid="uid://0cjiq2gdh6kt" path="res://Assets/Documents/Textures/3_dictionary.png" id="30_4o43n"]
 [ext_resource type="PackedScene" uid="uid://cijyt3whigooo" path="res://Modules/Interaction/Computer/File App/file_tab.tscn" id="30_kjo2c"]
+[ext_resource type="PackedScene" uid="uid://b6wv5r50sr8bh" path="res://Modules/Interaction/Item/item.tscn" id="31_kjo2c"]
+[ext_resource type="PackedScene" uid="uid://dkcsig15pybbc" path="res://Modules/Interaction/Computer/Text App/text_tab.tscn" id="31_w6uou"]
+[ext_resource type="Script" uid="uid://cwa1su0fsxi7t" path="res://Assets/TextConvos/text_convo_resource.gd" id="32_f11mn"]
+[ext_resource type="Resource" uid="uid://2u7ypb7xpscs" path="res://Assets/Items/Resources/apple.tres" id="32_xyxbf"]
+[ext_resource type="Resource" uid="uid://d1c0vmen0nu4u" path="res://Assets/TextConvos/Resources/test_convo.tres" id="33_hl847"]
+[ext_resource type="Resource" uid="uid://d2kllmd7ltgfs" path="res://Assets/TextConvos/Resources/text_convo_two.tres" id="34_f11mn"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_vmato"]
 
@@ -77,22 +82,22 @@ size = Vector3(2, 2, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6wjy"]
 size = Vector3(0.38, 2, 1.28)
 
-[node name="First Floor" type="Node3D" node_paths=PackedStringArray("cameras")]
+[node name="First Floor" type="Node3D" unique_id=427062814 node_paths=PackedStringArray("cameras")]
 script = ExtResource("1_vkurv")
 cameras = [NodePath("SubViewport"), NodePath("SubViewport2")]
 
-[node name="UI Manager" parent="." instance=ExtResource("1_cr80g")]
+[node name="UI Manager" parent="." unique_id=507236185 instance=ExtResource("1_cr80g")]
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=270912684]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1594246947]
 shape = SubResource("WorldBoundaryShape3D_vmato")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=915557627]
 mesh = SubResource("PlaneMesh_vk860")
 surface_material_override/0 = SubResource("StandardMaterial3D_a88kd")
 
-[node name="Walls" type="GridMap" parent="."]
+[node name="Walls" type="GridMap" parent="." unique_id=1433640414]
 mesh_library = ExtResource("1_p3g42")
 cell_size = Vector3(0.25, 2, 0.25)
 cell_center_y = false
@@ -103,398 +108,390 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="Rooms" type="Node3D" parent="."]
+[node name="Rooms" type="Node3D" parent="." unique_id=1197052228]
 
-[node name="Main Lobby" type="Node3D" parent="Rooms"]
+[node name="Main Lobby" type="Node3D" parent="Rooms" unique_id=1513428726]
 
-[node name="Doors" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Doors" type="Node3D" parent="Rooms/Main Lobby" unique_id=1107256476]
 
-[node name="Front Door1" parent="Rooms/Main Lobby/Doors" instance=ExtResource("7_xr2co")]
+[node name="Front Door1" parent="Rooms/Main Lobby/Doors" unique_id=440903086 instance=ExtResource("7_xr2co")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 35.25)
 is_locked = true
 
-[node name="Front Door2" parent="Rooms/Main Lobby/Doors" instance=ExtResource("7_xr2co")]
+[node name="Front Door2" parent="Rooms/Main Lobby/Doors" unique_id=456053937 instance=ExtResource("7_xr2co")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 35.25)
 is_locked = true
 
-[node name="Elevator Door A1" parent="Rooms/Main Lobby/Doors" instance=ExtResource("7_xr2co")]
+[node name="Elevator Door A1" parent="Rooms/Main Lobby/Doors" unique_id=773856345 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.25, 0, 3)
 is_locked = true
 
-[node name="Elevator Door A2" parent="Rooms/Main Lobby/Doors" instance=ExtResource("7_xr2co")]
+[node name="Elevator Door A2" parent="Rooms/Main Lobby/Doors" unique_id=1590337951 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.25, 0, 4)
 is_locked = true
 
-[node name="Elevator Door B1" parent="Rooms/Main Lobby/Doors" instance=ExtResource("7_xr2co")]
+[node name="Elevator Door B1" parent="Rooms/Main Lobby/Doors" unique_id=1870902578 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4, 0, 3)
 is_locked = true
 
-[node name="Elevator Door B2" parent="Rooms/Main Lobby/Doors" instance=ExtResource("7_xr2co")]
+[node name="Elevator Door B2" parent="Rooms/Main Lobby/Doors" unique_id=2033036399 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4, 0, 4)
 is_locked = true
 
-[node name="Elevator Door C1" parent="Rooms/Main Lobby/Doors" instance=ExtResource("7_xr2co")]
+[node name="Elevator Door C1" parent="Rooms/Main Lobby/Doors" unique_id=1838217304 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.25, 0, 6.75)
 is_locked = true
 
-[node name="Elevator Door C2" parent="Rooms/Main Lobby/Doors" instance=ExtResource("7_xr2co")]
+[node name="Elevator Door C2" parent="Rooms/Main Lobby/Doors" unique_id=2075931433 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.25, 0, 7.75)
 is_locked = true
 
-[node name="Elevator Door D1" parent="Rooms/Main Lobby/Doors" instance=ExtResource("7_xr2co")]
+[node name="Elevator Door D1" parent="Rooms/Main Lobby/Doors" unique_id=390139464 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4, 0, 6.75)
 is_locked = true
 
-[node name="Elevator Door D2" parent="Rooms/Main Lobby/Doors" instance=ExtResource("7_xr2co")]
+[node name="Elevator Door D2" parent="Rooms/Main Lobby/Doors" unique_id=1431444082 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4, 0, 7.75)
 is_locked = true
 
-[node name="Lights" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Lights" type="Node3D" parent="Rooms/Main Lobby" unique_id=540954034]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Rooms/Main Lobby/Lights"]
+[node name="OmniLight3D" type="OmniLight3D" parent="Rooms/Main Lobby/Lights" unique_id=449333280]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 light_energy = 3.855
 shadow_enabled = true
 omni_range = 7.309
 
-[node name="OmniLight3D3" type="OmniLight3D" parent="Rooms/Main Lobby/Lights"]
+[node name="OmniLight3D3" type="OmniLight3D" parent="Rooms/Main Lobby/Lights" unique_id=1988567471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 14)
 light_energy = 3.855
 shadow_enabled = true
 omni_range = 7.309
 
-[node name="OmniLight3D9" type="OmniLight3D" parent="Rooms/Main Lobby/Lights"]
+[node name="OmniLight3D9" type="OmniLight3D" parent="Rooms/Main Lobby/Lights" unique_id=795378151]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 5, 21)
 light_energy = 3.855
 shadow_enabled = true
 omni_range = 7.309
 
-[node name="OmniLight3D10" type="OmniLight3D" parent="Rooms/Main Lobby/Lights"]
+[node name="OmniLight3D10" type="OmniLight3D" parent="Rooms/Main Lobby/Lights" unique_id=430008294]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 5, 21)
 light_energy = 3.855
 shadow_enabled = true
 omni_range = 7.309
 
-[node name="OmniLight3D7" type="OmniLight3D" parent="Rooms/Main Lobby/Lights"]
+[node name="OmniLight3D7" type="OmniLight3D" parent="Rooms/Main Lobby/Lights" unique_id=1286811834]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 5, 21)
 light_energy = 3.855
 shadow_enabled = true
 omni_range = 7.309
 
-[node name="OmniLight3D5" type="OmniLight3D" parent="Rooms/Main Lobby/Lights"]
+[node name="OmniLight3D5" type="OmniLight3D" parent="Rooms/Main Lobby/Lights" unique_id=1450906812]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 28)
 light_energy = 3.855
 shadow_enabled = true
 omni_range = 7.309
 
-[node name="Guards" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Guards" type="Node3D" parent="Rooms/Main Lobby" unique_id=557749169]
 
-[node name="SecurityGuard1" type="Path3D" parent="Rooms/Main Lobby/Guards"]
+[node name="SecurityGuard1" type="Path3D" parent="Rooms/Main Lobby/Guards" unique_id=220013473]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.5)
 curve = SubResource("Curve3D_0a44u")
 script = ExtResource("8_vk860")
 speed = 4.0
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1"]
+[node name="PathFollow3D" type="PathFollow3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1" unique_id=2061215116]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=1715130975]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_riaqh")
 
-[node name="Cone Vision" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" instance=ExtResource("9_a88kd")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 1, 0)
-sight_line_angle = 140.0
-sight_line_radius = 5.0
-time_till_caught = 1.0
-
-[node name="Area3D" type="Area3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D"]
+[node name="Area3D" type="Area3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D" unique_id=964640159]
 script = SubResource("GDScript_d6wjy")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" unique_id=464436004]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_wxsiq")
 
-[node name="Bamboo" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Bamboo" type="Node3D" parent="Rooms/Main Lobby" unique_id=861452825]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 25.25)
 
-[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo" instance=ExtResource("10_0a44u")]
+[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo" unique_id=1915816801 instance=ExtResource("10_0a44u")]
 
-[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo" instance=ExtResource("11_riaqh")]
+[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo" unique_id=1777773635 instance=ExtResource("11_riaqh")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo" unique_id=147139018]
 collision_layer = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo/StaticBody3D" unique_id=1273873548]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_d6wjy")
 
-[node name="Bamboo2" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Bamboo2" type="Node3D" parent="Rooms/Main Lobby" unique_id=1804409309]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 30.75)
 
-[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo2" instance=ExtResource("10_0a44u")]
+[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo2" unique_id=1937215333 instance=ExtResource("10_0a44u")]
 
-[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo2" instance=ExtResource("11_riaqh")]
+[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo2" unique_id=853271370 instance=ExtResource("11_riaqh")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo2" unique_id=1474388800]
 collision_layer = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo2/StaticBody3D" unique_id=243611747]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_d6wjy")
 
-[node name="Bamboo3" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Bamboo3" type="Node3D" parent="Rooms/Main Lobby" unique_id=1883905409]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75, 0, 30.75)
 
-[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo3" instance=ExtResource("10_0a44u")]
+[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo3" unique_id=274256710 instance=ExtResource("10_0a44u")]
 
-[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo3" instance=ExtResource("11_riaqh")]
+[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo3" unique_id=1790106967 instance=ExtResource("11_riaqh")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo3"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo3" unique_id=95427426]
 collision_layer = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo3/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo3/StaticBody3D" unique_id=642035713]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_d6wjy")
 
-[node name="Bamboo4" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Bamboo4" type="Node3D" parent="Rooms/Main Lobby" unique_id=929866680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75, 0, 25.25)
 
-[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo4" instance=ExtResource("10_0a44u")]
+[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo4" unique_id=1924782384 instance=ExtResource("10_0a44u")]
 
-[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo4" instance=ExtResource("11_riaqh")]
+[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo4" unique_id=1222084211 instance=ExtResource("11_riaqh")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo4"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo4" unique_id=120387811]
 collision_layer = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo4/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo4/StaticBody3D" unique_id=53876075]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_d6wjy")
 
-[node name="Bamboo5" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Bamboo5" type="Node3D" parent="Rooms/Main Lobby" unique_id=502308962]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.25, 0, 25.25)
 
-[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo5" instance=ExtResource("10_0a44u")]
+[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo5" unique_id=1778895477 instance=ExtResource("10_0a44u")]
 
-[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo5" instance=ExtResource("11_riaqh")]
+[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo5" unique_id=573070776 instance=ExtResource("11_riaqh")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo5"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo5" unique_id=1692363704]
 collision_layer = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo5/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo5/StaticBody3D" unique_id=729399088]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_d6wjy")
 
-[node name="Bamboo6" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Bamboo6" type="Node3D" parent="Rooms/Main Lobby" unique_id=1459618327]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 25.25)
 
-[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo6" instance=ExtResource("10_0a44u")]
+[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo6" unique_id=302574182 instance=ExtResource("10_0a44u")]
 
-[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo6" instance=ExtResource("11_riaqh")]
+[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo6" unique_id=918313218 instance=ExtResource("11_riaqh")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo6"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo6" unique_id=222731133]
 collision_layer = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo6/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo6/StaticBody3D" unique_id=2078958841]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_d6wjy")
 
-[node name="Bamboo7" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Bamboo7" type="Node3D" parent="Rooms/Main Lobby" unique_id=426011468]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 30.75)
 
-[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo7" instance=ExtResource("10_0a44u")]
+[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo7" unique_id=1130925806 instance=ExtResource("10_0a44u")]
 
-[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo7" instance=ExtResource("11_riaqh")]
+[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo7" unique_id=1547024091 instance=ExtResource("11_riaqh")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo7"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo7" unique_id=1421919615]
 collision_layer = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo7/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo7/StaticBody3D" unique_id=1001502751]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_d6wjy")
 
-[node name="Bamboo8" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Bamboo8" type="Node3D" parent="Rooms/Main Lobby" unique_id=1578154685]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.25, 0, 30.75)
 
-[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo8" instance=ExtResource("10_0a44u")]
+[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo8" unique_id=767023953 instance=ExtResource("10_0a44u")]
 
-[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo8" instance=ExtResource("11_riaqh")]
+[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo8" unique_id=46503064 instance=ExtResource("11_riaqh")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo8"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo8" unique_id=960131447]
 collision_layer = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo8/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo8/StaticBody3D" unique_id=2125794787]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_d6wjy")
 
-[node name="Bamboo9" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Bamboo9" type="Node3D" parent="Rooms/Main Lobby" unique_id=298938753]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.25, 0, 18.5)
 
-[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo9" instance=ExtResource("10_0a44u")]
+[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo9" unique_id=1462622832 instance=ExtResource("10_0a44u")]
 
-[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo9" instance=ExtResource("11_riaqh")]
+[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo9" unique_id=398720662 instance=ExtResource("11_riaqh")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo9"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo9" unique_id=1303682224]
 collision_layer = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo9/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo9/StaticBody3D" unique_id=1703484525]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_d6wjy")
 
-[node name="Bamboo10" type="Node3D" parent="Rooms/Main Lobby"]
+[node name="Bamboo10" type="Node3D" parent="Rooms/Main Lobby" unique_id=148806665]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 9.25, 0, 18.5)
 
-[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo10" instance=ExtResource("10_0a44u")]
+[node name="Nature_Deco" parent="Rooms/Main Lobby/Bamboo10" unique_id=419475296 instance=ExtResource("10_0a44u")]
 
-[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo10" instance=ExtResource("11_riaqh")]
+[node name="Nature_Deco_Bamboo1" parent="Rooms/Main Lobby/Bamboo10" unique_id=378386158 instance=ExtResource("11_riaqh")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo10"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Rooms/Main Lobby/Bamboo10" unique_id=1910116887]
 collision_layer = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo10/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Main Lobby/Bamboo10/StaticBody3D" unique_id=1602233468]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_d6wjy")
 
-[node name="FrontDeskBackRoom" type="Node3D" parent="Rooms"]
+[node name="FrontDeskBackRoom" type="Node3D" parent="Rooms" unique_id=790218714]
 
-[node name="Doors" type="Node3D" parent="Rooms/FrontDeskBackRoom"]
+[node name="Doors" type="Node3D" parent="Rooms/FrontDeskBackRoom" unique_id=1033149166]
 
-[node name="Behind Desk Door1" parent="Rooms/FrontDeskBackRoom/Doors" instance=ExtResource("7_xr2co")]
+[node name="Behind Desk Door1" parent="Rooms/FrontDeskBackRoom/Doors" unique_id=1491306523 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.25, 0, 12.5)
 
-[node name="Behind Desk Door2" parent="Rooms/FrontDeskBackRoom/Doors" instance=ExtResource("7_xr2co")]
+[node name="Behind Desk Door2" parent="Rooms/FrontDeskBackRoom/Doors" unique_id=890006799 instance=ExtResource("7_xr2co")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.25, 0, 15)
 
-[node name="Lights" type="Node3D" parent="Rooms/FrontDeskBackRoom"]
+[node name="Lights" type="Node3D" parent="Rooms/FrontDeskBackRoom" unique_id=123944994]
 
-[node name="Left Bathroom" type="Node3D" parent="Rooms"]
+[node name="Left Bathroom" type="Node3D" parent="Rooms" unique_id=642785682]
 
-[node name="Doors" type="Node3D" parent="Rooms/Left Bathroom"]
+[node name="Doors" type="Node3D" parent="Rooms/Left Bathroom" unique_id=1889278667]
 
-[node name="Left Bathroom" parent="Rooms/Left Bathroom/Doors" instance=ExtResource("7_xr2co")]
+[node name="Left Bathroom" parent="Rooms/Left Bathroom/Doors" unique_id=320667811 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, -16, 0, 18.75)
 
-[node name="Lights" type="Node3D" parent="Rooms/Left Bathroom"]
+[node name="Lights" type="Node3D" parent="Rooms/Left Bathroom" unique_id=266308184]
 
-[node name="Right Bathroom" type="Node3D" parent="Rooms"]
+[node name="Right Bathroom" type="Node3D" parent="Rooms" unique_id=959180773]
 
-[node name="Doors" type="Node3D" parent="Rooms/Right Bathroom"]
+[node name="Doors" type="Node3D" parent="Rooms/Right Bathroom" unique_id=1586490690]
 
-[node name="Right Bathroom" parent="Rooms/Right Bathroom/Doors" instance=ExtResource("7_xr2co")]
+[node name="Right Bathroom" parent="Rooms/Right Bathroom/Doors" unique_id=2003923257 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 15.75, 0, 18.75)
 
-[node name="Lights" type="Node3D" parent="Rooms/Right Bathroom"]
+[node name="Lights" type="Node3D" parent="Rooms/Right Bathroom" unique_id=808584395]
 
-[node name="Left Hall" type="Node3D" parent="Rooms"]
+[node name="Left Hall" type="Node3D" parent="Rooms" unique_id=1684968584]
 
-[node name="Doors" type="Node3D" parent="Rooms/Left Hall"]
+[node name="Doors" type="Node3D" parent="Rooms/Left Hall" unique_id=1585980664]
 
-[node name="Left Hall Garage Door" parent="Rooms/Left Hall/Doors" instance=ExtResource("7_xr2co")]
+[node name="Left Hall Garage Door" parent="Rooms/Left Hall/Doors" unique_id=1846162982 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -24.25, 0, -2)
 
-[node name="Lights" type="Node3D" parent="Rooms/Left Hall"]
+[node name="Lights" type="Node3D" parent="Rooms/Left Hall" unique_id=1122227742]
 
-[node name="Right Hall" type="Node3D" parent="Rooms"]
+[node name="Right Hall" type="Node3D" parent="Rooms" unique_id=1866769543]
 
-[node name="Doors" type="Node3D" parent="Rooms/Right Hall"]
+[node name="Doors" type="Node3D" parent="Rooms/Right Hall" unique_id=2142851794]
 
-[node name="Right Hall Garage Door" parent="Rooms/Right Hall/Doors" instance=ExtResource("7_xr2co")]
+[node name="Right Hall Garage Door" parent="Rooms/Right Hall/Doors" unique_id=2059991412 instance=ExtResource("7_xr2co")]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 22, 0, 21.75)
 
-[node name="Lights" type="Node3D" parent="Rooms/Right Hall"]
+[node name="Lights" type="Node3D" parent="Rooms/Right Hall" unique_id=397637470]
 
-[node name="Janitors Closet" type="Node3D" parent="Rooms"]
+[node name="Janitors Closet" type="Node3D" parent="Rooms" unique_id=2094002511]
 
-[node name="Doors" type="Node3D" parent="Rooms/Janitors Closet"]
+[node name="Doors" type="Node3D" parent="Rooms/Janitors Closet" unique_id=741572769]
 
-[node name="Lights" type="Node3D" parent="Rooms/Janitors Closet"]
+[node name="Lights" type="Node3D" parent="Rooms/Janitors Closet" unique_id=105213868]
 
-[node name="Security Room" type="Node3D" parent="Rooms"]
+[node name="Security Room" type="Node3D" parent="Rooms" unique_id=1251881837]
 
-[node name="Doors" type="Node3D" parent="Rooms/Security Room"]
+[node name="Doors" type="Node3D" parent="Rooms/Security Room" unique_id=921825545]
 
-[node name="Lights" type="Node3D" parent="Rooms/Security Room"]
+[node name="Lights" type="Node3D" parent="Rooms/Security Room" unique_id=1888948910]
 
-[node name="Staircase" type="Node3D" parent="Rooms"]
+[node name="Staircase" type="Node3D" parent="Rooms" unique_id=1090286623]
 
-[node name="Doors" type="Node3D" parent="Rooms/Staircase"]
+[node name="Doors" type="Node3D" parent="Rooms/Staircase" unique_id=1799607631]
 
-[node name="Stair door" parent="Rooms/Staircase/Doors" instance=ExtResource("7_xr2co")]
+[node name="Stair door" parent="Rooms/Staircase/Doors" unique_id=1392935987 instance=ExtResource("7_xr2co")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.25, 0, -1.25)
 
-[node name="Lights" type="Node3D" parent="Rooms/Staircase"]
+[node name="Lights" type="Node3D" parent="Rooms/Staircase" unique_id=215450523]
 
-[node name="Parking Garage" type="Node3D" parent="Rooms"]
+[node name="Parking Garage" type="Node3D" parent="Rooms" unique_id=782277846]
 
-[node name="Doors" type="Node3D" parent="Rooms/Parking Garage"]
+[node name="Doors" type="Node3D" parent="Rooms/Parking Garage" unique_id=1428290979]
 
-[node name="Service Elevator Door1" parent="Rooms/Parking Garage/Doors" instance=ExtResource("7_xr2co")]
+[node name="Service Elevator Door1" parent="Rooms/Parking Garage/Doors" unique_id=1026388384 instance=ExtResource("7_xr2co")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -20.75)
 is_locked = true
 
-[node name="Service Elevator Door2" parent="Rooms/Parking Garage/Doors" instance=ExtResource("7_xr2co")]
+[node name="Service Elevator Door2" parent="Rooms/Parking Garage/Doors" unique_id=235628919 instance=ExtResource("7_xr2co")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -20.75)
 is_locked = true
 
-[node name="Garage Door Main1" parent="Rooms/Parking Garage/Doors" instance=ExtResource("7_xr2co")]
+[node name="Garage Door Main1" parent="Rooms/Parking Garage/Doors" unique_id=1530744301 instance=ExtResource("7_xr2co")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -2.25)
 
-[node name="Garage Door Main2" parent="Rooms/Parking Garage/Doors" instance=ExtResource("7_xr2co")]
+[node name="Garage Door Main2" parent="Rooms/Parking Garage/Doors" unique_id=1407926096 instance=ExtResource("7_xr2co")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.25)
 
-[node name="Lights" type="Node3D" parent="Rooms/Parking Garage"]
+[node name="Lights" type="Node3D" parent="Rooms/Parking Garage" unique_id=1538693991]
 
-[node name="Camera_pivot" parent="." instance=ExtResource("7_bfkqv")]
-CAMERA_ROTATION_X = -50.0
-CAMERA_DISTANCE_BACK = 2.0
-CAMERA_DISTANCE_UP = 6.0
+[node name="Camera_pivot" parent="." unique_id=476900760 instance=ExtResource("7_bfkqv")]
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("8_s57rb")]
+[node name="CharacterBody3D" parent="." unique_id=1656449044 instance=ExtResource("8_s57rb")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=796416966]
 transform = Transform3D(0.7230757, -0.5691714, 0.3914147, 0, 0.5666364, 0.82396805, -0.6907689, -0.5957913, 0.40972096, 0, 0, 0)
 visible = false
 shadow_enabled = true
 
-[node name="VisibilityMesh" parent="." node_paths=PackedStringArray("player", "gridmap") instance=ExtResource("9_s57rb")]
+[node name="VisibilityMesh" parent="." unique_id=170809200 node_paths=PackedStringArray("player", "gridmap") instance=ExtResource("9_s57rb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.9148035, 0)
 visible = false
 player = NodePath("../CharacterBody3D")
 gridmap = NodePath("../Walls")
 
-[node name="Document" parent="." instance=ExtResource("18_yl26t")]
+[node name="Document" parent="." unique_id=1076937972 instance=ExtResource("18_yl26t")]
 transform = Transform3D(2.77, 0, 0, 0, 2.77, 0, 0, 0, 2.77, 5.5, 0, 12.5)
 document_info = ExtResource("18_cr80g")
 texture = ExtResource("19_cr80g")
 
-[node name="Document2" parent="." instance=ExtResource("18_yl26t")]
+[node name="Document2" parent="." unique_id=1390205098 instance=ExtResource("18_yl26t")]
 transform = Transform3D(2.77, 0, 0, 0, 2.77, 0, 0, 0, 2.77, 9.332871, 0, 13.534893)
 document_info = ExtResource("20_cr80g")
 texture = ExtResource("19_cr80g")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1565609862]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="SubViewport" unique_id=137180529]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66743636, 1.017169, 11.366655)
 
-[node name="SubViewport2" type="SubViewport" parent="."]
+[node name="SubViewport2" type="SubViewport" parent="." unique_id=790503536]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="SubViewport2"]
+[node name="Camera3D" type="Camera3D" parent="SubViewport2" unique_id=1039579709]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.66743636, 1.017169, 11.366655)
 
-[node name="Computer" parent="." node_paths=PackedStringArray("computer_ui") instance=ExtResource("21_xfhbw")]
-transform = Transform3D(-0.3362735, 0, -0.94176435, 0, 1, 0, 0.94176435, 0, -0.3362735, -3.1650617, 0.9756807, 6.8823137)
+[node name="Computer" parent="." unique_id=1166512115 node_paths=PackedStringArray("computer_ui") instance=ExtResource("21_xfhbw")]
+transform = Transform3D(-0.3362735, 0, -0.94176435, 0, 1, 0, 0.94176435, 0, -0.3362735, -3.1650617, 0.9756807, -1.4123049)
 computer_ui = NodePath("Computer UI2")
 
-[node name="Computer UI2" parent="Computer" node_paths=PackedStringArray("icons") instance=ExtResource("22_rxtpu")]
-icons = [NodePath("Email"), NodePath("File"), NodePath("File2")]
+[node name="Computer UI2" parent="Computer" unique_id=417306020 node_paths=PackedStringArray("icons") instance=ExtResource("22_rxtpu")]
+icons = [NodePath("Email"), NodePath("File"), NodePath("File2"), NodePath("Text")]
 
-[node name="Email" parent="Computer/Computer UI2" node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
+[node name="Email" parent="Computer/Computer UI2" unique_id=529975338 node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
 layout_mode = 1
 offset_left = -480.0
 offset_top = -280.0
@@ -504,7 +501,8 @@ override_title = "Email"
 item_type = 1
 tab = NodePath("DesktopTab")
 
-[node name="DesktopTab" parent="Computer/Computer UI2/Email" node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+[node name="DesktopTab" parent="Computer/Computer UI2/Email" unique_id=1897922406 node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+visible = false
 layout_mode = 1
 offset_left = -178.0
 offset_top = -132.0
@@ -512,12 +510,12 @@ offset_right = 1022.0
 offset_bottom = 668.0
 content = NodePath("Email_Tab")
 
-[node name="Email_Tab" parent="Computer/Computer UI2/Email/DesktopTab" instance=ExtResource("25_he45r")]
+[node name="Email_Tab" parent="Computer/Computer UI2/Email/DesktopTab" unique_id=234296774 instance=ExtResource("25_he45r")]
 layout_mode = 1
 focus_mode = 2
-emails = Array[ExtResource("26_rew54")]([ExtResource("18_cr80g"), ExtResource("20_cr80g"), ExtResource("27_2dfqy")])
+emails = Array[ExtResource("26_rew54")]([ExtResource("20_cr80g"), ExtResource("18_cr80g")])
 
-[node name="File" parent="Computer/Computer UI2" node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
+[node name="File" parent="Computer/Computer UI2" unique_id=740427858 node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
 layout_mode = 1
 override_icon = ExtResource("28_4o43n")
 override_title = "First Test Document"
@@ -525,7 +523,8 @@ item_type = 3
 file = ExtResource("18_cr80g")
 tab = NodePath("Computer Tab")
 
-[node name="Computer Tab" parent="Computer/Computer UI2/File" node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+[node name="Computer Tab" parent="Computer/Computer UI2/File" unique_id=2100645123 node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+visible = false
 layout_mode = 1
 offset_left = -600.0
 offset_top = -400.0
@@ -533,11 +532,11 @@ offset_right = 600.0
 offset_bottom = 400.0
 content = NodePath("File Tab")
 
-[node name="File Tab" parent="Computer/Computer UI2/File/Computer Tab" instance=ExtResource("30_kjo2c")]
+[node name="File Tab" parent="Computer/Computer UI2/File/Computer Tab" unique_id=884899261 instance=ExtResource("30_kjo2c")]
 layout_mode = 1
 file = ExtResource("18_cr80g")
 
-[node name="File2" parent="Computer/Computer UI2" node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
+[node name="File2" parent="Computer/Computer UI2" unique_id=1442415261 node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
 layout_mode = 1
 offset_left = 714.0
 offset_top = -131.0
@@ -549,16 +548,42 @@ item_type = 3
 file = ExtResource("27_2dfqy")
 tab = NodePath("Computer Tab")
 
-[node name="Computer Tab" parent="Computer/Computer UI2/File2" node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+[node name="Computer Tab" parent="Computer/Computer UI2/File2" unique_id=633259373 node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+visible = false
 layout_mode = 1
 content = NodePath("File Tab")
 
-[node name="File Tab" parent="Computer/Computer UI2/File2/Computer Tab" instance=ExtResource("30_kjo2c")]
+[node name="File Tab" parent="Computer/Computer UI2/File2/Computer Tab" unique_id=602999325 instance=ExtResource("30_kjo2c")]
 layout_mode = 1
 offset_top = -1.0
 offset_bottom = -1.0
 file = ExtResource("27_2dfqy")
 
+[node name="Text" parent="Computer/Computer UI2" unique_id=982267182 node_paths=PackedStringArray("tab") instance=ExtResource("23_rew54")]
+layout_mode = 1
+offset_left = -413.0
+offset_top = 116.0
+offset_right = -413.0
+offset_bottom = 116.0
+override_title = "Messages"
+item_type = 2
+tab = NodePath("Computer Tab")
+
+[node name="Computer Tab" parent="Computer/Computer UI2/Text" unique_id=1716726960 node_paths=PackedStringArray("content") instance=ExtResource("24_2dfqy")]
+visible = false
+layout_mode = 1
+content = NodePath("Text Tab")
+
+[node name="Text Tab" parent="Computer/Computer UI2/Text/Computer Tab" unique_id=1299058217 instance=ExtResource("31_w6uou")]
+layout_mode = 1
+convos = Array[ExtResource("32_f11mn")]([ExtResource("33_hl847"), ExtResource("34_f11mn")])
+which_person = Array[int]([0, 1])
+
+[node name="Item" parent="." unique_id=93420287 instance=ExtResource("31_kjo2c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7551153, 0, 0)
+item = ExtResource("32_xyxbf")
+
 [connection signal="body_entered" from="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" to="Rooms/Main Lobby/Guards/SecurityGuard1/PathFollow3D/Area3D" method="_on_body_entered"]
 
 [editable path="Rooms/FrontDeskBackRoom/Doors/Behind Desk Door1"]
+[editable path="Rooms/FrontDeskBackRoom/Doors/Behind Desk Door1/Door_v20"]

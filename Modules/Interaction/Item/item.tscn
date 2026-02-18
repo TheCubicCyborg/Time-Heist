@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b6wv5r50sr8bh"]
+
+[ext_resource type="Script" uid="uid://b6fgsnycialr2" path="res://Modules/Interaction/Item/item.gd" id="1_sfirg"]
+[ext_resource type="PackedScene" uid="uid://b64t4twgcdips" path="res://Modules/Interaction/interactable.tscn" id="3_46odt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iea5r"]
+size = Vector3(0.29, 1, 0.29)
+
+[node name="Item" type="Node3D" unique_id=93420287]
+script = ExtResource("1_sfirg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1829794582]
+
+[node name="Interactable" parent="." unique_id=766215210 node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("3_46odt")]
+mesh = NodePath("../MeshInstance3D")
+interact_object = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=555249436]
+shape = SubResource("BoxShape3D_iea5r")

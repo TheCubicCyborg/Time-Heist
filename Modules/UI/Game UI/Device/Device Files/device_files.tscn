@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bigh7xaj6n6yj"]
+[gd_scene format=3 uid="uid://bigh7xaj6n6yj"]
 
-[ext_resource type="Script" uid="uid://rjinxblp7bsc" path="res://Modules/UI/Game UI/Device/device_files.gd" id="1_40ogp"]
+[ext_resource type="Script" uid="uid://rjinxblp7bsc" path="res://Modules/UI/Game UI/Device/Device Files/device_files.gd" id="1_40ogp"]
 [ext_resource type="Texture2D" uid="uid://dkgssmw57sk3g" path="res://Assets/UI/Time Travel Menu/doc bar.png" id="4_dwdlg"]
 [ext_resource type="PackedScene" uid="uid://dui7y0up6fidp" path="res://Modules/UI/Game UI/Device/device_document_viewer.tscn" id="4_xvwb1"]
 
-[node name="DeviceFiles" type="Control" node_paths=PackedStringArray("main_focus")]
+[node name="DeviceFiles" type="Control" unique_id=371239230 node_paths=PackedStringArray("main_focus")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ size_flags_vertical = 3
 script = ExtResource("1_40ogp")
 main_focus = NodePath("MarginContainer/HBoxContainer/FoldersMargin/Folder Buttons")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1544549271]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,33 +28,33 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1993862020]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="FoldersMargin" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+[node name="FoldersMargin" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=672540336]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 theme_override_constants/margin_top = 100
 
-[node name="Folder Buttons" type="VBoxContainer" parent="MarginContainer/HBoxContainer/FoldersMargin"]
+[node name="Folder Buttons" type="VBoxContainer" parent="MarginContainer/HBoxContainer/FoldersMargin" unique_id=1076843477]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 
-[node name="MidPanel" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="MidPanel" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1080077615]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MidPanel"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/MidPanel" unique_id=225353748]
 layout_mode = 2
 texture = ExtResource("4_dwdlg")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="NoDocuments" type="Label" parent="MarginContainer/HBoxContainer/MidPanel"]
+[node name="NoDocuments" type="Label" parent="MarginContainer/HBoxContainer/MidPanel" unique_id=1215204935]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
@@ -62,20 +62,20 @@ text = "No documents to view!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Folders" type="Control" parent="MarginContainer/HBoxContainer/MidPanel"]
+[node name="Folders" type="Control" parent="MarginContainer/HBoxContainer/MidPanel" unique_id=1701309327]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RightPanel" type="SubViewportContainer" parent="MarginContainer/HBoxContainer"]
+[node name="RightPanel" type="SubViewportContainer" parent="MarginContainer/HBoxContainer" unique_id=85648307]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.7
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/RightPanel"]
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/RightPanel" unique_id=532101542]
 handle_input_locally = false
 size = Vector2i(644, 1040)
 render_target_update_mode = 4
 
-[node name="DeviceDocumentViewer" parent="MarginContainer/HBoxContainer/RightPanel/SubViewport" instance=ExtResource("4_xvwb1")]
+[node name="DeviceDocumentViewer" parent="MarginContainer/HBoxContainer/RightPanel/SubViewport" unique_id=1694635236 instance=ExtResource("4_xvwb1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.03, 0)

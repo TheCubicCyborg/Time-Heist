@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://xao1udvjxbco"]
+
+[ext_resource type="Script" uid="uid://buhosr6g8knnm" path="res://Modules/Interaction/stashable.gd" id="1_ux553"]
+
+[node name="Stashable" type="Node" unique_id=1814647583]
+script = ExtResource("1_ux553")
