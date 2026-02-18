@@ -4,7 +4,7 @@ class_name UI_Manager
 @onready var document_viewer = $DocumentViewer
 @onready var debug_ui = $"DEBUG UI"
 @export var debug_mode: bool = false
-@onready var camera_ui = $Camera
+#@onready var camera_ui = $Camera
 @onready var device_menu = $DeviceMenu
 var ui_stack: Array[Control] = []
 var cur_ui: Control = null
@@ -22,7 +22,8 @@ func _process(_delta):
 		cur_ui.handle_input()
 
 func take_control(ui: Control):
-	globals.controller_of_input = globals.InputController.UI
+	if ui != debug_ui:
+		globals.controller_of_input = globals.InputController.UI
 	if cur_ui:
 		ui_stack.append(cur_ui)
 	cur_ui = ui
@@ -35,8 +36,8 @@ func release_control():
 		globals.controller_of_input = globals.InputController.GAMEPLAY
 
 func handle_input():
-	if Input.is_action_just_pressed("camera_ui"):
-		toggle_menu(camera_ui)
+	#if Input.is_action_just_pressed("camera_ui"):
+		#toggle_menu(camera_ui)
 	if Input.is_action_just_pressed("debug_button"):
 		toggle_menu(debug_ui)
 	if Input.is_action_just_pressed("device_menu"):
