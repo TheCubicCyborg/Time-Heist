@@ -21,6 +21,11 @@ var player : Player
 var camera : Node3D
 var safe_ratio : float = 1
 
+var time_juice : float = 100
+var max_time_juice : float = 100
+var rewind_drain_per_sec : float = 15
+var rewind_charge_per_sec : float = 10
+
 var allow_interact: bool = true
 
 var cameras : Array[SubViewport]

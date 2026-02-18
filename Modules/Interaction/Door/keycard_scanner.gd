@@ -13,6 +13,7 @@ var display_time_elapsed: float = 0
 #var success = preload("res://Assets/Materials/Interactable/success.tres")
 
 func _ready() -> void:
+	$MeshInstance3D.mesh.material.albedo_color = Color("ee4243")
 	$Label.text = locked_label
 
 func interact():

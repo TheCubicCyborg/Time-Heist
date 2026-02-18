@@ -6,12 +6,12 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fvf84"]
 shader = ExtResource("2_iwa17")
-shader_parameter/strength = 0.08
-shader_parameter/center = Vector2(0.5, 0.5)
-shader_parameter/radius = 0.0
-shader_parameter/aberration = 0.425
-shader_parameter/width = 0.04
-shader_parameter/feather = 0.135
+shader_parameter/intensity = 0.0
+shader_parameter/chromatic_spread = 15.0
+shader_parameter/warp_amount = 0.8
+shader_parameter/radial_blur_power = 0.2
+shader_parameter/tint = Color(0.8, 0.9, 1, 1)
+shader_parameter/brightness = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fvf84"]
 
