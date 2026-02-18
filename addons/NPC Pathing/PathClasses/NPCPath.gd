@@ -1,6 +1,8 @@
 @tool
 class_name NPCPath extends Resource
 
+@export var name: String = ""
+
 @export var path_components: Array[PathComponent]:
 	set(value):
 		path_components = value
@@ -193,6 +195,8 @@ func _validate_time_end_change(vertex: PathVertex, old: float):
 	_validate_time_start_change(vertex,old_start)
 
 func _validate_position_change(vertex: PathVertex, old: Vector3):
+	if vertex.id == 0:
+		return
 	var prev_line: PathLine = at(vertex.id-1)
 	prev_line.time_end = prev_line.time_start + prev_line.get_length()/prev_line.speed
 	var time_dif = prev_line.time_end - vertex.time_start
@@ -205,5 +209,6 @@ func _validate_vertex_actions_change(vertex: PathVertex):
 	_shift_time_by_from(time_dif,vertex.id+1)
 
 func _validate_property(property: Dictionary):
-	if property.name == "path_components":
-		property.usage = PROPERTY_USAGE_STORAGE
+	#if property.name == "path_components":
+		#property.usage = PROPERTY_USAGE_STORAGE
+	pass

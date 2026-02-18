@@ -22,8 +22,10 @@ func _init(_npc: NPC, _undo_redo: EditorUndoRedoManager):
 
 func on_property_changed(property: StringName, value:NPCPath, field: StringName, changing: bool):
 	undo_redo.create_action("Set NPCPath")
+	undo_redo.add_do_property(get_edited_object(),"updating_path",true)
 	undo_redo.add_do_property(get_edited_object(),"path",value)
 	undo_redo.add_do_method(get_edited_object(),"notify_property_list_changed")
+	undo_redo.add_do_property(get_edited_object(),"updating_path",false)
 	
 	undo_redo.add_undo_property(get_edited_object(),"path",get_edited_object()[get_edited_property()])
 	undo_redo.add_undo_method(get_edited_object(),"notify_property_list_changed")
@@ -55,8 +57,10 @@ func create_new_path():
 	#resource_slot.edited_resource = new_path
 	#emit_changed(get_edited_property(),new_path)
 	undo_redo.create_action("Create NPCPath")
+	undo_redo.add_do_property(get_edited_object(),"updating_path",true)
 	undo_redo.add_do_property(get_edited_object(),"path",new_path)
 	undo_redo.add_do_method(get_edited_object(),"notify_property_list_changed")
+	undo_redo.add_do_property(get_edited_object(),"updating_path",false)
 	
 	undo_redo.add_undo_property(get_edited_object(),"path",get_edited_object()[get_edited_property()])
 	undo_redo.add_undo_method(get_edited_object(),"notify_property_list_changed")
