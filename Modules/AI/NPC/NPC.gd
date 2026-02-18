@@ -48,12 +48,10 @@ func interact_with(nodepath: NodePath):
 func _ready():
 	if not Engine.is_editor_hint():
 		time_manager = globals.time_manager
-		start_pos = position
+		start_pos = Vector3.UP * position.y
 		if follow_branch > -1:
 			path_following = branch_paths[follow_branch]
-		else:
-			return
-		initialize_path_vars()
+			initialize_path_vars()
 
 
 func _process(_delta):

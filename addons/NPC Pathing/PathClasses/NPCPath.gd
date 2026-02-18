@@ -55,6 +55,18 @@ func _shift_time_by_from(amt_shift:float, ix_from: int):
 		cur_component.time_start += amt_shift
 		cur_component.time_end += amt_shift
 
+func _recalculate_time_from(ix: int):
+	var start_comp = at(ix)
+	var prev_end = start_comp.time_end
+	for i in range(ix+1,size()):
+		var comp: PathComponent = at(i)
+		comp.time_start = prev_end
+		if comp is PathVertex:
+			comp.time_end = comp.time_start + comp.get_duration()
+		elif comp is PathLine:
+			comp.time_end = comp.time_start + comp.get_length()/comp.speed
+		prev_end = comp.time_end
+
 func branch_forward(ix: int):
 	updating_path = true
 	var branch_vertex = at(ix)
@@ -113,8 +125,7 @@ func redo_branch(vertex: PathVertex, line: PathLine):
 	if vertex.id < size()-1:
 		var next_line: PathLine = at(vertex.id+1)
 		next_line.prev_vertex = vertex
-	var time_dif = vertex.get_duration() + line.get_length()/line.speed
-	_shift_time_by_from(time_dif,vertex.id+1)
+	_recalculate_time_from(vertex.id)
 
 func delete_vertex(ix: int):
 	updating_path = true
@@ -124,8 +135,7 @@ func delete_vertex(ix: int):
 		next_line.prev_vertex = prev_vert
 		next_line.time_start = prev_vert.time_end
 		next_line.time_end = next_line.time_start + next_line.get_length()/next_line.speed
-		var time_dif = next_line.time_end - next_line.next_vertex.time_start
-		_shift_time_by_from(time_dif,ix+2)
+		_recalculate_time_from(ix+1)
 		for i in range(next_line.id,size()):
 			at(i).id -= 2
 	path_components.remove_at(ix)
@@ -140,8 +150,7 @@ func commit_vertex(vertex: PathVertex, action: PathingGizmo.GIZMO_ACTION):
 		var next_line: PathLine = at(vertex.id+1)
 		next_line.time_start = vertex.time_end
 		next_line.time_end = next_line.time_start + next_line.get_length()/next_line.speed
-		var time_dif = next_line.time_end - next_line.next_vertex.time_start
-		_shift_time_by_from(time_dif,vertex.id+2)
+		_recalculate_time_from(vertex.id+1)
 	updating_path = false
 	#ResourceSaver.save(self,)
 
@@ -172,8 +181,7 @@ func validate_manual_change(component: PathComponent, property_name: String, old
 
 func _validate_speed_change(line: PathLine, old: float):
 	line.time_end = line.time_start + line.get_length()/line.speed
-	var time_dif = line.time_end - line.next_vertex.time_start
-	_shift_time_by_from(time_dif,line.id+1)
+	_recalculate_time_from(line.id-1)
 
 func _validate_time_start_change(vertex: PathVertex, old: float):
 	var value = vertex.time_start
@@ -184,8 +192,7 @@ func _validate_time_start_change(vertex: PathVertex, old: float):
 		value = prev_vert.time_end
 	prev_line.time_end = value
 	prev_line.recalculate_speed()
-	var time_dif: float = value - vertex.time_start
-	_shift_time_by_from(time_dif,vertex.id)
+	_recalculate_time_from(vertex.id-1)
 
 func _validate_time_end_change(vertex: PathVertex, old: float):
 	var time_dif = vertex.time_end - old
@@ -199,14 +206,12 @@ func _validate_position_change(vertex: PathVertex, old: Vector3):
 		return
 	var prev_line: PathLine = at(vertex.id-1)
 	prev_line.time_end = prev_line.time_start + prev_line.get_length()/prev_line.speed
-	var time_dif = prev_line.time_end - vertex.time_start
-	_shift_time_by_from(time_dif,vertex.id)
+	_recalculate_time_from(vertex.id-1)
 
 func _validate_vertex_actions_change(vertex: PathVertex):
 	var old_end = vertex.time_end
 	vertex.time_end = vertex.time_start + vertex.get_duration()
-	var time_dif = vertex.time_end - old_end
-	_shift_time_by_from(time_dif,vertex.id+1)
+	_recalculate_time_from(vertex.id)
 
 func _validate_property(property: Dictionary):
 	#if property.name == "path_components":
