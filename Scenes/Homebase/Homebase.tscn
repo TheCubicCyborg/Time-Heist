@@ -1,3 +1,68 @@
 [gd_scene format=3 uid="uid://c16p7bfr4pe7r"]
 
-[node name="Homebase" type="Node3D"]
+[ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="1_x6vhn"]
+[ext_resource type="Texture2D" uid="uid://cjwgyolwq6axi" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_ao.png" id="2_djhyv"]
+[ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="3_gjqgy"]
+[ext_resource type="Texture2D" uid="uid://iysiiph8g0nq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_normal-ogl.png" id="4_urm2d"]
+[ext_resource type="Texture2D" uid="uid://bi1v4o5qgvkpp" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_roughness.png" id="5_li6v2"]
+[ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/Player.tscn" id="6_qdus5"]
+[ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/camera_pivot.tscn" id="7_djhyv"]
+[ext_resource type="PackedScene" uid="uid://b64t4twgcdips" path="res://Modules/Interaction/interactable.tscn" id="8_gjqgy"]
+[ext_resource type="Script" uid="uid://cx0ieu0m32vi" path="res://Scenes/Homebase/friend.gd" id="8_urm2d"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hfwyr"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xauru"]
+size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ciaa5"]
+albedo_texture = ExtResource("1_x6vhn")
+metallic = 1.0
+metallic_texture = ExtResource("3_gjqgy")
+roughness_texture = ExtResource("5_li6v2")
+normal_enabled = true
+normal_texture = ExtResource("4_urm2d")
+ao_enabled = true
+ao_texture = ExtResource("2_djhyv")
+uv1_scale = Vector3(12.5, 12.5, 12.5)
+grow_amount = -4.125
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_urm2d"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_djhyv"]
+
+[node name="Homebase" type="Node3D" unique_id=1137310330]
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=751228529]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=904252996]
+visible = false
+shape = SubResource("WorldBoundaryShape3D_hfwyr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=683846590]
+mesh = SubResource("PlaneMesh_xauru")
+surface_material_override/0 = SubResource("StandardMaterial3D_ciaa5")
+
+[node name="Player" parent="." unique_id=265121882 instance=ExtResource("6_qdus5")]
+
+[node name="Camera_pivot" parent="." unique_id=144358182 instance=ExtResource("7_djhyv")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=22178100]
+transform = Transform3D(1, 0, 0, 0, 0.657362, 0.753575, 0, -0.753575, 0.657362, 0, 0, 0)
+
+[node name="Friend" type="Node3D" parent="." unique_id=1366652567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.4403734)
+script = ExtResource("8_urm2d")
+
+[node name="Interactable" parent="Friend" unique_id=242002428 node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("8_gjqgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.8546786)
+mesh = NodePath("../MeshInstance3D")
+interact_object = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Friend/Interactable" unique_id=1929693689]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.10288477, 0.78444016, -0.01680708)
+shape = SubResource("BoxShape3D_urm2d")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Friend" unique_id=1464206721]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5.0637712)
+mesh = SubResource("CapsuleMesh_djhyv")

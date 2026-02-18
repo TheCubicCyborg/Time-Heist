@@ -26,6 +26,7 @@ globals="*res://Globals/globals.gd"
 document_database="*res://Globals/document_database.gd"
 global_inventory="*uid://bd6hj8r16s6lx"
 DialogueManager="*uid://c3rodes2l3gxb"
+SceneManager="*uid://cbn2aivlaf362"
 
 [dialogue_manager]
 
@@ -199,7 +200,7 @@ rotate_document_down={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://Dialogue/first_test.dialogue", "res://Dialogue/test.dialogue")
+locale/translations_pot_files=PackedStringArray("res://Dialogue/first_test.dialogue", "res://Dialogue/test.dialogue", "res://Dialogue/homebase_friend.dialogue")
 
 [layer_names]
 

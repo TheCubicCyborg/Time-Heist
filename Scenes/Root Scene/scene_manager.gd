@@ -1,7 +1,10 @@
 extends Node
 
-@onready var scene_holder := $"../SceneHolder"
-@onready var current_scene := $"../SceneHolder/temp"
+#@onready var scene_holder := $"../SceneHolder"
+#@onready var current_scene := $"../SceneHolder/temp"
+# since this is a global, need to assign these in _ready
+var scene_holder: Node
+var current_scene: Node
 
 enum Scene {
 	GAMEPLAY,
@@ -15,6 +18,9 @@ var scene_paths := {
 }
 
 func change_scene(s: Scene) -> void:
+	print("---- change_scene called ----")
+	print_stack()
+	
 	# clear current scene if there
 	if current_scene:
 		current_scene.queue_free()
@@ -24,4 +30,8 @@ func change_scene(s: Scene) -> void:
 	scene_holder.add_child(current_scene)
 	
 func _ready() -> void:
-	change_scene(Scene.MAIN_MENU)
+	await get_tree().process_frame
+	
+	scene_holder = get_tree().current_scene.get_node("SceneHolder")
+	
+	change_scene(Scene.HOMEBASE)
