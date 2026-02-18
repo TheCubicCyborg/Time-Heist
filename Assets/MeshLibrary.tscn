@@ -6,7 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cajdu0cwfm2md" path="res://Assets/Meshes/WindowWideWall_Cube_003.res" id="4_tmw5u"]
 [ext_resource type="ArrayMesh" uid="uid://bvi5rdddg7fjs" path="res://Assets/Meshes/SmallWall_v2_Cube_003.res" id="6_tmw5u"]
 [ext_resource type="ArrayMesh" uid="uid://blfq83f2t8l1f" path="res://Assets/Meshes/staircase_Cube.res" id="6_upl86"]
-[ext_resource type="ArrayMesh" uid="uid://dhrjfsbvbf3lo" path="res://Assets/Meshes/FloorTile_Cube.res" id="7_upl86"]
+[ext_resource type="ArrayMesh" uid="uid://dyx80kvgx8fo1" path="res://Assets/Meshes/FloorTile_Cube.res" id="7_upl86"]
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="8_a05ek"]
 [ext_resource type="Texture2D" uid="uid://cjwgyolwq6axi" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_ao.png" id="9_l6peu"]
 [ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="10_utgb0"]
@@ -192,6 +192,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.625, 1.875, 1.625)
 shape = SubResource("BoxShape3D_e1pt4")
 
 [node name="FloorTile" type="MeshInstance3D" parent="." unique_id=623207182]
+visible = false
 mesh = ExtResource("7_upl86")
 surface_material_override/0 = SubResource("ShaderMaterial_m2k06")
 

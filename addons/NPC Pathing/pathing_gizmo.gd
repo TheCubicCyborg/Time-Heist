@@ -13,12 +13,16 @@ var cur_action: GIZMO_ACTION = GIZMO_ACTION.NONE
 
 var undo_redo: EditorUndoRedoManager
 
+var npc_pos_offset: Vector3
+
 func _init(_undo_redo: EditorUndoRedoManager):
 	undo_redo = _undo_redo
 
 func _redraw():
 	#print("redraw")
 	var path: NPCPath = get_node_3d().path
+	npc_pos_offset = -get_node_3d().position
+	npc_pos_offset.y = 0
 	
 	clear()
 	if not path:
@@ -29,7 +33,7 @@ func _redraw():
 	var handle_material := get_plugin().get_material("handle",self)
 	
 	var root_array = PackedVector3Array()
-	root_array.push_back(path.at(0).position - get_node_3d().position)
+	root_array.push_back(path.at(0).position + npc_pos_offset)
 	add_handles(root_array,handle_material,PackedInt32Array(),false,true)
 	
 	var vertex_positions := PackedVector3Array()
@@ -37,10 +41,12 @@ func _redraw():
 	var line_positions := PackedVector3Array()
 	var line_ids := PackedInt32Array()
 	
+	
+	
 	for i in range(1,path.size()):
 		var component = path.at(i)
 		if component is PathVertex:
-			vertex_positions.push_back(path.at(i).position - get_node_3d().position)
+			vertex_positions.push_back(path.at(i).position + npc_pos_offset)
 			vertex_ids.push_back(i)
 		elif component is PathLine:
 			line_positions.push_back(draw_line(component, line_material))
@@ -56,14 +62,14 @@ func _redraw():
 func draw_line(line: PathLine, line_material):
 	var line_vec = line.next_vertex.position - line.prev_vertex.position
 	var line_midpoint = (line.next_vertex.position + line.prev_vertex.position) * 0.5
-	line_midpoint += -get_node_3d().position
+	line_midpoint += npc_pos_offset
 	var rotation: Vector3 = Vector3(-PI/2,Vector3.FORWARD.signed_angle_to(line_vec,Vector3.UP),0)
 	var basis = Basis.from_scale(Vector3(1,line_vec.length()/2,1))
 	basis = basis.rotated(Vector3.RIGHT, rotation.x)
 	basis = basis.rotated(Vector3.UP, rotation.y)
 	var transform: Transform3D = Transform3D(basis,line_midpoint)
 	add_mesh(path_mesh,line_material,transform)
-	add_mesh(arrow_mesh,line_material,Transform3D(Basis.from_euler(rotation),(line.next_vertex.position - line_vec.normalized() * 0.3) - get_node_3d().position))
+	add_mesh(arrow_mesh,line_material,Transform3D(Basis.from_euler(rotation),(line.next_vertex.position - line_vec.normalized() * 0.3) + npc_pos_offset))
 	return line_midpoint
 
 func _begin_handle_action(id, secondary):
@@ -102,13 +108,13 @@ func _set_handle(id, secondary, camera, point):
 		#Handle position
 		var origin = camera.project_ray_origin(point)
 		var direction = camera.project_ray_normal(point)
-		var plane = Plane(Vector3.UP)
+		var plane = Plane(Vector3.UP,get_node_3d().position.y)
 		var position: Vector3 = plane.intersects_ray(origin,direction)
 		position = position.snapped(Vector3(1,0,1) * path.snap)
+		position.y = 0
 		moving_vertex.position = position
 		
 		#Handle time
-		#print(moving_vertex.id-1)
 		var prev_line: PathLine = path.at(moving_vertex.id-1)
 		var prev_vert: PathVertex = prev_line.prev_vertex
 		var add_time = (position.distance_to(prev_vert.position))/prev_line.speed
