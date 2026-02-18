@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dmcfah8vacfq6" path="res://Modules/Interaction/Door/generic_door.gd" id="1_nk12b"]
 [ext_resource type="PackedScene" uid="uid://oyq0g5wotgxh" path="res://Assets/Models/Door_v20.gltf" id="2_gq3nt"]
 [ext_resource type="PackedScene" uid="uid://b64t4twgcdips" path="res://Modules/Interaction/interactable.tscn" id="2_im0k3"]
+[ext_resource type="AudioStream" uid="uid://cdpr7pq46qe1h" path="res://Assets/SFX/open_door.ogg" id="4_gx118"]
+[ext_resource type="AudioStream" uid="uid://bihq08irhlvhi" path="res://Assets/SFX/door_lock.ogg" id="5_iwxtq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nk12b"]
 size = Vector3(1, 2, 0.1)
@@ -33,5 +35,13 @@ shape = SubResource("BoxShape3D_nk12b")
 
 [node name="Door_v20" parent="." unique_id=1158944372 instance=ExtResource("2_gq3nt")]
 transform = Transform3D(1.03, 0, 0, 0, 1.03, 0, 0, 0, 1.03, -0.47409245, 0, 0.075)
+
+[node name="DoorOpen" type="AudioStreamPlayer" parent="." unique_id=1949909753]
+stream = ExtResource("4_gx118")
+volume_db = -15.0
+
+[node name="DoorLock" type="AudioStreamPlayer" parent="." unique_id=1517413505]
+stream = ExtResource("5_iwxtq")
+volume_db = -22.0
 
 [editable path="Door_v20"]
