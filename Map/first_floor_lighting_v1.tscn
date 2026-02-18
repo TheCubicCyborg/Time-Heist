@@ -360,7 +360,6 @@ spot_angle_attenuation = 0.052556094
 
 [node name="Cone Vision" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Guards/NPC" unique_id=1869490121 instance=ExtResource("11_itpn1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28, 0)
-tracking_speed = 5.0
 sight_line_angle = 100.0
 
 [node name="Bamboo" type="Node3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby" unique_id=517443975]
@@ -625,7 +624,7 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 4, 0)
 CAMERA_DISTANCE_BACK = 3.0
 CAMERA_DISTANCE_UP = 3.5
 
-[node name="TimeTravelRect" parent="SubViewportContainer/SubViewport/Camera_pivot/CanvasLayer" parent_id_path=PackedInt32Array(1056852455, 2142778369) index="1" unique_id=2083416251 node_paths=PackedStringArray("subviewport_container")]
+[node name="TimeTravelRect" parent="SubViewportContainer/SubViewport/Camera_pivot/CanvasLayer" parent_id_path=PackedInt32Array(1056852455, 2142778369) index="0" unique_id=2083416251 node_paths=PackedStringArray("subviewport_container")]
 visible = false
 material = SubResource("ShaderMaterial_d6ckj")
 subviewport_container = NodePath("../../../..")
