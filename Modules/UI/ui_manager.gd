@@ -22,7 +22,8 @@ func _process(_delta):
 		cur_ui.handle_input()
 
 func take_control(ui: Control):
-	globals.controller_of_input = globals.InputController.UI
+	if ui != debug_ui:
+		globals.controller_of_input = globals.InputController.UI
 	if cur_ui:
 		ui_stack.append(cur_ui)
 	cur_ui = ui

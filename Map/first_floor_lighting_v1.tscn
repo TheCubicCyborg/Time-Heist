@@ -634,7 +634,7 @@ content = NodePath("Email_Tab")
 [node name="Email_Tab" parent="SubViewportContainer/SubViewport/Computer/Computer UI2/Email/DesktopTab" unique_id=1647248163 instance=ExtResource("25_6uxxh")]
 layout_mode = 1
 focus_mode = 2
-emails = Array[ExtResource("26_adxvu")]([ExtResource("18_ckksj"), ExtResource("20_yhcos"), ExtResource("27_sgxhe")])
+emails = Array[ExtResource("26_adxvu")]([ExtResource("18_ckksj"), ExtResource("20_yhcos")])
 
 [node name="File" parent="SubViewportContainer/SubViewport/Computer/Computer UI2" unique_id=2043219058 node_paths=PackedStringArray("tab") instance=ExtResource("23_epd46")]
 layout_mode = 1

@@ -21,6 +21,11 @@ var player : Player
 var camera : Node3D
 var safe_ratio : float = 1
 
+var time_juice : float = 100
+var max_time_juice : float = 100
+var rewind_drain_per_sec : float = 15
+var rewind_charge_per_sec : float = 10
+
 var allow_interact: bool = true
 
 var cameras : Array[SubViewport]
@@ -53,6 +58,7 @@ var clicking_cursor = preload("res://Assets/UI/Computer/Cursor_click.png")
 func _ready():
 	time_manager = preload("res://Modules/TimeTravel/TimeManager.gd").new()
 	add_child(time_manager)
+	time_juice = 100
 
 func player_caught():
 	get_tree().reload_current_scene()

@@ -7,11 +7,13 @@ var display_time_elapsed: float = 0
 @export var needed_item: Array[PickupItem]
 @export var needed_clearance: Array[globals.Clearances]
 @export var needed_doc: Array[DocumentInfo]
+@export var needed_lever: Array[Lever]
 @export var locked_label : String
 
 #var success = preload("res://Assets/Materials/Interactable/success.tres")
 
 func _ready() -> void:
+	$MeshInstance3D.mesh.material.albedo_color = Color("ee4243")
 	$Label.text = locked_label
 
 func interact():
@@ -29,6 +31,10 @@ func interact():
 		for clearance in needed_clearance:
 			if not global_inventory.has_clearance(clearance):
 				success = false
+	if needed_lever:
+		for lever in needed_lever:
+			if not lever.flipped:
+				success= false
 	if not success:
 		display_note = true
 		$Label.visible = true

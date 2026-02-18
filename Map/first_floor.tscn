@@ -87,6 +87,7 @@ script = ExtResource("1_vkurv")
 cameras = [NodePath("SubViewport"), NodePath("SubViewport2")]
 
 [node name="UI Manager" parent="." unique_id=507236185 instance=ExtResource("1_cr80g")]
+debug_mode = false
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=270912684]
 
