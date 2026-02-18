@@ -23,9 +23,9 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_pressed("rewind"):
-		is_time_traveling = true
 		globals.time_juice = maxf(0.0, globals.time_juice - globals.rewind_drain_per_sec * delta)
-		if globals.time_juice != 0.0:
+		if globals.time_juice > 0.0:
+			is_time_traveling = true
 			rewind(REWIND_MULTIPLIER * delta)
 	elif Input.is_action_pressed("wait"):
 		cur_time += delta * WAIT_MULTIPLIER

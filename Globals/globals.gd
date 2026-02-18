@@ -58,6 +58,7 @@ var clicking_cursor = preload("res://Assets/UI/Computer/Cursor_click.png")
 func _ready():
 	time_manager = preload("res://Modules/TimeTravel/TimeManager.gd").new()
 	add_child(time_manager)
+	time_juice = 100
 
 func player_caught():
 	get_tree().reload_current_scene()

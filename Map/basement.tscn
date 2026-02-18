@@ -1130,8 +1130,7 @@ id = 9
 
 [sub_resource type="Resource" id="Resource_3gpjm"]
 script = ExtResource("23_vpam8")
-start_time = 326.0
-end_time = 386.0
+end_time = 60.0
 duration = 60.0
 metadata/_custom_type_script = "uid://c8pv0a0in0u3y"
 
