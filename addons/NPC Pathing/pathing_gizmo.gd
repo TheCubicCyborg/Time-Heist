@@ -73,6 +73,7 @@ func draw_line(line: PathLine, line_material):
 	return line_midpoint
 
 func _begin_handle_action(id, secondary):
+	deferred_action = GIZMO_ACTION.NONE
 	var path = get_node_3d().path
 	var select_id: int = id
 	if id % 2 == 0:
