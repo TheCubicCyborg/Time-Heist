@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://yd82mkstnr4e" path="res://Assets/Documents/Textures/0_First_Test_Document.png" id="28_x70ib"]
 [ext_resource type="PackedScene" uid="uid://cijyt3whigooo" path="res://Modules/Interaction/Computer/File App/file_tab.tscn" id="29_gh7xj"]
 [ext_resource type="Texture2D" uid="uid://0cjiq2gdh6kt" path="res://Assets/Documents/Textures/3_dictionary.png" id="30_q31yb"]
+[ext_resource type="AudioStream" uid="uid://0g0pdg05gm2m" path="res://Assets/Music/Time Scheist.mp3" id="38_0mrj1"]
 
 [sub_resource type="Gradient" id="Gradient_vgt4j"]
 offsets = PackedFloat32Array(0, 0.1539924, 1)
@@ -82,12 +83,12 @@ ao_texture = ExtResource("4_d6ckj")
 uv1_scale = Vector3(12.5, 12.5, 12.5)
 grow_amount = -4.125
 
-[sub_resource type="Resource" id="Resource_m2r4p"]
+[sub_resource type="Resource" id="Resource_0mrj1"]
 resource_local_to_scene = true
 script = ExtResource("16_ty5h4")
 position = Vector3(0, 0, 21.5)
 
-[sub_resource type="Resource" id="Resource_0mrj1"]
+[sub_resource type="Resource" id="Resource_ty5h4"]
 resource_local_to_scene = true
 script = ExtResource("16_ty5h4")
 position = Vector3(5.75, 0, 21.5)
@@ -95,30 +96,30 @@ time_start = 5.75
 time_end = 5.75
 id = 2
 
-[sub_resource type="Resource" id="Resource_ty5h4"]
-resource_local_to_scene = true
-script = ExtResource("18_0mrj1")
-speed = 1.0
-prev_vertex = SubResource("Resource_m2r4p")
-next_vertex = SubResource("Resource_0mrj1")
-time_end = 5.75
-id = 1
-
 [sub_resource type="Resource" id="Resource_itpn1"]
 resource_local_to_scene = true
 script = ExtResource("18_0mrj1")
 speed = 1.0
 prev_vertex = SubResource("Resource_0mrj1")
-next_vertex = SubResource("Resource_m2r4p")
+next_vertex = SubResource("Resource_ty5h4")
+time_end = 5.75
+id = 1
+
+[sub_resource type="Resource" id="Resource_6tve6"]
+resource_local_to_scene = true
+script = ExtResource("18_0mrj1")
+speed = 1.0
+prev_vertex = SubResource("Resource_ty5h4")
+next_vertex = SubResource("Resource_0mrj1")
 is_loop_line = true
 time_start = 5.75
 time_end = 11.5
 id = 3
 
-[sub_resource type="Resource" id="Resource_6tve6"]
+[sub_resource type="Resource" id="Resource_8no5w"]
 resource_local_to_scene = true
 script = ExtResource("18_6tve6")
-path_components = Array[ExtResource("15_0mrj1")]([SubResource("Resource_m2r4p"), SubResource("Resource_ty5h4"), SubResource("Resource_0mrj1"), SubResource("Resource_itpn1")])
+path_components = Array[ExtResource("15_0mrj1")]([SubResource("Resource_0mrj1"), SubResource("Resource_itpn1"), SubResource("Resource_ty5h4"), SubResource("Resource_6tve6")])
 loop = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_644tb"]
@@ -339,7 +340,7 @@ spot_angle_attenuation = 2.4622889
 
 [node name="NPC" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Guards" unique_id=854805088 instance=ExtResource("14_m2r4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.5)
-path = SubResource("Resource_6tve6")
+path = SubResource("Resource_8no5w")
 
 [node name="ConeMesh" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Guards/NPC" unique_id=175379756]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 0.605, 0, -1, -2.644539e-08, 0, 1.2784806, 1.6110077)
@@ -735,6 +736,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_6y1c3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.058178, 0, 21.921896)
 process_material = SubResource("ParticleProcessMaterial_m2r4p")
 draw_pass_1 = SubResource("QuadMesh_0mrj1")
+
+[node name="OST" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport" unique_id=889972660]
+stream = ExtResource("38_0mrj1")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
 
 [editable path="SubViewportContainer/SubViewport/Rooms/FrontDeskBackRoom/Doors/Behind Desk Door1"]
 [editable path="SubViewportContainer/SubViewport/Rooms/FrontDeskBackRoom/Doors/Behind Desk Door1/Door_v20"]

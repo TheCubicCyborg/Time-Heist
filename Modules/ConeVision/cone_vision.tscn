@@ -2,6 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://drgbpq2p48wou" path="res://Effects/laser.gdshader" id="1_kdpmb"]
 [ext_resource type="Script" uid="uid://dydv15dtbt8or" path="res://Modules/ConeVision/laser_cylinder.gd" id="2_n627y"]
+[ext_resource type="AudioStream" uid="uid://cuq3predooygd" path="res://Assets/SFX/laser.ogg" id="3_1cksi"]
 
 [sub_resource type="GDScript" id="GDScript_23e0v"]
 resource_name = "cone_vision"
@@ -15,6 +16,7 @@ var player_spotted
 @onready var laser_mesh: ImmediateMesh = laser.mesh
 
 @onready var laser_node : MeshInstance3D = $LaserCylinder
+@onready var laser_sfx : AudioStreamPlayer = $AudioStreamPlayer
 
 var time_detecting: float = 0
 
@@ -81,16 +83,20 @@ func _process(delta: float) -> void:
 				time_detecting += delta
 				laser_mesh.clear_surfaces()
 				draw_line()
+				if laser_sfx.playing == false:
+					laser_sfx.play()
 			else:
 				time_detecting = 0
 				laser_mesh.clear_surfaces()
 				laser_node.visible = false
+				laser_sfx.stop()
 				
 			globals.safe_ratio = (time_till_caught - time_detecting) / time_till_caught
 			
 			if time_detecting >= time_till_caught:
 				caught()
 		else:
+			laser_sfx.stop()
 			laser_node.visible = false
 
 func _on_body_entered(body: Node3D) -> void:
@@ -142,7 +148,6 @@ height = 1.0
 
 [node name="Cone Vision" type="Area3D" unique_id=1869490121]
 script = SubResource("GDScript_23e0v")
-tracking_speed = null
 sight_line_angle = 129.9
 sight_line_radius = 14.825
 smaller_sight_line_radius = 0.0
@@ -167,6 +172,11 @@ mesh = SubResource("ImmediateMesh_23e0v")
 visible = false
 mesh = SubResource("CylinderMesh_kdpmb")
 script = ExtResource("2_n627y")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=935075018]
+stream = ExtResource("3_1cksi")
+volume_db = -5.0
+parameters/looping = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
