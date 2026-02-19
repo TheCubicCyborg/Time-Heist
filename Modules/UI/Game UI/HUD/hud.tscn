@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dc2y6bypod0bh" path="res://Assets/UI/HUD/timemachineuiassetCIRCLE (1).png" id="2_6qein"]
 
 [node name="HUD" type="Control" unique_id=528506545]
+z_index = 4
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

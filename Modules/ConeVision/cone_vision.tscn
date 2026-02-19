@@ -77,6 +77,10 @@ func create_mesh():
 	
 func _process(delta: float) -> void:
 	if not Engine.is_editor_hint():
+		if globals.time_manager.is_time_traveling:
+			laser_node.visible = false
+			laser_sfx.stop()
+			return
 		if player_spotted:
 			sight_checker.look_at(Vector3(globals.player.global_position.x, 1, globals.player.global_position.z))
 			

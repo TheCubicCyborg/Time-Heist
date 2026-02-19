@@ -91,9 +91,9 @@ position = Vector3(0, 0, 21.5)
 [sub_resource type="Resource" id="Resource_ty5h4"]
 resource_local_to_scene = true
 script = ExtResource("16_ty5h4")
-position = Vector3(5.75, 0, 21.5)
-time_start = 5.75
-time_end = 5.75
+position = Vector3(5, 0, 21.5)
+time_start = 5.0
+time_end = 5.0
 id = 2
 
 [sub_resource type="Resource" id="Resource_itpn1"]
@@ -102,7 +102,7 @@ script = ExtResource("18_0mrj1")
 speed = 1.0
 prev_vertex = SubResource("Resource_0mrj1")
 next_vertex = SubResource("Resource_ty5h4")
-time_end = 5.75
+time_end = 5.0
 id = 1
 
 [sub_resource type="Resource" id="Resource_6tve6"]
@@ -112,8 +112,8 @@ speed = 1.0
 prev_vertex = SubResource("Resource_ty5h4")
 next_vertex = SubResource("Resource_0mrj1")
 is_loop_line = true
-time_start = 5.75
-time_end = 11.5
+time_start = 5.0
+time_end = 10.0
 id = 3
 
 [sub_resource type="Resource" id="Resource_8no5w"]
@@ -121,6 +121,14 @@ resource_local_to_scene = true
 script = ExtResource("18_6tve6")
 path_components = Array[ExtResource("15_0mrj1")]([SubResource("Resource_0mrj1"), SubResource("Resource_itpn1"), SubResource("Resource_ty5h4"), SubResource("Resource_6tve6")])
 loop = true
+metadata/_custom_type_script = "uid://bqksnw54upvlw"
+
+[sub_resource type="Resource" id="Resource_6rmyi"]
+resource_local_to_scene = true
+script = ExtResource("18_6tve6")
+path_components = Array[ExtResource("15_0mrj1")]([SubResource("Resource_0mrj1"), SubResource("Resource_itpn1"), SubResource("Resource_ty5h4"), SubResource("Resource_6tve6")])
+loop = true
+metadata/_custom_type_script = "uid://bqksnw54upvlw"
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_644tb"]
 top_radius = 0.05
@@ -166,9 +174,91 @@ script = ExtResource("1_mil7u")
 cameras = [null, null]
 
 [node name="UI Manager" parent="." unique_id=1223697878 instance=ExtResource("2_6y1c3")]
+z_index = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=427487649]
 environment = SubResource("Environment_mil7u")
+
+[node name="Computers" type="Control" parent="." unique_id=918493176]
+z_index = 4
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Computer UI2" parent="Computers" unique_id=1006750746 node_paths=PackedStringArray("icons") instance=ExtResource("22_2gpm5")]
+visibility_layer = 2
+layout_mode = 1
+offset_right = 20.0
+offset_bottom = 20.0
+icons = [NodePath("Email"), NodePath("File"), NodePath("File2")]
+
+[node name="Email" parent="Computers/Computer UI2" unique_id=35271304 node_paths=PackedStringArray("tab") instance=ExtResource("23_epd46")]
+layout_mode = 1
+offset_left = -480.0
+offset_top = -280.0
+offset_right = -480.0
+offset_bottom = -280.0
+override_title = "Email"
+item_type = 1
+tab = NodePath("DesktopTab")
+
+[node name="DesktopTab" parent="Computers/Computer UI2/Email" unique_id=1908874106 node_paths=PackedStringArray("content") instance=ExtResource("24_twad6")]
+layout_mode = 1
+offset_left = -178.0
+offset_top = -132.0
+offset_right = 1022.0
+offset_bottom = 668.0
+content = NodePath("Email_Tab")
+
+[node name="Email_Tab" parent="Computers/Computer UI2/Email/DesktopTab" unique_id=1647248163 instance=ExtResource("25_6uxxh")]
+layout_mode = 1
+focus_mode = 2
+emails = Array[ExtResource("26_adxvu")]([ExtResource("18_ckksj"), ExtResource("20_yhcos")])
+
+[node name="File" parent="Computers/Computer UI2" unique_id=2043219058 node_paths=PackedStringArray("tab") instance=ExtResource("23_epd46")]
+layout_mode = 1
+override_icon = ExtResource("28_x70ib")
+override_title = "First Test Document"
+item_type = 3
+file = ExtResource("18_ckksj")
+tab = NodePath("Computer Tab")
+
+[node name="Computer Tab" parent="Computers/Computer UI2/File" unique_id=1833081613 node_paths=PackedStringArray("content") instance=ExtResource("24_twad6")]
+layout_mode = 1
+offset_left = -600.0
+offset_top = -400.0
+offset_right = 600.0
+offset_bottom = 400.0
+content = NodePath("File Tab")
+
+[node name="File Tab" parent="Computers/Computer UI2/File/Computer Tab" unique_id=882121023 instance=ExtResource("29_gh7xj")]
+layout_mode = 1
+file = ExtResource("18_ckksj")
+
+[node name="File2" parent="Computers/Computer UI2" unique_id=81061955 node_paths=PackedStringArray("tab") instance=ExtResource("23_epd46")]
+layout_mode = 1
+offset_left = 714.0
+offset_top = -131.0
+offset_right = 714.0
+offset_bottom = -131.0
+override_icon = ExtResource("30_q31yb")
+override_title = "Dictionary"
+item_type = 3
+file = ExtResource("27_sgxhe")
+tab = NodePath("Computer Tab")
+
+[node name="Computer Tab" parent="Computers/Computer UI2/File2" unique_id=11484157 node_paths=PackedStringArray("content") instance=ExtResource("24_twad6")]
+layout_mode = 1
+content = NodePath("File Tab")
+
+[node name="File Tab" parent="Computers/Computer UI2/File2/Computer Tab" unique_id=931061465 instance=ExtResource("29_gh7xj")]
+layout_mode = 1
+offset_top = -1.0
+offset_bottom = -1.0
+file = ExtResource("27_sgxhe")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=520587131]
 texture_filter = 1
@@ -340,7 +430,9 @@ spot_angle_attenuation = 2.4622889
 
 [node name="NPC" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Guards" unique_id=854805088 instance=ExtResource("14_m2r4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.5)
-path = SubResource("Resource_8no5w")
+branch_paths = Array[ExtResource("18_6tve6")]([SubResource("Resource_8no5w")])
+follow_branch = 0
+path = SubResource("Resource_6rmyi")
 
 [node name="ConeMesh" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Rooms/Main Lobby/Guards/NPC" unique_id=175379756]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 0.605, 0, -1, -2.644539e-08, 0, 1.2784806, 1.6110077)
@@ -626,10 +718,11 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 4, 0)
 CAMERA_DISTANCE_BACK = 3.0
 CAMERA_DISTANCE_UP = 3.5
 
-[node name="TimeTravelRect" parent="SubViewportContainer/SubViewport/Camera_pivot/CanvasLayer" parent_id_path=PackedInt32Array(1056852455, 2142778369) index="0" unique_id=2083416251 node_paths=PackedStringArray("subviewport_container")]
-visible = false
+[node name="TimeTravelRect" parent="SubViewportContainer/SubViewport/Camera_pivot/CanvasLayer" parent_id_path=PackedInt32Array(1056852455, 2142778369) index="0" unique_id=2083416251]
 material = SubResource("ShaderMaterial_d6ckj")
-subviewport_container = NodePath("../../../..")
+
+[node name="TimeTravel" parent="SubViewportContainer/SubViewport/Camera_pivot/CanvasLayer/TimeTravelRect" index="0" unique_id=256031849]
+volume_db = -20.0
 
 [node name="ColorRect" parent="SubViewportContainer/SubViewport/Camera_pivot/CanvasLayer" parent_id_path=PackedInt32Array(1056852455, 2142778369) index="1" unique_id=14214742]
 modulate = Color(1, 0.68235296, 0.74509805, 0)
@@ -654,75 +747,7 @@ texture = ExtResource("19_2yvpj")
 
 [node name="Computer" parent="SubViewportContainer/SubViewport" unique_id=1047723789 node_paths=PackedStringArray("computer_ui") instance=ExtResource("21_qhv1s")]
 transform = Transform3D(-0.3362735, 0, -0.94176435, 0, 1, 0, 0.94176435, 0, -0.3362735, -3.1650617, 0.9756807, 6.8823137)
-computer_ui = NodePath("Computer UI2")
-
-[node name="Computer UI2" parent="SubViewportContainer/SubViewport/Computer" unique_id=1006750746 node_paths=PackedStringArray("icons") instance=ExtResource("22_2gpm5")]
-icons = [NodePath("Email"), NodePath("File"), NodePath("File2")]
-
-[node name="Email" parent="SubViewportContainer/SubViewport/Computer/Computer UI2" unique_id=35271304 node_paths=PackedStringArray("tab") instance=ExtResource("23_epd46")]
-layout_mode = 1
-offset_left = -480.0
-offset_top = -280.0
-offset_right = -480.0
-offset_bottom = -280.0
-override_title = "Email"
-item_type = 1
-tab = NodePath("DesktopTab")
-
-[node name="DesktopTab" parent="SubViewportContainer/SubViewport/Computer/Computer UI2/Email" unique_id=1908874106 node_paths=PackedStringArray("content") instance=ExtResource("24_twad6")]
-layout_mode = 1
-offset_left = -178.0
-offset_top = -132.0
-offset_right = 1022.0
-offset_bottom = 668.0
-content = NodePath("Email_Tab")
-
-[node name="Email_Tab" parent="SubViewportContainer/SubViewport/Computer/Computer UI2/Email/DesktopTab" unique_id=1647248163 instance=ExtResource("25_6uxxh")]
-layout_mode = 1
-focus_mode = 2
-emails = Array[ExtResource("26_adxvu")]([ExtResource("18_ckksj"), ExtResource("20_yhcos")])
-
-[node name="File" parent="SubViewportContainer/SubViewport/Computer/Computer UI2" unique_id=2043219058 node_paths=PackedStringArray("tab") instance=ExtResource("23_epd46")]
-layout_mode = 1
-override_icon = ExtResource("28_x70ib")
-override_title = "First Test Document"
-item_type = 3
-file = ExtResource("18_ckksj")
-tab = NodePath("Computer Tab")
-
-[node name="Computer Tab" parent="SubViewportContainer/SubViewport/Computer/Computer UI2/File" unique_id=1833081613 node_paths=PackedStringArray("content") instance=ExtResource("24_twad6")]
-layout_mode = 1
-offset_left = -600.0
-offset_top = -400.0
-offset_right = 600.0
-offset_bottom = 400.0
-content = NodePath("File Tab")
-
-[node name="File Tab" parent="SubViewportContainer/SubViewport/Computer/Computer UI2/File/Computer Tab" unique_id=882121023 instance=ExtResource("29_gh7xj")]
-layout_mode = 1
-file = ExtResource("18_ckksj")
-
-[node name="File2" parent="SubViewportContainer/SubViewport/Computer/Computer UI2" unique_id=81061955 node_paths=PackedStringArray("tab") instance=ExtResource("23_epd46")]
-layout_mode = 1
-offset_left = 714.0
-offset_top = -131.0
-offset_right = 714.0
-offset_bottom = -131.0
-override_icon = ExtResource("30_q31yb")
-override_title = "Dictionary"
-item_type = 3
-file = ExtResource("27_sgxhe")
-tab = NodePath("Computer Tab")
-
-[node name="Computer Tab" parent="SubViewportContainer/SubViewport/Computer/Computer UI2/File2" unique_id=11484157 node_paths=PackedStringArray("content") instance=ExtResource("24_twad6")]
-layout_mode = 1
-content = NodePath("File Tab")
-
-[node name="File Tab" parent="SubViewportContainer/SubViewport/Computer/Computer UI2/File2/Computer Tab" unique_id=931061465 instance=ExtResource("29_gh7xj")]
-layout_mode = 1
-offset_top = -1.0
-offset_bottom = -1.0
-file = ExtResource("27_sgxhe")
+computer_ui = NodePath("../../../Computers/Computer UI2")
 
 [node name="Light Strip" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=85698757]
 visible = false

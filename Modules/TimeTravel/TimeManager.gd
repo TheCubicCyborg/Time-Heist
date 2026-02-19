@@ -24,6 +24,7 @@ func _ready():
 func _physics_process(delta):
 	if Input.is_action_pressed("rewind"):
 		globals.time_juice = maxf(0.0, globals.time_juice - globals.rewind_drain_per_sec * delta)
+		print("time juice", globals.time_juice)
 		if globals.time_juice > 0.0:
 			is_time_traveling = true
 			rewind(REWIND_MULTIPLIER * delta)
