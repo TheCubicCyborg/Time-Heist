@@ -13,6 +13,7 @@ func _ready() -> void:
 	
 func add_item(item:PickupItem):
 	if not has_item(item):
+		print("added item to the global inventory")
 		items.append(item)
 
 func has_item(item:PickupItem):

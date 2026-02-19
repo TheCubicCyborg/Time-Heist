@@ -21,8 +21,11 @@ class_name Generic_Door
 ## animation time in seconds
 const COOLDOWN_TIME = 1.25 
 var on_cooldown : bool = false
+var was_locked : bool = false #TEST
 
 func _ready():
+	if is_locked:
+		was_locked = true
 	if is_open:
 		open()
 
@@ -47,7 +50,10 @@ func unlock():
 func toggle_lock():
 	is_locked = not is_locked
 
-func interact():
+func interact(person : Node):
+	if person != globals.player and was_locked:
+		print("in here")
+		is_locked = false
 	if on_cooldown:
 		return
 		
@@ -67,6 +73,9 @@ func interact():
 		animation_player.play("Door_Action_Locked")
 		$DoorLock.play()
 		return true
+		
+	if person != globals.player and was_locked:
+		is_locked = true
 
 
 func _on_test_puzzle_puzzle_passed():
