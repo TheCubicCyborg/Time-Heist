@@ -41,3 +41,5 @@ theme_override_font_sizes/font_size = 45
 text = "Locked!"
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[connection signal="anon_interacted" from="Interactable" to="." method="interact"]

@@ -18,7 +18,7 @@ var can_interact: bool = true
 
 func _process(_delta):
 	if PlayerInput.is_action_just_pressed("player_interact") and targetted:
-		targetted.interact()
+		targetted.interact(globals.player)
 
 func _physics_process(_delta):
 	if in_range_interactables and can_interact:

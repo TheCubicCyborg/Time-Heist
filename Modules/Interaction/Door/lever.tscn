@@ -28,3 +28,5 @@ metadata/_custom_type_script = "uid://d0afbfeblscar"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1978443951]
 shape = SubResource("BoxShape3D_xq026")
+
+[connection signal="anon_interacted" from="Interactable" to="." method="interact"]

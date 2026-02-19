@@ -17,7 +17,7 @@ animation_player = NodePath("Door_v20/AnimationPlayer")
 
 [node name="Door RB" type="StaticBody3D" parent="." unique_id=1743068897]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.125)
-collision_layer = 16
+collision_layer = 17
 collision_mask = 0
 
 [node name="PhysicalCollider" type="CollisionShape3D" parent="Door RB" unique_id=925331689]
@@ -36,6 +36,7 @@ shape = SubResource("BoxShape3D_nk12b")
 [node name="Door_v20" parent="." unique_id=1158944372 instance=ExtResource("2_gq3nt")]
 transform = Transform3D(1.03, 0, 0, 0, 1.03, 0, 0, 0, 1.03, -0.47409245, 0, 0.075)
 
+[connection signal="anon_interacted" from="Door RB/Interactable" to="." method="interact"]
 [node name="DoorOpen" type="AudioStreamPlayer" parent="." unique_id=1949909753]
 stream = ExtResource("4_gx118")
 volume_db = -15.0

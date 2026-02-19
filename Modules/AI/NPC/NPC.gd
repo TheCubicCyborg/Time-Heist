@@ -43,7 +43,7 @@ var start_pos: Vector3
 
 
 func interact_with(nodepath: NodePath):
-	get_node(nodepath).interact()
+	get_node(nodepath).interact(self)
 
 func _ready():
 	if not Engine.is_editor_hint():
