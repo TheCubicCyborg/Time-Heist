@@ -74,6 +74,7 @@ func _process(_delta):
 					cur_action = cur_component.action(cur_action_ix)
 			elif cur_component is PathLine:
 				position = cur_component.get_position_at_time(cur_time) + start_pos
+				look_at(position + cur_component.get_direction())
 			if cur_time < cur_component.time_end:
 				reached_path_end = false
 		elif last_processed_time < cur_time: # moved forward in time
@@ -100,6 +101,7 @@ func _process(_delta):
 				elif cur_component is PathLine:
 					#print("pos from path:",cur_component.get_position_at_time(cur_time), " start y: ", start_y)
 					position = cur_component.get_position_at_time(cur_time) + start_pos
+					look_at(position + cur_component.get_direction())
 		else: #time did not move?
 			pass
 		last_processed_time = cur_time

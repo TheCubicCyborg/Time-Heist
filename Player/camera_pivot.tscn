@@ -21,15 +21,6 @@ script = ExtResource("1_ehrhw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2142778369]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1091248617]
-modulate = Color(1, 0.26666668, 0.2784314, 0)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
 [node name="TimeTravelRect" type="ColorRect" parent="CanvasLayer" unique_id=2083416251]
 material = SubResource("ShaderMaterial_fvf84")
 anchors_preset = 15
@@ -39,6 +30,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("3_fvf84")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=14214742]
+modulate = Color(1, 0.684147, 0.7443726, 1)
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=319537585]
 collision_mask = 8

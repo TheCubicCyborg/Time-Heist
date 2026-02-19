@@ -29,10 +29,14 @@ func _ready():
 func open():
 	collision_body.process_mode = Node.PROCESS_MODE_DISABLED
 	#mesh.visible = false
+	$DoorOpen.pitch_scale = 0.6
+	$DoorOpen.play()
 
 func close():
 	collision_body.process_mode = Node.PROCESS_MODE_INHERIT
 	#mesh.visible = true
+	$DoorOpen.pitch_scale = 1.0
+	$DoorOpen.play()
 
 func lock():
 	is_locked = true
@@ -61,6 +65,7 @@ func interact():
 		return false
 	else:
 		animation_player.play("Door_Action_Locked")
+		$DoorLock.play()
 		return true
 
 

@@ -40,8 +40,10 @@ func handle_input():
 		#toggle_menu(camera_ui)
 	if Input.is_action_just_pressed("debug_button"):
 		toggle_menu(debug_ui)
+		$ButtonMove.play()
 	if Input.is_action_just_pressed("device_menu"):
 		toggle_menu(device_menu)
+		$ButtonMove.play()
 
 func toggle_menu(ui:UI):
 	if not ui.is_open:
@@ -54,3 +56,4 @@ func set_menu(ui:UI,value:bool):
 		ui.open()
 	else:
 		ui.close()
+	
