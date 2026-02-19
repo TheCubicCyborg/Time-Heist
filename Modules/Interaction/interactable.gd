@@ -11,6 +11,9 @@ var invalid_animation_info: Array = [0.2,0,3,0,false] #blink duration, blink tim
 
 var is_targetted: bool = false
 
+signal interacted_by(interactor)
+signal anon_interacted
+
 func targetted():
 	is_targetted = true
 	if mesh and not playing_invalid_animation:
@@ -27,9 +30,9 @@ func highlight():
 func remove_highlight():
 	mesh.material_overlay = null
 
-func interact():
-	if interact_object.interact():
-		playing_invalid_animation = true
+func interact(person:Node = null):
+	interacted_by.emit(person)
+	anon_interacted.emit()
 
 func _process(delta):
 	if playing_invalid_animation:
