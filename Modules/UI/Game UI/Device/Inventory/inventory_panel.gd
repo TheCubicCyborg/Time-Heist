@@ -8,6 +8,7 @@ var inventory_slot : PackedScene = preload("res://Modules/UI/Game UI/Device/Inve
 
 func _ready() -> void:
 	globals.connect("collect_item", collect_item)
+	globals.connect("remove_item", remove_item)
 	globals.connect("collect_clearance", collect_clearance)
 
 #region items
@@ -18,6 +19,12 @@ func collect_item(item:PickupItem):
 	slot.set_data(item)
 	slot.mouse_entered.connect(view_info.bind(slot.item))
 	slot.mouse_exited.connect(empty_info)
+
+func remove_item(requested_item:PickupItem):
+	for item_slot in inventory_grid.get_children():
+		if item_slot.item == requested_item:
+			item_slot.queue_free()
+			return # removed the FIRST item
 
 func view_info(item: PickupItem):
 	item_info.text = item.description

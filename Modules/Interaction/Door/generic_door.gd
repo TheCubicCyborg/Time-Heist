@@ -51,12 +51,14 @@ func toggle_lock():
 	is_locked = not is_locked
 
 func interact(person : Node):
-	if person != globals.player and was_locked:
-		print("in here")
-		is_locked = false
-	if on_cooldown:
-		return
+	if person == globals.player and not globals.player.can_open_any_door:
+		print("person interact with")
+		attempt_door_open()
+	else:
+		print("npc interact with")
+		door_open()
 		
+func attempt_door_open(): # for if locked
 	on_cooldown = true
 	get_tree().create_timer(COOLDOWN_TIME).timeout.connect(func(): on_cooldown = false)
 		
@@ -73,9 +75,16 @@ func interact(person : Node):
 		animation_player.play("Door_Action_Locked")
 		$DoorLock.play()
 		return true
-		
-	if person != globals.player and was_locked:
-		is_locked = true
+
+func door_open(): # force open door
+	if is_open:
+		is_open = false
+		animation_player.play("Door_Action_Close")
+		return false
+	else:
+		is_open = true
+		animation_player.play("Door_Action_Open")
+		return false
 
 
 func _on_test_puzzle_puzzle_passed():

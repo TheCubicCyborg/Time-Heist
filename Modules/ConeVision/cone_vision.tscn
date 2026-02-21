@@ -77,7 +77,7 @@ func create_mesh():
 	
 func _process(delta: float) -> void:
 	if not Engine.is_editor_hint():
-		if player_spotted:
+		if player_spotted and globals.player.can_be_seen:
 			sight_checker.look_at(Vector3(globals.player.global_position.x, 1, globals.player.global_position.z))
 			
 			if sight_checker.get_collider() == globals.player:

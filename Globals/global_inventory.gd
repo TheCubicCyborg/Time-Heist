@@ -8,6 +8,7 @@ signal update_device_files
 
 func _ready() -> void:
 	globals.connect("collect_item",add_item)
+	globals.connect("remove_item", remove_item)
 	globals.connect("added_doc", add_doc)
 	globals.connect("collect_clearance", add_clearance)
 	
@@ -15,6 +16,10 @@ func add_item(item:PickupItem):
 	if not has_item(item):
 		print("added item to the global inventory")
 		items.append(item)
+
+func remove_item(item:PickupItem):
+	if has_item(item):
+		items.erase(item)
 
 func has_item(item:PickupItem):
 	return items.has(item)

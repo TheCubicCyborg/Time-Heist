@@ -21,6 +21,8 @@ var is_crouching := false
 var can_rotate := true
 
 var can_move: bool = true
+var can_be_seen: bool = true
+var can_open_any_door: bool = false
 
 #region Movement Export Variables
 var speed : float

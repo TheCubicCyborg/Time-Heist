@@ -70,6 +70,7 @@ func player_caught():
 #region Signals
 signal added_doc(doc : DocumentInfo)
 signal collect_item(item : PickupItem)
+signal remove_item(item : PickupItem)
 signal collect_clearance(clearance : Clearances)
 signal use_item(item : PickupItem)
 #endregion

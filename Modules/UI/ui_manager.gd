@@ -40,6 +40,8 @@ func handle_input():
 		#toggle_menu(camera_ui)
 	if Input.is_action_just_pressed("debug_button"):
 		toggle_menu(debug_ui)
+		globals.player.can_be_seen = not globals.player.can_be_seen
+		globals.player.can_open_any_door = not globals.player.can_open_any_door
 		$ButtonMove.play()
 	if Input.is_action_just_pressed("device_menu"):
 		toggle_menu(device_menu)
