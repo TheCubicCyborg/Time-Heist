@@ -42,6 +42,9 @@ func handle_input():
 		toggle_menu(debug_ui)
 		globals.player.can_be_seen = not globals.player.can_be_seen
 		globals.player.can_open_any_door = not globals.player.can_open_any_door
+		globals.player.infinite_juice = not globals.player.infinite_juice
+		globals.time_juice = globals.max_time_juice
+		globals.player.set_collision_mask_value(4, not globals.player.get_collision_mask_value(4))
 		$ButtonMove.play()
 	if Input.is_action_just_pressed("device_menu"):
 		toggle_menu(device_menu)

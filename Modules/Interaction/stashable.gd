@@ -2,8 +2,10 @@ extends Node
 class_name Stashable
 
 var has_item : bool
-@export var held_item : PickupItem = null:
+@export var held_item : PickupItem = null : #TIMEVAR
 	set(value):
+		if globals.time_manager and globals.time_manager.logging:
+			globals.time_manager.timelog(self,"held_item",held_item,value)
 		held_item = value
 		if value:
 			has_item = true

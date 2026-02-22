@@ -71,6 +71,7 @@ func player_caught():
 signal added_doc(doc : DocumentInfo)
 signal collect_item(item : PickupItem)
 signal remove_item(item : PickupItem)
+signal update_items #used to make items work with time
 signal collect_clearance(clearance : Clearances)
 signal use_item(item : PickupItem)
 #endregion

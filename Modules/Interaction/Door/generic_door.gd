@@ -21,13 +21,9 @@ class_name Generic_Door
 ## animation time in seconds
 const COOLDOWN_TIME = 1.25 
 var on_cooldown : bool = false
-var was_locked : bool = false #TEST
 
 func _ready():
-	if is_locked:
-		was_locked = true
-	if is_open:
-		open()
+	open() if is_open else close()
 
 func open():
 	collision_body.process_mode = Node.PROCESS_MODE_DISABLED

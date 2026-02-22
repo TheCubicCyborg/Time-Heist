@@ -23,6 +23,7 @@ var can_rotate := true
 var can_move: bool = true
 var can_be_seen: bool = true
 var can_open_any_door: bool = false
+var infinite_juice: bool = false
 
 #region Movement Export Variables
 var speed : float
