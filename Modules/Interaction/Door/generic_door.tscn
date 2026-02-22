@@ -36,7 +36,6 @@ shape = SubResource("BoxShape3D_nk12b")
 [node name="Door_v20" parent="." unique_id=1158944372 instance=ExtResource("2_gq3nt")]
 transform = Transform3D(1.03, 0, 0, 0, 1.03, 0, 0, 0, 1.03, -0.47409245, 0, 0.075)
 
-[connection signal="anon_interacted" from="Door RB/Interactable" to="." method="interact"]
 [node name="DoorOpen" type="AudioStreamPlayer" parent="." unique_id=1949909753]
 stream = ExtResource("4_gx118")
 volume_db = -15.0
@@ -44,5 +43,7 @@ volume_db = -15.0
 [node name="DoorLock" type="AudioStreamPlayer" parent="." unique_id=1517413505]
 stream = ExtResource("5_iwxtq")
 volume_db = -22.0
+
+[connection signal="interacted_by" from="Door RB/Interactable" to="." method="interact"]
 
 [editable path="Door_v20"]

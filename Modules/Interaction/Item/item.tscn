@@ -17,3 +17,5 @@ interact_object = NodePath("..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=555249436]
 shape = SubResource("BoxShape3D_iea5r")
+
+[connection signal="anon_interacted" from="Interactable" to="." method="interact"]
