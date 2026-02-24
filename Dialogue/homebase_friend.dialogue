@@ -3,7 +3,7 @@ Lauren: Hi friend
 Linda: This is my other personality
 Linda: Do you want to play the game?
 - Yes
-	do SceneManager.change_scene(SceneManager.Scene.GAMEPLAY)
+	Lauren: Go to the left
 	=> END
 - No
 	Lauren: Ok bye.. => END

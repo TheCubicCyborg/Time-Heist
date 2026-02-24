@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/camera_pivot.tscn" id="7_djhyv"]
 [ext_resource type="PackedScene" uid="uid://b64t4twgcdips" path="res://Modules/Interaction/interactable.tscn" id="8_gjqgy"]
 [ext_resource type="Script" uid="uid://cx0ieu0m32vi" path="res://Scenes/Homebase/friend.gd" id="8_urm2d"]
+[ext_resource type="Script" uid="uid://du7w2m0hi52ek" path="res://Scenes/Homebase/leave_area.gd" id="10_li6v2"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_hfwyr"]
 
@@ -30,6 +31,9 @@ grow_amount = -4.125
 [sub_resource type="BoxShape3D" id="BoxShape3D_urm2d"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_djhyv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_li6v2"]
+size = Vector3(6.330139, 2.790039, 5.504776)
 
 [node name="Homebase" type="Node3D" unique_id=1137310330]
 
@@ -66,3 +70,14 @@ shape = SubResource("BoxShape3D_urm2d")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Friend" unique_id=1464206721]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5.0637712)
 mesh = SubResource("CapsuleMesh_djhyv")
+
+[node name="Leave Area" type="Node3D" parent="." unique_id=409060452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.21616, 0, -9.915241)
+script = ExtResource("10_li6v2")
+
+[node name="Area3D" type="Area3D" parent="Leave Area" unique_id=600477584]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Leave Area/Area3D" unique_id=1557897613]
+shape = SubResource("BoxShape3D_li6v2")
+
+[connection signal="body_entered" from="Leave Area/Area3D" to="Leave Area" method="_on_area_3d_body_entered"]
