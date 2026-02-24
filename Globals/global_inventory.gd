@@ -24,9 +24,9 @@ func _ready() -> void:
 func add_item(item:PickupItem):
 	if not has_item(item):
 		print("added item to the global inventory: ", item)
+		globals.new_in_device.emit(true, globals.Device_Tabs.Inventory) # for device notif
 		var temp_items = items.duplicate(1)
 		temp_items.append(item)
-		print("before adding: ", items)
 		items = temp_items
 
 func remove_item(item:PickupItem):
@@ -42,6 +42,7 @@ func add_doc(doc:DocumentInfo):
 	if not has_doc(doc):
 		documents.append(doc)
 		emit_signal("update_device_files", doc)
+		globals.new_in_device.emit(true, globals.Device_Tabs.Files) # for device notif
 	
 func has_doc(doc:DocumentInfo):
 	return documents.has(doc)
@@ -49,6 +50,7 @@ func has_doc(doc:DocumentInfo):
 func add_clearance(clearance:globals.Clearances):
 	if not has_clearance(clearance):
 		clearances.append(clearance)
+		globals.new_in_device.emit(true, globals.Device_Tabs.Inventory) # for device notif
 	
 func has_clearance(clearance:globals.Clearances):
 	return clearances.has(clearance)

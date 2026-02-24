@@ -87,7 +87,7 @@ func _process(delta: float) -> void:
 				if laser_sfx.playing == false:
 					laser_sfx.play()
 			else:
-				time_detecting = 0
+				time_detecting -= delta
 				laser_mesh.clear_surfaces()
 				laser_node.visible = false
 				laser_sfx.stop()
