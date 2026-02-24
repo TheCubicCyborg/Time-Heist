@@ -23,16 +23,19 @@ const COOLDOWN_TIME = 1.25
 var on_cooldown : bool = false
 
 func _ready():
-	if is_open:
-		open()
+	open() if is_open else close()
 
 func open():
 	collision_body.process_mode = Node.PROCESS_MODE_DISABLED
 	#mesh.visible = false
+	$DoorOpen.pitch_scale = 0.6
+	$DoorOpen.play()
 
 func close():
 	collision_body.process_mode = Node.PROCESS_MODE_INHERIT
 	#mesh.visible = true
+	$DoorOpen.pitch_scale = 1.0
+	$DoorOpen.play()
 
 func lock():
 	is_locked = true
@@ -43,10 +46,15 @@ func unlock():
 func toggle_lock():
 	is_locked = not is_locked
 
-func interact():
-	if on_cooldown:
-		return
+func interact(person : Node):
+	if person == globals.player and not globals.player.can_open_any_door:
+		print("person interact with")
+		attempt_door_open()
+	else:
+		print("npc interact with")
+		door_open()
 		
+func attempt_door_open(): # for if locked
 	on_cooldown = true
 	get_tree().create_timer(COOLDOWN_TIME).timeout.connect(func(): on_cooldown = false)
 		
@@ -61,7 +69,18 @@ func interact():
 		return false
 	else:
 		animation_player.play("Door_Action_Locked")
+		$DoorLock.play()
 		return true
+
+func door_open(): # force open door
+	if is_open:
+		is_open = false
+		animation_player.play("Door_Action_Close")
+		return false
+	else:
+		is_open = true
+		animation_player.play("Door_Action_Open")
+		return false
 
 
 func _on_test_puzzle_puzzle_passed():

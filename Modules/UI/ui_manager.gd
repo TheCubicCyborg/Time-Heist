@@ -22,7 +22,8 @@ func _process(_delta):
 		cur_ui.handle_input()
 
 func take_control(ui: Control):
-	globals.controller_of_input = globals.InputController.UI
+	if ui != debug_ui:
+		globals.controller_of_input = globals.InputController.UI
 	if cur_ui:
 		ui_stack.append(cur_ui)
 	cur_ui = ui
@@ -39,8 +40,15 @@ func handle_input():
 		#toggle_menu(camera_ui)
 	if Input.is_action_just_pressed("debug_button"):
 		toggle_menu(debug_ui)
+		globals.player.can_be_seen = not globals.player.can_be_seen
+		globals.player.can_open_any_door = not globals.player.can_open_any_door
+		globals.player.infinite_juice = not globals.player.infinite_juice
+		globals.time_juice = globals.max_time_juice
+		globals.player.set_collision_mask_value(4, not globals.player.get_collision_mask_value(4))
+		$ButtonMove.play()
 	if Input.is_action_just_pressed("device_menu"):
 		toggle_menu(device_menu)
+		$ButtonMove.play()
 
 func toggle_menu(ui:UI):
 	if not ui.is_open:
@@ -53,3 +61,4 @@ func set_menu(ui:UI,value:bool):
 		ui.open()
 	else:
 		ui.close()
+	

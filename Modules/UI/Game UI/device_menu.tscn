@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bigh7xaj6n6yj" path="res://Modules/UI/Game UI/Device/Device Files/device_files.tscn" id="4_4t7mm"]
 [ext_resource type="PackedScene" uid="uid://dc0glsn1mwwwq" path="res://Modules/UI/Game UI/Device/Inventory/inventory_panel.tscn" id="4_7dje4"]
 [ext_resource type="PackedScene" uid="uid://begdut20cbu15" path="res://Modules/UI/Game UI/Device/settings.tscn" id="4_hgc2y"]
+[ext_resource type="AudioStream" uid="uid://da3exkttg2ndx" path="res://Assets/SFX/button_confirm.ogg" id="7_m01ss"]
+[ext_resource type="AudioStream" uid="uid://cj4g1ux14jflo" path="res://Assets/SFX/button_move.ogg" id="8_ijymv"]
 
 [sub_resource type="Theme" id="Theme_wq3jl"]
 
@@ -90,3 +92,11 @@ layout_mode = 2
 texture = ExtResource("3_y3rn4")
 expand_mode = 1
 stretch_mode = 3
+
+[node name="ButtonConfirm" type="AudioStreamPlayer" parent="." unique_id=656915482]
+stream = ExtResource("7_m01ss")
+volume_db = -15.0
+
+[node name="ButtonMove" type="AudioStreamPlayer" parent="." unique_id=1028115537]
+stream = ExtResource("8_ijymv")
+volume_db = -15.0

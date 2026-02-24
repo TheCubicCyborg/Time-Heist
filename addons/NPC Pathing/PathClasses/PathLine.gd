@@ -32,6 +32,9 @@ func recalculate_speed():
 func get_length():
 	return prev_vertex.position.distance_to(next_vertex.position)
 
+func get_direction() -> Vector3:
+	return next_vertex.position - prev_vertex.position
+
 func get_position_at_time(time: float) -> Vector3:
 	var start_pos: Vector3 = prev_vertex.position
 	var end_pos: Vector3 = next_vertex.position

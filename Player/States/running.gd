@@ -10,7 +10,11 @@ var walking_state : State
 var sliding_state : State
 
 func enter() -> void:
-	#player.anim_tree.set("parameters/PlayerAnimations/Movement/transition_request","Running")
+	if not $RunningSFX.finished.is_connected(_on_running_sfx_finished):
+		$RunningSFX.finished.connect(_on_running_sfx_finished)
+	
+	play_randomized_footstep()
+	
 	if player.is_crouching:
 		player.current_max_speed = player.max_speed_crouching
 		player.current_acceleration = player.acceleration_crouching
@@ -20,7 +24,15 @@ func enter() -> void:
 	pass
 	
 func exit() -> void:
+	$RunningSFX.stop()
 	pass
+
+func play_randomized_footstep() -> void:
+	$RunningSFX.pitch_scale = randf_range(0.85, 0.9)
+	$RunningSFX.play()
+
+func _on_running_sfx_finished() -> void:
+	play_randomized_footstep()
 	
 func process_input(event: InputEvent) -> State:
 	if input_controller.get_input_direction() == Vector2.ZERO:

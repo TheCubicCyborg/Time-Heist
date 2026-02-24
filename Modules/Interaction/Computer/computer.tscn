@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d34pm0fchacnp"]
+[gd_scene format=3 uid="uid://d34pm0fchacnp"]
 
 [ext_resource type="ArrayMesh" uid="uid://d2gnd1fg1caa5" path="res://Assets/Meshes/monitor_V3_Cube_006.res" id="1_0jkef"]
 [ext_resource type="Script" uid="uid://mkkydsd6s3el" path="res://Modules/Interaction/Computer/computer.gd" id="1_2r8gm"]
@@ -22,23 +22,23 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_8daly")
 size = Vector2(0.57, 0.35)
 
-[node name="Computer" type="Node3D"]
+[node name="Computer" type="Node3D" unique_id=1194039688]
 script = ExtResource("1_2r8gm")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1373146922]
 collision_layer = 16
 collision_mask = 0
 
-[node name="PhysicalCollider" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="PhysicalCollider" type="CollisionShape3D" parent="StaticBody3D" unique_id=2139826188]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27628404, -0.02743046)
 shape = SubResource("BoxShape3D_i46hk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1690809493]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8119463, -0.73505557, 0.24833304)
 mesh = ExtResource("1_0jkef")
 skeleton = NodePath("../..")
 
-[node name="Interactable" type="Area3D" parent="StaticBody3D" node_paths=PackedStringArray("mesh", "interact_object")]
+[node name="Interactable" type="Area3D" parent="StaticBody3D" unique_id=1203948719 node_paths=PackedStringArray("mesh", "interact_object")]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_0jkef")
@@ -46,19 +46,21 @@ mesh = NodePath("../MeshInstance3D")
 interact_object = NodePath("../..")
 metadata/_custom_type_script = "uid://d0afbfeblscar"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Interactable"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Interactable" unique_id=806806907]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27083367, -0.06754547)
 shape = SubResource("BoxShape3D_2r8gm")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2088442260]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.0024785772, 0.2937304, -0.70675313)
 visible = false
 fov = 37.538853
 
-[node name="Screen" type="MeshInstance3D" parent="."]
+[node name="Screen" type="MeshInstance3D" parent="." unique_id=1400247346]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.008925617, 0.29647523, -0.078984305)
 visible = false
 mesh = SubResource("QuadMesh_j65km")
 
-[node name="SubViewport" type="SubViewport" parent="Screen"]
+[node name="SubViewport" type="SubViewport" parent="Screen" unique_id=1627412615]
 size = Vector2i(1920, 1080)
+
+[connection signal="anon_interacted" from="StaticBody3D/Interactable" to="." method="interact"]

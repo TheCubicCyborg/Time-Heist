@@ -11,8 +11,8 @@ var tween : Tween
 
 
 func _ready() -> void:
-	globals.time_manager.time_traveled.connect(_play_anim)
-	globals.time_manager.stopped_time_travel.connect(_stop_animation)
+	#globals.time_manager.time_traveled.connect(_play_anim)
+	#globals.time_manager.stopped_time_travel.connect(_stop_animation)
 	visible = false
 
 func _play_anim() -> void:
