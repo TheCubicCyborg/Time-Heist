@@ -44,6 +44,12 @@ enum Clearances {
 	Other
 }
 
+enum Device_Tabs {
+	Files,
+	Inventory,
+	Settings
+}
+
 #region temporary test variables
 var player_has_keycard: bool = false
 var janitor_has_keycard: bool = false
@@ -74,4 +80,7 @@ signal remove_item(item : PickupItem)
 signal update_items #used to make items work with time
 signal collect_clearance(clearance : Clearances)
 signal use_item(item : PickupItem)
+
+signal new_in_device(value : bool, tab : Device_Tabs)
+#
 #endregion

@@ -6,6 +6,10 @@ class_name SettingsPanel
 
 func _ready() -> void:
 	settings.hide()
+	
+func select():
+	super.select()
+	globals.new_in_device.emit(false, globals.Device_Tabs.Settings)
 
 func _on_settings_toggled(toggled_on: bool) -> void:
 	if toggled_on:

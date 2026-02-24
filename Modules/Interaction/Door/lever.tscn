@@ -4,9 +4,11 @@
 [ext_resource type="Script" uid="uid://d0afbfeblscar" path="res://Modules/Interaction/interactable.gd" id="2_qprpv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xq026"]
+resource_local_to_scene = true
 albedo_color = Color(0.934157, 0.25749442, 0.26396477, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_xq026"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_xq026")
 size = Vector3(0.5, 0.5, 0.2)
 
