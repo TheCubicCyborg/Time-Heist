@@ -6,8 +6,8 @@ class_name Generic_Door
 		if globals.time_manager and globals.time_manager.logging:
 			globals.time_manager.timelog(self,"is_open",is_open,value)
 		@warning_ignore("standalone_ternary")
-		open() if value else close()
 		is_open = value
+		open() if value else close()
 		
 @export var is_locked: bool = false : #TIMEVAR
 	set(value):
