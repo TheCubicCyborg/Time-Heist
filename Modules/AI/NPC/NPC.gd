@@ -45,6 +45,19 @@ var start_pos: Vector3
 func interact_with(nodepath: NodePath):
 	get_node(nodepath).interact(self)
 
+func face(faceAction: FaceAction):
+	rotation.y = faceAction.rotation_deg
+
+func branch_if(branchAction: BranchAction):
+	print("branch if")
+	var temp = get_node(branchAction.object)
+	print("node: ", temp)
+	if temp.get(branchAction.property_name) != branchAction.is_false:
+		print("branching")
+		path_following = branch_paths[branchAction.dest_path_id]
+		initialize_path_vars()
+		print("done branching")
+
 func _ready():
 	if not Engine.is_editor_hint():
 		time_manager = globals.time_manager
@@ -69,7 +82,7 @@ func _process(_delta):
 						cur_action_ix = cur_component.num_actions()-1
 			if cur_component is PathVertex and cur_component.num_actions() > 0:
 				var cur_action = cur_component.action(cur_action_ix)
-				while cur_action is InteractVertexAction or (cur_action is WaitVertexAction and cur_action.start_time > cur_time):
+				while cur_action is InstantAction or (cur_action is WaitVertexAction and cur_action.start_time > cur_time):
 					cur_action_ix -= 1
 					cur_action = cur_component.action(cur_action_ix)
 			elif cur_component is PathLine:
@@ -83,7 +96,11 @@ func _process(_delta):
 					while cur_action_ix < cur_component.num_actions():
 						var cur_action = cur_component.action(cur_action_ix)
 						if cur_action is InteractVertexAction:
-							cur_action.interact()
+							interact_with(cur_action.interactable)
+						elif cur_action is BranchAction:
+							branch_if(cur_action)
+						elif cur_action is FaceAction:
+							face(cur_action)
 						cur_action_ix += 1
 				if cur_component.id < path_following.size()-1:
 					cur_action_ix = 0
@@ -93,9 +110,9 @@ func _process(_delta):
 			if not reached_path_end:
 				if cur_component is PathVertex:
 					var cur_action = cur_component.action(cur_action_ix)
-					while cur_action != null and cur_action_ix < cur_component.num_actions() and (cur_action is InteractVertexAction or (cur_action is WaitVertexAction and cur_action.end_time <= cur_time)):
+					while cur_action != null and cur_action_ix < cur_component.num_actions() and (cur_action is InstantAction or (cur_action is WaitVertexAction and cur_action.end_time <= cur_time)):
 						if cur_action is InteractVertexAction:
-							cur_action.interact()
+							interact_with(cur_action.interactable)
 						cur_action = cur_component.action(cur_action_ix)
 						cur_action_ix += 1
 				elif cur_component is PathLine:
@@ -113,8 +130,8 @@ func initialize_path_vars():
 		if cur_component is PathVertex:
 			if cur_component.num_actions() > 0:
 				cur_action_ix = 0
-	for component: PathComponent in path_following.path_components:
-		if component is PathVertex:
-			for action: VertexAction in component.vertex_actions:
-				if action is InteractVertexAction:
-					action.interact_signal.connect(interact_with)
+	#for component: PathComponent in path_following.path_components:
+		#if component is PathVertex:
+			#for action: VertexAction in component.vertex_actions:
+				#if action is InteractVertexAction:
+					#action.interact_signal.connect(interact_with)
