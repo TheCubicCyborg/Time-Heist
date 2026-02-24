@@ -1388,7 +1388,7 @@ time_start = 408.39276695251465
 time_end = 410.39276695251465
 id = 23
 
-[sub_resource type="Resource" id="Resource_78ob2"]
+[sub_resource type="Resource" id="Resource_pyiab"]
 resource_local_to_scene = true
 script = ExtResource("22_hevkm")
 speed = 2.0
@@ -1399,10 +1399,10 @@ time_start = 410.39276695251465
 time_end = 411.26776695251465
 id = 25
 
-[sub_resource type="Resource" id="Resource_pyiab"]
+[sub_resource type="Resource" id="Resource_78ob2"]
 resource_local_to_scene = true
 script = ExtResource("22_qx8o1")
-path_components = Array[ExtResource("19_hevkm")]([SubResource("Resource_fm2f0"), SubResource("Resource_yer5r"), SubResource("Resource_sing2"), SubResource("Resource_5agfy"), SubResource("Resource_1swm2"), SubResource("Resource_4c5dx"), SubResource("Resource_sd8w8"), SubResource("Resource_6i3sr"), SubResource("Resource_wlkx8"), SubResource("Resource_k2i13"), SubResource("Resource_p07qh"), SubResource("Resource_cuj8l"), SubResource("Resource_ppdk2"), SubResource("Resource_isjup"), SubResource("Resource_pjqd7"), SubResource("Resource_x0jl3"), SubResource("Resource_bn10k"), SubResource("Resource_v0fku"), SubResource("Resource_o88bk"), SubResource("Resource_xvxs3"), SubResource("Resource_q6pju"), SubResource("Resource_ucyfx"), SubResource("Resource_572ba"), SubResource("Resource_vwc7t"), SubResource("Resource_000dk"), SubResource("Resource_78ob2")])
+path_components = Array[ExtResource("19_hevkm")]([SubResource("Resource_fm2f0"), SubResource("Resource_yer5r"), SubResource("Resource_sing2"), SubResource("Resource_5agfy"), SubResource("Resource_1swm2"), SubResource("Resource_4c5dx"), SubResource("Resource_sd8w8"), SubResource("Resource_6i3sr"), SubResource("Resource_wlkx8"), SubResource("Resource_k2i13"), SubResource("Resource_p07qh"), SubResource("Resource_cuj8l"), SubResource("Resource_ppdk2"), SubResource("Resource_isjup"), SubResource("Resource_pjqd7"), SubResource("Resource_x0jl3"), SubResource("Resource_bn10k"), SubResource("Resource_v0fku"), SubResource("Resource_o88bk"), SubResource("Resource_xvxs3"), SubResource("Resource_q6pju"), SubResource("Resource_ucyfx"), SubResource("Resource_572ba"), SubResource("Resource_vwc7t"), SubResource("Resource_000dk"), SubResource("Resource_pyiab")])
 loop = true
 default_speed = 2.0
 
@@ -1566,9 +1566,9 @@ color = Color(0.9098039, 0.46666667, 0.61960787, 1)
 [node name="GoToCharge2" parent="Guards" unique_id=1419028612 instance=ExtResource("18_18nyf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.25, 0, 3.75)
 color = Color(0.9098039, 0.46666667, 0.61960787, 1)
-branch_paths = Array[ExtResource("22_qx8o1")]([SubResource("Resource_pyiab")])
+branch_paths = Array[ExtResource("22_qx8o1")]([SubResource("Resource_78ob2")])
 follow_branch = 0
-path = SubResource("Resource_pyiab")
+path = SubResource("Resource_78ob2")
 
 [node name="Cone Vision" parent="Guards/GoToCharge2" unique_id=934546193 instance=ExtResource("26_qx8o1")]
 

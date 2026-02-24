@@ -9,7 +9,8 @@ resource_name = "cone_vision"
 script/source = "@tool
 extends Area3D
 
-var player_spotted
+var player_in_zone : bool
+var player_spotted : bool
 @onready var sight_checker := $SightChecker
 @onready var collision := $CollisionPolygon3D
 @onready var laser: MeshInstance3D = $Laser
@@ -77,38 +78,43 @@ func create_mesh():
 	
 func _process(delta: float) -> void:
 	if not Engine.is_editor_hint():
-		if player_spotted and globals.player.can_be_seen:
+		if player_in_zone and globals.player.can_be_seen:
 			sight_checker.look_at(Vector3(globals.player.global_position.x, 1, globals.player.global_position.z))
 			
 			if sight_checker.get_collider() == globals.player:
-				time_detecting += delta
-				laser_mesh.clear_surfaces()
-				draw_line()
-				if laser_sfx.playing == false:
-					laser_sfx.play()
+				player_spotted = true
 			else:
-				time_detecting -= delta
-				laser_mesh.clear_surfaces()
-				laser_node.visible = false
+				player_spotted = false
 				laser_sfx.stop()
+				laser_node.visible = false
 				
-			globals.safe_ratio = (time_till_caught - time_detecting) / time_till_caught
-			
-			if time_detecting >= time_till_caught:
-				caught()
+		if player_spotted:
+			time_detecting += delta
+			laser_mesh.clear_surfaces()
+			draw_line()
+			if laser_sfx.playing == false:
+				laser_sfx.play()
 		else:
-			laser_sfx.stop()
+			time_detecting = max(time_detecting - delta, 0.0)
+			laser_mesh.clear_surfaces()
 			laser_node.visible = false
+			laser_sfx.stop()
+		
+		
+		globals.safe_ratio = min(globals.safe_ratio, (time_till_caught - time_detecting) / time_till_caught)
+		if time_detecting >= time_till_caught:
+			caught()
 
 func _on_body_entered(body: Node3D) -> void:
 	if body == globals.player:
-		player_spotted = true
+		player_in_zone = true
 		
 func _on_body_exited(body: Node3D) -> void:
 	if body == globals.player:
-		player_spotted = false 
-		time_detecting = 0
-		globals.safe_ratio = (time_till_caught - time_detecting) / time_till_caught
+		player_in_zone = false 
+		player_spotted = false
+		#time_detecting = 0
+		#globals.safe_ratio = (time_till_caught - time_detecting) / time_till_caught
 		laser_mesh.clear_surfaces()
 		laser_node.visible = false
 	
