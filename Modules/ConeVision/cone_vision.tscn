@@ -19,17 +19,19 @@ var player_spotted : bool
 @onready var laser_node : MeshInstance3D = $LaserCylinder
 @onready var laser_sfx : AudioStreamPlayer = $AudioStreamPlayer
 
+@export var on_gaurd : bool = true
+
 var time_detecting: float = 0
 
-@export var sight_line_angle : float = 220:
+@export var sight_line_angle : float = 130:
 	set(value):
 		sight_line_angle = value
 		create_mesh()
-@export var sight_line_radius : float = 75:
+@export var sight_line_radius : float = 15:
 	set(value):
 		sight_line_radius = value
 		create_mesh()
-@export var smaller_sight_line_radius : float = 20:
+@export var smaller_sight_line_radius : float = 0:
 	set(value):
 		smaller_sight_line_radius = value
 		create_mesh()
@@ -43,6 +45,9 @@ var polygon_points : PackedVector2Array = []
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
+		sight_line_angle = globals.gaurd_sight_line_angle if on_gaurd else globals.person_sight_line_angle
+		sight_line_radius = globals.gaurd_sight_line_radius if on_gaurd else globals.person_sight_line_radius
+		
 		globals.safe_ratio = 1
 		sight_checker.target_position.z = -sight_line_radius
 		create_mesh()
@@ -50,7 +55,6 @@ func _ready() -> void:
 		laser_node.visible = false
 
 func create_mesh():
-	print(\"mesh\")
 	polygon_points = []
 	var start_angle = -sight_line_angle / 2.0
 	var end_angle = sight_line_angle / 2.0
@@ -79,7 +83,8 @@ func create_mesh():
 func _process(delta: float) -> void:
 	if not Engine.is_editor_hint():
 		if player_in_zone and globals.player.can_be_seen:
-			sight_checker.look_at(Vector3(globals.player.global_position.x, 1, globals.player.global_position.z))
+			#sight_checker.look_at(Vector3(globals.player.global_position.x, 1, globals.player.global_position.z))
+			sight_checker.look_at(globals.player.detection_point.global_position)
 			
 			if sight_checker.get_collider() == globals.player:
 				player_spotted = true
@@ -155,9 +160,9 @@ height = 1.0
 
 [node name="Cone Vision" type="Area3D" unique_id=1869490121]
 script = SubResource("GDScript_23e0v")
+on_gaurd = null
 sight_line_angle = 129.9
 sight_line_radius = 14.825
-smaller_sight_line_radius = 0.0
 time_till_caught = 1.0
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="." unique_id=955152349]

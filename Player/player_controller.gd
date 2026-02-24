@@ -11,10 +11,12 @@ var sneak_detect = $SneakDetect
 var animation_player : AnimationPlayer = $Mesh/AnimationPlayer
 @onready
 var anim_tree : AnimationTree = $Mesh/AnimationTree
+@onready
+var detection_point: Marker3D = $DetectionPoint
+
 
 @onready var collision := $CollisionShape3D
 @onready var mesh : MeshInstance3D = $Mesh/Skeleton3D/torso_001
-@onready var material : StandardMaterial3D = mesh.get_surface_override_material(0) #Testing for crouch
 
 var previous_input : Vector2
 var is_crouching := false
@@ -88,6 +90,7 @@ func _ready() -> void:
 	state_machine.init(input_controller)
 	
 	current_rotation_speed = rotation_speed
+	input_controller.crouch_off()
 	
 	#MOVE
 	sneak_detect.head.position.y = collision.shape.height / 4 * 3

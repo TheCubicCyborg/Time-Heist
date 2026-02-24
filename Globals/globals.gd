@@ -19,7 +19,14 @@ var ui_manager: UI_Manager
 var player : Player
 
 var camera : Node3D
+
+#region Detection
 var safe_ratio : float = 1
+var gaurd_sight_line_angle : float = 130
+var gaurd_sight_line_radius : float = 15
+var person_sight_line_angle : float = 360
+var person_sight_line_radius : float = 3
+#endregion
 
 var time_juice : float = 100
 var max_time_juice : float = 100
@@ -85,10 +92,11 @@ signal new_in_device(value : bool, tab : Device_Tabs)
 #
 #endregion
 
-#DEBUG
+#region Debug
 func toggle_debug_settings():
 	player.can_be_seen = not player.can_be_seen
 	player.can_open_any_door = not player.can_open_any_door
 	player.infinite_juice = not player.infinite_juice
 	time_juice = max_time_juice
 	player.set_collision_mask_value(4, not player.get_collision_mask_value(4))
+#endregion

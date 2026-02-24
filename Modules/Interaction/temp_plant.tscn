@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://d36of8ff253ob"]
 
-[ext_resource type="Script" uid="uid://wstuxyg8ed8b" path="res://Modules/Interaction/temp_plant.gd" id="1_ooshc"]
 [ext_resource type="PackedScene" uid="uid://mvs3uo0ylvd3" path="res://Assets/Models/Stock Assets/Nature_Deco_3.fbx" id="2_7uwef"]
 [ext_resource type="PackedScene" uid="uid://b64t4twgcdips" path="res://Modules/Interaction/interactable.tscn" id="3_kguye"]
 [ext_resource type="Script" uid="uid://buhosr6g8knnm" path="res://Modules/Interaction/stashable.gd" id="4_7uwef"]
+[ext_resource type="Resource" uid="uid://2u7ypb7xpscs" path="res://Assets/Items/Resources/apple.tres" id="4_kguye"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7uwef"]
 size = Vector3(1, 0.99749756, 1)
@@ -12,7 +12,6 @@ size = Vector3(1, 0.99749756, 1)
 size = Vector3(0.50024414, 0.8954468, 0.36157227)
 
 [node name="Temp Plant" type="Node3D" unique_id=1100459895]
-script = ExtResource("1_ooshc")
 
 [node name="Nature_Deco_3" parent="." unique_id=1489859823 instance=ExtResource("2_7uwef")]
 
@@ -34,6 +33,7 @@ shape = SubResource("BoxShape3D_ooshc")
 
 [node name="Stashable" type="Node" parent="." unique_id=176569730]
 script = ExtResource("4_7uwef")
+expected_item = ExtResource("4_kguye")
 metadata/_custom_type_script = "uid://buhosr6g8knnm"
 
 [connection signal="interacted_by" from="Interactable" to="Stashable" method="interact"]
