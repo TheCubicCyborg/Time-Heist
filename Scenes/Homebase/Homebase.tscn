@@ -80,4 +80,5 @@ script = ExtResource("10_li6v2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Leave Area/Area3D" unique_id=1557897613]
 shape = SubResource("BoxShape3D_li6v2")
 
+[connection signal="anon_interacted" from="Friend/Interactable" to="Friend" method="_on_interactable_anon_interacted"]
 [connection signal="body_entered" from="Leave Area/Area3D" to="Leave Area" method="_on_area_3d_body_entered"]
