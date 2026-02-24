@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://di5tt110m4f64" path="res://Modules/UI/Game UI/HUD/hud.gd" id="1_6qein"]
 [ext_resource type="Texture2D" uid="uid://ck1i4sr0w4o20" path="res://Assets/UI/HUD/timemachineuiassetempty.png" id="1_xrti2"]
 [ext_resource type="Texture2D" uid="uid://dc2y6bypod0bh" path="res://Assets/UI/HUD/timemachineuiassetCIRCLE (1).png" id="2_6qein"]
+[ext_resource type="Texture2D" uid="uid://co4jpppqbvflr" path="res://icon.svg" id="4_r0gy4"]
 
 [node name="HUD" type="Control" unique_id=528506545]
 layout_mode = 3
@@ -23,3 +24,13 @@ radial_initial_angle = 340.0
 texture_under = ExtResource("1_xrti2")
 texture_progress = ExtResource("2_6qein")
 texture_progress_offset = Vector2(82, -43.355)
+
+[node name="NewNotif" type="TextureRect" parent="TimeJuice" unique_id=889791476]
+visible = false
+layout_mode = 0
+offset_left = 23.0
+offset_top = 89.0
+offset_right = 63.0
+offset_bottom = 129.0
+texture = ExtResource("4_r0gy4")
+expand_mode = 1

@@ -12,6 +12,10 @@ func _ready() -> void:
 	globals.connect("collect_clearance", collect_clearance)
 	globals.update_items.connect(update_items) #for time traveling
 
+func select():
+	super.select()
+	globals.new_in_device.emit(false, globals.Device_Tabs.Inventory)
+
 #region items
 func collect_item(item:PickupItem):
 	print("adding item into panel: ", item.name)
@@ -33,9 +37,7 @@ func update_items():
 		if not panel_has_item(item):
 			collect_item(item)
 	for item_slot in inventory_grid.get_children(): # delete items from panel that are not in global inven
-		print("\n\nchecking slot with ", item_slot.item, " in ", global_inventory.items, "\n\n")
 		if not global_inventory.has_item(item_slot.item):
-			print("found one!!!")
 			remove_item(item_slot.item)
 
 func panel_has_item(search_item:PickupItem) -> bool:

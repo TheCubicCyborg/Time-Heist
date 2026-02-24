@@ -19,7 +19,10 @@ func _ready() -> void:
 		folder_buttons.get_child(0).grab_focus()
 	
 	#$MarginContainer/HBoxContainer/SubViewportContainer/SubViewport.size = $MarginContainer/HBoxContainer/SubViewportContainer.size
-	
+func select():
+	super.select()
+	globals.new_in_device.emit(false, globals.Device_Tabs.Files)
+
 func view_panel(panel_to_view:DeviceFilesList):
 	for folder in folders.get_children():
 		folder.hide()
