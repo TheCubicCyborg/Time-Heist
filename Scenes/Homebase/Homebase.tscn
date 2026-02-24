@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="3_gjqgy"]
 [ext_resource type="Texture2D" uid="uid://iysiiph8g0nq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_normal-ogl.png" id="4_urm2d"]
 [ext_resource type="Texture2D" uid="uid://bi1v4o5qgvkpp" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_roughness.png" id="5_li6v2"]
+[ext_resource type="MeshLibrary" uid="uid://dy0vxnd1qseb5" path="res://Assets/MeshLibrary.tres" id="6_hfwyr"]
 [ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/Player.tscn" id="6_qdus5"]
 [ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/camera_pivot.tscn" id="7_djhyv"]
 [ext_resource type="PackedScene" uid="uid://b64t4twgcdips" path="res://Modules/Interaction/interactable.tscn" id="8_gjqgy"]
@@ -46,6 +47,13 @@ shape = SubResource("WorldBoundaryShape3D_hfwyr")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=683846590]
 mesh = SubResource("PlaneMesh_xauru")
 surface_material_override/0 = SubResource("StandardMaterial3D_ciaa5")
+
+[node name="Map" type="GridMap" parent="." unique_id=317982580]
+mesh_library = ExtResource("6_hfwyr")
+cell_size = Vector3(0.25, 1.75, 0.25)
+collision_layer = 8
+collision_mask = 0
+metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Player" parent="." unique_id=265121882 instance=ExtResource("6_qdus5")]
 
