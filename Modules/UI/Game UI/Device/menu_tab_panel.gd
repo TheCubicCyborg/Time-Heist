@@ -5,3 +5,6 @@ class_name MenuTabPanel
 
 func select():
 	main_focus.grab_focus()
+
+func handle_input(_delta):
+	pass

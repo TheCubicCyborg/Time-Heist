@@ -11,6 +11,7 @@ var time_multiplier:float = 1
 const FIXED_REWIND_VALUE = 15
 const REWIND_MULTIPLIER = 2
 const WAIT_MULTIPLIER = 5
+const WAIT_FASTER_MULTIPLIER = 15
 
 signal time_traveled
 signal stopped_time_travel
@@ -30,6 +31,11 @@ func _physics_process(delta):
 			rewind(REWIND_MULTIPLIER * delta)
 	elif Input.is_action_pressed("wait"):
 		cur_time += delta * WAIT_MULTIPLIER
+		if is_time_traveling:
+			stopped_time_travel.emit()
+			is_time_traveling = false
+	elif Input.is_action_pressed("wait_faster"):
+		cur_time += delta * WAIT_FASTER_MULTIPLIER
 		if is_time_traveling:
 			stopped_time_travel.emit()
 			is_time_traveling = false

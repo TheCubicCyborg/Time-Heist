@@ -7,8 +7,11 @@ class_name NPC extends Node3D
 		$MeshInstance3D.mesh.material.albedo_color = value
 
 @export var branch_paths: Array[NPCPath] = []
-@export var follow_branch: int = -1:
+@export var follow_branch: int = -1 : #TIMEVAR #NOT WORKING
 	set(value):
+		if globals.time_manager and globals.time_manager.logging:
+			globals.time_manager.timelog(self,"follow_branch",follow_branch,value)
+		follow_branch = value
 		if value < branch_paths.size():
 			follow_branch = value
 			if not Engine.is_editor_hint():
@@ -46,7 +49,7 @@ func interact_with(nodepath: NodePath):
 	get_node(nodepath).interact(self)
 
 func face(faceAction: FaceAction):
-	rotation.y = faceAction.rotation_deg
+	rotation.y = deg_to_rad(faceAction.rotation_deg)
 
 func branch_if(branchAction: BranchAction):
 	print("branch if")

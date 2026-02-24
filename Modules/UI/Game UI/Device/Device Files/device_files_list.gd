@@ -5,6 +5,7 @@ class_name DeviceFilesList
 
 var tag: String
 var documents: Array[DocumentInfo]
+var button: NodePath
 
 func set_tag(_tag: String) -> void:
 	tag = _tag
@@ -16,6 +17,7 @@ func add_doc(doc: DocumentInfo) -> Button:
 	files.add_child(doc_button)
 	
 	doc_button.text = doc.title
+	doc_button.focus_neighbor_left = button
 	documents.append(doc)
 	
 	return doc_button

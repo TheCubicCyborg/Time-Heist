@@ -25,6 +25,6 @@ func close():
 	process_mode = Node.PROCESS_MODE_DISABLED
 	globals.ui_manager.release_control()
 
-func handle_input():
+func handle_input(_delta):
 	if Input.is_action_just_pressed("escape"):
 		close()

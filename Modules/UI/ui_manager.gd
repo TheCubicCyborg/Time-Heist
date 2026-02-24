@@ -17,9 +17,9 @@ func _ready():
 	set_menu(document_viewer,false)
 
 func _process(_delta):
-	handle_input()
+	handle_input(_delta)
 	if globals.controller_of_input == globals.InputController.UI:
-		cur_ui.handle_input()
+		cur_ui.handle_input(_delta)
 
 func take_control(ui: Control):
 	if ui != debug_ui:
@@ -35,7 +35,7 @@ func release_control():
 		cur_ui = null
 		globals.controller_of_input = globals.InputController.GAMEPLAY
 
-func handle_input():
+func handle_input(_delta):
 	#if Input.is_action_just_pressed("camera_ui"):
 		#toggle_menu(camera_ui)
 	if Input.is_action_just_pressed("debug_button"):

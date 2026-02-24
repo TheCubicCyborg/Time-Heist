@@ -93,7 +93,7 @@ func _process(delta: float) -> void:
 				laser_sfx.stop()
 				laser_node.visible = false
 				
-		if player_spotted:
+		if player_spotted and globals.player.can_be_seen:
 			time_detecting += delta
 			laser_mesh.clear_surfaces()
 			draw_line()
@@ -160,7 +160,6 @@ height = 1.0
 
 [node name="Cone Vision" type="Area3D" unique_id=1869490121]
 script = SubResource("GDScript_23e0v")
-on_gaurd = null
 sight_line_angle = 129.9
 sight_line_radius = 14.825
 time_till_caught = 1.0
