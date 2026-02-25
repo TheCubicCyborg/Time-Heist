@@ -1,5 +1,5 @@
 @tool
-class_name WaitVertexAction extends VertexAction
+class_name WaitAction extends VertexAction
 
 @export var start_time: float:
 	set(value):
@@ -35,3 +35,9 @@ signal validate_action
 func _validate_property(property: Dictionary):
 	if property.name == "start_time":
 		property.usage |= PROPERTY_USAGE_READ_ONLY
+
+func progress(npc: NPC, from: float, to: float):
+	return to >= end_time
+
+func revert(npc: NPC, from: float, to: float):
+	return to < start_time

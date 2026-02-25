@@ -33,7 +33,7 @@ func on_property_changed(property: StringName, value:NPCPath, field: StringName,
 	get_edited_object().notify_property_list_changed()
 
 func on_resource_changed(resource: NPCPath):
-	emit_changed(get_edited_property(),resource.duplicate())
+	emit_changed(get_edited_property(),resource)
 
 func on_resource_selected(resource:NPCPath, inspect: bool):
 	if is_open:
