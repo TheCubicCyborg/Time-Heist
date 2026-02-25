@@ -24,7 +24,7 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_pressed("rewind"):
-		if not globals.player.infinite_juice: #DEBUG dont lose juice if debug mode
+		if globals.player and not globals.player.infinite_juice: #DEBUG dont lose juice if debug mode
 			globals.time_juice = maxf(0.0, globals.time_juice - globals.rewind_drain_per_sec * delta)
 		if globals.time_juice > 0.0:
 			is_time_traveling = true

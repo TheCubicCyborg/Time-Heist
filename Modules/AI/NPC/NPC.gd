@@ -7,17 +7,19 @@ class_name NPC extends Node3D
 		$MeshInstance3D.mesh.material.albedo_color = value
 
 @export var branch_paths: Array[NPCPath] = []
-@export var follow_branch: int = -1 : #TIMEVAR #NOT WORKING
+@export var follow_branch: int = -1:
 	set(value):
-		if globals.time_manager and globals.time_manager.logging:
-			globals.time_manager.timelog(self,"follow_branch",follow_branch,value)
-		follow_branch = value
-		if value < branch_paths.size():
+		if value < branch_paths.size() and value > -2:
 			follow_branch = value
 			if not Engine.is_editor_hint():
 				path_following = branch_paths[value]
 				initialize_path_vars()
-var path_following: NPCPath = null
+var path_following: NPCPath = null: #TIMEVAR
+	set(value):
+		if globals.time_manager and globals.time_manager.logging:
+			globals.time_manager.timelog(self,"path_following",path_following,value)
+		path_following = value
+		initialize_path_vars()
 
 var time_manager: TimeManager
 
@@ -25,6 +27,7 @@ var cur_component: PathComponent = null
 var cur_action_ix: int = 0
 var last_processed_time: float = 0
 var reached_path_end: bool = false
+var branched: bool
 
 var start_pos: Vector3
 
@@ -34,7 +37,6 @@ var start_pos: Vector3
 	set(value):
 		path = value
 		if Engine.is_editor_hint():
-			update_gizmos()
 			if path: 
 				path.updating_path = true
 				var first_vert_pos = position
@@ -43,23 +45,43 @@ var start_pos: Vector3
 				path.updating_path = false
 				if not path.changed.is_connected(update_gizmos):
 					path.changed.connect(update_gizmos)
+			update_gizmos()
 
+func initialize_path_vars():
+	if not globals.time_manager:
+		return
+	var cur_time = time_manager.cur_time
+	if path_following:
+		cur_component = path_following.at(0)
+		while cur_component.time_end <= cur_time:
+			cur_component = path_following.at(cur_component.id+1)
+		if cur_component is PathVertex:
+			cur_action_ix = 0
+			var cur_action = cur_component.action(cur_action_ix)
+			while cur_action is InstantAction or (cur_action is WaitAction and cur_action.end_time <= cur_time):
+				cur_action_ix += 1
+				cur_action = cur_component.action(cur_action_ix)
 
 func interact_with(nodepath: NodePath):
-	get_node(nodepath).interact(self)
+	var node = get_node(nodepath)
+	if node:
+		node.interact(self)
 
-func face(faceAction: FaceAction):
-	rotation.y = deg_to_rad(faceAction.rotation_deg)
+func face(rotation_deg: float):
+	rotation.y = deg_to_rad(rotation_deg)
 
 func branch_if(branchAction: BranchAction):
-	print("branch if")
+	#print("branch if")
 	var temp = get_node(branchAction.object)
-	print("node: ", temp)
+	#print("node: ", temp)
 	if temp.get(branchAction.property_name) != branchAction.is_false:
-		print("branching")
+		#print("branching")
 		path_following = branch_paths[branchAction.dest_path_id]
 		initialize_path_vars()
-		print("done branching")
+		#print("done branching")
+		branched = true
+		return true
+	return false
 
 func _ready():
 	if not Engine.is_editor_hint():
@@ -78,63 +100,65 @@ func _process(_delta):
 		if path_following.loop:
 			cur_time = fmod(cur_time,path_following.get_path_duration())
 		if last_processed_time > cur_time: # moved backward in time
-			while cur_component.time_start > cur_time:
-				if cur_component.id > 0:
-					cur_component = path_following.at(cur_component.id-1)
-					if cur_component is PathVertex:
-						cur_action_ix = cur_component.num_actions()-1
-			if cur_component is PathVertex and cur_component.num_actions() > 0:
-				var cur_action = cur_component.action(cur_action_ix)
-				while cur_action is InstantAction or (cur_action is WaitVertexAction and cur_action.start_time > cur_time):
-					cur_action_ix -= 1
-					cur_action = cur_component.action(cur_action_ix)
-			elif cur_component is PathLine:
-				position = cur_component.get_position_at_time(cur_time) + start_pos
-				look_at(position + cur_component.get_direction())
-			if cur_time < cur_component.time_end:
-				reached_path_end = false
+			path_following.revert(self,last_processed_time,cur_time)
 		elif last_processed_time < cur_time: # moved forward in time
-			while not reached_path_end and cur_component.time_end <= cur_time:
-				if cur_component is PathVertex:
-					while cur_action_ix < cur_component.num_actions():
-						var cur_action = cur_component.action(cur_action_ix)
-						if cur_action is InteractVertexAction:
-							interact_with(cur_action.interactable)
-						elif cur_action is BranchAction:
-							branch_if(cur_action)
-						elif cur_action is FaceAction:
-							face(cur_action)
-						cur_action_ix += 1
-				if cur_component.id < path_following.size()-1:
-					cur_action_ix = 0
-					cur_component = path_following.at(cur_component.id+1)
-				else:
-					reached_path_end = true
-			if not reached_path_end:
-				if cur_component is PathVertex:
-					var cur_action = cur_component.action(cur_action_ix)
-					while cur_action != null and cur_action_ix < cur_component.num_actions() and (cur_action is InstantAction or (cur_action is WaitVertexAction and cur_action.end_time <= cur_time)):
-						if cur_action is InteractVertexAction:
-							interact_with(cur_action.interactable)
-						cur_action = cur_component.action(cur_action_ix)
-						cur_action_ix += 1
-				elif cur_component is PathLine:
-					#print("pos from path:",cur_component.get_position_at_time(cur_time), " start y: ", start_y)
-					position = cur_component.get_position_at_time(cur_time) + start_pos
-					look_at(position + cur_component.get_direction())
+			path_following.progress(self,last_processed_time,cur_time)
 		else: #time did not move?
 			pass
 		last_processed_time = cur_time
 
-
-func initialize_path_vars():
-	if path_following.size() > 0:
-		cur_component = path_following.at(0)
-		if cur_component is PathVertex:
-			if cur_component.num_actions() > 0:
-				cur_action_ix = 0
-	#for component: PathComponent in path_following.path_components:
-		#if component is PathVertex:
-			#for action: VertexAction in component.vertex_actions:
-				#if action is InteractVertexAction:
-					#action.interact_signal.connect(interact_with)
+#func _process(_delta):
+	#if not Engine.is_editor_hint():
+		#if not path_following:
+			#return
+		#var cur_time = time_manager.cur_time
+		#if path_following.loop:
+			#cur_time = fmod(cur_time,path_following.get_path_duration())
+		#if last_processed_time > cur_time: # moved backward in time
+			#while cur_component.time_start > cur_time:
+				#if cur_component.id > 0:
+					#cur_component = path_following.at(cur_component.id-1)
+					#if cur_component is PathVertex:
+						#cur_action_ix = cur_component.num_actions()-1
+			#if cur_component is PathVertex and cur_component.num_actions() > 0:
+				#var cur_action = cur_component.action(cur_action_ix)
+				#while cur_action is InstantAction or (cur_action is WaitVertexAction and cur_action.start_time > cur_time):
+					#cur_action_ix -= 1
+					#cur_action = cur_component.action(cur_action_ix)
+			#elif cur_component is PathLine:
+				#position = cur_component.get_position_at_time(cur_time) + start_pos
+				#look_at(position + cur_component.get_direction())
+			#if cur_time < cur_component.time_end:
+				#reached_path_end = false
+		#elif last_processed_time < cur_time: # moved forward in time
+			#while not reached_path_end and cur_component.time_end <= cur_time:
+				#if cur_component is PathVertex:
+					#while cur_action_ix < cur_component.num_actions():
+						#var cur_action = cur_component.action(cur_action_ix)
+						#if cur_action is InteractVertexAction:
+							#interact_with(cur_action.interactable)
+						#elif cur_action is BranchAction:
+							#branch_if(cur_action)
+						#elif cur_action is FaceAction:
+							#face(cur_action)
+						#cur_action_ix += 1
+				#if cur_component.id < path_following.size()-1:
+					#cur_action_ix = 0
+					#cur_component = path_following.at(cur_component.id+1)
+				#else:
+					#reached_path_end = true
+			#if not reached_path_end:
+				#if cur_component is PathVertex:
+					#var cur_action = cur_component.action(cur_action_ix)
+					#while cur_action != null and cur_action_ix < cur_component.num_actions() and (cur_action is InstantAction or (cur_action is WaitVertexAction and cur_action.end_time <= cur_time)):
+						#if cur_action is InteractVertexAction:
+							#interact_with(cur_action.interactable)
+						#cur_action = cur_component.action(cur_action_ix)
+						#cur_action_ix += 1
+				#elif cur_component is PathLine:
+					##print("pos from path:",cur_component.get_position_at_time(cur_time), " start y: ", start_y)
+					#position = cur_component.get_position_at_time(cur_time) + start_pos
+					#look_at(position + cur_component.get_direction())
+		#else: #time did not move?
+			#pass
+		#last_processed_time = cur_time
