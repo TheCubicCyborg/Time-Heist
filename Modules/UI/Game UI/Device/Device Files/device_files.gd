@@ -2,11 +2,16 @@ extends MenuTabPanel
 class_name DeviceFiles
 
 #var documents : Array = [preload("res://Assets/UI/Time Travel Menu/Files_Test/person2.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/person3.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/person4.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/person_1.png"), preload("res://Assets/UI/Time Travel Menu/Files_Test/place1.jpg")]
-@onready var folder_buttons: VBoxContainer = $"MarginContainer/HBoxContainer/FoldersMargin/Folder Buttons"
+@onready var folder_buttons: VBoxContainer = $"MarginContainer/HBoxContainer/LeftPanel/Folder Buttons"
 @onready var folders: Control = $"MarginContainer/HBoxContainer/MidPanel/Folders"
-var device_files_list : PackedScene = preload("res://Modules/UI/Game UI/Device/Device Files/device_files_list.tscn")
+@onready var left_panel: MarginContainer = $MarginContainer/HBoxContainer/LeftPanel
+@onready var mid_panel: VBoxContainer = $MarginContainer/HBoxContainer/MidPanel
+@onready var fullscreen_button: Button = $MarginContainer/HBoxContainer/Control/Fullscreen
 
-@onready var document_viewer := $MarginContainer/HBoxContainer/RightPanel/SubViewport/DeviceDocumentViewer
+var device_files_list : PackedScene = preload("res://Modules/UI/Game UI/Device/Device Files/device_files_list.tscn")
+var fullscreen: bool = false
+
+@onready var document_viewer := $MarginContainer/HBoxContainer/Control/RightPanel/SubViewport/DeviceDocumentViewer
 
 func _ready() -> void:
 	#Add already owned documents
@@ -19,9 +24,18 @@ func _ready() -> void:
 		folder_buttons.get_child(0).grab_focus()
 	
 	#$MarginContainer/HBoxContainer/SubViewportContainer/SubViewport.size = $MarginContainer/HBoxContainer/SubViewportContainer.size
+
+func handle_input(_delta):
+	document_viewer.handle_input(_delta)
+	if fullscreen:
+		document_viewer.handle_fullscreen_input(_delta)
+
 func select():
 	super.select()
 	globals.new_in_device.emit(false, globals.Device_Tabs.Files)
+	if fullscreen:
+		fullscreen_button.grab_focus() #for when you are in fullscreen, change tabs, then come back
+		
 
 func view_panel(panel_to_view:DeviceFilesList):
 	for folder in folders.get_children():
@@ -45,7 +59,6 @@ func add_new_doc(doc: DocumentInfo):
 				doc_button.focus_entered.connect(view_doc.bind(doc.document_id))
 
 func check_for_new_tags(doc: DocumentInfo):
-	
 	for tag in doc.relevant_tags:
 		var found = false
 		for button in folder_buttons.get_children():
@@ -68,6 +81,7 @@ func add_new_folder(folder_name : String):
 	var new_folder = device_files_list.instantiate()
 	new_folder.set_tag(folder_name)
 	folders.add_child(new_folder)
+	new_folder.button = new_folder_button.get_path()
 	new_folder.name = folder_name + "Container"
 	
 	#Connect button
@@ -79,3 +93,9 @@ func add_new_folder(folder_name : String):
 	return new_folder
 	
 #endregion
+
+func _on_fullscreen_toggled(toggled_on: bool) -> void:
+	left_panel.hide() if toggled_on else left_panel.show()
+	mid_panel.hide() if toggled_on else mid_panel.show()
+	if not toggled_on: document_viewer.reset_position()
+	fullscreen = toggled_on

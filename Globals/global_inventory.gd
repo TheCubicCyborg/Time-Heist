@@ -4,10 +4,8 @@ class_name GlobalInventory
 var items : Array[PickupItem] : #TIMEVAR
 	set(value):
 		if globals.time_manager and globals.time_manager.logging:
-			print("LOGGING -- items array as ", items, " at time ", globals.time_manager.cur_time)
 			globals.time_manager.timelog(self,"items",items,value)
 		items = value
-		print("ITEMS ARRAY IN SET FUNCTION: ", items)
 		globals.update_items.emit()
 @export var items_to_start_with : Array[PickupItem] = []
 var documents : Array[DocumentInfo]
