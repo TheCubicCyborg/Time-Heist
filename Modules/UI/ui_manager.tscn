@@ -70,6 +70,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yaem8")
 
+[node name="HUD" parent="." unique_id=528506545 instance=ExtResource("5_df44s")]
+z_index = 1
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
 [node name="DEBUG UI" type="Control" parent="." unique_id=1553451654]
 process_mode = 4
 visible = false
@@ -128,15 +137,6 @@ layout_mode = 1
 visible = false
 z_index = 1
 layout_mode = 1
-
-[node name="HUD" parent="." unique_id=528506545 instance=ExtResource("5_df44s")]
-z_index = 1
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="ButtonMove" type="AudioStreamPlayer" parent="." unique_id=447146223]
 stream = ExtResource("6_df44s")

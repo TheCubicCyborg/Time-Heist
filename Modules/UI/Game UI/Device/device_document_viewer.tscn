@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bka6qumuyo18s" path="res://Modules/UI/Game UI/Device/device_document_viewer.gd" id="1_gjq0a"]
 [ext_resource type="Texture2D" uid="uid://kon7grknc0m0" path="res://Assets/UI/Main Menu/5560F638-770D-4B23-A73B-C47E189BD1F4.jpeg" id="2_0nkbd"]
 
+[sub_resource type="Environment" id="Environment_gjq0a"]
+
 [sub_resource type="CanvasTexture" id="CanvasTexture_gjq0a"]
 
 [node name="DeviceDocumentViewer" type="Node3D" unique_id=247393591]
@@ -10,6 +12,7 @@ script = ExtResource("1_gjq0a")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1797373346]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.92901194)
+environment = SubResource("Environment_gjq0a")
 
 [node name="Document" type="Sprite3D" parent="." unique_id=1401445372]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, -1.2355669)
