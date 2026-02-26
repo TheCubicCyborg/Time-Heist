@@ -10,7 +10,7 @@ albedo_color = Color(0.934157, 0.25749442, 0.26396477, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_xq026"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_xq026")
-size = Vector3(0.5, 0.5, 0.2)
+size = Vector3(0.25, 0.5, 0.2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xq026"]
 size = Vector3(0.5371094, 0.5576172, 0.45703125)

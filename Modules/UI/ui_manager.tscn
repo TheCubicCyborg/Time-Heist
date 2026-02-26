@@ -130,6 +130,7 @@ z_index = 1
 layout_mode = 1
 
 [node name="HUD" parent="." unique_id=528506545 instance=ExtResource("5_df44s")]
+z_index = 1
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0

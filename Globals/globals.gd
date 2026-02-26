@@ -10,7 +10,7 @@ class_name Globals extends Node
 #7:
 #8:
 
-enum InputController {UI, GAMEPLAY}
+enum InputController {UI, GAMEPLAY, TIMETRAVEL}
 var controller_of_input = InputController.GAMEPLAY
 
 var time_manager: TimeManager
