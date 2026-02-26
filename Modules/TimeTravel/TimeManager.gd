@@ -8,6 +8,10 @@ var paused: bool = true
 var logging: bool = false
 var time_multiplier:float = 1
 
+var night_start_hours: int = 1
+var night_start_minutes: int = 49
+var night_end: float = 300 #seconds / 5 mins
+
 const FIXED_REWIND_VALUE = 15
 const REWIND_MULTIPLIER = 2
 const WAIT_MULTIPLIER = 5

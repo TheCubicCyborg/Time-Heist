@@ -146,7 +146,8 @@ func draw_line():
 
 
 func _on_npc_hitbox_body_entered(body: Node3D) -> void:
-	caught()
+	if body == globals.player and globals.player.can_be_seen:
+		caught()
 "
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_23e0v"]
@@ -216,3 +217,4 @@ shape = SubResource("BoxShape3D_1cksi")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_entered" from="NPC hitbox" to="." method="_on_npc_hitbox_body_entered"]

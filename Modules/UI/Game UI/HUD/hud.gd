@@ -14,7 +14,7 @@ func _process(_delta: float) -> void:
 	time_juice.value = globals.time_juice
 	if globals.time_manager:
 		var cur_time: int = int(globals.time_manager.cur_time)
-		time_label.text = "%02d:%02d" % [cur_time/60,int(cur_time)%60]
+		time_label.text = "%d:%02d:%02d" % [globals.time_manager.night_start_hours,globals.time_manager.night_start_minutes+(cur_time/60),int(cur_time)%60] #start time is 1:49
 	pass
 
 func new_notif(value : bool, tab : globals.Device_Tabs):

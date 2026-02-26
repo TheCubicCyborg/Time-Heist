@@ -13,7 +13,7 @@ size = Vector3(1, 0.88, 0.44)
 size = Vector3(1, 0.37, 0.76)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r8iwe"]
-size = Vector3(1, 1.770752, 1)
+size = Vector3(1.0683594, 1.770752, 1.1643066)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fh5j6"]
 size = Vector3(1, 1.6975098, 1)
@@ -44,7 +44,7 @@ interact_object = NodePath("..")
 metadata/_custom_type_script = "uid://d0afbfeblscar"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1555061485]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84484863, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84484863, 0.012084961)
 shape = SubResource("BoxShape3D_r8iwe")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1467218949]
