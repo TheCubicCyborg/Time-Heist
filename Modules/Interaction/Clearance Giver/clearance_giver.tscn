@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cums0n03a6on2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xr4ad"]
+size = Vector3(1, 0.86, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_le8sc"]
+size = Vector3(1, 0.88, 0.44)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r8iwe"]
+size = Vector3(1, 0.37, 0.76)
+
+[node name="Clearance Giver" type="Node3D" unique_id=1251886145]
+
+[node name="Mesh" type="Node3D" parent="." unique_id=612838289]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh" unique_id=51251177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43, 0)
+mesh = SubResource("BoxMesh_xr4ad")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Mesh" unique_id=2009156000]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.23, -0.28)
+mesh = SubResource("BoxMesh_le8sc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Mesh" unique_id=1835123005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48, -0.11)
+mesh = SubResource("BoxMesh_r8iwe")

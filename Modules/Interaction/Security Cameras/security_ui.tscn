@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://b64j2lbpoxerw"]
+
+[ext_resource type="Script" uid="uid://s4xge84s8f2e" path="res://Modules/Interaction/Security Cameras/security_ui.gd" id="1_82u6j"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_82u6j"]
+viewport_path = NodePath("ColorRect/MarginContainer/GridContainer/CameraFeed1/SubViewport")
+
+[node name="Security UI" type="Control" unique_id=1551658266]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_82u6j")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1715061004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.69135684, 0.6913568, 0.69135684, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect" unique_id=857060187]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/MarginContainer" unique_id=1493526620]
+layout_mode = 2
+columns = 3
+
+[node name="CameraFeed1" type="TextureRect" parent="ColorRect/MarginContainer/GridContainer" unique_id=453272576]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("ViewportTexture_82u6j")
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/MarginContainer/GridContainer/CameraFeed1" unique_id=293086598]
+
+[node name="Camera3D" type="Camera3D" parent="ColorRect/MarginContainer/GridContainer/CameraFeed1/SubViewport" unique_id=812343546]
+
+[node name="CameraFeed2" type="TextureRect" parent="ColorRect/MarginContainer/GridContainer" unique_id=1173773839]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("ViewportTexture_82u6j")
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/MarginContainer/GridContainer/CameraFeed2" unique_id=167501901]
+
+[node name="Camera3D" type="Camera3D" parent="ColorRect/MarginContainer/GridContainer/CameraFeed2/SubViewport" unique_id=233020374]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.47944, 0, 0)
+
+[node name="CameraFeed3" type="TextureRect" parent="ColorRect/MarginContainer/GridContainer" unique_id=671238626]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("ViewportTexture_82u6j")
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/MarginContainer/GridContainer/CameraFeed3" unique_id=91192958]
+
+[node name="Camera3D" type="Camera3D" parent="ColorRect/MarginContainer/GridContainer/CameraFeed3/SubViewport" unique_id=1062231656]
+
+[node name="CameraFeed4" type="TextureRect" parent="ColorRect/MarginContainer/GridContainer" unique_id=908982344]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("ViewportTexture_82u6j")
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/MarginContainer/GridContainer/CameraFeed4" unique_id=714237248]
+
+[node name="Camera3D" type="Camera3D" parent="ColorRect/MarginContainer/GridContainer/CameraFeed4/SubViewport" unique_id=855990881]
+
+[node name="CameraFeed5" type="TextureRect" parent="ColorRect/MarginContainer/GridContainer" unique_id=1514203002]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("ViewportTexture_82u6j")
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/MarginContainer/GridContainer/CameraFeed5" unique_id=1687143009]
+
+[node name="Camera3D" type="Camera3D" parent="ColorRect/MarginContainer/GridContainer/CameraFeed5/SubViewport" unique_id=1577947308]
+
+[node name="CameraFeed6" type="TextureRect" parent="ColorRect/MarginContainer/GridContainer" unique_id=759914621]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("ViewportTexture_82u6j")
+
+[node name="SubViewport" type="SubViewport" parent="ColorRect/MarginContainer/GridContainer/CameraFeed6" unique_id=751226353]
+
+[node name="Camera3D" type="Camera3D" parent="ColorRect/MarginContainer/GridContainer/CameraFeed6/SubViewport" unique_id=294868834]

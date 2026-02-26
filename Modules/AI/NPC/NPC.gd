@@ -50,10 +50,10 @@ var start_pos: Vector3
 func initialize_path_vars():
 	if not globals.time_manager:
 		return
-	var cur_time = time_manager.cur_time
+	var cur_time = globals.time_manager.cur_time
 	if path_following:
 		cur_component = path_following.at(0)
-		while cur_component.time_end <= cur_time:
+		while cur_component and cur_component.time_end <= cur_time:
 			cur_component = path_following.at(cur_component.id+1)
 		if cur_component is PathVertex:
 			cur_action_ix = 0
@@ -68,6 +68,7 @@ func interact_with(nodepath: NodePath):
 		node.interact(self)
 
 func face(rotation_deg: float):
+	print("facing ", rotation_deg)
 	rotation.y = deg_to_rad(rotation_deg)
 
 func branch_if(branchAction: BranchAction):

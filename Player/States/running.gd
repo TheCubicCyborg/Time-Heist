@@ -12,7 +12,7 @@ var sliding_state : State
 func enter() -> void:
 	if not $RunningSFX.finished.is_connected(_on_running_sfx_finished):
 		$RunningSFX.finished.connect(_on_running_sfx_finished)
-	
+		
 	play_randomized_footstep()
 	
 	if player.is_crouching:

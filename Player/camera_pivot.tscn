@@ -32,6 +32,7 @@ mouse_filter = 2
 script = ExtResource("3_fvf84")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=14214742]
+visible = false
 modulate = Color(1, 0.684147, 0.7443726, 1)
 offset_right = 40.0
 offset_bottom = 40.0
