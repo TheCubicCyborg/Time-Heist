@@ -11,6 +11,7 @@ var time_multiplier:float = 1
 const FIXED_REWIND_VALUE = 15
 const REWIND_MULTIPLIER = 2
 const WAIT_MULTIPLIER = 5
+const WAIT_FASTER_MULTIPLIER = 15
 
 signal time_traveled
 signal stopped_time_travel
@@ -23,13 +24,18 @@ func _ready():
 
 func _physics_process(delta):
 	if Input.is_action_pressed("rewind"):
-		if not globals.player.infinite_juice: #DEBUG dont lose juice if debug mode
+		if globals.player and not globals.player.infinite_juice: #DEBUG dont lose juice if debug mode
 			globals.time_juice = maxf(0.0, globals.time_juice - globals.rewind_drain_per_sec * delta)
 		if globals.time_juice > 0.0:
 			is_time_traveling = true
 			rewind(REWIND_MULTIPLIER * delta)
 	elif Input.is_action_pressed("wait"):
 		cur_time += delta * WAIT_MULTIPLIER
+		if is_time_traveling:
+			stopped_time_travel.emit()
+			is_time_traveling = false
+	elif Input.is_action_pressed("wait_faster"):
+		cur_time += delta * WAIT_FASTER_MULTIPLIER
 		if is_time_traveling:
 			stopped_time_travel.emit()
 			is_time_traveling = false

@@ -56,3 +56,13 @@ func _validate_property(property: Dictionary):
 			property.usage |= PROPERTY_USAGE_DEFAULT
 		else:
 			property.usage |= PROPERTY_USAGE_READ_ONLY
+
+func progress(npc: NPC, from: float, to: float):
+	npc.position = get_position_at_time(to)
+	npc.look_at(npc.position + get_direction())
+	return to >= time_end
+
+func revert(npc: NPC, from: float, to: float):
+	npc.position = get_position_at_time(to)
+	npc.look_at(npc.position + get_direction())
+	return to < time_start

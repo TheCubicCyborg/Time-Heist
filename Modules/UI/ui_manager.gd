@@ -17,9 +17,9 @@ func _ready():
 	set_menu(document_viewer,false)
 
 func _process(_delta):
-	handle_input()
+	handle_input(_delta)
 	if globals.controller_of_input == globals.InputController.UI:
-		cur_ui.handle_input()
+		cur_ui.handle_input(_delta)
 
 func take_control(ui: Control):
 	if ui != debug_ui:
@@ -35,17 +35,13 @@ func release_control():
 		cur_ui = null
 		globals.controller_of_input = globals.InputController.GAMEPLAY
 
-func handle_input():
+func handle_input(_delta):
 	#if Input.is_action_just_pressed("camera_ui"):
 		#toggle_menu(camera_ui)
 	if Input.is_action_just_pressed("debug_button"):
 		toggle_menu(debug_ui)
-		globals.player.can_be_seen = not globals.player.can_be_seen
-		globals.player.can_open_any_door = not globals.player.can_open_any_door
-		globals.player.infinite_juice = not globals.player.infinite_juice
-		globals.time_juice = globals.max_time_juice
-		globals.player.set_collision_mask_value(4, not globals.player.get_collision_mask_value(4))
-		$ButtonMove.play()
+	if Input.is_action_just_pressed("ui_paste"):
+		globals.toggle_debug_settings()
 	if Input.is_action_just_pressed("device_menu"):
 		toggle_menu(device_menu)
 		$ButtonMove.play()

@@ -31,13 +31,18 @@ class_name NPCPath extends Resource
 			emit_changed()
 @export var default_speed: float = 1
 
-var updating_path: bool = false
+var updating_path: bool = false:
+	set(value):
+		updating_path = value
+		#print("changed updating path to: ", value)
 
 func _init():
 	resource_local_to_scene = true
 	path_components.push_back(PathVertex.new(0,self))
 
 func at(ix: int):
+	if ix < 0 or ix >= size():
+		return null
 	return path_components[ix]
 
 func size():
@@ -56,6 +61,7 @@ func _shift_time_by_from(amt_shift:float, ix_from: int):
 		cur_component.time_end += amt_shift
 
 func _recalculate_time_from(ix: int):
+	#print("recalculating time")
 	var start_comp = at(ix)
 	var prev_end = start_comp.time_end
 	for i in range(ix+1,size()):
@@ -155,11 +161,13 @@ func commit_vertex(vertex: PathVertex, action: PathingGizmo.GIZMO_ACTION):
 	#ResourceSaver.save(self,)
 
 func component_manually_changed(component:PathComponent,property_name: String,old: Variant):
+	#print("manual change recieved, component: ", component ," property_name: ", property_name ," updating path: ",updating_path)
 	if not updating_path:
 		validate_manual_change(component,property_name,old)
 		emit_changed()
 
 func validate_manual_change(component: PathComponent, property_name: String, old: Variant):
+	#print("validating manual change: ", property_name)
 	updating_path = true
 	if component is PathLine:
 		match property_name:
@@ -209,11 +217,23 @@ func _validate_position_change(vertex: PathVertex, old: Vector3):
 	_recalculate_time_from(vertex.id-1)
 
 func _validate_vertex_actions_change(vertex: PathVertex):
-	var old_end = vertex.time_end
 	vertex.time_end = vertex.time_start + vertex.get_duration()
 	_recalculate_time_from(vertex.id)
 
-func _validate_property(property: Dictionary):
+#func _validate_property(property: Dictionary):
 	#if property.name == "path_components":
 		#property.usage = PROPERTY_USAGE_STORAGE
-	pass
+
+func progress(npc: NPC, from: float, to: float):
+	while npc.cur_component and npc.cur_component.progress(npc,from,to) and not npc.branched:
+		npc.cur_component = at(npc.cur_component.id+1)
+		npc.cur_action_ix = 0
+	npc.branched = false
+
+func revert(npc: NPC, from: float, to: float):
+	if npc.cur_component == null and to < at(size()-1).time_end:
+		npc.cur_component = at(size()-1)
+	while npc.cur_component and npc.cur_component.revert(npc,from,to):
+		npc.cur_component = at(npc.cur_component.id-1)
+		if npc.cur_component is PathVertex:
+			npc.cur_action_ix = npc.cur_component.num_actions()-1

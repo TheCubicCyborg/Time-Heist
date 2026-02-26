@@ -9,7 +9,8 @@ resource_name = "cone_vision"
 script/source = "@tool
 extends Area3D
 
-var player_spotted
+var player_in_zone : bool
+var player_spotted : bool
 @onready var sight_checker := $SightChecker
 @onready var collision := $CollisionPolygon3D
 @onready var laser: MeshInstance3D = $Laser
@@ -18,17 +19,19 @@ var player_spotted
 @onready var laser_node : MeshInstance3D = $LaserCylinder
 @onready var laser_sfx : AudioStreamPlayer = $AudioStreamPlayer
 
+@export var on_gaurd : bool = true
+
 var time_detecting: float = 0
 
-@export var sight_line_angle : float = 220:
+@export var sight_line_angle : float = 130:
 	set(value):
 		sight_line_angle = value
 		create_mesh()
-@export var sight_line_radius : float = 75:
+@export var sight_line_radius : float = 15:
 	set(value):
 		sight_line_radius = value
 		create_mesh()
-@export var smaller_sight_line_radius : float = 20:
+@export var smaller_sight_line_radius : float = 0:
 	set(value):
 		smaller_sight_line_radius = value
 		create_mesh()
@@ -42,6 +45,9 @@ var polygon_points : PackedVector2Array = []
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
+		sight_line_angle = globals.gaurd_sight_line_angle if on_gaurd else globals.person_sight_line_angle
+		sight_line_radius = globals.gaurd_sight_line_radius if on_gaurd else globals.person_sight_line_radius
+		
 		globals.safe_ratio = 1
 		sight_checker.target_position.z = -sight_line_radius
 		create_mesh()
@@ -49,7 +55,6 @@ func _ready() -> void:
 		laser_node.visible = false
 
 func create_mesh():
-	print(\"mesh\")
 	polygon_points = []
 	var start_angle = -sight_line_angle / 2.0
 	var end_angle = sight_line_angle / 2.0
@@ -77,38 +82,44 @@ func create_mesh():
 	
 func _process(delta: float) -> void:
 	if not Engine.is_editor_hint():
-		if player_spotted and globals.player.can_be_seen:
-			sight_checker.look_at(Vector3(globals.player.global_position.x, 1, globals.player.global_position.z))
+		if player_in_zone and globals.player.can_be_seen:
+			#sight_checker.look_at(Vector3(globals.player.global_position.x, 1, globals.player.global_position.z))
+			sight_checker.look_at(globals.player.detection_point.global_position)
 			
 			if sight_checker.get_collider() == globals.player:
-				time_detecting += delta
-				laser_mesh.clear_surfaces()
-				draw_line()
-				if laser_sfx.playing == false:
-					laser_sfx.play()
+				player_spotted = true
 			else:
-				time_detecting -= delta
-				laser_mesh.clear_surfaces()
-				laser_node.visible = false
+				player_spotted = false
 				laser_sfx.stop()
+				laser_node.visible = false
 				
-			globals.safe_ratio = (time_till_caught - time_detecting) / time_till_caught
-			
-			if time_detecting >= time_till_caught:
-				caught()
+		if player_spotted and globals.player.can_be_seen:
+			time_detecting += delta
+			laser_mesh.clear_surfaces()
+			draw_line()
+			if laser_sfx.playing == false:
+				laser_sfx.play()
 		else:
-			laser_sfx.stop()
+			time_detecting = max(time_detecting - delta, 0.0)
+			laser_mesh.clear_surfaces()
 			laser_node.visible = false
+			laser_sfx.stop()
+		
+		
+		globals.safe_ratio = min(globals.safe_ratio, (time_till_caught - time_detecting) / time_till_caught)
+		if time_detecting >= time_till_caught:
+			caught()
 
 func _on_body_entered(body: Node3D) -> void:
 	if body == globals.player:
-		player_spotted = true
+		player_in_zone = true
 		
 func _on_body_exited(body: Node3D) -> void:
 	if body == globals.player:
-		player_spotted = false 
-		time_detecting = 0
-		globals.safe_ratio = (time_till_caught - time_detecting) / time_till_caught
+		player_in_zone = false 
+		player_spotted = false
+		#time_detecting = 0
+		#globals.safe_ratio = (time_till_caught - time_detecting) / time_till_caught
 		laser_mesh.clear_surfaces()
 		laser_node.visible = false
 	
@@ -151,7 +162,6 @@ height = 1.0
 script = SubResource("GDScript_23e0v")
 sight_line_angle = 129.9
 sight_line_radius = 14.825
-smaller_sight_line_radius = 0.0
 time_till_caught = 1.0
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="." unique_id=955152349]

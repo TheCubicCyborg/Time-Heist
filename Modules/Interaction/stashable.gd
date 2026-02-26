@@ -25,6 +25,7 @@ func interact(person : Node):
 			else:
 				print("player doesnt have item")
 	else:
+		print("NPC TOUCHING PLANT")
 		if has_item: # NPC interaction is kinda temp rn. NPCs should honestly have an inventory
 			held_item = null
 		else:

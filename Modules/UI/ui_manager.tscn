@@ -50,6 +50,17 @@ func _process(_delta):
 	text = \"Speed: \" + cur_speed
 "
 
+[sub_resource type="GDScript" id="GDScript_df44s"]
+resource_name = "SafeRatioDisplay"
+script/source = "extends Label
+
+func _process(_delta):
+	var safe_ratio = \"N/A\"
+	if globals.player:
+		safe_ratio = str(globals.safe_ratio)
+	text = \"Safe Ratio: \" + safe_ratio
+"
+
 [node name="UI Manager" type="Control" unique_id=1478464990]
 layout_mode = 3
 anchors_preset = 15
@@ -61,6 +72,7 @@ script = ExtResource("1_yaem8")
 
 [node name="DEBUG UI" type="Control" parent="." unique_id=1553451654]
 process_mode = 4
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -69,36 +81,38 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_u3icv")
 
-[node name="Time Display" type="Label" parent="DEBUG UI" unique_id=1629058186]
-layout_mode = 0
-offset_right = 302.0
-offset_bottom = 23.0
+[node name="VBoxContainer" type="VBoxContainer" parent="DEBUG UI" unique_id=938135867]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="Time Display" type="Label" parent="DEBUG UI/VBoxContainer" unique_id=1629058186]
+layout_mode = 2
 text = "Time Display"
 script = SubResource("GDScript_yaem8")
 
-[node name="State Display" type="Label" parent="DEBUG UI" unique_id=1732052527]
-layout_mode = 0
-offset_top = 18.63
-offset_right = 387.0
-offset_bottom = 42.0
+[node name="State Display" type="Label" parent="DEBUG UI/VBoxContainer" unique_id=1732052527]
+layout_mode = 2
 text = "State Display"
 script = SubResource("GDScript_u3icv")
 
-[node name="Crouching Display" type="Label" parent="DEBUG UI" unique_id=1972601677]
-layout_mode = 0
-offset_top = 41.0
-offset_right = 387.0
-offset_bottom = 64.37
+[node name="Crouching Display" type="Label" parent="DEBUG UI/VBoxContainer" unique_id=1972601677]
+layout_mode = 2
 text = "Crouching Display"
 script = SubResource("GDScript_nr7cl")
 
-[node name="Speed Display" type="Label" parent="DEBUG UI" unique_id=620182975]
-layout_mode = 0
-offset_top = 64.0
-offset_right = 387.0
-offset_bottom = 87.37
+[node name="Speed Display" type="Label" parent="DEBUG UI/VBoxContainer" unique_id=620182975]
+layout_mode = 2
 text = "Speed Display"
 script = SubResource("GDScript_isv23")
+
+[node name="Safe Ratio Display" type="Label" parent="DEBUG UI/VBoxContainer" unique_id=679642968]
+layout_mode = 2
+script = SubResource("GDScript_df44s")
 
 [node name="Interface" type="Control" parent="." unique_id=722000712]
 visible = false
