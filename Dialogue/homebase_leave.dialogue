@@ -1,0 +1,8 @@
+~ start
+Do you want to leave?
+- Yes
+	do SceneManager.change_scene(SceneManager.Scene.GAMEPLAY)
+	=> END
+- No
+	=> END
+=> END

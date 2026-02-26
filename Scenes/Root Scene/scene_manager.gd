@@ -1,7 +1,10 @@
 extends Node
 
-@onready var scene_holder := $"../SceneHolder"
-@onready var current_scene := $"../SceneHolder/temp"
+#@onready var scene_holder := $"../SceneHolder"
+#@onready var current_scene := $"../SceneHolder/temp"
+# since this is a global, need to assign these in _ready
+var scene_holder: Node
+var current_scene: Node
 
 enum Scene {
 	GAMEPLAY,
@@ -14,6 +17,9 @@ var scene_paths := {
 	Scene.MAIN_MENU: preload("res://Scenes/Main Menu/main_menu.tscn")
 }
 
+const START_SCENE := Scene.HOMEBASE
+const ROOT_SCENE_NAME := "TimeHeist"
+
 func change_scene(s: Scene) -> void:
 	# clear current scene if there
 	if current_scene:
@@ -21,7 +27,13 @@ func change_scene(s: Scene) -> void:
 		
 	# instantiate designated scene and save ref
 	current_scene = scene_paths[s].instantiate()
-	scene_holder.add_child(current_scene)
+	if scene_holder:
+		scene_holder.add_child(current_scene)
 	
 func _ready() -> void:
-	change_scene(Scene.MAIN_MENU)
+	await get_tree().process_frame
+	
+	scene_holder = get_tree().current_scene.get_node("SceneHolder")
+	
+	if get_tree().current_scene.name == ROOT_SCENE_NAME:
+		change_scene(START_SCENE)
