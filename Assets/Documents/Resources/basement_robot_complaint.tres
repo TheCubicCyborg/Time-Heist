@@ -13,5 +13,4 @@ relevant_tags = Array[String](["Emails"])
 email_heading = "These new robots are freaky..."
 email_from = "John D"
 email_desc = "Please get rid of them"
-email_time = 30.0
 metadata/_custom_type_script = "uid://c4r7d4bl70rat"

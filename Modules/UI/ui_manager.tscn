@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b8umb5d42v56y" path="res://Modules/UI/Game UI/HUD/hud.tscn" id="5_df44s"]
 [ext_resource type="PackedScene" uid="uid://djm2xkntdba18" path="res://Modules/UI/Game UI/device_menu.tscn" id="5_keavj"]
 [ext_resource type="AudioStream" uid="uid://cj4g1ux14jflo" path="res://Assets/SFX/button_move.ogg" id="6_df44s"]
+[ext_resource type="PackedScene" uid="uid://v7qhxfhoa5ng" path="res://Modules/UI/Game UI/DesktopViewer/desktop_viewer.tscn" id="6_purnk"]
 
 [sub_resource type="GDScript" id="GDScript_yaem8"]
 resource_name = "TimeDisplay"
@@ -72,12 +73,7 @@ script = ExtResource("1_yaem8")
 
 [node name="HUD" parent="." unique_id=528506545 instance=ExtResource("5_df44s")]
 z_index = 1
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
 
 [node name="DEBUG UI" type="Control" parent="." unique_id=1553451654]
 process_mode = 4
@@ -123,13 +119,7 @@ script = SubResource("GDScript_isv23")
 layout_mode = 2
 script = SubResource("GDScript_df44s")
 
-[node name="Interface" type="Control" parent="." unique_id=722000712]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="DeviceMenu" parent="." unique_id=1059738567 instance=ExtResource("5_keavj")]
+[node name="Desktop Viewer" parent="." unique_id=2027082529 instance=ExtResource("6_purnk")]
 visible = false
 layout_mode = 1
 
@@ -138,9 +128,15 @@ visible = false
 z_index = 1
 layout_mode = 1
 
-[node name="HUD" parent="." unique_id=528506545 instance=ExtResource("5_df44s")]
-z_index = 1
+[node name="DeviceMenu" parent="." unique_id=1059738567 instance=ExtResource("5_keavj")]
+visible = false
 layout_mode = 1
+
+[node name="Interface" type="Control" parent="." unique_id=722000712]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="ButtonMove" type="AudioStreamPlayer" parent="." unique_id=447146223]
 stream = ExtResource("6_df44s")

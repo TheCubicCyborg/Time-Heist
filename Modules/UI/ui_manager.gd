@@ -2,6 +2,7 @@ extends Control
 class_name UI_Manager
 
 @onready var document_viewer = $DocumentViewer
+@onready var desktop_viewer: DesktopViewer = $"Desktop Viewer"
 @onready var debug_ui = $"DEBUG UI"
 @export var debug_mode: bool = false
 #@onready var camera_ui = $Camera
@@ -15,6 +16,7 @@ func _ready():
 	set_menu(device_menu,false)
 	set_menu(debug_ui,debug_mode)
 	set_menu(document_viewer,false)
+	set_menu(desktop_viewer,false)
 
 func _process(_delta):
 	handle_input(_delta)
@@ -40,7 +42,7 @@ func handle_input(_delta):
 		#toggle_menu(camera_ui)
 	if Input.is_action_just_pressed("debug_button"):
 		toggle_menu(debug_ui)
-	if Input.is_action_just_pressed("ui_paste"):
+	if Input.is_action_just_pressed("ui_paste"): #why is this in ui_manager?
 		globals.toggle_debug_settings()
 	if Input.is_action_just_pressed("device_menu"):
 		toggle_menu(device_menu)

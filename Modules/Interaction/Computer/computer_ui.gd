@@ -13,7 +13,6 @@ const MOUSE_SPEED := 450.0
 
 func _ready() -> void:
 	Input.set_custom_mouse_cursor(globals.normal_cursor,Input.CURSOR_ARROW)
-	
 	desktop.texture = desktop_image
 
 #func _physics_process(delta: float) -> void:

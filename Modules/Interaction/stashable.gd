@@ -14,6 +14,7 @@ var has_item : bool
 @export var expected_item : PickupItem
 
 func interact(person : Node):
+	print("interacting with stashable")
 	if person == globals.player:
 		if has_item:
 			globals.collect_item.emit(held_item)
