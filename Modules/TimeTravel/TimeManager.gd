@@ -4,6 +4,7 @@ class_name TimeManager
 
 var time_stack: Array[TimeDelta] = []
 var cur_time: float = 0
+var delta_time: float = 0
 var paused: bool = true
 var logging: bool = false
 var time_multiplier:float = 1
@@ -31,26 +32,26 @@ func _ready():
 	start_time()
 
 func _physics_process(delta):
+	if paused:
+		return
 	if Input.is_action_pressed("rewind") and globals.time_juice > 0.0:
-		if globals.player and not globals.player.infinite_juice: #DEBUG dont lose juice if debug mode
-			globals.time_juice = maxf(0.0, globals.time_juice - globals.rewind_drain_per_sec * delta)
-			is_time_traveling = true
+		if globals.time_juice > 0.0 or not globals.player or globals.player.infinite_juice:
 			rewind(REWIND_MULTIPLIER * delta)
-	elif Input.is_action_pressed("wait"):
-		cur_time += delta * WAIT_MULTIPLIER
+			is_time_traveling = true
+			if globals.player and not globals.player.infinite_juice: #DEBUG dont lose juice if debug mode
+				globals.time_juice = maxf(0.0, globals.time_juice - globals.rewind_drain_per_sec * delta)
+	else:
+		if Input.is_action_pressed("wait"):
+			delta_time = delta * WAIT_MULTIPLIER
+		elif Input.is_action_pressed("wait_faster"):
+			delta_time = delta * WAIT_FASTER_MULTIPLIER
+		else:
+			delta_time = delta
 		if is_time_traveling:
 			stopped_time_travel.emit()
 			is_time_traveling = false
-	elif Input.is_action_pressed("wait_faster"):
-		cur_time += delta * WAIT_FASTER_MULTIPLIER
-		if is_time_traveling:
-			stopped_time_travel.emit()
-			is_time_traveling = false
-	elif !paused:
-		cur_time += delta * time_multiplier
-		if is_time_traveling:
-			stopped_time_travel.emit()
-			is_time_traveling = false
+	cur_time += delta_time
+	
 
 func toggle_time():
 	paused = not paused
@@ -75,15 +76,16 @@ func timelog(_object: Node,_var_name:String, _old_value, _new_value):
 	time_stack.append(newDelta)
 
 func rewind(time_sec:float):
-	var goal_time = cur_time - time_sec
+	delta_time = -time_sec
+	var goal_time = cur_time + delta_time
 	if goal_time < 0:
 		goal_time = 0
-
+		delta_time = -cur_time
+	
 	logging = false
 	while(not time_stack.is_empty() and time_stack.back().time_stamp > goal_time):
 		time_stack.pop_back().undo_delta()
 	logging = true
-	cur_time = goal_time
 	time_traveled.emit()
 
 func start_fast_forward(multiplier: float):
@@ -94,7 +96,7 @@ func stop_fast_forward():
 
 class TimeDelta:
 	var object: Object
-	var time_stamp:int
+	var time_stamp: float
 	var var_name:String
 	var old_value
 	func undo_delta():

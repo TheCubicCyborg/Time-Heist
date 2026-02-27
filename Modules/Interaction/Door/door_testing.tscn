@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://b0eo68htgjcd3"]
+
+[ext_resource type="PackedScene" uid="uid://bk11o2jtj5d7g" path="res://Modules/Interaction/Door/generic_door.tscn" id="1_26vd6"]
+[ext_resource type="PackedScene" uid="uid://bm4y2kiv4odnp" path="res://Modules/UI/ui_manager.tscn" id="2_30l1c"]
+[ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/camera_pivot.tscn" id="3_6rnln"]
+[ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="4_0fo0o"]
+[ext_resource type="Texture2D" uid="uid://cjwgyolwq6axi" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_ao.png" id="5_2h3rx"]
+[ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="6_p4sqk"]
+[ext_resource type="Texture2D" uid="uid://iysiiph8g0nq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_normal-ogl.png" id="7_pgbwf"]
+[ext_resource type="Texture2D" uid="uid://bi1v4o5qgvkpp" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_roughness.png" id="8_itaa2"]
+[ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/Player.tscn" id="9_ent17"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_meejx"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r14a3"]
+size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ypf6f"]
+albedo_texture = ExtResource("4_0fo0o")
+metallic = 1.0
+metallic_texture = ExtResource("6_p4sqk")
+roughness_texture = ExtResource("8_itaa2")
+normal_enabled = true
+normal_texture = ExtResource("7_pgbwf")
+ao_enabled = true
+ao_texture = ExtResource("5_2h3rx")
+uv1_scale = Vector3(12.5, 12.5, 12.5)
+grow_amount = -4.125
+
+[node name="DoorTesting" type="Node3D" unique_id=1787823224]
+
+[node name="Generic_Door" parent="." unique_id=74631722 instance=ExtResource("1_26vd6")]
+is_open = true
+
+[node name="UI Manager" parent="." unique_id=1478464990 instance=ExtResource("2_30l1c")]
+
+[node name="Camera_pivot" parent="." unique_id=144358182 instance=ExtResource("3_6rnln")]
+CAMERA_DISTANCE_BACK = 3.0
+CAMERA_DISTANCE_UP = 3.5
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1607686888]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1278929793]
+shape = SubResource("WorldBoundaryShape3D_meejx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1816563652]
+mesh = SubResource("PlaneMesh_r14a3")
+surface_material_override/0 = SubResource("StandardMaterial3D_ypf6f")
+
+[node name="CharacterBody3D" parent="." unique_id=265121882 instance=ExtResource("9_ent17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4435679, 0, 3.908525)
