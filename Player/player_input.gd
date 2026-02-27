@@ -14,7 +14,7 @@ var face_to_move = {
 }
 
 var input_map
-var should_update_map : bool = false
+var should_update_map : bool = true
 
 func _ready() -> void:
 	input_map = face_to_move[0] # Initally set input map

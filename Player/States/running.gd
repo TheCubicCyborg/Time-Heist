@@ -28,8 +28,9 @@ func exit() -> void:
 	pass
 
 func play_randomized_footstep() -> void:
-	$RunningSFX.pitch_scale = randf_range(0.85, 0.9)
-	$RunningSFX.play()
+	if not globals.player.is_crouching:
+		$RunningSFX.pitch_scale = randf_range(0.85, 0.9)
+		$RunningSFX.play()
 
 func _on_running_sfx_finished() -> void:
 	play_randomized_footstep()

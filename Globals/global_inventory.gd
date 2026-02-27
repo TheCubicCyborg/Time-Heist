@@ -8,7 +8,7 @@ var items : Array[PickupItem] : #TIMEVAR
 		items = value
 		globals.update_items.emit()
 @export var items_to_start_with : Array[PickupItem] = []
-var documents : Array[DocumentInfo]
+var documents : Array[DocumentInfo] = [preload("res://Assets/Documents/Resources/demo_recharge_note.tres")]
 var clearances : Array[globals.Clearances]
 signal update_device_files
 

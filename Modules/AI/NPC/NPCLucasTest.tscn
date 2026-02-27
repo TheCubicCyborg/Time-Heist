@@ -168,22 +168,22 @@ visible = false
 mesh = SubResource("CapsuleMesh_gvvx1")
 
 [node name="Cylinder" type="MeshInstance3D" parent="." unique_id=1628374913]
-transform = Transform3D(15.31432, 0, 0, 0, -3.6512183e-06, 8.609855, 0, -15.314319, -2.0527496e-06, -0.00017647594, 0.26309648, 0)
+transform = Transform3D(15.31432, 0, 0, 0, -6.6941016e-07, 8.609855, 0, -15.314319, -3.763487e-07, -0.00017647594, 0.26309648, 0)
 mesh = SubResource("ArrayMesh_3yuln")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_3yuln")
 
 [node name="tire" type="MeshInstance3D" parent="." unique_id=1767033042]
-transform = Transform3D(100, 0, 0, 0, -2.3841858e-05, 99.99999, 0, -99.99999, -2.3841858e-05, 0.31826976, 0.24740723, -3.6469192e-08)
+transform = Transform3D(100, 0, 0, 0, -4.3711384e-06, 99.99999, 0, -99.99999, -4.3711384e-06, 0.31826976, 0.24740723, -3.6469192e-08)
 mesh = SubResource("ArrayMesh_ywgw4")
 skeleton = NodePath("")
 
 [node name="torso" type="MeshInstance3D" parent="." unique_id=805945296]
-transform = Transform3D(13.599682, 3.3002405e-18, -1.4113967e-16, 1.4113966e-16, -0.63564026, 13.584822, -3.3001332e-18, -13.584822, -0.63564026, -0.00016136988, 0.9761665, 1.3115658e-07)
+transform = Transform3D(-13.599682, 1.1889222e-06, 0, -5.6005867e-08, -0.64063257, 13.584587, 1.187602e-06, 13.584587, 0.64063257, -0.00016136988, 0.9761665, 1.3115658e-07)
 mesh = SubResource("ArrayMesh_cy4ms")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_3yuln")
 
 [node name="EyeClinder" type="MeshInstance3D" parent="." unique_id=1281035009]
-transform = Transform3D(0.2287981, 0, 0, 0, 0.01096248, 0, 0, 0, 0.27177733, 0, 1.2961587, 0.030633867)
+transform = Transform3D(0.2287981, 0, 0, 0, 0.01096248, 0, 0, 0, 0.27177733, 0, 1.2961587, -0.037184685)
 mesh = SubResource("CylinderMesh_mf4uq")

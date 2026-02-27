@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var CAMERA_ROTATION_X : float = -50
-@export var CAM_ROT_SPEED : float = 5
+@export var CAM_ROT_SPEED : float = 4
 @export var CAMERA_DISTANCE_BACK : float = 2
 @export var CAMERA_DISTANCE_UP : float = 6
 

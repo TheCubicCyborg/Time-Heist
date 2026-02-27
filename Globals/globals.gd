@@ -24,8 +24,10 @@ var camera : Node3D
 var safe_ratio : float = 1
 var gaurd_sight_line_angle : float = 130
 var gaurd_sight_line_radius : float = 15
+var gaurd_smaller_sight_line_radius : float = 1.5
 var person_sight_line_angle : float = 360
 var person_sight_line_radius : float = 3
+var person_smaller_sight_line_radius : float = 0
 #endregion
 
 var time_juice : float = 100
@@ -35,7 +37,7 @@ var rewind_charge_per_sec : float = 40
 
 var allow_interact: bool = true
 
-var cameras : Array[SubViewport]
+#var cameras : Array[SubViewport]
 
 #var collected_documents: Array[DocumentInfo]
 #func collect(doc : DocumentInfo):
@@ -75,6 +77,7 @@ func _ready():
 
 func player_caught():
 	get_tree().reload_current_scene()
+	time_juice = max_time_juice
 	time_manager.restart_time()
 	time_manager.start_time()
 	#END GAME MWAHAHA
@@ -89,7 +92,6 @@ signal collect_clearance(clearance : Clearances)
 signal use_item(item : PickupItem)
 
 signal new_in_device(value : bool, tab : Device_Tabs)
-#
 #endregion
 
 #region Debug
