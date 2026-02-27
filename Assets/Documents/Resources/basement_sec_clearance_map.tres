@@ -8,4 +8,5 @@ script = ExtResource("1_fbfdy")
 document_id = 4
 title = "Security Clearance"
 document_image = ExtResource("1_m6jh1")
+relevant_tags = Array[String](["Map", "Basement"])
 metadata/_custom_type_script = "uid://c4r7d4bl70rat"
