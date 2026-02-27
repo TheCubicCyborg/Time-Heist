@@ -25,7 +25,7 @@ func change_state(new_state : State) -> void:
 	current_state.enter()
 	
 func handle_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("player_crouch"):
+	if PlayerInput.is_action_just_pressed("player_crouch"):
 		if globals.player.state_machine.is_crouching == true:
 			globals.player.state_machine.is_crouching = false
 		else:

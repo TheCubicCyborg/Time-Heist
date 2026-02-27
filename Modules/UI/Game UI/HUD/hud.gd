@@ -4,6 +4,7 @@ class_name HUD
 @onready var time_juice: TextureProgressBar = $TimeJuice
 @onready var new_notif_texture: TextureRect = $TimeJuice/NewNotif
 @onready var time_label: Label = $Time
+@onready var time_label_seconds: Label = $"Time Seconds"
 var notif_on_tab : Array[bool] = [false,false,false]
 
 func _ready() -> void:
@@ -14,7 +15,8 @@ func _process(_delta: float) -> void:
 	time_juice.value = globals.time_juice
 	if globals.time_manager:
 		var cur_time: int = int(globals.time_manager.cur_time)
-		time_label.text = "%02d:%02d" % [cur_time/60,int(cur_time)%60]
+		time_label.text = "%02d:%02d" % [globals.time_manager.night_start_hours,globals.time_manager.night_start_minutes+(cur_time/60)] #start time is 1:49
+		time_label_seconds.text = "%02d" % [int(cur_time)%60]
 	pass
 
 func new_notif(value : bool, tab : globals.Device_Tabs):

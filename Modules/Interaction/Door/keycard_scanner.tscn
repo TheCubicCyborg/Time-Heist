@@ -31,11 +31,17 @@ shape = SubResource("BoxShape3D_xq026")
 
 [node name="Label" type="Label" parent="." unique_id=1916188804]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -206.0
+offset_right = 83.0
+offset_bottom = -143.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 45
 text = "Locked!"

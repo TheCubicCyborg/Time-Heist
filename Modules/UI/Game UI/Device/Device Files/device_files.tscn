@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bigh7xaj6n6yj"]
 
 [ext_resource type="Script" uid="uid://rjinxblp7bsc" path="res://Modules/UI/Game UI/Device/Device Files/device_files.gd" id="1_40ogp"]
-[ext_resource type="Texture2D" uid="uid://co4jpppqbvflr" path="res://icon.svg" id="3_ay7ts"]
+[ext_resource type="Texture2D" uid="uid://cdxcdfnjmqysk" path="res://Modules/UI/Game UI/Device/Device Files/fullscreen_button_small.jpg" id="4_ay7ts"]
 [ext_resource type="Texture2D" uid="uid://dkgssmw57sk3g" path="res://Assets/UI/Time Travel Menu/doc bar.png" id="4_dwdlg"]
 [ext_resource type="PackedScene" uid="uid://dui7y0up6fidp" path="res://Modules/UI/Game UI/Device/device_document_viewer.tscn" id="4_xvwb1"]
 
@@ -85,11 +85,22 @@ render_target_update_mode = 4
 [node name="DeviceDocumentViewer" parent="MarginContainer/HBoxContainer/Control/RightPanel/SubViewport" unique_id=1694635236 instance=ExtResource("4_xvwb1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.03, 0)
 
-[node name="Fullscreen" type="Button" parent="MarginContainer/HBoxContainer/Control" unique_id=237293077]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Control" unique_id=1786073707]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Fullscreen" type="Button" parent="MarginContainer/HBoxContainer/Control/HBoxContainer" unique_id=237293077]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 toggle_mode = true
-icon = ExtResource("3_ay7ts")
+icon = ExtResource("4_ay7ts")
 
-[connection signal="toggled" from="MarginContainer/HBoxContainer/Control/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[node name="Controls" type="Label" parent="MarginContainer/HBoxContainer/Control/HBoxContainer" unique_id=847827247]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "WASD - move, Z - zoom in, C - zoom out, Arrow Key - rotate"
+
+[connection signal="toggled" from="MarginContainer/HBoxContainer/Control/HBoxContainer/Fullscreen" to="." method="_on_fullscreen_toggled"]

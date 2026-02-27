@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://cums0n03a6on2"]
 
+[ext_resource type="Script" uid="uid://d0afbfeblscar" path="res://Modules/Interaction/interactable.gd" id="1_le8sc"]
+[ext_resource type="Script" uid="uid://dbkxdjsb03h5e" path="res://Modules/Interaction/Clearance Giver/clearance_giver.gd" id="1_r8iwe"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_xr4ad"]
 size = Vector3(1, 0.86, 1)
 
@@ -9,7 +12,14 @@ size = Vector3(1, 0.88, 0.44)
 [sub_resource type="BoxMesh" id="BoxMesh_r8iwe"]
 size = Vector3(1, 0.37, 0.76)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_r8iwe"]
+size = Vector3(1.0683594, 1.770752, 1.1643066)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fh5j6"]
+size = Vector3(1, 1.6975098, 1)
+
 [node name="Clearance Giver" type="Node3D" unique_id=1251886145]
+script = ExtResource("1_r8iwe")
 
 [node name="Mesh" type="Node3D" parent="." unique_id=612838289]
 
@@ -24,3 +34,25 @@ mesh = SubResource("BoxMesh_le8sc")
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Mesh" unique_id=1835123005]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48, -0.11)
 mesh = SubResource("BoxMesh_r8iwe")
+
+[node name="Interactable" type="Area3D" parent="." unique_id=1071358984 node_paths=PackedStringArray("mesh", "interact_object")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_le8sc")
+mesh = NodePath("../Mesh/MeshInstance3D")
+interact_object = NodePath("..")
+metadata/_custom_type_script = "uid://d0afbfeblscar"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable" unique_id=1555061485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84484863, 0.012084961)
+shape = SubResource("BoxShape3D_r8iwe")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1467218949]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1013551560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8206787, 0)
+shape = SubResource("BoxShape3D_fh5j6")
+
+[connection signal="anon_interacted" from="Interactable" to="." method="interact"]

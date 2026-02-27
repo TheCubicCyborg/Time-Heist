@@ -7,6 +7,7 @@ class_name DeviceFiles
 @onready var left_panel: MarginContainer = $MarginContainer/HBoxContainer/LeftPanel
 @onready var mid_panel: VBoxContainer = $MarginContainer/HBoxContainer/MidPanel
 @onready var fullscreen_button: Button = $MarginContainer/HBoxContainer/Control/Fullscreen
+@onready var fullscreen_controls: Label = $MarginContainer/HBoxContainer/Control/HBoxContainer/Controls
 
 var device_files_list : PackedScene = preload("res://Modules/UI/Game UI/Device/Device Files/device_files_list.tscn")
 var fullscreen: bool = false
@@ -98,4 +99,5 @@ func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	left_panel.hide() if toggled_on else left_panel.show()
 	mid_panel.hide() if toggled_on else mid_panel.show()
 	if not toggled_on: document_viewer.reset_position()
+	fullscreen_controls.show() if toggled_on else fullscreen_controls.hide()
 	fullscreen = toggled_on
