@@ -64,8 +64,15 @@ func initialize_path_vars():
 
 func interact_with(nodepath: NodePath):
 	var node = get_node(nodepath)
-	if node:
+	if node is Interactable:
 		node.interact(self)
+	else:
+		for child in node.get_children():
+			if child is Interactable:
+				child.interact(self)
+				return
+		print("node at ", nodepath, " is not an Interactable and has no Interactible children")
+	
 
 func face(rotation_deg: float):
 	print("facing ", rotation_deg)

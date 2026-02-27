@@ -9,32 +9,33 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_nk12b"]
 size = Vector3(1, 2, 0.1)
 
-[node name="Generic_Door" type="Node3D" unique_id=74631722 node_paths=PackedStringArray("collision_body", "mesh", "animation_player")]
+[node name="Generic_Door" type="Node3D" unique_id=74631722]
 script = ExtResource("1_nk12b")
-collision_body = NodePath("Door RB")
-mesh = NodePath("Door_v20/DoorHinge/Door")
-animation_player = NodePath("Door_v20/AnimationPlayer")
-
-[node name="Door RB" type="StaticBody3D" parent="." unique_id=1743068897]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.125)
-collision_layer = 17
-collision_mask = 0
-
-[node name="PhysicalCollider" type="CollisionShape3D" parent="Door RB" unique_id=925331689]
-shape = SubResource("BoxShape3D_nk12b")
-
-[node name="Interactable" parent="Door RB" unique_id=1669651446 node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("2_im0k3")]
-process_mode = 1
-mesh = NodePath("../../Door_v20/DoorHinge/Door")
-interact_object = NodePath("../..")
-
-[node name="InteractableCollider" type="CollisionShape3D" parent="Door RB/Interactable" unique_id=1482335466]
-shape = SubResource("BoxShape3D_nk12b")
 
 [node name="Timer" type="Timer" parent="." unique_id=295246165]
 
 [node name="Door_v20" parent="." unique_id=1158944372 instance=ExtResource("2_gq3nt")]
 transform = Transform3D(1.03, 0, 0, 0, 1.03, 0, 0, 0, 1.03, -0.47409245, 0, 0.075)
+
+[node name="Door RB" type="StaticBody3D" parent="Door_v20/DoorHinge/Door" parent_id_path=PackedInt32Array(1158944372, 671530655) index="1" unique_id=1743068897]
+transform = Transform3D(0.97087383, 0, 0, 0, 0.97087383, 0, 0, 0, 0.97087383, 0.46028396, 0.97087383, 0.04854369)
+collision_layer = 16
+collision_mask = 0
+
+[node name="PhysicalCollider" type="CollisionShape3D" parent="Door_v20/DoorHinge/Door/Door RB" unique_id=925331689]
+shape = SubResource("BoxShape3D_nk12b")
+
+[node name="Interactable" parent="Door_v20/DoorHinge/Door" parent_id_path=PackedInt32Array(1158944372, 671530655) index="2" unique_id=1669651446 node_paths=PackedStringArray("mesh", "interact_object") instance=ExtResource("2_im0k3")]
+process_mode = 1
+transform = Transform3D(0.97087383, 0, 0, 0, 0.97087383, 0, 0, 0, 0.97087383, 0.46028396, 0.97087383, 0.04854369)
+mesh = NodePath("..")
+interact_object = NodePath("../../../..")
+
+[node name="InteractableCollider" type="CollisionShape3D" parent="Door_v20/DoorHinge/Door/Interactable" unique_id=1482335466]
+shape = SubResource("BoxShape3D_nk12b")
+
+[node name="AnimationPlayer" parent="Door_v20" index="1" unique_id=849600809]
+speed_scale = 1.5
 
 [node name="DoorOpen" type="AudioStreamPlayer" parent="." unique_id=1949909753]
 stream = ExtResource("4_gx118")
@@ -44,6 +45,6 @@ volume_db = -15.0
 stream = ExtResource("5_iwxtq")
 volume_db = -22.0
 
-[connection signal="interacted_by" from="Door RB/Interactable" to="." method="interact"]
+[connection signal="interacted_by" from="Door_v20/DoorHinge/Door/Interactable" to="." method="interact"]
 
 [editable path="Door_v20"]
