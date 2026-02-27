@@ -18,7 +18,7 @@ class_name Generic_Door
 					collision_body.process_mode = Node.PROCESS_MODE_INHERIT
 			is_open = value
 			
-		else:
+		elif animation_player:
 			is_open = value
 			if value:
 				animation_player.play("DoorOpen")
