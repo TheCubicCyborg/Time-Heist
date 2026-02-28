@@ -27,6 +27,7 @@ texture_progress_offset = Vector2(82, -43.355)
 
 [node name="NewNotif" type="TextureRect" parent="TimeJuice" unique_id=889791476]
 visible = false
+modulate = Color(0.76132107, 0.16330728, 0.09244985, 1)
 layout_mode = 0
 offset_left = 23.0
 offset_top = 89.0

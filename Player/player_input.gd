@@ -62,11 +62,10 @@ func get_direction_vector(input_dir : Vector2) -> Vector3:
 	return (direction_facing * Vector3(abs(input_dir.x), 0, abs(input_dir.y))).normalized()
 #endregion
 
-
 func crouch_on():
 	globals.player.is_crouching = true
-	globals.player.collision.shape.height -= 0.8
-	globals.player.collision.position.y -= 0.4
+	#globals.player.collision.shape.height -= 0.8
+	#globals.player.collision.position.y -= 0.4
 	globals.player.current_rotation_speed = globals.player.crouch_rotation_speed
 	globals.player.detection_point.position.y = 0.7
 	#globals.player.mesh.position.y -= 0.8
@@ -74,8 +73,8 @@ func crouch_on():
 	
 func crouch_off():
 	globals.player.is_crouching = false
-	globals.player.collision.shape.height += 0.8
-	globals.player.collision.position.y += 0.4
+	#globals.player.collision.shape.height += 0.8
+	#globals.player.collision.position.y += 0.4
 	globals.player.current_rotation_speed = globals.player.rotation_speed
 	globals.player.detection_point.position.y = 1.5
 	#globals.player.mesh.position.y += 0.8

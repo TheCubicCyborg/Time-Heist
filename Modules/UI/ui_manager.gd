@@ -44,6 +44,8 @@ func handle_input(_delta):
 		toggle_menu(debug_ui)
 	if Input.is_action_just_pressed("ui_paste"): #why is this in ui_manager?
 		globals.toggle_debug_settings()
+	if Input.is_action_just_pressed("ui_copy"):
+		globals.toggle_lesser_debug_settings()
 	if Input.is_action_just_pressed("device_menu"):
 		toggle_menu(device_menu)
 		$ButtonMove.play()
