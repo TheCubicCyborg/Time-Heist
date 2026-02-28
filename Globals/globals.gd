@@ -112,4 +112,6 @@ func toggle_debug_settings():
 	player.infinite_juice = not player.infinite_juice
 	time_juice = max_time_juice
 	player.set_collision_mask_value(4, not player.get_collision_mask_value(4))
+func toggle_lesser_debug_settings():
+	player.can_be_seen = not player.can_be_seen
 #endregion

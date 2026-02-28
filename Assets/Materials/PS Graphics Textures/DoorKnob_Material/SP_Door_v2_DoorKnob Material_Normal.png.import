@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkhy8et0iavh"
 path.s3tc="res://.godot/imported/SP_Door_v2_DoorKnob Material_Normal.png-59ed758892213385889ebcb4733b2b12.s3tc.ctex"
+path.etc2="res://.godot/imported/SP_Door_v2_DoorKnob Material_Normal.png-59ed758892213385889ebcb4733b2b12.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Materials/PS Graphics Textures/DoorKnob_Material/SP_Door_v2_DoorKnob Material_Normal.png"
-dest_files=["res://.godot/imported/SP_Door_v2_DoorKnob Material_Normal.png-59ed758892213385889ebcb4733b2b12.s3tc.ctex"]
+dest_files=["res://.godot/imported/SP_Door_v2_DoorKnob Material_Normal.png-59ed758892213385889ebcb4733b2b12.s3tc.ctex", "res://.godot/imported/SP_Door_v2_DoorKnob Material_Normal.png-59ed758892213385889ebcb4733b2b12.etc2.ctex"]
 
 [params]
 

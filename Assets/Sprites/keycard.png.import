@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkfkrh8rlgw1e"
 path.s3tc="res://.godot/imported/keycard.png-6581079037bfa028c5885e47a839328c.s3tc.ctex"
+path.etc2="res://.godot/imported/keycard.png-6581079037bfa028c5885e47a839328c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Sprites/keycard.png"
-dest_files=["res://.godot/imported/keycard.png-6581079037bfa028c5885e47a839328c.s3tc.ctex"]
+dest_files=["res://.godot/imported/keycard.png-6581079037bfa028c5885e47a839328c.s3tc.ctex", "res://.godot/imported/keycard.png-6581079037bfa028c5885e47a839328c.etc2.ctex"]
 
 [params]
 

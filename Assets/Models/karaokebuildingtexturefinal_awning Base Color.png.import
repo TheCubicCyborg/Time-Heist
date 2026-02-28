@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dv3rhf8vmwgba"
 path.s3tc="res://.godot/imported/karaokebuildingtexturefinal_awning Base Color.png-585b3a5307d79e5700e6a7240e38a172.s3tc.ctex"
+path.etc2="res://.godot/imported/karaokebuildingtexturefinal_awning Base Color.png-585b3a5307d79e5700e6a7240e38a172.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Assets/Models/karaokebuildingtexturefinal_awning Base Color.png"
-dest_files=["res://.godot/imported/karaokebuildingtexturefinal_awning Base Color.png-585b3a5307d79e5700e6a7240e38a172.s3tc.ctex"]
+dest_files=["res://.godot/imported/karaokebuildingtexturefinal_awning Base Color.png-585b3a5307d79e5700e6a7240e38a172.s3tc.ctex", "res://.godot/imported/karaokebuildingtexturefinal_awning Base Color.png-585b3a5307d79e5700e6a7240e38a172.etc2.ctex"]
 
 [params]
 

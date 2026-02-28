@@ -20,6 +20,12 @@ var player_spotted : bool
 @onready var laser_sfx : AudioStreamPlayer = $AudioStreamPlayer
 
 @export var on_gaurd : bool = true
+var disabled : bool = false : #TIMEVAR
+	set(value):
+		if globals.time_manager and globals.time_manager.logging:
+			globals.time_manager.timelog(self,\"disabled\",disabled,value)
+		disabled = value
+		process_mode = Node.PROCESS_MODE_DISABLED if value else Node.PROCESS_MODE_INHERIT
 
 var time_detecting: float = 0
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://doms85d0fgdxk"
 path.s3tc="res://.godot/imported/full_screen_icon.jpg-3052a1c9a9706c977d958db66e31c04f.s3tc.ctex"
+path.etc2="res://.godot/imported/full_screen_icon.jpg-3052a1c9a9706c977d958db66e31c04f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Modules/UI/Game UI/Device/Device Files/full_screen_icon.jpg"
-dest_files=["res://.godot/imported/full_screen_icon.jpg-3052a1c9a9706c977d958db66e31c04f.s3tc.ctex"]
+dest_files=["res://.godot/imported/full_screen_icon.jpg-3052a1c9a9706c977d958db66e31c04f.s3tc.ctex", "res://.godot/imported/full_screen_icon.jpg-3052a1c9a9706c977d958db66e31c04f.etc2.ctex"]
 
 [params]
 
