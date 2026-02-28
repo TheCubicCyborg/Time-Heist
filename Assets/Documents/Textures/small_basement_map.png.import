@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqfsmsd8bembf"
 path.s3tc="res://.godot/imported/small_basement_map.png-62cba81345b09fb139a59de13d508916.s3tc.ctex"
+path.etc2="res://.godot/imported/small_basement_map.png-62cba81345b09fb139a59de13d508916.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Documents/Textures/small_basement_map.png"
-dest_files=["res://.godot/imported/small_basement_map.png-62cba81345b09fb139a59de13d508916.s3tc.ctex"]
+dest_files=["res://.godot/imported/small_basement_map.png-62cba81345b09fb139a59de13d508916.s3tc.ctex", "res://.godot/imported/small_basement_map.png-62cba81345b09fb139a59de13d508916.etc2.ctex"]
 
 [params]
 

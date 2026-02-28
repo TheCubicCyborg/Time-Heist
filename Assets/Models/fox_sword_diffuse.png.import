@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bo1pqrm4chuu0"
 path.s3tc="res://.godot/imported/fox_sword_diffuse.png-3a7f47c217e4cbcf0b3c182a63cc94a7.s3tc.ctex"
+path.etc2="res://.godot/imported/fox_sword_diffuse.png-3a7f47c217e4cbcf0b3c182a63cc94a7.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://Assets/Models/fox_sword_diffuse.png"
-dest_files=["res://.godot/imported/fox_sword_diffuse.png-3a7f47c217e4cbcf0b3c182a63cc94a7.s3tc.ctex"]
+dest_files=["res://.godot/imported/fox_sword_diffuse.png-3a7f47c217e4cbcf0b3c182a63cc94a7.s3tc.ctex", "res://.godot/imported/fox_sword_diffuse.png-3a7f47c217e4cbcf0b3c182a63cc94a7.etc2.ctex"]
 
 [params]
 

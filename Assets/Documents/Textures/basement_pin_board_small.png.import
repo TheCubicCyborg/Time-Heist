@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cdblcmebp2g6i"
 path.s3tc="res://.godot/imported/basement_pin_board_small.png-fa0398df33fa3b9c7e6b8b64e51632ea.s3tc.ctex"
+path.etc2="res://.godot/imported/basement_pin_board_small.png-fa0398df33fa3b9c7e6b8b64e51632ea.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Documents/Textures/basement_pin_board_small.png"
-dest_files=["res://.godot/imported/basement_pin_board_small.png-fa0398df33fa3b9c7e6b8b64e51632ea.s3tc.ctex"]
+dest_files=["res://.godot/imported/basement_pin_board_small.png-fa0398df33fa3b9c7e6b8b64e51632ea.s3tc.ctex", "res://.godot/imported/basement_pin_board_small.png-fa0398df33fa3b9c7e6b8b64e51632ea.etc2.ctex"]
 
 [params]
 

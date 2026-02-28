@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cscrys1eg3joj"
 path.s3tc="res://.godot/imported/DoorTexture_v1.jpg-e5e0b15dc4f52068b78aedc98c3b428c.s3tc.ctex"
+path.etc2="res://.godot/imported/DoorTexture_v1.jpg-e5e0b15dc4f52068b78aedc98c3b428c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/Materials/PS Graphics Textures/Door_Material/DoorTexture_v1.jpg"
-dest_files=["res://.godot/imported/DoorTexture_v1.jpg-e5e0b15dc4f52068b78aedc98c3b428c.s3tc.ctex"]
+dest_files=["res://.godot/imported/DoorTexture_v1.jpg-e5e0b15dc4f52068b78aedc98c3b428c.s3tc.ctex", "res://.godot/imported/DoorTexture_v1.jpg-e5e0b15dc4f52068b78aedc98c3b428c.etc2.ctex"]
 
 [params]
 
