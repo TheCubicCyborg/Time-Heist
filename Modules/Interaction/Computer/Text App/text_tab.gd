@@ -44,7 +44,7 @@ func update_panel(convo : TextConvo):
 		else:
 			return
 		
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if current_convo:
 		update_panel(current_convo)
 	pass

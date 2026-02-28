@@ -20,6 +20,7 @@ var player_spotted : bool
 @onready var laser_sfx : AudioStreamPlayer = $AudioStreamPlayer
 
 @export var on_gaurd : bool = true
+@export var use_overriden_vals : bool = false
 var disabled : bool = false : #TIMEVAR
 	set(value):
 		if globals.time_manager and globals.time_manager.logging:
@@ -51,9 +52,10 @@ var polygon_points : PackedVector2Array = []
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		sight_line_angle = globals.gaurd_sight_line_angle if on_gaurd else globals.person_sight_line_angle
-		sight_line_radius = globals.gaurd_sight_line_radius if on_gaurd else globals.person_sight_line_radius
-		smaller_sight_line_radius = globals.gaurd_smaller_sight_line_radius if on_gaurd else globals.person_smaller_sight_line_radius
+		if not use_overriden_vals:
+			sight_line_angle = globals.gaurd_sight_line_angle if on_gaurd else globals.person_sight_line_angle
+			sight_line_radius = globals.gaurd_sight_line_radius if on_gaurd else globals.person_sight_line_radius
+			smaller_sight_line_radius = globals.gaurd_smaller_sight_line_radius if on_gaurd else globals.person_smaller_sight_line_radius
 		
 		globals.safe_ratio = 1
 		sight_checker.target_position.z = -sight_line_radius
@@ -188,6 +190,7 @@ size = Vector3(1, 1.9223633, 1)
 
 [node name="Cone Vision" type="Area3D" unique_id=1869490121]
 script = SubResource("GDScript_23e0v")
+use_overriden_vals = null
 time_till_caught = 1.0
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="." unique_id=955152349]

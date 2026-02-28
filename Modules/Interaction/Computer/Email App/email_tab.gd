@@ -35,7 +35,7 @@ func _ready() -> void:
 	
 	time_manager = globals.time_manager
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not finished:
 		for email in email_button_instances:
 			if email.email_info.email_time <= time_manager.cur_time:

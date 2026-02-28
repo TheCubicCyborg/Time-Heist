@@ -34,7 +34,7 @@ func handle_input(delta): #change to be handle_function()
 		1.0 - exp(-rotation_smoothing * delta)
 	)
 
-func handle_fullscreen_input(delta):
+func handle_fullscreen_input(_delta):
 	if Input.is_action_pressed("player_left"):
 		camera.position.x -= camera_move_speed
 	if Input.is_action_pressed("player_right"):

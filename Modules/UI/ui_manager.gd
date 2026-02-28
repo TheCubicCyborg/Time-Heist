@@ -30,11 +30,13 @@ func take_control(ui: Control):
 		globals.controller_of_input = globals.InputController.UI
 	if cur_ui:
 		ui_stack.append(cur_ui)
+		cur_ui.mouse_filter = Control.MOUSE_FILTER_IGNORE #doesnt really do anything
 	cur_ui = ui
 
 func release_control():
 	if not ui_stack.is_empty():
 		cur_ui = ui_stack.pop_back()
+		cur_ui.mouse_filter = Control.MOUSE_FILTER_STOP #doesnt really do anything
 	else:
 		cur_ui = null
 		globals.controller_of_input = globals.InputController.GAMEPLAY

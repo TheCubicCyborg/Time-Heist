@@ -35,7 +35,7 @@ func _ready() -> void:
 	destination_rotation = facing_direction * 90
 	pass
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if PlayerInput.is_action_just_pressed("camera_right"):
 		step_rotation(-1)
 		test_print()

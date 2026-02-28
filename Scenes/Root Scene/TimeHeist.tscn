@@ -7,6 +7,7 @@
 [node name="Holder" type="Node" parent="." unique_id=13854569]
 
 [node name="persistent ui? (temp)" type="Label" parent="Holder" unique_id=496174908]
+visible = false
 modulate = Color(0.8820887, 0.2173545, 0.20605037, 1)
 offset_left = 907.0
 offset_top = 991.0

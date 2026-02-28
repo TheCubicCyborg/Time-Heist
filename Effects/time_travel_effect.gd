@@ -46,10 +46,10 @@ func _stop_animation() -> void:
 
 	
 func _pulsate_effect() -> void:
-	var tween : Tween = create_tween()
-	tween.tween_method(_set_shader_radius, intensity, intensity - intensity_pulse_amount, 0.2)
-	tween.tween_method(_set_shader_radius, intensity - intensity_pulse_amount, intensity, 0.2)
-	await tween.finished
+	var new_tween : Tween = create_tween()
+	new_tween.tween_method(_set_shader_radius, intensity, intensity - intensity_pulse_amount, 0.2)
+	new_tween.tween_method(_set_shader_radius, intensity - intensity_pulse_amount, intensity, 0.2)
+	await new_tween.finished
 	
 func _set_shader_radius(value: float) -> void:
 	var mat : ShaderMaterial = material

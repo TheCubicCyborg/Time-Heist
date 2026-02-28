@@ -15,7 +15,7 @@ func _ready() -> void:
 	pass
 
 #region dragging
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if dragging:
 		global_position = get_global_mouse_position() - offset
 

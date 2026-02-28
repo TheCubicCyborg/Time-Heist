@@ -20,10 +20,10 @@ func _process(_delta: float) -> void:
 	pass
 
 func new_notif(value : bool, tab : globals.Device_Tabs):
-	var show : bool = false
+	var do_show : bool = false
 	notif_on_tab[tab] = value
 	print("checking ", notif_on_tab)
 	for notif_tab in notif_on_tab:
 		if notif_tab:
-			show = true
-	new_notif_texture.show() if show else new_notif_texture.hide()
+			do_show = true
+	new_notif_texture.show() if do_show else new_notif_texture.hide()
