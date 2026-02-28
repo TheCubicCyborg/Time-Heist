@@ -3,7 +3,8 @@ class_name Interactable
 
 @export var mesh: GeometryInstance3D = null
 @export var interact_object: Node = null
-static var outline_material:StandardMaterial3D = preload("res://Assets/Materials/Interactable/Highlight.tres")
+static var outline_material:ShaderMaterial = preload("res://Assets/Materials/Interactable/interactable_outline.tres")
+static var highlight_material:ShaderMaterial = preload("res://Assets/Materials/Interactable/interactable_highlight.tres")
 static var invalid_outline_material:StandardMaterial3D = preload("res://Assets/Materials/Interactable/Invalid_Highlight.tres")
 
 var playing_invalid_animation: bool = false
@@ -13,6 +14,10 @@ var is_targetted: bool = false
 
 signal interacted_by(interactor)
 signal anon_interacted
+
+func _ready():
+	if mesh:
+		mesh.material_overlay = outline_material
 
 func targetted():
 	is_targetted = true
@@ -25,10 +30,10 @@ func untargetted():
 		remove_highlight()
 
 func highlight():
-	mesh.material_overlay = outline_material
+	mesh.material_overlay = highlight_material
 
 func remove_highlight():
-	mesh.material_overlay = null
+	mesh.material_overlay = outline_material
 
 func interact(person:Node = null):
 	interacted_by.emit(person)

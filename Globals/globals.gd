@@ -76,12 +76,23 @@ func _ready():
 	time_juice = 100
 
 func player_caught():
-	get_tree().reload_current_scene()
+	#print("caught!")
+	ui_manager.caught_ui.open()
+	time_manager.paused = true
+	ui_manager.caught_ui.visible = true
+	ui_manager.mouse_filter = Control.MOUSE_FILTER_STOP
+
+func to_homebase():
+	print("to homebase")
+	SceneManager.change_scene(SceneManager.Scene.HOMEBASE)
+
+func restart_gameplay():
+	print("restart")
 	time_juice = max_time_juice
 	time_manager.restart_time()
 	time_manager.start_time()
-	#END GAME MWAHAHA
-	pass
+	SceneManager.change_scene(SceneManager.Scene.GAMEPLAY)
+
 
 #region Signals
 signal added_doc(doc : DocumentInfo)
