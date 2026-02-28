@@ -1,4 +1,4 @@
-extends Node3D
+extends Node
 
 @onready var anim_tree: AnimationTree = $"../AnimationTree"
 @onready var player : Player = globals.player
@@ -6,9 +6,8 @@ extends Node3D
 
 func _ready() -> void:
 	anim_tree.active = true
-	
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	
 	blend_space.set_blend_point_position(2, globals.player.max_speed_running)
 	blend_space.set_blend_point_position(1, globals.player.max_speed_walking)

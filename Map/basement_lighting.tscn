@@ -136,8 +136,8 @@ time_end = 101.0
 resource_local_to_scene = true
 script = ExtResource("28_s3jm4")
 position = Vector3(-4.75, 0, -8.75)
-time_start = 101.65641876061757
-time_end = 101.65641876061757
+time_start = 101.65641876061756
+time_end = 101.65641876061756
 id = 2
 
 [sub_resource type="Resource" id="Resource_xj822"]
@@ -154,8 +154,8 @@ id = 1
 resource_local_to_scene = true
 script = ExtResource("28_s3jm4")
 position = Vector3(-4.75, 0, -6.5)
-time_start = 102.40641876061757
-time_end = 102.40641876061757
+time_start = 102.40641876061756
+time_end = 102.40641876061756
 id = 4
 
 [sub_resource type="Resource" id="Resource_j008v"]
@@ -190,8 +190,8 @@ id = 5
 resource_local_to_scene = true
 script = ExtResource("28_s3jm4")
 position = Vector3(3.25, 0, 0)
-time_start = 107.23975209395091
-time_end = 107.23975209395091
+time_start = 107.23975209395093
+time_end = 107.23975209395093
 id = 8
 
 [sub_resource type="Resource" id="Resource_tp0ge"]
@@ -214,8 +214,8 @@ resource_local_to_scene = true
 script = ExtResource("28_s3jm4")
 position = Vector3(6.25, 0, 0)
 vertex_actions = Array[ExtResource("29_2agqk")]([SubResource("Resource_l3c0y")])
-time_start = 108.23975209395091
-time_end = 108.23975209395091
+time_start = 108.23975209395093
+time_end = 108.23975209395093
 id = 10
 
 [sub_resource type="Resource" id="Resource_2giet"]
@@ -257,8 +257,8 @@ id = 11
 resource_local_to_scene = true
 script = ExtResource("28_s3jm4")
 position = Vector3(11.5, 0, 0)
-time_start = 109.98975209395091
-time_end = 109.98975209395091
+time_start = 109.98975209395093
+time_end = 109.98975209395093
 id = 14
 
 [sub_resource type="Resource" id="Resource_2agqk"]
@@ -305,8 +305,8 @@ id = 15
 resource_local_to_scene = true
 script = ExtResource("28_s3jm4")
 position = Vector3(9.25, 0, 0)
-time_start = 116.95822191238405
-time_end = 116.95822191238405
+time_start = 116.95822191238403
+time_end = 116.95822191238403
 id = 18
 
 [sub_resource type="Resource" id="Resource_27jfw"]
@@ -2841,7 +2841,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_oygta")
 [node name="OST" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport" unique_id=1000599565]
 stream = ExtResource("51_fqqlb")
 volume_db = -15.0
-autoplay = true
 parameters/looping = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="SubViewportContainer/SubViewport" unique_id=883769056]

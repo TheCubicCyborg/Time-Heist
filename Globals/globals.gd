@@ -77,10 +77,11 @@ func _ready():
 
 func player_caught():
 	#print("caught!")
-	ui_manager.caught_ui.open()
+	if ui_manager:
+		ui_manager.caught_ui.open()
+		ui_manager.caught_ui.visible = true
+		ui_manager.mouse_filter = Control.MOUSE_FILTER_STOP
 	time_manager.paused = true
-	ui_manager.caught_ui.visible = true
-	ui_manager.mouse_filter = Control.MOUSE_FILTER_STOP
 
 func to_homebase():
 	print("to homebase")

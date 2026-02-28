@@ -5,6 +5,7 @@ class_name PlayerInput
 @export var sneak_state : State
 @export var rolling_state : State
 @onready var roll_window := $roll_window
+@onready var anim_tree: AnimationTree = $"../Mesh/AnimationTree"
 
 var face_to_move = {
 	0 : ["player_left", "player_right", "player_up", "player_down"],
@@ -63,6 +64,9 @@ func get_direction_vector(input_dir : Vector2) -> Vector3:
 #endregion
 
 func crouch_on():
+	print("\tcrouch going on")
+	anim_tree.set("parameters/conditions/is_crouching", true)
+	anim_tree.set("parameters/conditions/not_crouching", false)
 	globals.player.is_crouching = true
 	#globals.player.collision.shape.height -= 0.8
 	#globals.player.collision.position.y -= 0.4
@@ -72,6 +76,9 @@ func crouch_on():
 	#globals.player.material.albedo_color = Color(0.982, 0.502, 1.0, 1.0)
 	
 func crouch_off():
+	print("\tcrouch going off")
+	anim_tree.set("parameters/conditions/is_crouching", false)
+	anim_tree.set("parameters/conditions/not_crouching", true)
 	globals.player.is_crouching = false
 	#globals.player.collision.shape.height += 0.8
 	#globals.player.collision.position.y += 0.4
@@ -81,12 +88,9 @@ func crouch_off():
 	#globals.player.material.albedo_color = Color(1.0, 1.0, 1.0, 1.0)
 	
 func toggle_crouch():
-	if globals.player.is_crouching:
-		crouch_off()
-	else:
-		crouch_on()
+	crouch_off() if globals.player.is_crouching else crouch_on()
 
-func process_input(event: InputEvent):
+func process_input(_event: InputEvent):
 	#region Crouch
 	if PlayerInput.is_action_just_pressed("player_crouch"):
 		if globals.player.state_machine.current_state != $"../state_machine/rolling":
@@ -97,13 +101,13 @@ func process_input(event: InputEvent):
 	if PlayerInput.is_action_just_pressed("player_roll_walk"):
 		if roll_window.is_stopped():
 			roll_window.start()
-			print("starting roll timer")
+			#print("starting roll timer")
 	if PlayerInput.is_action_just_released("player_roll_walk"):
 		if not roll_window.is_stopped():
 			globals.player.state_machine.change_state(rolling_state)
 			roll_window.stop()
-		else:
-			print("missed it")
+		#else:
+			#print("missed it")
 		return
 	#endregion
 	#region Tools

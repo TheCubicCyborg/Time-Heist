@@ -24,7 +24,7 @@ func enter() -> void:
 func exit() -> void:
 	pass
 	
-func process_input(event: InputEvent) -> State:
+func process_input(_event: InputEvent) -> State:
 	#if PlayerInput.is_action_just_pressed("player_dash"):
 		#return dash_state
 	return null
@@ -44,7 +44,7 @@ func process_physics(delta: float) -> State:
 	
 	return null
 	
-func process_frame(delta: float) -> State:
+func process_frame(_delta: float) -> State:
 	if input_controller.get_input_direction() == Vector2.ZERO:
 		return sliding_state
 	if PlayerInput.is_action_pressed("player_roll_walk"):

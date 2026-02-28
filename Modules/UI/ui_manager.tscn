@@ -72,11 +72,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yaem8")
 
-[node name="CaughtUI" parent="." unique_id=519183442 instance=ExtResource("8_1ex2v")]
-visible = false
-z_index = 1
-layout_mode = 1
-
 [node name="HUD" parent="." unique_id=528506545 instance=ExtResource("5_df44s")]
 z_index = 1
 layout_mode = 1
@@ -93,6 +88,7 @@ grow_vertical = 2
 script = ExtResource("2_u3icv")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="DEBUG UI" unique_id=938135867]
+z_index = 1
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -127,6 +123,7 @@ script = SubResource("GDScript_df44s")
 
 [node name="Desktop Viewer" parent="." unique_id=2027082529 instance=ExtResource("6_purnk")]
 visible = false
+z_index = 1
 layout_mode = 1
 
 [node name="DocumentViewer" parent="." unique_id=1468834605 instance=ExtResource("3_jfs1l")]
@@ -138,8 +135,14 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
+[node name="CaughtUI" parent="." unique_id=519183442 instance=ExtResource("8_1ex2v")]
+visible = false
+z_index = 1
+layout_mode = 1
+
 [node name="Interface" type="Control" parent="." unique_id=722000712]
 visible = false
+z_index = 1
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0

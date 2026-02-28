@@ -4,7 +4,6 @@ extends Node
 
 var current_state: State
 var state_string: String
-var is_crouching: bool = false
 # Called when the node enters the scene tree for the first time.
 func init(input_controller: Node) -> void:
 	for child in get_children():
@@ -21,16 +20,17 @@ func change_state(new_state : State) -> void:
 	
 	#Update String
 	state_string = current_state.get_script().get_global_name()
+	#print("Changing to ", state_string)
 	
 	current_state.enter()
 	
 func handle_input(event: InputEvent) -> void:
-	if PlayerInput.is_action_just_pressed("player_crouch"):
-		if globals.player.state_machine.is_crouching == true:
-			globals.player.state_machine.is_crouching = false
-		else:
-			globals.player.state_machine.is_crouching = true
-	#Pass input to playerinputcontroller first (inputs that dont affect state)
+	#if PlayerInput.is_action_just_pressed("player_crouch"):
+		#if globals.player.state_machine.is_crouching == true:
+			#globals.player.state_machine.is_crouching = false
+		#else:
+			#globals.player.state_machine.is_crouching = true
+	##Pass input to playerinputcontroller first (inputs that dont affect state)
 	globals.player.input_controller.process_input(event)
 	
 	#Now give it to the states

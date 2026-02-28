@@ -6,8 +6,6 @@ var state_machine = $state_machine
 @onready
 var input_controller = $input_controller
 @onready
-var sneak_detect = $SneakDetect
-@onready
 var animation_player : AnimationPlayer = $Mesh/AnimationPlayer
 @onready
 var anim_tree : AnimationTree = $Mesh/AnimationTree
@@ -91,10 +89,6 @@ func _ready() -> void:
 	
 	current_rotation_speed = rotation_speed
 	input_controller.crouch_off()
-	
-	#MOVE
-	sneak_detect.head.position.y = collision.shape.height / 4 * 3
-	sneak_detect.hip.position.y = collision.shape.height / 4
 	
 	anim_tree.set("parameters/Movement/transition_request", "Idle")
 	

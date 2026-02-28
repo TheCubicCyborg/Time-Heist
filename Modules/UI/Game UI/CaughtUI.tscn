@@ -12,6 +12,15 @@ grow_vertical = 2
 script = ExtResource("1_rlblt")
 default_focus = NodePath("TryAgain")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=983817021]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9323446, 0.3923438, 0.4157313, 0.10980392)
+
 [node name="Label" type="Label" parent="." unique_id=1025596840]
 layout_mode = 1
 anchors_preset = 8
@@ -41,6 +50,10 @@ offset_right = 40.5
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../Homebase")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../Homebase")
 theme_override_font_sizes/font_size = 60
 text = "Try Again"
 
@@ -57,6 +70,10 @@ offset_right = 304.0
 offset_bottom = 151.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../TryAgain")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../TryAgain")
 theme_override_font_sizes/font_size = 60
 text = "Return to Homebase"
 
