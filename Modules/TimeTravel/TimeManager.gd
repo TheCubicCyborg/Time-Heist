@@ -51,6 +51,7 @@ func _physics_process(delta):
 			stopped_time_travel.emit()
 			is_time_traveling = false
 	cur_time += delta_time
+	#print(cur_time)
 	
 
 func toggle_time():

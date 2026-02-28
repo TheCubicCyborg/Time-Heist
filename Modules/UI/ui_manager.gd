@@ -7,6 +7,7 @@ class_name UI_Manager
 @export var debug_mode: bool = false
 #@onready var camera_ui = $Camera
 @onready var device_menu = $DeviceMenu
+@onready var caught_ui = $CaughtUI
 var ui_stack: Array[Control] = []
 var cur_ui: Control = null
 
@@ -17,6 +18,7 @@ func _ready():
 	set_menu(debug_ui,debug_mode)
 	set_menu(document_viewer,false)
 	set_menu(desktop_viewer,false)
+	set_menu(caught_ui, false)
 
 func _process(_delta):
 	handle_input(_delta)

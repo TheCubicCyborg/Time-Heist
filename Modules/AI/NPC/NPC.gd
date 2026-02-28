@@ -39,9 +39,9 @@ var start_pos: Vector3
 		if Engine.is_editor_hint():
 			if path: 
 				path.updating_path = true
-				var first_vert_pos = position
-				first_vert_pos.y = 0
-				path.path_components[0].position = first_vert_pos
+				#var first_vert_pos = path.path_components[0].position
+				#first_vert_pos.y = 0
+				#path.path_components[0].position = first_vert_pos
 				path.updating_path = false
 				if not path.changed.is_connected(update_gizmos):
 					path.changed.connect(update_gizmos)
