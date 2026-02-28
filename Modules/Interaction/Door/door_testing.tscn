@@ -30,7 +30,6 @@ grow_amount = -4.125
 [node name="DoorTesting" type="Node3D" unique_id=1787823224]
 
 [node name="Generic_Door" parent="." unique_id=74631722 instance=ExtResource("1_26vd6")]
-is_open = true
 
 [node name="UI Manager" parent="." unique_id=1478464990 instance=ExtResource("2_30l1c")]
 
