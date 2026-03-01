@@ -81,7 +81,8 @@ func player_caught():
 		ui_manager.caught_ui.open()
 		ui_manager.caught_ui.visible = true
 		ui_manager.mouse_filter = Control.MOUSE_FILTER_STOP
-	time_manager.paused = true
+	time_manager.stop_time()
+	get_tree().paused = true
 
 func to_homebase():
 	print("to homebase")

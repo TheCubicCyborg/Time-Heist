@@ -19,3 +19,4 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		print("Trying to leave")
 		dialogue_balloon = DialogueManager.show_dialogue_balloon_scene(balloon_scene, resource, dial_start_loc)
 		dialogue_balloon.tree_exited.connect(_on_dialogue_finish)
+		get_tree().paused = true

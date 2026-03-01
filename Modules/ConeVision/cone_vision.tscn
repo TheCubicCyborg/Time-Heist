@@ -116,7 +116,7 @@ func _process(delta: float) -> void:
 				laser_node.visible = false
 				
 		if player_spotted and globals.player.can_be_seen and not globals.time_manager.is_time_traveling:
-			time_detecting += delta
+			time_detecting += globals.time_manager.delta_time
 			laser_mesh.clear_surfaces()
 			draw_line()
 			if laser_sfx.playing == false:
@@ -190,7 +190,6 @@ size = Vector3(1, 1.9223633, 1)
 
 [node name="Cone Vision" type="Area3D" unique_id=1869490121]
 script = SubResource("GDScript_23e0v")
-use_overriden_vals = null
 time_till_caught = 1.0
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="." unique_id=955152349]

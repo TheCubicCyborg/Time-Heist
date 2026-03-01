@@ -55,7 +55,8 @@ func _physics_process(delta):
 	
 
 func toggle_time():
-	paused = not paused
+	@warning_ignore("standalone_ternary")
+	start_time() if paused else stop_time()
 
 func start_time():
 	paused = false

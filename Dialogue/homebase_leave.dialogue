@@ -1,6 +1,7 @@
 ~ start
 Do you want to leave?
 - Yes
+	do get_tree().paused = false
 	do SceneManager.change_scene(SceneManager.Scene.GAMEPLAY)
 	=> END
 - No
