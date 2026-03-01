@@ -11,12 +11,13 @@ func _ready() -> void:
 	reload()
 
 func reload() -> void:
+	print("reloading")
 	by_id.clear()
 	all.clear()
 
 	var paths: Array[String] = []
 	get_resource_paths(documents_folder, paths, recursive)
-
+	print(paths)
 	for path in paths:
 		var res = load(path)
 		if res == null:
@@ -29,7 +30,7 @@ func reload() -> void:
 		#Ignore unrelated resources in the folder
 
 func get_document(id: int) -> DocumentInfo:
-	return by_id.get(id, null)
+	return by_id.get(id)
 
 func has_document(id: String) -> bool:
 	return by_id.has(id)
@@ -56,7 +57,6 @@ func get_resource_paths(folder: String, out_paths: Array[String], is_recursive: 
 	if dir == null:
 		push_warning("Document folder not found: %s" % folder)
 		return
-
 	dir.list_dir_begin()
 	while true:
 		var path_name := dir.get_next()
@@ -73,7 +73,8 @@ func get_resource_paths(folder: String, out_paths: Array[String], is_recursive: 
 				get_resource_paths(full_path, out_paths, is_recursive)
 		else:
 			# Only load .tres
-			if full_path.ends_with(".tres"):
-				out_paths.append(full_path)
+			if full_path.ends_with(".tres") or full_path.ends_with(".tres.remap"): #when exported, all .tres have .remap added to the end
+				var load_path = full_path.replace(".remap", "")
+				out_paths.append(load_path)
 
 	dir.list_dir_end()
