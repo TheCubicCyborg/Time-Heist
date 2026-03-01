@@ -9,6 +9,7 @@ var dialogue_balloon
 	
 func _on_dialogue_finish() -> void:
 	dialogue_balloon = null
+	get_tree().paused = false
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.name == "Player":
@@ -19,3 +20,4 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		print("Trying to leave")
 		dialogue_balloon = DialogueManager.show_dialogue_balloon_scene(balloon_scene, resource, dial_start_loc)
 		dialogue_balloon.tree_exited.connect(_on_dialogue_finish)
+		get_tree().paused = true
