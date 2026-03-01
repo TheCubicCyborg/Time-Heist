@@ -100,6 +100,7 @@ _data = {
 }
 
 [node name="ExampleBalloon" type="CanvasLayer" unique_id=1552101593]
+process_mode = 3
 layer = 100
 script = ExtResource("1_36de5")
 
