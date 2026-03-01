@@ -96,13 +96,19 @@ func restart_gameplay():
 
 
 #region Signals
+@warning_ignore("unused_signal")
 signal added_doc(doc : DocumentInfo)
+@warning_ignore("unused_signal")
 signal collect_item(item : PickupItem)
+@warning_ignore("unused_signal")
 signal remove_item(item : PickupItem)
+@warning_ignore("unused_signal")
 signal update_items #used to make items work with time
+@warning_ignore("unused_signal")
 signal collect_clearance(clearance : Clearances)
+@warning_ignore("unused_signal")
 signal use_item(item : PickupItem)
-
+@warning_ignore("unused_signal")
 signal new_in_device(value : bool, tab : Device_Tabs)
 #endregion
 

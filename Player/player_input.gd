@@ -88,6 +88,7 @@ func crouch_off():
 	#globals.player.material.albedo_color = Color(1.0, 1.0, 1.0, 1.0)
 	
 func toggle_crouch():
+	@warning_ignore("standalone_ternary")
 	crouch_off() if globals.player.is_crouching else crouch_on()
 
 func process_input(_event: InputEvent):

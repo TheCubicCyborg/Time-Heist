@@ -34,6 +34,7 @@ func set_email_info(doc : DocumentInfo):
 	from.text = "From: " + doc.email_from
 	desc.text = doc.email_desc
 	var total_seconds := int(doc.email_time)
+	@warning_ignore("integer_division")
 	time.text = "%d:%02d" % [total_seconds/60,total_seconds%60]
 	
 func _on_focus_entered() -> void:

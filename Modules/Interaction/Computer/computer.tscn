@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d34pm0fchacnp"]
 
-[ext_resource type="ArrayMesh" uid="uid://d2gnd1fg1caa5" path="res://Assets/Meshes/monitor_V3_Cube_006.res" id="1_0jkef"]
+[ext_resource type="ArrayMesh" uid="uid://csukgjabvmcds" path="res://Assets/Meshes/monitor_V3_Cube_006.res" id="1_0jkef"]
 [ext_resource type="Script" uid="uid://mkkydsd6s3el" path="res://Modules/Interaction/Computer/computer.gd" id="1_2r8gm"]
 [ext_resource type="Script" uid="uid://d0afbfeblscar" path="res://Modules/Interaction/interactable.gd" id="2_0jkef"]
 
