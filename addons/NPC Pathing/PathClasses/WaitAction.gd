@@ -11,7 +11,7 @@ class_name WaitAction extends VertexAction
 		else:
 			end_time = value
 		if Engine.is_editor_hint():
-			if EditorInterface.get_edited_scene_root() and not editing_action:
+			if not editing_action:
 				editing_action = true
 				duration = end_time - start_time
 				editing_action = false
@@ -21,7 +21,7 @@ class_name WaitAction extends VertexAction
 	set(value):
 		duration = value
 		if Engine.is_editor_hint():
-			if EditorInterface.get_edited_scene_root() and not editing_action:
+			if not editing_action:
 				editing_action = true
 				end_time = start_time + duration
 				editing_action = false

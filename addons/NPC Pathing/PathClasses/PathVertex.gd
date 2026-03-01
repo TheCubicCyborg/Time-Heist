@@ -13,10 +13,7 @@ class_name PathVertex extends PathComponent
 		#print("vertex actions changed")
 		vertex_actions = value
 		if Engine.is_editor_hint():
-			if EditorInterface.get_edited_scene_root():
-				_validate_actions()
-			else:
-				verify_signals()
+			_validate_actions()
 			vertex_action_changed()
 
 func _init(_id: int = 0, _path: NPCPath = null):

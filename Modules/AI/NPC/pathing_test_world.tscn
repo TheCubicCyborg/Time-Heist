@@ -46,7 +46,8 @@ metadata/_custom_type_script = "uid://cjhgp3kkd22yr"
 
 [sub_resource type="Resource" id="Resource_8lxqm"]
 script = ExtResource("7_w2fhl")
-end_time = 2.0
+start_time = 4.000196
+end_time = 6.000196
 duration = 2.0
 metadata/_custom_type_script = "uid://c8pv0a0in0u3y"
 
@@ -101,50 +102,50 @@ type = 4
 bool_value = true
 metadata/_custom_type_script = "uid://daejfwfkoy2cv"
 
-[sub_resource type="Resource" id="Resource_70th2"]
+[sub_resource type="Resource" id="Resource_q3uff"]
 resource_local_to_scene = true
 script = ExtResource("4_sby2f")
 position = Vector3(0, 0, 8)
 vertex_actions = Array[ExtResource("5_khdrh")]([SubResource("Resource_7oa7a")])
-time_start = 10.00019598007202
-time_end = 10.00019598007202
+time_start = 10.000195999999999
+time_end = 10.000195999999999
 id = 6
 
-[sub_resource type="Resource" id="Resource_wf320"]
+[sub_resource type="Resource" id="Resource_70th2"]
 resource_local_to_scene = true
 script = ExtResource("6_nhqvp")
 speed = 1.0
 prev_vertex = SubResource("Resource_usbjq")
-next_vertex = SubResource("Resource_70th2")
+next_vertex = SubResource("Resource_q3uff")
 time_start = 7.500196
-time_end = 10.00019598007202
+time_end = 10.000195999999999
 id = 5
 
-[sub_resource type="Resource" id="Resource_uvja5"]
+[sub_resource type="Resource" id="Resource_wf320"]
 resource_local_to_scene = true
 script = ExtResource("4_sby2f")
 position = Vector3(8, 0, 8)
-time_start = 18.000195980072018
-time_end = 18.000195980072018
+time_start = 18.000195999999995
+time_end = 18.000195999999995
 id = 8
 
-[sub_resource type="Resource" id="Resource_l6f57"]
+[sub_resource type="Resource" id="Resource_uvja5"]
 resource_local_to_scene = true
 script = ExtResource("6_nhqvp")
 speed = 1.0000000000000002
-prev_vertex = SubResource("Resource_70th2")
-next_vertex = SubResource("Resource_uvja5")
-time_start = 10.00019598007202
-time_end = 18.000195980072018
+prev_vertex = SubResource("Resource_q3uff")
+next_vertex = SubResource("Resource_wf320")
+time_start = 10.000195999999999
+time_end = 18.000195999999995
 id = 7
 
-[sub_resource type="Resource" id="Resource_iblv2"]
+[sub_resource type="Resource" id="Resource_l6f57"]
 resource_local_to_scene = true
 script = ExtResource("7_3aima")
 name = "1"
-path_components = Array[ExtResource("3_0d2mm")]([SubResource("Resource_jyu0l"), SubResource("Resource_7e2gi"), SubResource("Resource_lj00a"), SubResource("Resource_k52w3"), SubResource("Resource_usbjq"), SubResource("Resource_wf320"), SubResource("Resource_70th2"), SubResource("Resource_l6f57"), SubResource("Resource_uvja5")])
+path_components = Array[ExtResource("3_0d2mm")]([SubResource("Resource_jyu0l"), SubResource("Resource_7e2gi"), SubResource("Resource_lj00a"), SubResource("Resource_k52w3"), SubResource("Resource_usbjq"), SubResource("Resource_70th2"), SubResource("Resource_q3uff"), SubResource("Resource_uvja5"), SubResource("Resource_wf320")])
 
-[sub_resource type="Resource" id="Resource_0t17t"]
+[sub_resource type="Resource" id="Resource_iblv2"]
 resource_local_to_scene = true
 script = ExtResource("4_sby2f")
 position = Vector3(0.0052558184, 0, -0.00019264221)
@@ -155,7 +156,7 @@ end_time = 2.0
 duration = 2.0
 metadata/_custom_type_script = "uid://c8pv0a0in0u3y"
 
-[sub_resource type="Resource" id="Resource_m2y43"]
+[sub_resource type="Resource" id="Resource_0t17t"]
 resource_local_to_scene = true
 script = ExtResource("4_sby2f")
 position = Vector3(0, 0, 8)
@@ -164,12 +165,12 @@ time_start = 8.000195
 time_end = 10.000195
 id = 2
 
-[sub_resource type="Resource" id="Resource_k2qbp"]
+[sub_resource type="Resource" id="Resource_m2y43"]
 resource_local_to_scene = true
 script = ExtResource("6_nhqvp")
 speed = 0.9999999436964409
-prev_vertex = SubResource("Resource_0t17t")
-next_vertex = SubResource("Resource_m2y43")
+prev_vertex = SubResource("Resource_iblv2")
+next_vertex = SubResource("Resource_0t17t")
 time_end = 8.000195
 id = 1
 
@@ -188,7 +189,7 @@ script = ExtResource("9_3aima")
 interactable = NodePath("../TestCube/Interactable")
 metadata/_custom_type_script = "uid://dn4bpr3ia1qr0"
 
-[sub_resource type="Resource" id="Resource_p8rwl"]
+[sub_resource type="Resource" id="Resource_k2qbp"]
 resource_local_to_scene = true
 script = ExtResource("4_sby2f")
 position = Vector3(-8, 0, 8)
@@ -197,21 +198,21 @@ time_start = 18.000194999999998
 time_end = 20.000195
 id = 4
 
-[sub_resource type="Resource" id="Resource_ch6nj"]
+[sub_resource type="Resource" id="Resource_p8rwl"]
 resource_local_to_scene = true
 script = ExtResource("6_nhqvp")
 speed = 1.0000000000000002
-prev_vertex = SubResource("Resource_m2y43")
-next_vertex = SubResource("Resource_p8rwl")
+prev_vertex = SubResource("Resource_0t17t")
+next_vertex = SubResource("Resource_k2qbp")
 time_start = 10.000195
 time_end = 18.000194999999998
 id = 3
 
-[sub_resource type="Resource" id="Resource_syu00"]
+[sub_resource type="Resource" id="Resource_ch6nj"]
 resource_local_to_scene = true
 script = ExtResource("7_3aima")
 name = "2"
-path_components = Array[ExtResource("3_0d2mm")]([SubResource("Resource_0t17t"), SubResource("Resource_k2qbp"), SubResource("Resource_m2y43"), SubResource("Resource_ch6nj"), SubResource("Resource_p8rwl")])
+path_components = Array[ExtResource("3_0d2mm")]([SubResource("Resource_iblv2"), SubResource("Resource_m2y43"), SubResource("Resource_0t17t"), SubResource("Resource_p8rwl"), SubResource("Resource_k2qbp")])
 
 [node name="Pathing Test World" type="Node3D" unique_id=1891461424]
 
@@ -237,9 +238,9 @@ shape = SubResource("BoxShape3D_ah0ni")
 
 [node name="NPC" parent="." unique_id=580269137 instance=ExtResource("1_0mxr5")]
 transform = Transform3D(1, 0, 0, 0, 0.9999826, 0.005899179, 0, -0.005899179, 0.9999826, 0.0052558184, 0.032344818, -0.00019264221)
-branch_paths = Array[ExtResource("7_3aima")]([SubResource("Resource_iblv2"), SubResource("Resource_syu00")])
+branch_paths = Array[ExtResource("7_3aima")]([SubResource("Resource_l6f57"), SubResource("Resource_ch6nj")])
 follow_branch = 0
-path = SubResource("Resource_iblv2")
+path = SubResource("Resource_l6f57")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1573951455]
 transform = Transform3D(0.57513374, -0.37195083, 0.7286108, -1.4901161e-08, 0.8906576, 0.4546746, -0.8180594, -0.26149872, 0.5122472, 0, 0, 0)

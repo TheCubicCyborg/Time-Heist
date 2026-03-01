@@ -148,7 +148,7 @@ func delete_vertex(ix: int):
 	path_components.remove_at(ix-1)
 	updating_path = false
 
-func commit_vertex(vertex: PathVertex, action: PathingGizmo.GIZMO_ACTION):
+func commit_vertex(vertex: PathVertex, action):
 	updating_path = true
 	var prev_line: PathLine = at(vertex.id-1)
 	prev_line.time_end = vertex.time_start
