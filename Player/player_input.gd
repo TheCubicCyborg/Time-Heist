@@ -6,19 +6,21 @@ class_name PlayerInput
 @export var rolling_state : State
 @onready var roll_window := $roll_window
 @onready var anim_tree: AnimationTree = $"../Mesh/AnimationTree"
+@onready var spring_arm_pivot: Node3D = $"../Spring Arm Pivot"
 
-var face_to_move = {
-	0 : ["player_left", "player_right", "player_up", "player_down"],
-	1 : ["player_up", "player_down", "player_right", "player_left"],
-	2 : ["player_right", "player_left", "player_down", "player_up"],
-	3 : ["player_down", "player_up", "player_left", "player_right"],
-}
 
-var input_map
-var should_update_map : bool = true
+#var face_to_move = {
+	#0 : ["player_left", "player_right", "player_up", "player_down"],
+	#1 : ["player_up", "player_down", "player_right", "player_left"],
+	#2 : ["player_right", "player_left", "player_down", "player_up"],
+	#3 : ["player_down", "player_up", "player_left", "player_right"],
+#}
+#
+#var input_map
+#var should_update_map : bool = true
 
-func _ready() -> void:
-	input_map = face_to_move[0] # Initally set input map
+#func _ready() -> void:
+	#input_map = face_to_move[0] # Initally set input map
 	#mat = globals.player.mesh.get_surface_override_material(0) #Testing for crouch
 
 #region Static Function to check player control
@@ -47,20 +49,24 @@ func get_input_direction() -> Vector2:
 	if not player_is_in_control():
 		return Vector2.ZERO
 	# Get input (based on mapping from direction it is facing)
-	var input_dir := Input.get_vector(input_map[0],input_map[1],input_map[2],input_map[3])
-	# Update maping (only if should)
-	if should_update_map and input_dir != globals.player.previous_input:
-		input_map = face_to_move[globals.camera.facing_direction]
-		should_update_map = false
-	
-	if input_dir != globals.player.previous_input:
-		globals.player.previous_input = input_dir # Stores previous input (for the above check)
+	var input_dir := Input.get_vector("player_left","player_right","player_up","player_down")
+	#var input_dir := Input.get_vector(input_map[0],input_map[1],input_map[2],input_map[3])
+	## Update maping (only if should)
+	#if should_update_map and input_dir != globals.player.previous_input:
+		#input_map = face_to_move[globals.camera.facing_direction]
+		#should_update_map = false
+	#
+	#if input_dir != globals.player.previous_input:
+		#globals.player.previous_input = input_dir # Stores previous input (for the above check)
 		
 	return input_dir
 
 func get_direction_vector(input_dir : Vector2) -> Vector3:
-	var direction_facing = get_parent().get_direction_facing()
-	return (direction_facing * Vector3(abs(input_dir.x), 0, abs(input_dir.y))).normalized()
+	#var direction_facing = get_parent().get_direction_facing()
+	#return (direction_facing * Vector3(abs(input_dir.x), 0, abs(input_dir.y))).normalized()
+	var direction := Vector3(input_dir.x,0,input_dir.y).normalized()
+	direction = direction.rotated(Vector3.UP,$"../Spring Arm Pivot".global_rotation.y)
+	return direction
 #endregion
 
 func crouch_on():

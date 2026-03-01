@@ -1,4 +1,4 @@
-extends Node3D
+extends Node3D #OLD CAMERA
 
 @export var CAMERA_ROTATION_X : float = -50
 @export var CAM_ROT_SPEED : float = 4

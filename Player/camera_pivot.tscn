@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c2jmn7fqcsv24"]
 
-[ext_resource type="Script" uid="uid://ddcrxqxycn04f" path="res://Player/camera_pivot.gd" id="1_ehrhw"]
+[ext_resource type="Script" uid="uid://2gh0e72pqwae" path="res://Player/spring_arm_pivot.gd" id="1_fvf84"]
 [ext_resource type="Shader" uid="uid://d1gd8vm0a4uou" path="res://Effects/time_travel_1.gdshader" id="2_iwa17"]
 [ext_resource type="Script" uid="uid://w74t1d1ps1fb" path="res://Effects/time_travel_effect.gd" id="3_fvf84"]
 
@@ -15,9 +15,20 @@ shader_parameter/brightness = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fvf84"]
 
-[node name="Camera_pivot" type="Node3D" unique_id=144358182]
+[sub_resource type="GDScript" id="GDScript_fvf84"]
+resource_name = "camera_lerp"
+script/source = "extends Camera3D
+
+@export var spring_arm: Node3D
+@export var lerp_power: float = 1.0
+
+func _process(delta: float) -> void:
+	position = lerp(position, spring_arm.position, delta * lerp_power)
+"
+
+[node name="Spring Arm Pivot" type="Node3D" unique_id=144358182]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-script = ExtResource("1_ehrhw")
+script = ExtResource("1_fvf84")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2142778369]
 
@@ -41,4 +52,8 @@ offset_bottom = 40.0
 collision_mask = 8
 shape = SubResource("SphereShape3D_fvf84")
 
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=1895428662]
+[node name="Spring Arm Position" type="Node3D" parent="SpringArm3D" unique_id=1443119065]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1895428662 node_paths=PackedStringArray("spring_arm")]
+script = SubResource("GDScript_fvf84")
+spring_arm = NodePath("../SpringArm3D/Spring Arm Position")

@@ -47,8 +47,12 @@ func process_physics(delta: float) -> State:
 	var input_dir = input_controller.get_input_direction() # Input direction
 	var direction_vector = input_controller.get_direction_vector(input_dir) # Direction vector
 	
-	player.speed = lerp(player.speed, player.current_max_speed, player.current_acceleration * delta)
-	player.velocity = player.speed * direction_vector
+	direction_vector *= player.current_max_speed
+	player.velocity.x = move_toward(player.velocity.x, direction_vector.x, delta * player.current_acceleration)
+	player.velocity.z = move_toward(player.velocity.z, direction_vector.z, delta * player.current_acceleration)
+	
+	#player.speed = lerp(player.speed, player.current_max_speed, player.current_acceleration * delta)
+	#player.velocity = player.speed * direction_vector
 
 	player.move_and_slide()
 	

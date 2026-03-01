@@ -106,7 +106,7 @@ func _process(delta: float) -> void:
 	
 	var input_dir = input_controller.get_input_direction() # Input direction
 	if can_rotate and input_dir:
-		rotation.y = lerp_angle(rotation.y, atan2(-input_dir.x, -input_dir.y), delta * current_rotation_speed)
+		mesh.rotation.y = lerp_angle(mesh.rotation.y, atan2(-input_dir.x, -input_dir.y), delta * current_rotation_speed)
 	
 func get_direction_facing() -> Vector3:
 	return -get_global_transform().basis.z

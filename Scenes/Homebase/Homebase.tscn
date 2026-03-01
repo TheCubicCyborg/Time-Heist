@@ -72,8 +72,6 @@ metadata/_editor_floor_ = Vector3(0, 1, 0)
 [node name="Player" parent="." unique_id=265121882 instance=ExtResource("6_qdus5")]
 
 [node name="Camera_pivot" parent="." unique_id=144358182 instance=ExtResource("7_djhyv")]
-CAMERA_DISTANCE_BACK = 3.0
-CAMERA_DISTANCE_UP = 3.5
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=22178100]
 transform = Transform3D(1, 0, 0, 0, 0.657362, 0.753575, 0, -0.753575, 0.657362, 0, 0, 0)
