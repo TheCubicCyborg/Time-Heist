@@ -17,7 +17,6 @@ func interact():
 
 func _on_dialogue_finish() -> void:
 	dialogue_balloon = null
-	get_tree().paused = false
 
 func _on_interactable_anon_interacted() -> void:
 	interact()

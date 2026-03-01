@@ -9,7 +9,6 @@ var dialogue_balloon
 	
 func _on_dialogue_finish() -> void:
 	dialogue_balloon = null
-	get_tree().paused = false
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.name == "Player":
