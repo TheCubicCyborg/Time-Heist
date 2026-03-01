@@ -20,6 +20,7 @@ var scene_paths := {
 const START_SCENE := Scene.HOMEBASE
 const ROOT_SCENE_NAME := "TimeHeist"
 
+
 func change_scene(s: Scene) -> void:
 	# clear current scene if there
 	if current_scene:
@@ -33,7 +34,8 @@ func change_scene(s: Scene) -> void:
 func _ready() -> void:
 	await get_tree().process_frame
 	
-	scene_holder = get_tree().current_scene.get_node("SceneHolder")
+	scene_holder = Node.new()
+	add_child(scene_holder)
 	
 	if get_tree().current_scene.name == ROOT_SCENE_NAME:
 		change_scene(START_SCENE)

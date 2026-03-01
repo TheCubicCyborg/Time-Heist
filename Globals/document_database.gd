@@ -11,13 +11,11 @@ func _ready() -> void:
 	reload()
 
 func reload() -> void:
-	print("reloading")
 	by_id.clear()
 	all.clear()
 
 	var paths: Array[String] = []
 	get_resource_paths(documents_folder, paths, recursive)
-	print(paths)
 	for path in paths:
 		var res = load(path)
 		if res == null:

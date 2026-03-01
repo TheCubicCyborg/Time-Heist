@@ -2,8 +2,6 @@
 
 [node name="TimeHeist" type="Node" unique_id=231608727]
 
-[node name="SceneHolder" type="Node" parent="." unique_id=346401578]
-
 [node name="Holder" type="Node" parent="." unique_id=13854569]
 
 [node name="persistent ui? (temp)" type="Label" parent="Holder" unique_id=496174908]
@@ -13,6 +11,5 @@ offset_left = 907.0
 offset_top = 991.0
 offset_right = 1046.1305
 offset_bottom = 1071.0
-text = "test123"
 horizontal_alignment = 1
 vertical_alignment = 1
