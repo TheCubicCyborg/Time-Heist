@@ -11,7 +11,8 @@ func display_document(doc_id: int):
 	open()
 
 func handle_input(_delta):
-	if Input.is_action_just_pressed("escape") or Input.is_action_just_pressed("ui_tab_forward"):
+	if Input.is_action_just_pressed("escape") or Input.is_action_just_pressed("ui_tab_forward") or Input.is_action_just_pressed("player_interact"):
+		#print("closing document")
 		#animation_player.play("close")
-		close()
+		call_deferred("close")
 	

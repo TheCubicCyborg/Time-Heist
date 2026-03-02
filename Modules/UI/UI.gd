@@ -28,3 +28,5 @@ func close():
 func handle_input(_delta):
 	if Input.is_action_just_pressed("escape"):
 		close()
+	elif Input.is_action_just_pressed("player_interact"):
+		close()

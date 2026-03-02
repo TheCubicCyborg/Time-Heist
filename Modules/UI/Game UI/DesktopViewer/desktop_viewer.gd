@@ -24,9 +24,9 @@ func display_security(security_ui : PackedScene, cameras : Node):
 			open()
 		
 func handle_input(_delta):
-	if Input.is_action_just_pressed("escape"):
+	if Input.is_action_just_pressed("escape") or Input.is_action_just_pressed("player_interact"):
 		if get_child_count() == 0:
 			get_child(0).queue_free()
 		#animation_player.play("close")
-		close()
+		call_deferred("close")
 	

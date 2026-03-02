@@ -21,10 +21,16 @@ const WAIT_FASTER_MULTIPLIER = 15
 signal time_traveled
 signal stopped_time_travel
 
+var last_input_controller
+
 var is_time_traveling = false:
 	set(value):
 		is_time_traveling = value
-		globals.controller_of_input = globals.InputController.TIMETRAVEL if value else globals.InputController.GAMEPLAY
+		if value:
+			last_input_controller = globals.controller_of_input
+			globals.controller_of_input = globals.InputController.TIMETRAVEL 
+		else:
+			globals.controller_of_input = last_input_controller
 
 func _ready():
 	globals.time_manager = self
@@ -37,7 +43,8 @@ func _physics_process(delta):
 	if Input.is_action_pressed("rewind") and globals.time_juice > 0.0:
 		if globals.time_juice > 0.0 or not globals.player or globals.player.infinite_juice:
 			rewind(REWIND_MULTIPLIER * delta)
-			is_time_traveling = true
+			if not is_time_traveling:
+				is_time_traveling = true
 			if globals.player and not globals.player.infinite_juice: #DEBUG dont lose juice if debug mode
 				globals.time_juice = maxf(0.0, globals.time_juice - globals.rewind_drain_per_sec * delta)
 	else:

@@ -5,7 +5,7 @@ class_name Computer
 
 func _ready() -> void:
 	if not computer_ui:
-		push_error("Computer UI not hooked up")
+		push_warning("Computer UI not hooked up")
 		#assert(false)
 	#computer_ui.close()
 	

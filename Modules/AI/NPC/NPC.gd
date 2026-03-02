@@ -32,15 +32,14 @@ var branched: bool
 var start_pos: Vector3
 
 
+
 @export_category("Path Editor")
 @export var path: NPCPath:
 	set(value):
 		path = value
 		if Engine.is_editor_hint():
-			if path: 
+			if path and is_node_ready(): 
 				path.updating_path = true
-				#var first_vert_pos = path.path_components[0].position
-				#first_vert_pos.y = 0
 				path.path_components[0].position = global_position
 				path.updating_path = false
 				if not path.changed.is_connected(update_gizmos):

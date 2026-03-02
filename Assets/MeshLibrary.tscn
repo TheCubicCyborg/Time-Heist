@@ -27,7 +27,7 @@ size = Vector3(0.25, 1, 0.25)
 size = Vector3(0.25, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_so2ud"]
-size = Vector3(0.25, 3.75, 1.5)
+size = Vector3(0.25, 3.55, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e1pt4"]
 size = Vector3(1.5, 0.25, 3.5)
@@ -177,11 +177,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.25)
 shape = SubResource("BoxShape3D_rgqh2")
 
 [node name="StairFlight" type="MeshInstance3D" parent="." unique_id=172617441]
-visible = false
 mesh = ExtResource("6_upl86")
 
 [node name="StairCollider" type="StaticBody3D" parent="StairFlight" unique_id=280554096]
-transform = Transform3D(0.55484444, -0.8319541, 0, 0.8319541, 0.55484444, 0, 0, 0, 1, -1.385, 0.855, 0.625)
+transform = Transform3D(0.55484444, -0.8319541, 0, 0.8319541, 0.55484444, 0, 0, 0, 1, -1.47, 0.91, 0.625)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StairFlight/StairCollider" unique_id=1015269040]
 shape = SubResource("BoxShape3D_so2ud")

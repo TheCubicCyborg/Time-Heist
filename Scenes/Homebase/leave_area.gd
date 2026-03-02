@@ -1,6 +1,6 @@
 extends Node3D
 
-var resource := load("res://Dialogue/homebase_leave.dialogue")
+@export var dialogue: DialogueResource
 var balloon_scene := "res://Dialogue/balloon.tscn"
 var dial_start_loc := "start"
 var dialogue_balloon
@@ -17,6 +17,6 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 			return
 		
 		print("Trying to leave")
-		dialogue_balloon = DialogueManager.show_dialogue_balloon_scene(balloon_scene, resource, dial_start_loc)
+		dialogue_balloon = DialogueManager.show_dialogue_balloon_scene(balloon_scene, dialogue, dial_start_loc)
 		dialogue_balloon.tree_exited.connect(_on_dialogue_finish)
 		get_tree().paused = true

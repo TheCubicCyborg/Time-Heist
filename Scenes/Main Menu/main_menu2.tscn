@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://b42j8ycb3g26l"]
+
+[ext_resource type="Script" uid="uid://dv3pmyjmcfrbs" path="res://Scenes/Main Menu/main_menu.gd" id="1_c0awy"]
+[ext_resource type="Texture2D" uid="uid://23mhu5fh4s5b" path="res://Assets/UI/Main Menu/MainMenu2.png" id="2_c0awy"]
+
+[node name="MainMenu" type="Control" unique_id=194556561]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c0awy")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=615041850]
+custom_minimum_size = Vector2(0, 700)
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_vertical = 3
+texture = ExtResource("2_c0awy")
+
+[node name="Settings" type="Button" parent="." unique_id=1896658415]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 660.0
+offset_right = 463.0
+offset_bottom = 821.0
+focus_neighbor_right = NodePath("../Play")
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+flat = true
+
+[node name="Play" type="Button" parent="." unique_id=1793094267]
+layout_mode = 0
+offset_left = 784.0
+offset_top = 652.0
+offset_right = 1156.0
+offset_bottom = 815.0
+focus_neighbor_left = NodePath("../Settings")
+focus_neighbor_right = NodePath("../Quit")
+flat = true
+
+[node name="Quit" type="Button" parent="." unique_id=372349385]
+layout_mode = 0
+offset_left = 1394.0
+offset_top = 692.0
+offset_right = 1675.0
+offset_bottom = 849.0
+focus_neighbor_left = NodePath("../Play")
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+flat = true
+
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

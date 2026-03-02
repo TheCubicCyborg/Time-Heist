@@ -13,3 +13,5 @@ offset_right = 1046.1305
 offset_bottom = 1071.0
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SceneHolder" type="Node" parent="." unique_id=597155139]

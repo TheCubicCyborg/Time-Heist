@@ -1,8 +1,17 @@
 extends Control
 
 func _ready() -> void:
-	$MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/Play.grab_focus()
+	print("grabbing focus")
+	$Play.grab_focus()
+	pass
 
 func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://Map/Test_Map/test_map-alex.tscn")
+	SceneManager.change_scene(SceneManager.Scene.TUTORIAL)
 	pass
+
+func _on_settings_pressed():
+	pass # Replace with function body.
+
+
+func _on_quit_pressed():
+	get_tree().quit()

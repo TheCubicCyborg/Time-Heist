@@ -15,6 +15,7 @@ var picked_up : bool : #TIMEVAR
 		if globals.time_manager and globals.time_manager.logging:
 			globals.time_manager.timelog(self,"picked_up",picked_up,value)
 		picked_up = value
+		@warning_ignore("standalone_ternary")
 		hide() if value else show()
 
 func interact(person : Node):

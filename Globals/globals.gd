@@ -72,6 +72,7 @@ var clicking_cursor = preload("res://Assets/UI/Computer/Cursor_click.png")
 
 func _ready():
 	time_manager = preload("res://Modules/TimeTravel/TimeManager.gd").new()
+	time_manager.name = "TimeManager"
 	add_child(time_manager)
 	time_juice = 100
 
@@ -85,15 +86,13 @@ func player_caught():
 	get_tree().paused = true
 
 func to_homebase():
-	print("to homebase")
+	#print("to homebase")
 	SceneManager.change_scene(SceneManager.Scene.HOMEBASE)
 
-func restart_gameplay():
-	print("restart")
+func retry():
+	#print("restart")
 	time_juice = max_time_juice
-	time_manager.restart_time()
-	time_manager.start_time()
-	SceneManager.change_scene(SceneManager.Scene.GAMEPLAY)
+	SceneManager.change_scene(SceneManager.current_scene_type)
 
 
 #region Signals

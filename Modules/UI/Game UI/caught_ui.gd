@@ -4,7 +4,7 @@ func _on_try_again_pressed():
 	print("press restart")
 	close()
 	get_tree().paused = false
-	globals.restart_gameplay()
+	globals.retry()
 
 
 func _on_homebase_pressed():
