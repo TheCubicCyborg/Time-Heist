@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdblcmebp2g6i"
-path.s3tc="res://.godot/imported/basement_pin_board_small.png-fa0398df33fa3b9c7e6b8b64e51632ea.s3tc.ctex"
-path.etc2="res://.godot/imported/basement_pin_board_small.png-fa0398df33fa3b9c7e6b8b64e51632ea.etc2.ctex"
+uid="uid://dn4jk0ilbavbu"
+path.s3tc="res://.godot/imported/6a_small_basement_map.png-46da33c029ed2046240ef33de59c4b50.s3tc.ctex"
+path.etc2="res://.godot/imported/6a_small_basement_map.png-46da33c029ed2046240ef33de59c4b50.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Documents/Textures/basement_pin_board_small.png"
-dest_files=["res://.godot/imported/basement_pin_board_small.png-fa0398df33fa3b9c7e6b8b64e51632ea.s3tc.ctex", "res://.godot/imported/basement_pin_board_small.png-fa0398df33fa3b9c7e6b8b64e51632ea.etc2.ctex"]
+source_file="res://Assets/Documents/Textures/6a_small_basement_map.png"
+dest_files=["res://.godot/imported/6a_small_basement_map.png-46da33c029ed2046240ef33de59c4b50.s3tc.ctex", "res://.godot/imported/6a_small_basement_map.png-46da33c029ed2046240ef33de59c4b50.etc2.ctex"]
 
 [params]
 
