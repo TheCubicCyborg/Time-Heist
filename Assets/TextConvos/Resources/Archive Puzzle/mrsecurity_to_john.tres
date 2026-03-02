@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TextConvo" format=3 uid="uid://cxus0xrdd5e5u"]
+
+[ext_resource type="Script" uid="uid://cwa1su0fsxi7t" path="res://Assets/TextConvos/text_convo_resource.gd" id="1_j3ych"]
+
+[resource]
+script = ExtResource("1_j3ych")
+person0 = "John"
+person1 = "Albus"
+conversation = "0,0"
+metadata/_custom_type_script = "uid://cwa1su0fsxi7t"

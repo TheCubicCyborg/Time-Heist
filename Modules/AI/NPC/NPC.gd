@@ -79,7 +79,7 @@ func face(rotation_deg: float):
 	rotation.y = deg_to_rad(rotation_deg)
 
 func branch_if(branchAction: BranchAction):
-	print("branch if")
+	#print("branch if")
 	var temp = get_node(branchAction.object)
 	#print("node: ", temp)
 	if temp.get(branchAction.property_name) != branchAction.is_false:
