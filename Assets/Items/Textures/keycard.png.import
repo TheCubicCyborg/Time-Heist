@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1n5rdbagyhkl"
-path="res://.godot/imported/7_basement_pin_board.png-62a22fc307c78c1d30d6b579238415e7.ctex"
+uid="uid://d16psthp7cv1t"
+path="res://.godot/imported/keycard.png-00b434a3151986dc73a599faa49c7cc9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Documents/Textures/7_basement_pin_board.png"
-dest_files=["res://.godot/imported/7_basement_pin_board.png-62a22fc307c78c1d30d6b579238415e7.ctex"]
+source_file="res://Assets/Items/Textures/keycard.png"
+dest_files=["res://.godot/imported/keycard.png-00b434a3151986dc73a599faa49c7cc9.ctex"]
 
 [params]
 
