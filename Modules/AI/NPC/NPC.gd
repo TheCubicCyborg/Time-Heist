@@ -41,7 +41,7 @@ var start_pos: Vector3
 				path.updating_path = true
 				#var first_vert_pos = path.path_components[0].position
 				#first_vert_pos.y = 0
-				#path.path_components[0].position = first_vert_pos
+				path.path_components[0].position = global_position
 				path.updating_path = false
 				if not path.changed.is_connected(update_gizmos):
 					path.changed.connect(update_gizmos)
@@ -79,7 +79,7 @@ func face(rotation_deg: float):
 	rotation.y = deg_to_rad(rotation_deg)
 
 func branch_if(branchAction: BranchAction):
-	#print("branch if")
+	print("branch if")
 	var temp = get_node(branchAction.object)
 	#print("node: ", temp)
 	if temp.get(branchAction.property_name) != branchAction.is_false:

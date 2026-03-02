@@ -10,6 +10,16 @@ var display_time_elapsed: float = 0
 @export var needed_lever: Array[Lever]
 @export var locked_label : String
 
+@export var is_unlocked: bool = false : #TIMEVAR
+	set(value):
+		if globals.time_manager and globals.time_manager.logging:
+			globals.time_manager.timelog(self,"is_unlocked",is_unlocked,value)
+		if value:
+			$MeshInstance3D.mesh.material.albedo_color = Color(0.0, 0.706, 0.0, 1.0)
+		else:
+			$MeshInstance3D.mesh.material.albedo_color = Color("ee4243")
+		is_unlocked = value
+
 #var success = preload("res://Assets/Materials/Interactable/success.tres")
 
 func _ready() -> void:
@@ -17,8 +27,20 @@ func _ready() -> void:
 	$Label.text = locked_label
 
 func interact():
-	var success: bool = true
+	var unlocked = check_interact()
 	
+	if not unlocked:
+		is_unlocked = false
+		display_note = true
+		$Label.visible = true
+		return
+	else:
+		is_unlocked = true
+		keycard_scanned.emit()
+		is_unlocked = true
+
+func check_interact():
+	var success = true
 	if needed_doc:
 		for doc in needed_doc:
 			if not global_inventory.has_doc(doc):
@@ -35,13 +57,7 @@ func interact():
 		for lever in needed_lever:
 			if not lever.flipped:
 				success= false
-	if not success:
-		display_note = true
-		$Label.visible = true
-		return
-		
-	keycard_scanned.emit()
-	$MeshInstance3D.mesh.material.albedo_color = Color(0.0, 0.706, 0.0, 1.0)
+	return success
 
 func _process(delta):
 	if display_note:

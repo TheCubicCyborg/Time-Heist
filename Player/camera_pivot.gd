@@ -12,7 +12,7 @@ enum Direction {
 	EAST
 }
 
-@export var facing_direction : Direction #Starting facing direction
+@export var facing_direction : Direction
 var previous_facing_direction : Direction
 
 var destination_rotation : int

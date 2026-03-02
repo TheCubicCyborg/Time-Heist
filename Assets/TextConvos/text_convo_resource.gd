@@ -8,7 +8,7 @@ class_name TextConvo
 # Format:
 # 
 # [time],[person][message]
-# 0Hi John
-# 1Hi Billy
-# 0How is work?
+# 0,0Hi John
+# 10,1Hi Billy
+# 15,0How is work?
 #
