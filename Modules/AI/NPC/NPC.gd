@@ -41,7 +41,7 @@ var start_pos: Vector3
 				path.updating_path = true
 				#var first_vert_pos = path.path_components[0].position
 				#first_vert_pos.y = 0
-				#path.path_components[0].position = first_vert_pos
+				path.path_components[0].position = global_position
 				path.updating_path = false
 				if not path.changed.is_connected(update_gizmos):
 					path.changed.connect(update_gizmos)

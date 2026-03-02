@@ -21,7 +21,7 @@ func _init(_undo_redo: EditorUndoRedoManager):
 func _redraw():
 	#print("redraw")
 	var path: NPCPath = get_node_3d().path
-	npc_pos_offset = -get_node_3d().position
+	npc_pos_offset = -get_node_3d().global_position
 	npc_pos_offset.y = 0
 	
 	clear()

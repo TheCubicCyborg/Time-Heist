@@ -17,8 +17,7 @@ var picked_up : bool : #TIMEVAR
 		picked_up = value
 		hide() if value else show()
 
-func interact():
+func interact(person : Node):
+	if person == globals.player:
+		globals.emit_signal("collect_item", item)
 	picked_up = true
-	globals.emit_signal("collect_item", item)
-	#TEMP
-	globals.emit_signal("collect_clearance", globals.Clearances.Security)
