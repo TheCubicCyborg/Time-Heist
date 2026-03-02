@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cvsjvf2hm0j0v" path="res://Modules/Interaction/Computer/computer_tab.gd" id="1_t7psn"]
 
 [node name="Computer Tab" type="Control" unique_id=411550248]
-z_index = 1
 custom_minimum_size = Vector2(1200, 800)
 layout_mode = 3
 anchors_preset = 15

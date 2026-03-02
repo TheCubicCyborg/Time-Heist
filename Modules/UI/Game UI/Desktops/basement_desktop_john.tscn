@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://bnhismy4o74yd" path="res://Modules/Interaction/Computer/Email App/email_tab.tscn" id="7_31vdu"]
 [ext_resource type="Script" uid="uid://c4r7d4bl70rat" path="res://Assets/Documents/document_resource.gd" id="8_1ashx"]
 [ext_resource type="Resource" uid="uid://btvs4c8o6ktei" path="res://Assets/Documents/Resources/basement_robot_complaint.tres" id="9_5vmcd"]
+[ext_resource type="PackedScene" uid="uid://dkcsig15pybbc" path="res://Modules/Interaction/Computer/Text App/text_tab.tscn" id="10_xob4a"]
+[ext_resource type="Script" uid="uid://cwa1su0fsxi7t" path="res://Assets/TextConvos/text_convo_resource.gd" id="11_s1djq"]
+[ext_resource type="Resource" uid="uid://cxus0xrdd5e5u" path="res://Assets/TextConvos/Resources/Archive Puzzle/mrsecurity_to_john.tres" id="12_v4qbt"]
 
 [node name="Basement Desktop John" type="Control" unique_id=738063015]
 layout_mode = 3
@@ -55,3 +58,20 @@ content = NodePath("Email Tab")
 [node name="Email Tab" parent="Computer UI/Email/Computer Tab" unique_id=718460647 instance=ExtResource("7_31vdu")]
 layout_mode = 1
 emails = Array[ExtResource("8_1ashx")]([ExtResource("9_5vmcd")])
+
+[node name="Texts" parent="Computer UI" unique_id=395578597 node_paths=PackedStringArray("tab") instance=ExtResource("2_y3e1a")]
+layout_mode = 1
+offset_left = 494.0
+offset_top = 133.0
+offset_right = 494.0
+offset_bottom = 133.0
+tab = NodePath("Computer Tab")
+
+[node name="Computer Tab" parent="Computer UI/Texts" unique_id=1080463219 node_paths=PackedStringArray("content") instance=ExtResource("5_s1djq")]
+layout_mode = 1
+content = NodePath("Text Tab")
+
+[node name="Text Tab" parent="Computer UI/Texts/Computer Tab" unique_id=1299058217 instance=ExtResource("10_xob4a")]
+layout_mode = 1
+convos = Array[ExtResource("11_s1djq")]([ExtResource("12_v4qbt")])
+which_person = Array[int]([0])
