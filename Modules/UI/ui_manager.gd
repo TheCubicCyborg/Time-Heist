@@ -26,6 +26,7 @@ func _process(_delta):
 		cur_ui.handle_input(_delta)
 
 func take_control(ui: Control):
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	if ui != debug_ui:
 		globals.controller_of_input = globals.InputController.UI
 	if cur_ui:
@@ -40,6 +41,7 @@ func release_control():
 	else:
 		cur_ui = null
 		globals.controller_of_input = globals.InputController.GAMEPLAY
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func handle_input(_delta):
 	#if Input.is_action_just_pressed("camera_ui"):

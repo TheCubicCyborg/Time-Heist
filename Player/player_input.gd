@@ -6,6 +6,7 @@ class_name PlayerInput
 @export var rolling_state : State
 @onready var roll_window := $roll_window
 @onready var anim_tree: AnimationTree = $"../Mesh/AnimationTree"
+@onready var camera_mount: Node3D = $"../Camera_pivot"
 
 var face_to_move = {
 	0 : ["player_left", "player_right", "player_up", "player_down"],
@@ -19,6 +20,7 @@ var should_update_map : bool = true
 
 func _ready() -> void:
 	input_map = face_to_move[0] # Initally set input map
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	#mat = globals.player.mesh.get_surface_override_material(0) #Testing for crouch
 
 #region Static Function to check player control
@@ -47,20 +49,22 @@ func get_input_direction() -> Vector2:
 	if not player_is_in_control():
 		return Vector2.ZERO
 	# Get input (based on mapping from direction it is facing)
-	var input_dir := Input.get_vector(input_map[0],input_map[1],input_map[2],input_map[3])
-	# Update maping (only if should)
-	if should_update_map and input_dir != globals.player.previous_input:
-		input_map = face_to_move[globals.camera.facing_direction]
-		should_update_map = false
-	
-	if input_dir != globals.player.previous_input:
-		globals.player.previous_input = input_dir # Stores previous input (for the above check)
+	#var input_dir := Input.get_vector(input_map[0],input_map[1],input_map[2],input_map[3])
+	## Update maping (only if should)
+	#if should_update_map and input_dir != globals.player.previous_input:
+		#input_map = face_to_move[globals.camera.facing_direction]
+		#should_update_map = false
+	#
+	#if input_dir != globals.player.previous_input:
+		#globals.player.previous_input = input_dir # Stores previous input (for the above check)
 		
-	return input_dir
+	return Input.get_vector("player_left","player_right","player_down","player_up")
 
-func get_direction_vector(input_dir : Vector2) -> Vector3:
-	var direction_facing = get_parent().get_direction_facing()
-	return (direction_facing * Vector3(abs(input_dir.x), 0, abs(input_dir.y))).normalized()
+func get_direction_vector(_input_dir : Vector2) -> Vector3:
+	#var direction_facing = get_parent().get_direction_facing()
+	#return (direction_facing * Vector3(abs(input_dir.x), 0, abs(input_dir.y))).normalized()
+	Vector3.FORWARD.rotated(Vector3.UP,camera_mount.rotation.y)
+	return Vector3.ZERO
 #endregion
 
 func crouch_on():
@@ -91,7 +95,10 @@ func toggle_crouch():
 	@warning_ignore("standalone_ternary")
 	crouch_off() if globals.player.is_crouching else crouch_on()
 
-func process_input(_event: InputEvent):
+func process_input(_event):
+	pass
+
+func _process(_delta):
 	#region Crouch
 	if PlayerInput.is_action_just_pressed("player_crouch"):
 		if globals.player.state_machine.current_state != $"../state_machine/rolling":

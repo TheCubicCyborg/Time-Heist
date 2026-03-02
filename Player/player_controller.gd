@@ -13,7 +13,7 @@ var anim_tree : AnimationTree = $Mesh/AnimationTree
 var detection_point: Marker3D = $DetectionPoint
 
 
-@onready var collision := $CollisionShape3D
+@onready var collision := $Hitbox
 @onready var mesh : MeshInstance3D = $Mesh/Skeleton3D/torso_001
 
 var previous_input : Vector2

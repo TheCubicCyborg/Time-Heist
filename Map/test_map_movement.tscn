@@ -1,7 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://cvpussyyat68g"]
+[gd_scene format=3 uid="uid://cvpussyyat68g"]
 
-[ext_resource type="MeshLibrary" uid="uid://c33av8p4dtuad" path="res://Assets/MeshLibrary.tres" id="1_0btr0"]
-[ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/camera_pivot.tscn" id="1_8i5ej"]
+[ext_resource type="MeshLibrary" uid="uid://dy0vxnd1qseb5" path="res://Assets/MeshLibrary.tres" id="1_0btr0"]
 [ext_resource type="Texture2D" uid="uid://xt01w1u2qfwc" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_albedo.png" id="2_fwwy1"]
 [ext_resource type="Texture2D" uid="uid://cjwgyolwq6axi" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_ao.png" id="3_8i5ej"]
 [ext_resource type="Texture2D" uid="uid://d1ud0cbta6goq" path="res://Assets/Materials/TestFloorMat/exquistite-polished-tile_metallic.png" id="4_f7iyc"]
@@ -30,9 +29,9 @@ grow_amount = -4.125
 
 [sub_resource type="SphereMesh" id="SphereMesh_8uw46"]
 
-[node name="TestScene" type="Node3D"]
+[node name="TestScene" type="Node3D" unique_id=224826480]
 
-[node name="World" type="GridMap" parent="."]
+[node name="World" type="GridMap" parent="." unique_id=1167633402]
 mesh_library = ExtResource("1_0btr0")
 cell_size = Vector3(0.25, 3, 0.25)
 cell_center_y = false
@@ -40,30 +39,27 @@ data = {
 "cells": PackedInt32Array(0, 0, 1048578, 3, 0, 1048577, 6, 0, 1048577, 10, 0, 1048577, 65530, 0, 1048577, 65527, 1, 655361, 65527, 5, 655361, 65527, 9, 655361, 65527, 13, 655361, 65527, 17, 1441793, 65531, 17, 1441793)
 }
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1631703117]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1451706693]
 visible = false
 shape = SubResource("WorldBoundaryShape3D_terai")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1632666785]
 mesh = SubResource("PlaneMesh_terai")
 surface_material_override/0 = SubResource("StandardMaterial3D_lhttk")
 
-[node name="Player" parent="." instance=ExtResource("7_fwwy1")]
+[node name="Player" parent="." unique_id=550179108 instance=ExtResource("7_fwwy1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1612346, 0, 1.8356428)
 
-[node name="Camera_pivot" parent="." instance=ExtResource("1_8i5ej")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1612346, 0, 1.8356428)
-
-[node name="Ball-Throw-it-against-the-wall" type="RigidBody3D" parent="."]
+[node name="Ball-Throw-it-against-the-wall" type="RigidBody3D" parent="." unique_id=1504827680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94134, 3.16438)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball-Throw-it-against-the-wall"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball-Throw-it-against-the-wall" unique_id=828751765]
 shape = SubResource("SphereShape3D_uf72f")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball-Throw-it-against-the-wall"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ball-Throw-it-against-the-wall" unique_id=856425967]
 mesh = SubResource("SphereMesh_8uw46")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=544920326]
 transform = Transform3D(1, 0, 0, 0, 0.657362, 0.753575, 0, -0.753575, 0.657362, 0, 0, 0)
