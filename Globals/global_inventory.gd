@@ -27,6 +27,9 @@ func add_item(item:PickupItem):
 		temp_items.append(item)
 		items = temp_items
 
+func reset_items():
+	items = items_to_start_with
+	
 func remove_item(item:PickupItem):
 	if has_item(item):
 		var temp_items = items

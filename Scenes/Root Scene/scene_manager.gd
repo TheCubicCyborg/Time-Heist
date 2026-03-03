@@ -35,6 +35,7 @@ func change_scene(s: Scene) -> void:
 	current_scene_type = s
 	if scene_holder:
 		scene_holder.add_child(current_scene)
+		global_inventory.reset_items()
 	
 func _ready() -> void:
 	if get_tree().current_scene.name == ROOT_SCENE_NAME:
