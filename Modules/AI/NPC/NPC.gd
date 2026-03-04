@@ -31,8 +31,6 @@ var branched: bool
 
 var start_pos: Vector3
 
-
-
 @export_category("Path Editor")
 @export var path: NPCPath:
 	set(value):
@@ -83,6 +81,8 @@ func branch_if(branchAction: BranchAction):
 	#print("node: ", temp)
 	if temp.get(branchAction.property_name) != branchAction.is_false:
 		#print("branching")
+		if branchAction.start_branch_at_cur_time:
+			branch_paths[branchAction.dest_path_id].start_time = globals.time_manager.cur_time 
 		path_following = branch_paths[branchAction.dest_path_id]
 		initialize_path_vars()
 		#print("done branching")

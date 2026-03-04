@@ -31,6 +31,12 @@ class_name NPCPath extends Resource
 			emit_changed()
 @export var default_speed: float = 1
 
+@export var start_time: float = 0:
+	set(value):
+		if start_time != value and value >= 0:
+			start_time = value
+			_recalculate_times()
+
 var updating_path: bool = false:
 	set(value):
 		updating_path = value
@@ -59,6 +65,17 @@ func _shift_time_by_from(amt_shift:float, ix_from: int):
 		var cur_component: PathComponent = at(i)
 		cur_component.time_start += amt_shift
 		cur_component.time_end += amt_shift
+
+func _recalculate_times():
+	var prev_end = start_time
+	for i in range(0,size()):
+		var comp: PathComponent = at(i)
+		comp.time_start = prev_end
+		if comp is PathVertex:
+			comp.time_end = comp.time_start + comp.get_duration()
+		elif comp is PathLine:
+			comp.time_end = comp.time_start + comp.get_length()/comp.speed
+		prev_end = comp.time_end
 
 func _recalculate_time_from(ix: int):
 	#print("recalculating time")
@@ -192,6 +209,9 @@ func _validate_speed_change(line: PathLine, old: float):
 	_recalculate_time_from(line.id-1)
 
 func _validate_time_start_change(vertex: PathVertex, old: float):
+	if vertex.id == 0:
+		_recalculate_times()
+		return
 	var value = vertex.time_start
 	vertex.time_start = old
 	var prev_line: PathLine = at(vertex.id-1)
@@ -225,6 +245,8 @@ func _validate_vertex_actions_change(vertex: PathVertex):
 		#property.usage = PROPERTY_USAGE_STORAGE
 
 func progress(npc: NPC, from: float, to: float):
+	if npc.cur_component == null and to >= at(0).time_start:
+		npc.cur_component = at(0)
 	while npc.cur_component and npc.cur_component.progress(npc,from,to) and not npc.branched:
 		npc.cur_component = at(npc.cur_component.id+1)
 		npc.cur_action_ix = 0
