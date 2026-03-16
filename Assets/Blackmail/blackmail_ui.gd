@@ -13,6 +13,7 @@ extends Control
 @onready var delete_button: Button = $"DocView/HBoxContainer/Delete Button"
 
 const BM_NAME_BTN_SCN = preload("res://Assets/Blackmail/bm_name_button.tscn")
+const BM_FORM_FLD_SCN = preload("res://Assets/Blackmail/bm_form_field.tscn")
 
 var cur_record: BlackmailRecord
 var info_edits: Dictionary[String, LineEdit] = {}
@@ -46,18 +47,10 @@ func _show_form_view(record: BlackmailRecord):
 	info_edits.clear()
 	# create form fields
 	for field_name in record.person_info.keys():
-		# make label first
-		var label = Label.new()
-		label.text = field_name.capitalize()
-		label.add_theme_color_override("font_color", Color.BLACK)
-		label.add_theme_font_size_override("font_size", 24)
-		fields_container.add_child(label)
-		# make form entry next
-		var form = LineEdit.new()
-		form.placeholder_text = "Enter %s..." % field_name
-		form.add_theme_font_size_override("font_size", 24)
-		fields_container.add_child(form)
-		info_edits[field_name] = form
+		var form_field: BmFormField = BM_FORM_FLD_SCN.instantiate()
+		form_field.setup(field_name)
+		fields_container.add_child(form_field)
+		info_edits[field_name] = form_field.get_form()
 	# set view to form
 	_set_view(form_view)
 
