@@ -12,9 +12,50 @@ var is_targetted: bool = false
 signal interacted_by(interactor)
 signal anon_interacted
 
-func _ready():
-	mesh.set_layer_mask_value(2, true)
+enum OutlineState { DEFAULT, TARGETED, DISABLED }
 
+@export var default_state: OutlineState
+ 
+func set_outline_state(state: OutlineState) -> void:
+	mesh.set_layer_mask_value(2, state == OutlineState.DEFAULT)
+	# Layer 3 = bit 4 (1 << 2)
+	mesh.set_layer_mask_value(3, state == OutlineState.TARGETED)
+	# Layer 4 = bit 8 (1 << 3)
+	mesh.set_layer_mask_value(4, state == OutlineState.DISABLED)
+
+
+var _sprite_outline_mesh: MeshInstance3D
+
+func _ready() -> void:
+	if mesh is Sprite3D:
+		call_deferred("_setup_sprite3d_outline")
+	else:
+		set_outline_state(default_state)
+
+func _setup_sprite3d_outline() -> void:
+	var sprite := mesh as Sprite3D
+	if not sprite.texture:
+		return
+	
+	var quad := MeshInstance3D.new()
+	var quad_mesh := QuadMesh.new()
+	quad_mesh.size = sprite.pixel_size * Vector2(
+		sprite.texture.get_width(),
+		sprite.texture.get_height()
+	)
+	
+	var mat := ShaderMaterial.new()
+	mat.shader = preload("res://Modules/Interaction/Outlines/sprite_outline_mask.gdshader")
+	mat.set_shader_parameter("texture_albedo", sprite.texture)
+	mat.set_shader_parameter("alpha_threshold", 0.1)
+	quad.material_override = mat
+	
+	quad.mesh = quad_mesh
+	quad.rotation_degrees.y = 180.0
+	quad.set_layer_mask_value(1, false)
+	quad.set_layer_mask_value(2, true)
+	mesh.add_child(quad)
+	_sprite_outline_mesh = quad
 
 func targetted():
 	is_targetted = true
