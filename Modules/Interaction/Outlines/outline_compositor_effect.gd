@@ -33,7 +33,7 @@ func _initialize_compute() -> void:
 	if shader.is_valid():
 		pipeline = rd.compute_pipeline_create(shader)
 
-func _render_callback(p_effect_callback_type: EffectCallbackType, p_render_data: RenderData) -> void:
+func _render_callback(_p_effect_callback_type: EffectCallbackType, p_render_data: RenderData) -> void:
 	if not rd or not pipeline.is_valid():
 		return
 
@@ -66,7 +66,9 @@ func _render_callback(p_effect_callback_type: EffectCallbackType, p_render_data:
 				_run_pass(color_image, depth_image, sv_rid, disabled_color, size)
 
 func _run_pass(color_image: RID, depth_image: RID, sv_rid: RID, color: Color, size: Vector2i) -> void:
+	@warning_ignore("integer_division")
 	var x_groups := (size.x - 1) / 8 + 1
+	@warning_ignore("integer_division")
 	var y_groups := (size.y - 1) / 8 + 1
 
 	var push_constant := PackedFloat32Array([

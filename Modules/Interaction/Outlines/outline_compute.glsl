@@ -66,7 +66,7 @@ void main() {
 
 	// Suppress outline if scene has something in front of the interactable (occluded)
 	// Tolerance scales with depth to handle non-linear depth buffer
-	float tolerance = interactable_depth * 0.1;
+	float tolerance = interactable_depth * 0.0001;
 	if (scene_depth > interactable_depth + tolerance) return;
 
 	imageStore(color_image, uv, params.outline_color);

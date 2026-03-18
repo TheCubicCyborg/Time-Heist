@@ -1,6 +1,6 @@
 class_name OutlineManager extends Control
 
-@export var main_camera: Camera3D
+var main_camera: Camera3D
 
 @export_group("Outline Colors")
 @export var default_color: Color = Color(0.4, 0.4, 0.0, 1.0)
@@ -20,10 +20,13 @@ var sv_camera_disabled: Camera3D
 
 var compositor_effect: OutlineCompositorEffect
 
+@export var world_environment: WorldEnvironment
+
 func _ready() -> void:
 	process_priority = 500
 	await get_tree().process_frame
 	await get_tree().process_frame
+	main_camera = globals.camera_pivot.camera
 	call_deferred("_setup")
 
 func _setup() -> void:
@@ -47,11 +50,19 @@ func _setup() -> void:
 	compositor_effect.sv_texture_targeted = sv_targeted.get_texture()
 	compositor_effect.sv_texture_disabled = sv_disabled.get_texture()
 
-	var main_compositor := Compositor.new()
-	main_compositor.compositor_effects = [compositor_effect]
-	main_camera.compositor = main_compositor
+	if world_environment:
+		print("found environment")
+		var comp := Compositor.new()
+		comp.compositor_effects = [compositor_effect]
+		world_environment.compositor = comp
+	else:
+		print("did not find environment")
+		# fallback to camera
+		var main_compositor := Compositor.new()
+		main_compositor.compositor_effects = [compositor_effect]
+		main_camera.compositor = main_compositor
 
-func _create_sub_viewport(cull_mask: int) -> SubViewport:
+func _create_sub_viewport(_cull_mask: int) -> SubViewport:
 	var container := SubViewportContainer.new()
 	container.visible = false
 	container.size = get_viewport().size

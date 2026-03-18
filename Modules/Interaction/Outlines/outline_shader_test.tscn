@@ -126,8 +126,11 @@ grow_amount = -4.125
 
 [node name="OutlineShaderTest" type="Node3D" unique_id=1907704994]
 
-[node name="OutlineManager" parent="." unique_id=1422189756 node_paths=PackedStringArray("main_camera") instance=ExtResource("12_c6vqf")]
-main_camera = NodePath("../Camera_pivot/SpringArm3D/Camera3D")
+[node name="OutlineManager" parent="." unique_id=1422189756 instance=ExtResource("12_c6vqf")]
+default_color = Color(0.1841588, 0.18415892, 0, 1)
+targeted_color = Color(1, 1, 0, 1)
+disabled_color = Color(0.21887887, 1.3657101e-06, 7.70092e-07, 1)
+outline_width = 5
 
 [node name="Cube" type="MeshInstance3D" parent="." unique_id=1316756326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26225328, 1.2359595, 0.0033780336)
@@ -157,7 +160,6 @@ mesh = SubResource("SphereMesh_pe2i6")
 
 [node name="Interactable" parent="Sphere2" unique_id=380077650 node_paths=PackedStringArray("mesh") instance=ExtResource("2_k5j3p")]
 mesh = NodePath("..")
-default_state = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sphere2/Interactable" unique_id=1248316578]
 shape = SubResource("BoxShape3D_rg1c2")
@@ -174,7 +176,6 @@ mesh = SubResource("PrismMesh_ngt7t")
 
 [node name="Interactable" parent="Triangle2" unique_id=1932062074 node_paths=PackedStringArray("mesh") instance=ExtResource("2_k5j3p")]
 mesh = NodePath("..")
-default_state = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Triangle2/Interactable" unique_id=704178306]
 shape = SubResource("BoxShape3D_rg1c2")
@@ -186,7 +187,7 @@ material_overlay = SubResource("ShaderMaterial_6lcki")
 texture = ExtResource("2_844sn")
 
 [node name="Sprite2" type="Sprite3D" parent="." unique_id=102214577]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3.1783423, 1.2359595, 0.49906445)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3.178, 1.236, 0.47)
 double_sided = false
 texture = ExtResource("2_844sn")
 
@@ -197,7 +198,7 @@ mesh = NodePath("..")
 shape = SubResource("BoxShape3D_rg1c2")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=2031868594]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14581394, 1.2359595, 1.1167817)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.146, 1.236, 1)
 mesh = SubResource("BoxMesh_8barg")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=2063368642]
@@ -214,8 +215,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.17583)
 
 [node name="Camera_pivot" parent="." unique_id=144358182 instance=ExtResource("10_q67yl")]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, -4.17583)
-CAMERA_DISTANCE_BACK = 3.0
-CAMERA_DISTANCE_UP = 3.5
 facing_direction = 2
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=892245575]

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b0eo68htgjcd3"]
 
+[ext_resource type="PackedScene" uid="uid://du2l043hanw8u" path="res://Modules/Interaction/Outlines/outline_manager.tscn" id="1_0fo0o"]
 [ext_resource type="PackedScene" uid="uid://bk11o2jtj5d7g" path="res://Modules/Interaction/Door/generic_door.tscn" id="1_26vd6"]
 [ext_resource type="PackedScene" uid="uid://bm4y2kiv4odnp" path="res://Modules/UI/ui_manager.tscn" id="2_30l1c"]
 [ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/camera_pivot.tscn" id="3_6rnln"]
@@ -29,13 +30,13 @@ grow_amount = -4.125
 
 [node name="DoorTesting" type="Node3D" unique_id=1787823224]
 
+[node name="OutlineManager" parent="." unique_id=1466555702 instance=ExtResource("1_0fo0o")]
+
 [node name="Generic_Door" parent="." unique_id=74631722 instance=ExtResource("1_26vd6")]
 
 [node name="UI Manager" parent="." unique_id=1478464990 instance=ExtResource("2_30l1c")]
 
 [node name="Camera_pivot" parent="." unique_id=144358182 instance=ExtResource("3_6rnln")]
-CAMERA_DISTANCE_BACK = 3.0
-CAMERA_DISTANCE_UP = 3.5
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1607686888]
 

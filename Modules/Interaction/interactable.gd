@@ -14,7 +14,7 @@ signal anon_interacted
 
 enum OutlineState { DEFAULT, TARGETED, DISABLED }
 
-@export var default_state: OutlineState
+var default_state: OutlineState = OutlineState.DEFAULT
  
 func set_outline_state(state: OutlineState) -> void:
 	mesh.set_layer_mask_value(2, state == OutlineState.DEFAULT)
@@ -23,13 +23,10 @@ func set_outline_state(state: OutlineState) -> void:
 	# Layer 4 = bit 8 (1 << 3)
 	mesh.set_layer_mask_value(4, state == OutlineState.DISABLED)
 
-
-var _sprite_outline_mesh: MeshInstance3D
-
 func _ready() -> void:
 	if mesh is Sprite3D:
 		call_deferred("_setup_sprite3d_outline")
-	else:
+	elif mesh:
 		set_outline_state(default_state)
 
 func _setup_sprite3d_outline() -> void:
@@ -53,54 +50,28 @@ func _setup_sprite3d_outline() -> void:
 	quad.mesh = quad_mesh
 	quad.rotation_degrees.y = 180.0
 	quad.set_layer_mask_value(1, false)
-	quad.set_layer_mask_value(2, true)
 	mesh.add_child(quad)
-	_sprite_outline_mesh = quad
+	mesh = quad
+	set_outline_state(default_state)
 
 func targetted():
+	#print("targetted")
 	is_targetted = true
 	if mesh and not playing_invalid_animation:
 		highlight()
 
 func untargetted():
+	#print("untargetted")
 	is_targetted = false
 	if mesh and not playing_invalid_animation:
 		remove_highlight()
 
 func highlight():
-	#mesh.material_overlay = highlight_material
-	pass
+	set_outline_state(OutlineState.TARGETED)
 
 func remove_highlight():
-	#mesh.material_overlay = outline_material
-	pass
+	set_outline_state(OutlineState.DEFAULT)
 
 func interact(person:Node = null):
 	interacted_by.emit(person)
 	anon_interacted.emit()
-
-#func _process(delta):
-	#if playing_invalid_animation:
-		#_process_invalid_interaction(delta)
-
-#func _process_invalid_interaction(delta):
-	#if invalid_animation_info[3] == invalid_animation_info[2]: #Done blinking
-		#playing_invalid_animation = false
-		#invalid_animation_info[1] = 0
-		#invalid_animation_info[3] = 0
-		#if is_targetted:
-			#highlight()
-		#else:
-			#remove_highlight()
-	#elif invalid_animation_info[1] >= invalid_animation_info[0]: #timer is up, change state
-		#if invalid_animation_info[4]: #currently highlighted
-			#invalid_animation_info[4] = false
-			#invalid_animation_info[1] = 0
-			#invalid_animation_info[3] += 1
-			#mesh.material_overlay = null
-		#else: #currently not highlighted
-			#invalid_animation_info[4] = true
-			#invalid_animation_info[1] = 0
-			#mesh.material_overlay = invalid_outline_material
-	#else:
-		#invalid_animation_info[1] += delta
