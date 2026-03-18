@@ -50,7 +50,7 @@ func get_input_direction() -> Vector2:
 	var input_dir := Input.get_vector(input_map[0],input_map[1],input_map[2],input_map[3])
 	# Update maping (only if should)
 	if should_update_map and input_dir != globals.player.previous_input:
-		input_map = face_to_move[globals.camera.facing_direction]
+		input_map = face_to_move[globals.camera_pivot.facing_direction]
 		should_update_map = false
 	
 	if input_dir != globals.player.previous_input:

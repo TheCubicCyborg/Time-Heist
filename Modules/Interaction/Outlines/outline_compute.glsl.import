@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://le126xt66drb"
+path="res://.godot/imported/outline_compute.glsl-8d7dab6f86d8e13cf2465a9d5fbdc75b.res"
+
+[deps]
+
+source_file="res://Modules/Interaction/Outlines/outline_compute.glsl"
+dest_files=["res://.godot/imported/outline_compute.glsl-8d7dab6f86d8e13cf2465a9d5fbdc75b.res"]
+
+[params]
+

@@ -42,3 +42,4 @@ collision_mask = 8
 shape = SubResource("SphereShape3D_fvf84")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=1895428662]
+cull_mask = 1048573

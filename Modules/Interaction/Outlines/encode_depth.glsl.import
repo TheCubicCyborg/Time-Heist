@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://d4dr7ndbxmnsy"
+path="res://.godot/imported/encode_depth.glsl-c9bce82a69d412683f41f1cf5b01c6d4.res"
+
+[deps]
+
+source_file="res://Modules/Interaction/Outlines/encode_depth.glsl"
+dest_files=["res://.godot/imported/encode_depth.glsl-c9bce82a69d412683f41f1cf5b01c6d4.res"]
+
+[params]
+

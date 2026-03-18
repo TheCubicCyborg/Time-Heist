@@ -4,7 +4,7 @@ class_name CamerasPanel
 @onready var grid := $GridContainer
 
 func _ready() -> void:
-	if not globals.cameras.is_empty():
+	if not globals.camera_pivots.is_empty():
 		for camera : SubViewport in get_tree().get_current_scene().cameras:
 			var camera_view = TextureRect.new()
 			camera_view.custom_minimum_size = Vector2(640,360)

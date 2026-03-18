@@ -1,4 +1,4 @@
-extends Node3D
+class_name CameraPivot extends Node3D
 
 @export var CAMERA_ROTATION_X : float = -50
 @export var CAM_ROT_SPEED : float = 4
@@ -24,7 +24,7 @@ var current_camera_z : float
 @onready var color_rect := $CanvasLayer/ColorRect
 
 func _ready() -> void:
-	globals.camera = self
+	globals.camera_pivot = self
 	spring_arm.spring_length = CAMERA_DISTANCE_BACK
 	current_camera_z = spring_arm.spring_length
 	rotation_degrees.x = CAMERA_ROTATION_X

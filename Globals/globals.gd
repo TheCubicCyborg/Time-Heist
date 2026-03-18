@@ -15,10 +15,12 @@ var controller_of_input = InputController.GAMEPLAY
 
 var time_manager: TimeManager
 var ui_manager: UI_Manager
+var outline_manager: OutlineManager
 
 var player : Player
 
-var camera : Node3D
+var camera_pivot : CameraPivot
+
 
 #region Detection
 var safe_ratio : float = 1

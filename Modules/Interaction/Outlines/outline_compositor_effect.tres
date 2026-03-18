@@ -1,0 +1,13 @@
+[gd_resource type="CompositorEffect" script_class="OutlineCompositorEffect" format=3 uid="uid://c12yog5w2ciwk"]
+
+[ext_resource type="Script" uid="uid://b7ifyu3laweed" path="res://Modules/Interaction/Outlines/outline_compositor_effect.gd" id="1_8rlq6"]
+
+[resource]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_8rlq6")
+metadata/_custom_type_script = "uid://b7ifyu3laweed"
