@@ -24,22 +24,21 @@ func _initialize_compute() -> void:
 	if shader.is_valid():
 		pipeline = rd.compute_pipeline_create(shader)
 
-func _render_callback(p_effect_callback_type: EffectCallbackType, p_render_data: RenderData) -> void:
+func _render_callback(_p_effect_callback_type: EffectCallbackType, p_render_data: RenderData) -> void:
 	if not rd or not pipeline.is_valid():
 		return
 
 	var render_scene_buffers := p_render_data.get_render_scene_buffers() as RenderSceneBuffersRD
 	if not render_scene_buffers:
 		return
-	
+
 	var size: Vector2i = render_scene_buffers.get_internal_size()
 	if size.x == 0 or size.y == 0:
 		return
 
-	var color_format = rd.texture_get_format(render_scene_buffers.get_color_layer(0))
-	var depth_format = rd.texture_get_format(render_scene_buffers.get_depth_layer(0))
-
+	@warning_ignore("integer_division")
 	var x_groups := (size.x - 1) / 8 + 1
+	@warning_ignore("integer_division")
 	var y_groups := (size.y - 1) / 8 + 1
 
 	var push_constant := PackedFloat32Array([

@@ -14,7 +14,6 @@ layout(push_constant, std430) uniform Params {
 	vec4 outline_color;
 } params;
 
-// Decode 4x8bit encoded depth back to 32bit float
 float decode_depth(vec4 encoded) {
 	uvec4 bits = uvec4(round(encoded * 255.0));
 	uint float_bits = (bits.x << 24u) | (bits.y << 16u) | (bits.z << 8u) | bits.w;
@@ -28,7 +27,6 @@ bool is_opaque(vec2 uv) {
 	return depth > 0.0 && depth < 0.9999;
 }
 
-// outline_compute.glsl - restore full main()
 void main() {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
 	if (uv.x >= int(params.image_size.x) || uv.y >= int(params.image_size.y)) return;
@@ -58,17 +56,18 @@ void main() {
 		}
 	}
 
-if (!has_opaque_neighbor) return;
+	if (!has_opaque_neighbor) return;
 
-float scene_depth = texelFetch(depth_image, uv, 0).r;
-float interactable_depth = decode_depth(texelFetch(sv_depth_encoded, ivec2(neighbor_uv * params.image_size), 0));
+	// Sample scene depth at the outline pixel (outside the silhouette)
+	float scene_depth = texelFetch(depth_image, uv, 0).r;
 
-// Approximate view-space depth from raw depth
-float z_approx = (0.05 * 4000.0) / (4000.0 - interactable_depth * (4000.0 - 0.05));
+	// Sample interactable depth at the nearest silhouette pixel
+	float interactable_depth = decode_depth(texelFetch(sv_depth_encoded, ivec2(neighbor_uv * params.image_size), 0));
 
-// Scale tolerance by z squared
-float tolerance = (z_approx * z_approx) * 0.1;
-if (scene_depth > interactable_depth + tolerance) return;
+	// Suppress outline if scene has something in front of the interactable (occluded)
+	// Tolerance scales with depth to handle non-linear depth buffer
+	float tolerance = interactable_depth * 0.1;
+	if (scene_depth > interactable_depth + tolerance) return;
 
-imageStore(color_image, uv, params.outline_color);
+	imageStore(color_image, uv, params.outline_color);
 }

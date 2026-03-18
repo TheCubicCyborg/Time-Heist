@@ -29,7 +29,7 @@ func _initialize_compute() -> void:
 	if shader.is_valid():
 		pipeline = rd.compute_pipeline_create(shader)
 
-func _render_callback(p_effect_callback_type: EffectCallbackType, p_render_data: RenderData) -> void:
+func _render_callback(_p_effect_callback_type: EffectCallbackType, p_render_data: RenderData) -> void:
 	if not rd or not pipeline.is_valid():
 		return
 	if not sv_viewport_texture:

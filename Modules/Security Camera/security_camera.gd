@@ -6,4 +6,5 @@ class_name SecurityCamera
 var active : bool = true:
 	set(value):
 		active = value
+		@warning_ignore("standalone_ternary")
 		camera.show() if value else camera.hide()

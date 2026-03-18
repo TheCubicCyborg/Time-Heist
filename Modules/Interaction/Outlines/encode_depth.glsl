@@ -11,7 +11,6 @@ layout(push_constant, std430) uniform Params {
 	vec2 reserved;
 } params;
 
-// encode_depth.glsl
 vec3 srgb_to_linear(vec3 sRGB) {
 	bvec3 cutoff = lessThan(sRGB, vec3(0.04045));
 	vec3 higher = pow((sRGB + vec3(0.055)) / vec3(1.055), vec3(2.4));
@@ -22,7 +21,10 @@ vec3 srgb_to_linear(vec3 sRGB) {
 void main() {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
 	ivec2 size = ivec2(params.raster_size);
-	if (uv.x >= size.x || uv.y >= size.y) return;
+
+	if (uv.x >= size.x || uv.y >= size.y) {
+		return;
+	}
 
 	float depth = texelFetch(depth_image, uv, 0).r;
 
@@ -34,7 +36,7 @@ void main() {
 		float( float_bits & 0x000000FFu       ) / 255.0
 	);
 
-	// Pre-correct for sRGB conversion that will be applied to the viewport color buffer
+	// Pre-correct for sRGB conversion applied to viewport color buffer
 	encoded.rgb = srgb_to_linear(encoded.rgb);
 
 	imageStore(color_image, uv, encoded);
