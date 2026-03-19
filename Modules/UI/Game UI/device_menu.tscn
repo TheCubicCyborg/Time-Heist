@@ -127,6 +127,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" unique_id=592252107]
@@ -151,13 +152,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.25)
 [node name="RIGHT" parent="CanvasLayer/SubViewportContainer/SubViewport/TimeMachine_right" index="0" unique_id=395162506]
 layers = 512
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=1877456144]
-layers = 512
+[node name="DirectionalLight3D" type="SpotLight3D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=25230241]
+layers = 513
 light_color = Color(0.6485435, 0.9284026, 0.99987143, 1)
-light_cull_mask = 4293919232
+spot_angle = 59.556946
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=725419511]
 libraries/ = SubResource("AnimationLibrary_mgddb")
+autoplay = &"RESET"
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=293497102]
 layer = 2

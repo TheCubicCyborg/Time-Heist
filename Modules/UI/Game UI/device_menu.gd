@@ -1,6 +1,8 @@
 extends UI
 class_name DeviceMenu
 
+var first_time : bool = true
+
 #region Tabs
 @onready var menu_tabs: PanelContainer = $CanvasLayer2/MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs
 var tabs : Array[MenuTabPanel]
@@ -32,8 +34,13 @@ func open():
 
 func close():
 	$CanvasLayer/SubViewportContainer/SubViewport/AnimationPlayer.play("close")
-	await get_tree().create_timer(0.4).timeout
-	super.close()
+	if first_time:
+		$CanvasLayer/SubViewportContainer/SubViewport/AnimationPlayer.play("RESET")
+		first_time = false
+		super.close()
+	else:
+		await get_tree().create_timer(0.4).timeout
+		super.close()
 
 #region Tab Functions
 func handle_input(_delta):

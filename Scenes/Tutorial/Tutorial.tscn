@@ -956,3 +956,5 @@ spot_angle_attenuation = 2.4622889
 [connection signal="keycard_scanned" from="SubViewportContainer/SubViewport/Tutorial/Step 7/Keycard Scanner" to="SubViewportContainer/SubViewport/Tutorial/Step 7/Generic_Door" method="toggle_open"]
 [connection signal="keycard_scanned" from="SubViewportContainer/SubViewport/Tutorial/Step 9/Door scanner" to="SubViewportContainer/SubViewport/Tutorial/Step 9/Exit door" method="toggle_open"]
 [connection signal="body_entered" from="SubViewportContainer/SubViewport/Tutorial/Step 10/Area3D" to="." method="_on_area_3d_body_entered"]
+
+[editable path="UI Manager"]

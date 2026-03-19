@@ -3126,6 +3126,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_oygta")
 [node name="OST" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport" unique_id=1000599565]
 stream = ExtResource("51_fqqlb")
 volume_db = -15.0
+autoplay = true
 parameters/looping = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="SubViewportContainer/SubViewport" unique_id=883769056]

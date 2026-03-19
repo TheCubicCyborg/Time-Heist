@@ -52,7 +52,7 @@ func handle_fullscreen_input(_delta):
 		camera.position.z -= camera_move_speed
 	if Input.is_action_pressed("ui_dowcument_zoom_out"):
 		camera.position.z += camera_move_speed
-	camera.position.z = clamp(camera.position.z, current_z - 1.6, current_z + 1)
+	camera.position.z = clamp(camera.position.z, current_z - 2, current_z + 2)
 
 func reset_position():
 	camera.position = Vector3(0,0,0)
