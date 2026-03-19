@@ -2,7 +2,7 @@ extends UI
 class_name DeviceMenu
 
 #region Tabs
-@onready var menu_tabs: PanelContainer = $MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs
+@onready var menu_tabs: PanelContainer = $CanvasLayer2/MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs
 var tabs : Array[MenuTabPanel]
 @export var focused_tab : int = 0
 var tab_assets : Array[Texture] = [
@@ -10,7 +10,7 @@ var tab_assets : Array[Texture] = [
 	preload("res://Assets/UI/Device Menu/inventoryselect.png"),
 	preload("res://Assets/UI/Device Menu/settingsselect.png")
 ]
-@onready var tab_texture: TextureRect = $MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Tabs/TabTexture
+@onready var tab_texture: TextureRect = $CanvasLayer2/MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Tabs/TabTexture
 #endregion
 
 @onready var button_move : AudioStreamPlayer = $ButtonMove
@@ -19,6 +19,7 @@ var tab_assets : Array[Texture] = [
 #$MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs/DeviceFiles.select() #TEMP!
 
 func _ready() -> void:
+	$CanvasLayer/SubViewportContainer/SubViewport/AnimationPlayer.play("RESET")
 	setup_button_sounds(self)
 	for tab in menu_tabs.get_children():
 		tabs.append(tab)
@@ -26,7 +27,13 @@ func _ready() -> void:
 
 func open():
 	super.open()
+	$CanvasLayer/SubViewportContainer/SubViewport/AnimationPlayer.play("open")
 	select_tab(focused_tab)
+
+func close():
+	$CanvasLayer/SubViewportContainer/SubViewport/AnimationPlayer.play("close")
+	await get_tree().create_timer(0.4).timeout
+	super.close()
 
 #region Tab Functions
 func handle_input(_delta):
