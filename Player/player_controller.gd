@@ -14,7 +14,7 @@ var detection_point: Marker3D = $DetectionPoint
 
 
 @onready var collision := $CollisionShape3D
-@onready var mesh : MeshInstance3D = $Mesh/Skeleton3D/torso_001
+@onready var mesh : MeshInstance3D = $Mesh/Armature/Skeleton3D/Body
 
 var previous_input : Vector2
 var is_crouching := false
