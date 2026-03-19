@@ -30,9 +30,11 @@ func _ready() -> void:
 func open():
 	super.open()
 	$CanvasLayer/SubViewportContainer/SubViewport/AnimationPlayer.play("open")
+	$CanvasLayer2/MarginContainer.mouse_filter = MOUSE_FILTER_STOP
 	select_tab(focused_tab)
 
 func close():
+	$CanvasLayer2/MarginContainer.mouse_filter = MOUSE_FILTER_IGNORE
 	$CanvasLayer/SubViewportContainer/SubViewport/AnimationPlayer.play("close")
 	if first_time:
 		$CanvasLayer/SubViewportContainer/SubViewport/AnimationPlayer.play("RESET")

@@ -119,6 +119,7 @@ grow_vertical = 2
 script = ExtResource("1_hgc2y")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=580131768]
+layer = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer" unique_id=857335613]
 visibility_layer = 512
@@ -143,13 +144,13 @@ cull_mask = 512
 [node name="TimeMachine_left" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=1942334391 instance=ExtResource("10_q575b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.25)
 
-[node name="LEFT" parent="CanvasLayer/SubViewportContainer/SubViewport/TimeMachine_left" index="0" unique_id=1068971639]
+[node name="LEFT" parent="CanvasLayer/SubViewportContainer/SubViewport/TimeMachine_left" index="0" unique_id=774853231]
 layers = 512
 
 [node name="TimeMachine_right" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=1412619158 instance=ExtResource("11_mgddb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.25)
 
-[node name="RIGHT" parent="CanvasLayer/SubViewportContainer/SubViewport/TimeMachine_right" index="0" unique_id=395162506]
+[node name="RIGHT" parent="CanvasLayer/SubViewportContainer/SubViewport/TimeMachine_right" index="0" unique_id=385788433]
 layers = 512
 
 [node name="DirectionalLight3D" type="SpotLight3D" parent="CanvasLayer/SubViewportContainer/SubViewport" unique_id=25230241]
@@ -162,7 +163,7 @@ libraries/ = SubResource("AnimationLibrary_mgddb")
 autoplay = &"RESET"
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=293497102]
-layer = 2
+layer = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2" unique_id=1772771113]
 anchors_preset = 15
