@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cihv24qvrt2o0"
-path="res://.godot/imported/person4.png-bbdc845385b32d0b5458d7ed5756a9ca.ctex"
+uid="uid://1r0tud40uc4"
+path="res://.godot/imported/sendingmessage.png-7b8cb3359252f5bf268f3a49162465f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Time Travel Menu/Files_Test/person4.png"
-dest_files=["res://.godot/imported/person4.png-bbdc845385b32d0b5458d7ed5756a9ca.ctex"]
+source_file="res://Assets/UI/Computer/Text Messages/sendingmessage.png"
+dest_files=["res://.godot/imported/sendingmessage.png-7b8cb3359252f5bf268f3a49162465f9.ctex"]
 
 [params]
 

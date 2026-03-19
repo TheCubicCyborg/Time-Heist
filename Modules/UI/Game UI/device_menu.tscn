@@ -1,17 +1,18 @@
 [gd_scene format=3 uid="uid://djm2xkntdba18"]
 
 [ext_resource type="Script" uid="uid://bd4wvbt4n011e" path="res://Modules/UI/Game UI/device_menu.gd" id="1_hgc2y"]
-[ext_resource type="Texture2D" uid="uid://c3uwunfq42tg8" path="res://Assets/UI/Time Travel Menu/time machine side left.png" id="1_wq3jl"]
-[ext_resource type="Texture2D" uid="uid://q007275otxah" path="res://Assets/UI/Time Travel Menu/time machine side right.png" id="3_y3rn4"]
+[ext_resource type="Texture2D" uid="uid://c3uwunfq42tg8" path="res://Assets/UI/Device Menu/time machine side left.png" id="1_wq3jl"]
+[ext_resource type="Texture2D" uid="uid://d4jvp5u20o0la" path="res://Assets/UI/Device Menu/inventoryselect.png" id="3_ijymv"]
+[ext_resource type="Texture2D" uid="uid://q007275otxah" path="res://Assets/UI/Device Menu/time machine side right.png" id="3_y3rn4"]
 [ext_resource type="PackedScene" uid="uid://bigh7xaj6n6yj" path="res://Modules/UI/Game UI/Device/Device Files/device_files.tscn" id="4_4t7mm"]
 [ext_resource type="PackedScene" uid="uid://dc0glsn1mwwwq" path="res://Modules/UI/Game UI/Device/Inventory/inventory_panel.tscn" id="4_7dje4"]
 [ext_resource type="PackedScene" uid="uid://begdut20cbu15" path="res://Modules/UI/Game UI/Device/settings.tscn" id="4_hgc2y"]
 [ext_resource type="AudioStream" uid="uid://da3exkttg2ndx" path="res://Assets/SFX/button_confirm.ogg" id="7_m01ss"]
 [ext_resource type="AudioStream" uid="uid://cj4g1ux14jflo" path="res://Assets/SFX/button_move.ogg" id="8_ijymv"]
 
-[sub_resource type="Theme" id="Theme_wq3jl"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pmuwh"]
 
-[node name="Control" type="Control" unique_id=1283105560 node_paths=PackedStringArray("default_focus")]
+[node name="Control" type="Control" unique_id=1283105560]
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -20,7 +21,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hgc2y")
-default_focus = NodePath("MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1772771113]
 layout_mode = 1
@@ -44,7 +44,7 @@ expand_mode = 1
 stretch_mode = 3
 
 [node name="TextureRect" type="ColorRect" parent="MarginContainer/HBoxContainer" unique_id=815694146]
-modulate = Color(0.5058824, 1, 0.99607843, 0.8117647)
+modulate = Color(1, 1, 1, 0.8117647)
 custom_minimum_size = Vector2(1420, 0)
 layout_mode = 2
 
@@ -63,28 +63,51 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer" unique_id=1757122488]
 layout_mode = 2
 
-[node name="MenuTabs" type="TabContainer" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer" unique_id=1277128379]
+[node name="Tabs" type="PanelContainer" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer" unique_id=225485587]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_pmuwh")
+
+[node name="TabTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Tabs" unique_id=981628280]
+layout_mode = 2
+texture = ExtResource("3_ijymv")
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Tabs" unique_id=1675234072]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="database" type="Button" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Tabs/Buttons" unique_id=1696146067]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+
+[node name="inventory" type="Button" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Tabs/Buttons" unique_id=511501974]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+
+[node name="settings" type="Button" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Tabs/Buttons" unique_id=1222573306]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+
+[node name="MenuTabs" type="PanelContainer" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer" unique_id=985773308]
 layout_mode = 2
 size_flags_vertical = 3
-focus_mode = 2
-theme = SubResource("Theme_wq3jl")
-current_tab = 0
-all_tabs_in_front = true
-tab_focus_mode = 0
 
 [node name="DeviceFiles" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" unique_id=1302796986 instance=ExtResource("4_4t7mm")]
 layout_mode = 2
-metadata/_tab_index = 0
 
 [node name="InventoryPanel" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" unique_id=473098046 instance=ExtResource("4_7dje4")]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 1
 
 [node name="SettingsPanel" parent="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/MenuTabs" unique_id=1743540238 instance=ExtResource("4_hgc2y")]
 visible = false
 layout_mode = 2
-metadata/_tab_index = 2
 
 [node name="SidePanelR" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1458306387]
 custom_minimum_size = Vector2(250, 0)
@@ -100,3 +123,7 @@ volume_db = -15.0
 [node name="ButtonMove" type="AudioStreamPlayer" parent="." unique_id=1028115537]
 stream = ExtResource("8_ijymv")
 volume_db = -15.0
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Tabs/Buttons/database" to="." method="_on_database_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Tabs/Buttons/inventory" to="." method="_on_inventory_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/TextureRect/MarginContainer/VBoxContainer/Tabs/Buttons/settings" to="." method="_on_settings_pressed"]

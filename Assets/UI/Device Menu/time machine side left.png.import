@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv3guij266djy"
-path="res://.godot/imported/person3.png-bf191cc0bf11e556d190a79d6d4fdb75.ctex"
+uid="uid://c3uwunfq42tg8"
+path="res://.godot/imported/time machine side left.png-df9c319dfb8601eb09ed6ea19f107308.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Time Travel Menu/Files_Test/person3.png"
-dest_files=["res://.godot/imported/person3.png-bf191cc0bf11e556d190a79d6d4fdb75.ctex"]
+source_file="res://Assets/UI/Device Menu/time machine side left.png"
+dest_files=["res://.godot/imported/time machine side left.png-df9c319dfb8601eb09ed6ea19f107308.ctex"]
 
 [params]
 

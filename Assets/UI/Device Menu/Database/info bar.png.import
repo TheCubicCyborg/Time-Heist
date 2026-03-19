@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dundn3spckisq"
-path="res://.godot/imported/person_1.png-9dca504426e2a640f16c98421427bf3b.ctex"
+uid="uid://df28njmkboh6d"
+path="res://.godot/imported/info bar.png-52929ba1312f75c2b18f35c3f30651e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Time Travel Menu/Files_Test/person_1.png"
-dest_files=["res://.godot/imported/person_1.png-9dca504426e2a640f16c98421427bf3b.ctex"]
+source_file="res://Assets/UI/Device Menu/Database/info bar.png"
+dest_files=["res://.godot/imported/info bar.png-52929ba1312f75c2b18f35c3f30651e2.ctex"]
 
 [params]
 

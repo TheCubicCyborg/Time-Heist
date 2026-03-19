@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdxcdfnjmqysk"
-path="res://.godot/imported/fullscreen_button_small.jpg-b6fc8e43d8c739711d96eaec3582c9ec.ctex"
+uid="uid://dw4406xdsw0jc"
+path="res://.godot/imported/fullscreen.png-d9892e7b1dd724b0565c04bfb323c836.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Modules/UI/Game UI/Device/Device Files/fullscreen_button_small.jpg"
-dest_files=["res://.godot/imported/fullscreen_button_small.jpg-b6fc8e43d8c739711d96eaec3582c9ec.ctex"]
+source_file="res://Assets/UI/Device Menu/Database/fullscreen.png"
+dest_files=["res://.godot/imported/fullscreen.png-d9892e7b1dd724b0565c04bfb323c836.ctex"]
 
 [params]
 

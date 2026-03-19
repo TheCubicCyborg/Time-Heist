@@ -3,6 +3,16 @@
 [ext_resource type="Script" uid="uid://dv3pmyjmcfrbs" path="res://Scenes/Main Menu/main_menu.gd" id="1_c0awy"]
 [ext_resource type="Texture2D" uid="uid://23mhu5fh4s5b" path="res://Assets/UI/Main Menu/MainMenu2.png" id="2_c0awy"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c0awy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w8vya"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eq6i5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbbqo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dtamd"]
+
 [node name="MainMenu" type="Control" unique_id=194556561]
 layout_mode = 3
 anchors_preset = 15
@@ -28,6 +38,11 @@ offset_right = 463.0
 offset_bottom = 821.0
 focus_neighbor_right = NodePath("../Play")
 theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c0awy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_w8vya")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_eq6i5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pbbqo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dtamd")
 text = "Settings"
 flat = true
 

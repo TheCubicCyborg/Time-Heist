@@ -42,6 +42,10 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/NPC Pathing/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/time_tracker/plugin.cfg")
 
+[gui]
+
+theme/custom="uid://jodljyivkod0"
+
 [input]
 
 ui_focus_next={

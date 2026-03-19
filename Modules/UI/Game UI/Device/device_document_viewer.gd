@@ -6,6 +6,8 @@ extends Node3D
 @export var camera_move_speed := 0.03
 @export var rotation_smoothing := 15.0
 
+var current_z : float #set by the fit camera to document
+
 var target_rotation: Vector3
 
 func _ready():
@@ -50,12 +52,41 @@ func handle_fullscreen_input(_delta):
 		camera.position.z -= camera_move_speed
 	if Input.is_action_pressed("ui_dowcument_zoom_out"):
 		camera.position.z += camera_move_speed
-	camera.position.z = clamp(camera.position.z, 0, 1.9)
+	camera.position.z = clamp(camera.position.z, current_z - 1.6, current_z + 1)
 
 func reset_position():
-	camera.position = Vector3(0,0,0.9)
+	camera.position = Vector3(0,0,0)
 	target_rotation = Vector3(0,0,0)
+	fit_camera_to_document()
+	print(camera.position.z)
 	
 func set_document_texture(document_id : int):
 	var document_to_view = document_database.get_document(document_id)
 	document.texture = document_to_view.document_image
+	fit_camera_to_document()
+	print(camera.position.z)
+	
+func fit_camera_to_document() -> void:
+	# Get document world size accounting for pixel_size and scale
+	var tex_size = document.texture.get_size()
+	var world_width = tex_size.x * document.pixel_size * document.scale.x
+	var world_height = tex_size.y * document.pixel_size * document.scale.y
+	
+	var viewport = camera.get_viewport()
+	var viewport_aspect = float(viewport.size.x) / float(viewport.size.y)
+	var doc_aspect = world_width / world_height
+
+	var fov_rad = deg_to_rad(camera.fov)
+
+	var dist: float
+	if doc_aspect > viewport_aspect:
+		# Wide document — fit by width
+		var half_width = world_width / 2.0
+		dist = half_width / (tan(fov_rad / 2.0) * viewport_aspect)
+	else:
+		# Tall document — fit by height
+		var half_height = world_height / 2.0
+		dist = half_height / tan(fov_rad / 2.0)
+
+	camera.position.z = dist
+	current_z = dist
