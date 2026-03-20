@@ -12,6 +12,14 @@ corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 
+[sub_resource type="Gradient" id="Gradient_vsybf"]
+offsets = PackedFloat32Array(0.42829457, 1)
+colors = PackedColorArray(1, 1, 1, 0.47058824, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h8qpj"]
+gradient = SubResource("Gradient_vsybf")
+fill_from = Vector2(1, 1)
+
 [node name="DeviceFiles" type="Control" unique_id=371239230 node_paths=PackedStringArray("main_focus")]
 layout_mode = 3
 anchors_preset = 15
@@ -108,10 +116,8 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = -133.0
-offset_right = 133.0
-offset_bottom = -4.9987793
+offset_top = -128.0
+offset_right = 128.0
 grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -120,6 +126,7 @@ size_flags_vertical = 8
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("5_vsybf")
+texture_focused = SubResource("GradientTexture2D_h8qpj")
 
 [node name="Controls" type="Label" parent="MarginContainer/HBoxContainer/Control/HBoxContainer" unique_id=847827247]
 visible = false

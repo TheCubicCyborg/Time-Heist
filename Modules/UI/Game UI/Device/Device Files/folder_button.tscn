@@ -10,8 +10,8 @@
 resource_local_to_scene = false
 
 [sub_resource type="Gradient" id="Gradient_qxfag"]
-offsets = PackedFloat32Array(0.44124168, 1)
-colors = PackedColorArray(0.60784316, 0.83137256, 1, 0.25490198, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.42829457, 1)
+colors = PackedColorArray(0.60784316, 0.83137256, 1, 0.47058824, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dksst"]
 gradient = SubResource("Gradient_qxfag")
