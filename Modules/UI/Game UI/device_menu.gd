@@ -34,6 +34,7 @@ func open():
 	select_tab(focused_tab)
 
 func close():
+	get_viewport().gui_release_focus()
 	$CanvasLayer2/MarginContainer.mouse_filter = MOUSE_FILTER_IGNORE
 	$CanvasLayer/SubViewportContainer/SubViewport/AnimationPlayer.play("close")
 	if first_time:

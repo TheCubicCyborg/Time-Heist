@@ -68,6 +68,8 @@ func set_document_texture(document_id : int):
 	
 func fit_camera_to_document() -> void:
 	# Get document world size accounting for pixel_size and scale
+	if not document.texture:
+		return
 	var tex_size = document.texture.get_size()
 	var world_width = tex_size.x * document.pixel_size * document.scale.x
 	var world_height = tex_size.y * document.pixel_size * document.scale.y
