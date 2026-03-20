@@ -32,6 +32,7 @@ clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ndhg")
+follow_focus = true
 horizontal_scroll_mode = 0
 
 [node name="Chatlog" type="VBoxContainer" parent="HBoxContainer/ScrollContainer" unique_id=1950848013]

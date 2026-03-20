@@ -30,7 +30,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_40ogp")
-main_focus = NodePath("MarginContainer/HBoxContainer/LeftPanel/Folder Buttons")
+main_focus = NodePath("MarginContainer/HBoxContainer/LeftPanel/ScrollContainer/Folder Buttons")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1544549271]
 layout_mode = 1
@@ -55,7 +55,11 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 theme_override_constants/margin_top = 100
 
-[node name="Folder Buttons" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftPanel" unique_id=1076843477]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/LeftPanel" unique_id=1968387770]
+layout_mode = 2
+theme = ExtResource("3_vsybf")
+
+[node name="Folder Buttons" type="VBoxContainer" parent="MarginContainer/HBoxContainer/LeftPanel/ScrollContainer" unique_id=1076843477]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
