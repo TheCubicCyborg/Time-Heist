@@ -8,5 +8,5 @@ script = ExtResource("1_ejixm")
 document_id = 7
 title = "Basement Pin Board"
 document_image = ExtResource("1_nsi07")
-relevant_tags = Array[String](["Basement"])
+relevant_tags = Array[String](["Basement", "All Files"])
 metadata/_custom_type_script = "uid://c4r7d4bl70rat"

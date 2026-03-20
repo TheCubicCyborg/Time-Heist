@@ -1,10 +1,14 @@
 @tool
 class_name NPC extends Node3D
 
-@export var color : Color = Color(1.0, 1.0, 1.0, 1.0):
+@export var color : Color = Color("cf7d00"):
 	set(value):
 		color = value
-		$MeshInstance3D.mesh.material.albedo_color = value
+		print("changing their colors")
+		if find_child("MeshInstance3D"):
+			$MeshInstance3D.mesh.material.albedo_color = value
+		if find_child("torso"):
+			$torso.get_surface_override_material(0).emission = color
 
 @export var branch_paths: Array[NPCPath] = []
 @export var follow_branch: int = -1:

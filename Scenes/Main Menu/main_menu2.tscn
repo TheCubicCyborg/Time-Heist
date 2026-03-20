@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://b42j8ycb3g26l"]
 
 [ext_resource type="Script" uid="uid://dv3pmyjmcfrbs" path="res://Scenes/Main Menu/main_menu.gd" id="1_c0awy"]
-[ext_resource type="Texture2D" uid="uid://23mhu5fh4s5b" path="res://Assets/UI/Main Menu/MainMenu2.png" id="2_c0awy"]
+[ext_resource type="Texture2D" uid="uid://dt2jut8yswykf" path="res://Assets/UI/Main Menu/start screen mockup lofi.png" id="2_c0awy"]
+[ext_resource type="Texture2D" uid="uid://cxy8sj7p8e6l1" path="res://Assets/UI/Main Menu/settingshover.png" id="3_pbbqo"]
+[ext_resource type="Texture2D" uid="uid://bfc7iirrlrj5r" path="res://Assets/UI/Main Menu/creditshover.png" id="4_dtamd"]
+[ext_resource type="Texture2D" uid="uid://dsg2oiempe3xa" path="res://Assets/UI/Main Menu/playdefault.png" id="5_p5wrb"]
 
 [node name="MainMenu" type="Control" unique_id=194556561]
 layout_mode = 3
@@ -20,36 +23,59 @@ offset_bottom = 1080.0
 size_flags_vertical = 3
 texture = ExtResource("2_c0awy")
 
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=2020076377]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 676.0
+offset_right = 563.0
+offset_bottom = 903.0
+texture = ExtResource("3_pbbqo")
+
+[node name="TextureRect3" type="TextureRect" parent="." unique_id=1740897700]
+layout_mode = 0
+offset_left = 1362.0
+offset_top = 688.0
+offset_right = 1762.0
+offset_bottom = 915.0
+texture = ExtResource("4_dtamd")
+
+[node name="TextureRect4" type="TextureRect" parent="." unique_id=772229579]
+layout_mode = 0
+offset_left = 755.0
+offset_top = 685.0
+offset_right = 1155.0
+offset_bottom = 912.0
+texture = ExtResource("5_p5wrb")
+
 [node name="Settings" type="Button" parent="." unique_id=1896658415]
 layout_mode = 0
-offset_left = 142.0
-offset_top = 660.0
-offset_right = 463.0
-offset_bottom = 821.0
+offset_left = 200.0
+offset_top = 668.0
+offset_right = 521.0
+offset_bottom = 829.0
 focus_neighbor_right = NodePath("../Play")
 theme_override_font_sizes/font_size = 50
-text = "Settings"
 flat = true
 
 [node name="Play" type="Button" parent="." unique_id=1793094267]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 784.0
-offset_top = 652.0
-offset_right = 1156.0
-offset_bottom = 815.0
+offset_left = 763.0
+offset_top = 681.0
+offset_right = 1135.0
+offset_bottom = 844.0
 focus_neighbor_left = NodePath("../Settings")
 focus_neighbor_right = NodePath("../Quit")
 flat = true
 
 [node name="Quit" type="Button" parent="." unique_id=372349385]
 layout_mode = 0
-offset_left = 1394.0
+offset_left = 1353.0
 offset_top = 692.0
-offset_right = 1675.0
+offset_right = 1775.0
 offset_bottom = 849.0
 focus_neighbor_left = NodePath("../Play")
 theme_override_font_sizes/font_size = 50
-text = "Quit"
 flat = true
 
 [connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv3guij266djy"
-path="res://.godot/imported/person3.png-bf191cc0bf11e556d190a79d6d4fdb75.ctex"
+uid="uid://cdxcdfnjmqysk"
+path="res://.godot/imported/fullscreen_button_small.jpg-697f1f287098f36c3f3a9fa3959adff6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Time Travel Menu/Files_Test/person3.png"
-dest_files=["res://.godot/imported/person3.png-bf191cc0bf11e556d190a79d6d4fdb75.ctex"]
+source_file="res://Assets/UI/Device Menu/Database/fullscreen_button_small.jpg"
+dest_files=["res://.godot/imported/fullscreen_button_small.jpg-697f1f287098f36c3f3a9fa3959adff6.ctex"]
 
 [params]
 

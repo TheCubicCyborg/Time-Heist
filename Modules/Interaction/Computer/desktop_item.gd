@@ -57,5 +57,6 @@ func _on_mouse_exited() -> void:
 	pass
 
 func _on_button_pressed() -> void:
+	print("HELO BRO")
 	if tab and not active:
 		tab.open_tab()

@@ -37,7 +37,7 @@ func _process(delta):
 [sub_resource type="Resource" id="Resource_jyu0l"]
 resource_local_to_scene = true
 script = ExtResource("4_sby2f")
-position = Vector3(0.0052558184, 0, -0.00019264221)
+position = Vector3(0.0052558184, 0.032344818, -0.00019264221)
 
 [sub_resource type="Resource" id="Resource_svjk4"]
 script = ExtResource("7_npck5")
@@ -46,8 +46,7 @@ metadata/_custom_type_script = "uid://cjhgp3kkd22yr"
 
 [sub_resource type="Resource" id="Resource_8lxqm"]
 script = ExtResource("7_w2fhl")
-start_time = 4.000196
-end_time = 6.000196
+end_time = 2.0
 duration = 2.0
 metadata/_custom_type_script = "uid://c8pv0a0in0u3y"
 
@@ -107,8 +106,8 @@ resource_local_to_scene = true
 script = ExtResource("4_sby2f")
 position = Vector3(0, 0, 8)
 vertex_actions = Array[ExtResource("5_khdrh")]([SubResource("Resource_7oa7a")])
-time_start = 10.000195999999999
-time_end = 10.000195999999999
+time_start = 10.000196
+time_end = 10.000196
 id = 6
 
 [sub_resource type="Resource" id="Resource_70th2"]
@@ -118,25 +117,25 @@ speed = 1.0
 prev_vertex = SubResource("Resource_usbjq")
 next_vertex = SubResource("Resource_q3uff")
 time_start = 7.500196
-time_end = 10.000195999999999
+time_end = 10.000196
 id = 5
 
 [sub_resource type="Resource" id="Resource_wf320"]
 resource_local_to_scene = true
 script = ExtResource("4_sby2f")
 position = Vector3(8, 0, 8)
-time_start = 18.000195999999995
-time_end = 18.000195999999995
+time_start = 18.000196000000003
+time_end = 18.000196000000003
 id = 8
 
 [sub_resource type="Resource" id="Resource_uvja5"]
 resource_local_to_scene = true
 script = ExtResource("6_nhqvp")
-speed = 1.0000000000000002
+speed = 1.0
 prev_vertex = SubResource("Resource_q3uff")
 next_vertex = SubResource("Resource_wf320")
-time_start = 10.000195999999999
-time_end = 18.000195999999995
+time_start = 10.000196
+time_end = 18.000196000000003
 id = 7
 
 [sub_resource type="Resource" id="Resource_l6f57"]
