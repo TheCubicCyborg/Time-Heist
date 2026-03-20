@@ -17,6 +17,13 @@ func _on_settings_toggled(toggled_on: bool) -> void:
 	if not toggled_on:
 		animation_player.play("settings_close")
 		
+func _on_homebase_pressed() -> void:
+	pass
+	#SceneManager.change_scene(SceneManager.Scene.HOMEBASE)
+		
+func _on_quit_pressed() -> void:
+	get_tree().quit()
+		
 func _on_resolution_options_item_selected(index: int) -> void:
 	match index:
 		0:

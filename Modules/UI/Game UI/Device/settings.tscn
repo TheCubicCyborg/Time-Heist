@@ -196,13 +196,13 @@ theme_override_font_sizes/font_size = 90
 toggle_mode = true
 text = "Settings"
 
-[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=265424093]
+[node name="Homebase" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=265424093]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 90
 text = "Erm... Idk"
 
-[node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1686965176]
+[node name="Quit" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1686965176]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 90
@@ -296,5 +296,7 @@ size_flags_vertical = 3
 libraries/ = SubResource("AnimationLibrary_0cor1")
 
 [connection signal="toggled" from="HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_toggled"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Homebase" to="." method="_on_homebase_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="toggled" from="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/FullscreenToggle" to="." method="_on_fullscreen_toggle_toggled"]
 [connection signal="item_selected" from="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer2/ResolutionOptions" to="." method="_on_resolution_options_item_selected"]
