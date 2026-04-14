@@ -122,6 +122,7 @@ size = Vector3(0.25, 1, 0.25)
 
 [node name="SmallWall" type="MeshInstance3D" parent="." unique_id=682191582]
 visible = false
+layers = 33
 mesh = ExtResource("6_tmw5u")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="SmallWall" unique_id=864653458]
@@ -132,6 +133,7 @@ shape = SubResource("BoxShape3D_rgqh2")
 
 [node name="WideWall" type="MeshInstance3D" parent="." unique_id=1798293783]
 visible = false
+layers = 33
 mesh = ExtResource("2_m8hoe")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="WideWall" unique_id=2068181852]
@@ -142,6 +144,7 @@ shape = SubResource("BoxShape3D_upl86")
 
 [node name="WindowSmallWall" type="MeshInstance3D" parent="." unique_id=161874877]
 visible = false
+layers = 33
 mesh = ExtResource("3_rgqh2")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="WindowSmallWall" unique_id=946474403]
@@ -152,6 +155,7 @@ shape = SubResource("BoxShape3D_tmw5u")
 
 [node name="WindowWideWall" type="MeshInstance3D" parent="." unique_id=1470660928]
 visible = false
+layers = 33
 mesh = ExtResource("4_tmw5u")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="WindowWideWall" unique_id=2087358250]
@@ -162,6 +166,7 @@ shape = SubResource("BoxShape3D_6qwye")
 
 [node name="DoorWay" type="MeshInstance3D" parent="." unique_id=2128339612]
 visible = false
+layers = 33
 mesh = ExtResource("3_m8hoe")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="DoorWay" unique_id=912881974]
@@ -177,6 +182,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.25)
 shape = SubResource("BoxShape3D_rgqh2")
 
 [node name="StairFlight" type="MeshInstance3D" parent="." unique_id=172617441]
+layers = 33
 mesh = ExtResource("6_upl86")
 
 [node name="StairCollider" type="StaticBody3D" parent="StairFlight" unique_id=280554096]
@@ -193,6 +199,7 @@ shape = SubResource("BoxShape3D_e1pt4")
 
 [node name="FloorTile" type="MeshInstance3D" parent="." unique_id=623207182]
 visible = false
+layers = 33
 mesh = ExtResource("7_upl86")
 surface_material_override/0 = SubResource("ShaderMaterial_m2k06")
 
@@ -204,6 +211,7 @@ shape = SubResource("BoxShape3D_2ss1j")
 
 [node name="UntrimmedSmallWall" type="MeshInstance3D" parent="." unique_id=672581345]
 visible = false
+layers = 33
 mesh = ExtResource("2_l6peu")
 
 [node name="RigidBody3D" type="StaticBody3D" parent="UntrimmedSmallWall" unique_id=1438805219]

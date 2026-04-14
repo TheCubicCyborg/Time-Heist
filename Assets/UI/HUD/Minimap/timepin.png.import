@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtc4kd4x3ahd0"
-path.s3tc="res://.godot/imported/Linda_face.png-4d9835e784c3a722b60d301c7a3051ff.s3tc.ctex"
-path.etc2="res://.godot/imported/Linda_face.png-4d9835e784c3a722b60d301c7a3051ff.etc2.ctex"
+uid="uid://bbradfuplryhd"
+path.s3tc="res://.godot/imported/timepin.png-87ac850dac96909df929696d348aeb65.s3tc.ctex"
+path.etc2="res://.godot/imported/timepin.png-87ac850dac96909df929696d348aeb65.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Dialogue/Linda_face.png"
-dest_files=["res://.godot/imported/Linda_face.png-4d9835e784c3a722b60d301c7a3051ff.s3tc.ctex", "res://.godot/imported/Linda_face.png-4d9835e784c3a722b60d301c7a3051ff.etc2.ctex"]
+source_file="res://Assets/UI/HUD/Minimap/timepin.png"
+dest_files=["res://.godot/imported/timepin.png-87ac850dac96909df929696d348aeb65.s3tc.ctex", "res://.godot/imported/timepin.png-87ac850dac96909df929696d348aeb65.etc2.ctex"]
 
 [params]
 
