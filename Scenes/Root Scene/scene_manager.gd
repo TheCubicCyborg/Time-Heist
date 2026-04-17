@@ -16,7 +16,7 @@ enum Scene {
 var scene_paths := {
 	Scene.GAMEPLAY: preload("res://Scenes/Gameplay/Gameplay.tscn"),
 	Scene.HOMEBASE: preload("res://Scenes/Homebase/Homebase.tscn"),
-	Scene.MAIN_MENU: preload("res://Scenes/Main Menu/main_menu2.tscn"),
+	Scene.MAIN_MENU: preload("res://Scenes/Main Menu/main_menu3.tscn"),
 	Scene.TUTORIAL: preload("res://Scenes/Tutorial/Tutorial.tscn")
 }
 
