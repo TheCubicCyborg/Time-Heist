@@ -17,6 +17,10 @@ albedo_color = Color(0.0722431, 0.20142925, 0.32405767, 1)
 material = SubResource("StandardMaterial3D_e2b0l")
 size = Vector3(100, 1, 100)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pta86"]
+radius = 0.25
+height = 1.829
+
 [sub_resource type="Skin" id="Skin_v3wqe"]
 resource_name = "Skin"
 bind_count = 25
@@ -412,10 +416,6 @@ bind/24/name = &"mixamorig_RightToe_End"
 bind/24/bone = -1
 bind/24/pose = Transform3D(-99.45263, 9.794947, -3.6379232, -9.739291, -99.51037, -1.6755428, -3.7842386, -1.3120708, 99.91974, -0.07549876, -0.21602364, -0.009800126)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pta86"]
-radius = 0.25
-height = 1.829
-
 [node name="Player2Test" type="Node3D" unique_id=311373764]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2058003306]
@@ -436,6 +436,11 @@ metadata/_edit_lock_ = true
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1623791428]
 script = ExtResource("1_so0m4")
+max_speed = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=357834909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.914, -0.05)
+shape = SubResource("CapsuleShape3D_pta86")
 
 [node name="Mesh" type="Node3D" parent="CharacterBody3D" unique_id=168559073]
 
@@ -674,10 +679,6 @@ skin = SubResource("Skin_8p8ys")
 [node name="hair?" type="MeshInstance3D" parent="CharacterBody3D/Mesh/Armature/Skeleton3D" unique_id=107609249]
 mesh = ExtResource("5_tmnhp")
 skin = SubResource("Skin_fw5v7")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=357834909]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.914, -0.05)
-shape = SubResource("CapsuleShape3D_pta86")
 
 [node name="Camera Pivot" type="Node3D" parent="CharacterBody3D" unique_id=1344159886]
 
