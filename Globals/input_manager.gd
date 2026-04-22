@@ -4,10 +4,17 @@ enum InputControllers {UI, GAMEPLAY, NONE}
 
 var in_control = InputControllers.GAMEPLAY
 
-var camera_sens_hor: float = 50
+var camera_sens_hor: float = 20
+
+var roll_walk_timer: float = 0
+var player: Player2
+
+const TAP_HOLD_THRESH:float = 0.2
 
 func _ready():
 	change_input_controller(in_control)
+	await get_tree().process_frame
+	player = globals.player2
 
 func change_input_controller(controller: InputControllers):
 	match controller:
@@ -63,13 +70,27 @@ func _switch_to_gameplay():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input_gameplay(event: InputEvent):
-	if event is InputEventMouseMotion:
-		globals.player2.pan_camera_horizontally(-deg_to_rad(event.screen_relative.x * (camera_sens_hor/100)))
+	if player and event is InputEventMouseMotion:
+		player.pan_camera_horizontally(-deg_to_rad(event.screen_relative.x * (camera_sens_hor/100)))
 
-func _process_gameplay(_delta: float):
-	if globals.player2:
-		globals.player2.move(Input.get_vector("player_left","player_right","player_down","player_up"))
+func _process_gameplay(delta: float):
+	if player:
+		player.move(Input.get_vector("player_left","player_right","player_up","player_down"), delta)
+	if Input.is_action_pressed("player_roll_walk"):
+		if roll_walk_timer < TAP_HOLD_THRESH:
+			roll_walk_timer += delta
+		else:
+			player.set_walk(true)
+			print("walking")
+	if Input.is_action_just_released("player_roll_walk"):
+		if roll_walk_timer < TAP_HOLD_THRESH:
+			player.roll()
+			print("roll!")
+		else:
+			player.set_walk(false)
+		roll_walk_timer = 0
 	
 	if Input.is_action_just_pressed("escape"):
 		change_input_controller(InputControllers.UI)
+
 #endregion
