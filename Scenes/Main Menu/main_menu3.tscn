@@ -1,0 +1,201 @@
+[gd_scene format=3 uid="uid://brvqb2m5ecmet"]
+
+[ext_resource type="Script" uid="uid://c8fbb58rxxhkr" path="res://Scenes/Main Menu/menu_menu3d.gd" id="1_ltef7"]
+[ext_resource type="Texture2D" uid="uid://cxy8sj7p8e6l1" path="res://Assets/UI/Main Menu/settingshover.png" id="1_waq0v"]
+[ext_resource type="Texture2D" uid="uid://1e762uk44mwt" path="res://Assets/UI/Main Menu/settingsdefault.png" id="2_ltef7"]
+[ext_resource type="Texture2D" uid="uid://b81rhk5a7asg" path="res://Assets/UI/Main Menu/timeheistlogolofi.png" id="3_i6mko"]
+[ext_resource type="Texture2D" uid="uid://dsg2oiempe3xa" path="res://Assets/UI/Main Menu/playdefault.png" id="3_ifg3e"]
+[ext_resource type="Texture2D" uid="uid://bhq8qc76s7c86" path="res://Assets/UI/Main Menu/playhover.png" id="4_i6mko"]
+[ext_resource type="Texture2D" uid="uid://dw70mj6jev0jy" path="res://Assets/UI/Main Menu/buildingscape 1.png" id="4_ilpl1"]
+[ext_resource type="Texture2D" uid="uid://bfc7iirrlrj5r" path="res://Assets/UI/Main Menu/creditshover.png" id="5_i6g8v"]
+[ext_resource type="Texture2D" uid="uid://beac8u05t3mr7" path="res://Assets/UI/Main Menu/building foreground.png" id="5_mohnt"]
+[ext_resource type="Texture2D" uid="uid://rop0vuvsqp3w" path="res://Assets/UI/Main Menu/creditsdefault.png" id="6_ilpl1"]
+[ext_resource type="Theme" uid="uid://jodljyivkod0" path="res://Assets/UI/main_theme.tres" id="7_mohnt"]
+[ext_resource type="Texture2D" uid="uid://c031e7lr2i3xe" path="res://Effects/qwantani_moonrise_puresky_4k.hdr" id="8_ntibg"]
+[ext_resource type="Texture2D" uid="uid://0ojaguqbvv3t" path="res://Assets/UI/HUD/timeline.png" id="10_ifg3e"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j0vim"]
+size = Vector3(4.37, 8.15, 3.04)
+
+[sub_resource type="BoxMesh" id="BoxMesh_24fjd"]
+size = Vector3(42.1, 12.66, 1.22)
+
+[sub_resource type="Gradient" id="Gradient_mwdlf"]
+offsets = PackedFloat32Array(0, 0.1539924, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.08235294, 0.24705882, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d6ckj"]
+gradient = SubResource("Gradient_mwdlf")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bgryv"]
+panorama = ExtResource("8_ntibg")
+filter = false
+
+[sub_resource type="Sky" id="Sky_7ijys"]
+sky_material = SubResource("PanoramaSkyMaterial_bgryv")
+
+[sub_resource type="Environment" id="Environment_0te8p"]
+background_mode = 2
+background_color = Color(0.09385053, 0.11577933, 0.14867228, 1)
+background_energy_multiplier = 0.25
+sky = SubResource("Sky_7ijys")
+ambient_light_source = 3
+ambient_light_color = Color(0.0363, 0.073149994, 0.11, 1)
+ambient_light_sky_contribution = 0.01
+ambient_light_energy = 0.0
+tonemap_mode = 2
+ssao_enabled = true
+ssao_intensity = 1.0
+glow_enabled = true
+glow_intensity = 0.5
+glow_bloom = 0.25
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.53900033, 0.53900033, 0.53900033, 1)
+volumetric_fog_length = 16.0
+volumetric_fog_sky_affect = 0.1
+adjustment_enabled = true
+adjustment_contrast = 1.1
+adjustment_saturation = 1.1
+adjustment_color_correction = SubResource("GradientTexture1D_d6ckj")
+
+[node name="MainMenu3" type="Node3D" unique_id=281524917]
+script = ExtResource("1_ltef7")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1304303615]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=1462606291]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=908360288]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=211356027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5193849, -1.1738236, -4.6343813)
+mesh = SubResource("BoxMesh_j0vim")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport" unique_id=1537076829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.634046, -9.110873, -8.3062935)
+mesh = SubResource("BoxMesh_24fjd")
+skeleton = NodePath("../../..")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport" unique_id=302261961]
+environment = SubResource("Environment_0te8p")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" unique_id=1363984519]
+transform = Transform3D(0.56305856, -0.6350541, 0.52883965, 0.4628966, 0.7724677, 0.43476486, -0.6846107, 0, 0.7289089, 3.3528776, 2.1955516, 1.2616868)
+light_color = Color(0.5481284, 0.7392462, 0.8602281, 1)
+light_energy = 0.2
+sky_mode = 1
+
+[node name="marker_middle" type="Marker3D" parent="SubViewportContainer/SubViewport" unique_id=2053680046]
+
+[node name="marker_right" type="Marker3D" parent="SubViewportContainer/SubViewport" unique_id=1097387677]
+transform = Transform3D(0.9890365, 0, 0.14767131, 0, 1, 0, -0.14767131, 0, 0.9890365, 0.8, 0, 0.3)
+
+[node name="marker_left" type="Marker3D" parent="SubViewportContainer/SubViewport" unique_id=671783515]
+transform = Transform3D(0.9890159, 0, -0.1478094, 0, 1, 0, 0.1478094, 0, 0.9890159, -0.8, 0, 0.3)
+
+[node name="Sprite3D" type="Sprite3D" parent="SubViewportContainer/SubViewport" unique_id=1173155521]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.8043903, 0.79779303, -3.023798)
+billboard = 1
+texture = ExtResource("3_i6mko")
+
+[node name="Background" type="Sprite3D" parent="SubViewportContainer/SubViewport" unique_id=166571912]
+transform = Transform3D(2.31, 0, 0, 0, 1.31, 0, 0, 0, 1, 0, -1.1196852, -7.4181414)
+texture = ExtResource("4_ilpl1")
+
+[node name="Foreground" type="Sprite3D" parent="SubViewportContainer/SubViewport" unique_id=2144267790]
+transform = Transform3D(0.5, 0, 0, 0, 0.54, 0, 0, 0, 1, 2.551475, 0, -3.046185)
+texture = ExtResource("5_mohnt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1881663630]
+
+[node name="Settings" type="TextureButton" parent="CanvasLayer" unique_id=275691611]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -783.0
+offset_top = -376.0
+offset_right = -415.0
+offset_bottom = -176.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_neighbor_right = NodePath("../Play")
+texture_normal = ExtResource("1_waq0v")
+texture_hover = ExtResource("2_ltef7")
+texture_focused = ExtResource("2_ltef7")
+
+[node name="Play" type="TextureButton" parent="CanvasLayer" unique_id=2051656142]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -410.0
+offset_right = 200.0
+offset_bottom = -183.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_neighbor_left = NodePath("../Settings")
+focus_neighbor_right = NodePath("../Credits")
+focus_neighbor_bottom = NodePath("../Quit")
+texture_normal = ExtResource("3_ifg3e")
+texture_hover = ExtResource("4_i6mko")
+texture_focused = ExtResource("4_i6mko")
+
+[node name="Credits" type="TextureButton" parent="CanvasLayer" unique_id=558908009]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 417.0
+offset_top = -377.0
+offset_right = 839.0
+offset_bottom = -177.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_neighbor_left = NodePath("../Play")
+texture_normal = ExtResource("5_i6g8v")
+texture_hover = ExtResource("6_ilpl1")
+texture_focused = ExtResource("6_ilpl1")
+
+[node name="Quit" type="Button" parent="CanvasLayer" unique_id=1286518011]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -145.5
+offset_top = -87.0
+offset_right = 145.5
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("7_mohnt")
+text = "Quit"
+
+[node name="timeline" type="TextureRect" parent="CanvasLayer" unique_id=632980416]
+offset_top = 898.0
+offset_right = 1920.0
+offset_bottom = 980.0
+texture = ExtResource("10_ifg3e")
+
+[connection signal="focus_entered" from="CanvasLayer/Settings" to="." method="_on_settings_focus_entered"]
+[connection signal="mouse_entered" from="CanvasLayer/Settings" to="." method="_on_settings_focus_entered"]
+[connection signal="pressed" from="CanvasLayer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="focus_entered" from="CanvasLayer/Play" to="." method="_on_play_focus_entered"]
+[connection signal="mouse_entered" from="CanvasLayer/Play" to="." method="_on_play_focus_entered"]
+[connection signal="pressed" from="CanvasLayer/Play" to="." method="_on_play_pressed"]
+[connection signal="focus_entered" from="CanvasLayer/Credits" to="." method="_on_credits_focus_entered"]
+[connection signal="mouse_entered" from="CanvasLayer/Credits" to="." method="_on_credits_focus_entered"]
+[connection signal="pressed" from="CanvasLayer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="CanvasLayer/Quit" to="." method="_on_quit_pressed"]

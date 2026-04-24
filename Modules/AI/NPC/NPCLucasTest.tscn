@@ -1,8 +1,10 @@
 [gd_scene format=4 uid="uid://bomvk14icglbq"]
 
 [ext_resource type="Script" uid="uid://dxhkc2f80jysl" path="res://Modules/AI/NPC/NPC.gd" id="1_3yuln"]
+[ext_resource type="Texture2D" uid="uid://dtc4kd4x3ahd0" path="res://Dialogue/Linda_face.png" id="2_yt8hl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eq44y"]
+albedo_color = Color(0.15021607, 0.5912154, 0.9274573, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gvvx1"]
 material = SubResource("StandardMaterial3D_eq44y")
@@ -189,3 +191,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_3yuln")
 [node name="EyeClinder" type="MeshInstance3D" parent="." unique_id=1281035009]
 transform = Transform3D(0.2287981, 0, 0, 0, 0.01096248, 0, 0, 0, 0.27177733, 0, 1.2961587, -0.037184685)
 mesh = SubResource("CylinderMesh_mf4uq")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1548599900]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, 0.5, 0, -0.5, -2.1855694e-08, 0, 2.9, 0)
+layers = 32
+texture = ExtResource("2_yt8hl")
