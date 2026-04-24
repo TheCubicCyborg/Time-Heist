@@ -3487,6 +3487,7 @@ target = NodePath("../../../../../SubViewportContainer/SubViewport/CharacterBody
 [connection signal="keycard_scanned" from="SubViewportContainer/SubViewport/Buttons/Archive Scanner" to="SubViewportContainer/SubViewport/Archive Door" method="unlock"]
 [connection signal="keycard_scanned" from="SubViewportContainer/SubViewport/Buttons/Keycard Scanner" to="SubViewportContainer/SubViewport/Doors/MrSecurityDoor" method="unlock"]
 
+[editable path="SubViewportContainer/SubViewport/Camera_pivot"]
 [editable path="SubViewportContainer/SubViewport/Deco/Key Office/Temp Plant"]
 [editable path="SubViewportContainer/SubViewport/Deco/Key Office/Temp Plant/Nature_Deco_3"]
 [editable path="SubViewportContainer/SubViewport/Deco/Security/LockBox"]
