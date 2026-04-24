@@ -3397,6 +3397,7 @@ transform = Transform3D(-0.50000006, -0.6123724, 0.61237246, 0, 0.7071069, 0.707
 [connection signal="keycard_scanned" from="SubViewportContainer/SubViewport/Buttons/Archive Scanner" to="SubViewportContainer/SubViewport/Archive Door" method="unlock"]
 [connection signal="keycard_scanned" from="SubViewportContainer/SubViewport/Buttons/Keycard Scanner" to="SubViewportContainer/SubViewport/Doors/MrSecurityDoor" method="unlock"]
 
+[editable path="SubViewportContainer/SubViewport/Camera_pivot"]
 [editable path="SubViewportContainer/SubViewport/Deco/Key Office/Temp Plant"]
 [editable path="SubViewportContainer/SubViewport/Deco/Key Office/Temp Plant/Nature_Deco_3"]
 [editable path="SubViewportContainer/SubViewport/Deco/Security/LockBox"]
