@@ -154,6 +154,9 @@ size = Vector3(7.25, 1, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bk7os"]
 size = Vector3(8, 1, 5)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_rjonq"]
+size = Vector3(18.25, 1, 4.5)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_p8kop"]
 size = Vector3(7.75, 1, 5.5)
 
@@ -1564,7 +1567,7 @@ room_id = "lab_small"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/LabSmall/Area" unique_id=2111258023]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.875, 0, -2.125)
-shape = SubResource("BoxShape3D_p8kop")
+shape = SubResource("BoxShape3D_rjonq")
 debug_color = Color(1.347661e-06, 0.5690049, 0.8358974, 1)
 
 [node name="Lights" type="Node3D" parent="SubViewportContainer/SubViewport/LabSmall" unique_id=1225144350]
