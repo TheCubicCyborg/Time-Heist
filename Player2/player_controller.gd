@@ -84,6 +84,10 @@ func move(input_dir: Vector2, delta):
 		velocity = Vector3.ZERO
 		animation_tree["parameters/WalkBlendSpace/blend_position"].y = -1
 		animation_tree["parameters/CrouchBlendSpace/blend_position"] = 0
+		if crouching:
+			animation_tree["parameters/WalkCrouchBlend/blend_amount"] = 1
+		else:
+			animation_tree["parameters/WalkCrouchBlend/blend_amount"] = 0
 	else:
 		if rolling:
 			roll_timer -= delta
@@ -96,12 +100,14 @@ func move(input_dir: Vector2, delta):
 			if walking:
 				speed = max_walk_speed
 				animation_tree["parameters/WalkBlendSpace/blend_position"].y = 0
-				animation_tree["parameters/CrouchBlendSpace/blend_position"] = 1
+				animation_tree["parameters/WalkCrouchBlend/blend_amount"] = 0
 			elif crouching:
 				speed = max_crouch_speed
+				animation_tree["parameters/WalkCrouchBlend/blend_amount"] = 1
+				animation_tree["parameters/CrouchBlendSpace/blend_position"] = 1
 			else:
 				animation_tree["parameters/WalkBlendSpace/blend_position"].y = 1
-				animation_tree["parameters/CrouchBlendSpace/blend_position"] = 1
+				animation_tree["parameters/WalkCrouchBlend/blend_amount"] = 0
 			velocity = (Vector3(input_dir.x, 0, input_dir.y).normalized() * speed).rotated(Vector3.UP,camera_pivot.rotation.y)
 			destination_rotation = Vector3.FORWARD.signed_angle_to(velocity, Vector3.UP)
 			player_facing = velocity
