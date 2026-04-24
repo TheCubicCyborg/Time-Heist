@@ -81,15 +81,14 @@ func _process_gameplay(delta: float):
 			roll_walk_timer += delta
 		else:
 			player.set_walk(true)
-			print("walking")
 	if Input.is_action_just_released("player_roll_walk"):
 		if roll_walk_timer < TAP_HOLD_THRESH:
 			player.roll()
-			print("roll!")
 		else:
 			player.set_walk(false)
 		roll_walk_timer = 0
-	
+	if Input.is_action_just_pressed("player_crouch"):
+		player.toggle_crouch()
 	if Input.is_action_just_pressed("escape"):
 		change_input_controller(InputControllers.UI)
 

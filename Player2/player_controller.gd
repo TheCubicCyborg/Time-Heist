@@ -23,8 +23,10 @@ class_name Player2 extends CharacterBody3D
 
 @export var max_walk_speed: float = 2.5
 @export var max_run_speed: float = 5
+@export var max_crouch_speed: float = 2.2
 @export var roll_speed: float = 5
 @export var roll_duration: float = 0.4
+@export var turn_speed: float = 15.0
 
 var camera_locked: bool = true
 var crouching: bool = false
@@ -33,9 +35,12 @@ var roll_timer: float = 0
 var walking: bool = false
 
 var player_facing: Vector3 = Vector3.ZERO
+var destination_rotation: float
 
 func _ready():
+	animation_tree["parameters/RollTimeScale/scale"] = 1.5/roll_duration
 	globals.player2 = self
+	destination_rotation = mesh.rotation.y
 
 func _process(_delta):
 	if not Engine.is_editor_hint():
@@ -67,6 +72,8 @@ func set_walk(val: bool):
 func roll():
 	if rolling:
 		return
+	if crouching:
+		crouching = false
 	rolling = true
 	animation_tree["parameters/WalkRollTransition/transition_request"] = "Roll"
 	roll_timer = roll_duration
@@ -90,12 +97,16 @@ func move(input_dir: Vector2, delta):
 				speed = max_walk_speed
 				animation_tree["parameters/WalkBlendSpace/blend_position"].y = 0
 				animation_tree["parameters/CrouchBlendSpace/blend_position"] = 1
+			elif crouching:
+				speed = max_crouch_speed
 			else:
 				animation_tree["parameters/WalkBlendSpace/blend_position"].y = 1
 				animation_tree["parameters/CrouchBlendSpace/blend_position"] = 1
 			velocity = (Vector3(input_dir.x, 0, input_dir.y).normalized() * speed).rotated(Vector3.UP,camera_pivot.rotation.y)
-			mesh.rotation.y = Vector3.FORWARD.signed_angle_to(velocity, Vector3.UP)
+			destination_rotation = Vector3.FORWARD.signed_angle_to(velocity, Vector3.UP)
 			player_facing = velocity
 			player_facing.y = 0
 			player_facing = player_facing.normalized()
+		if mesh.rotation.y != destination_rotation:
+			mesh.rotation.y = lerp_angle(mesh.rotation.y, destination_rotation,0.5)
 	move_and_slide()
