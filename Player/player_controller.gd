@@ -19,6 +19,7 @@ var detection_point: Marker3D = $DetectionPoint
 var previous_input : Vector2
 var is_crouching := false
 var can_rotate := true
+var is_hidden := false
 
 var can_move: bool = true
 var can_be_seen: bool = true
