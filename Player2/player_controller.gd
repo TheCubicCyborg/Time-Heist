@@ -4,6 +4,7 @@ class_name Player2 extends CharacterBody3D
 @onready var mesh: Node3D = $Mesh
 @onready var camera_pivot: Node3D = $"Camera Pivot"
 @onready var animation_tree: AnimationTree = $AnimationTree
+@onready var detection_point: Marker3D = $DetectionPoint
 
 @export_category("Camera")
 @export var camera_up: float = 5.798:
@@ -23,16 +24,20 @@ class_name Player2 extends CharacterBody3D
 			$"Camera Pivot/Camera3D".rotation.x = deg_to_rad(value)
 
 @export_category("Movement Exports")
+@export var turn_weight: float = 0.5
+@export var deceleration: float = 6
+@export_group("Walking")
 @export var max_walk_speed: float = 2.5
 @export var walk_acceleration: float = 2.5
+@export_group("Running")
 @export var max_run_speed: float = 5
 @export var run_acceleration: float = 5
+@export_group("Crouching")
 @export var max_crouch_speed: float = 2.2
-@export var crouch_acceleration: float = 1
-@export var deceleration: float = 6
-@export var roll_speed: float = 7
+@export var crouch_acceleration: float = 2.2
+@export_group("Rolling")
+@export var roll_speed: float = 5
 @export var roll_duration: float = 0.75
-@export var turn_weight: float = 0.5
 
 var camera_locked: bool = true
 
