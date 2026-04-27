@@ -14,7 +14,7 @@ var night_start_minutes: int = 49
 var night_end: float = 300 #seconds / 5 mins
 
 const FIXED_REWIND_VALUE = 15
-const REWIND_MULTIPLIER = 2
+const REWIND_MULTIPLIER = 5
 const WAIT_MULTIPLIER = 5
 const WAIT_FASTER_MULTIPLIER = 15
 

@@ -484,9 +484,9 @@ render_target_update_mode = 4
 [node name="Camera3D" type="Camera3D" parent="SubViewport2" unique_id=1039579709]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.66743636, 1.017169, 11.366655)
 
-[node name="Computer" parent="." unique_id=1166512115 node_paths=PackedStringArray("computer_ui") instance=ExtResource("21_xfhbw")]
+[node name="Computer" parent="." unique_id=1166512115 instance=ExtResource("21_xfhbw")]
 transform = Transform3D(-0.3362735, 0, -0.94176435, 0, 1, 0, 0.94176435, 0, -0.3362735, -3.1650617, 0.9756807, -1.4123049)
-computer_ui = NodePath("Computer UI2")
+computer_ui = null
 
 [node name="Computer UI2" parent="Computer" unique_id=417306020 node_paths=PackedStringArray("icons") instance=ExtResource("22_rxtpu")]
 icons = [NodePath("Email"), NodePath("File"), NodePath("File2"), NodePath("Text")]

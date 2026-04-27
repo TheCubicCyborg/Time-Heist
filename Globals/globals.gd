@@ -6,9 +6,13 @@ class_name Globals extends Node
 #3: Floor
 #4: Walls
 #5: Collidable Interaction
-#6:
-#7:
+#6: 
+#7: 
 #8:
+
+#Vision Layers:
+#6: Minimap stuff
+#7: Lights
 
 enum InputController {UI, GAMEPLAY, TIMETRAVEL}
 var controller_of_input = InputController.GAMEPLAY
@@ -18,6 +22,7 @@ var ui_manager: UI_Manager
 var outline_manager: OutlineManager
 
 var player : Player
+var player2 : Player2
 
 var camera_pivot : CameraPivot
 

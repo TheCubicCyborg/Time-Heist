@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://begdut20cbu15"]
+[gd_scene format=3 uid="uid://begdut20cbu15"]
 
 [ext_resource type="Script" uid="uid://tdcuwudsecor" path="res://Modules/UI/Game UI/Device/settings.gd" id="1_pnwlj"]
 
@@ -164,7 +164,7 @@ _data = {
 &"settings_open": SubResource("Animation_pnwlj")
 }
 
-[node name="SettingsPanel" type="Control" node_paths=PackedStringArray("main_focus")]
+[node name="SettingsPanel" type="Control" unique_id=1183147821 node_paths=PackedStringArray("main_focus")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,7 +174,7 @@ grow_vertical = 2
 script = ExtResource("1_pnwlj")
 main_focus = NodePath("HBoxContainer/VBoxContainer/Settings")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2072320580]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -185,45 +185,48 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1339200596]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Settings" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=448108556]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 90
 toggle_mode = true
 text = "Settings"
 
-[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Homebase" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=265424093]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 90
 text = "Erm... Idk"
 
-[node name="Button3" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="HBoxContainer/VBoxContainer" unique_id=1686965176]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 90
 text = "Quit Game"
 
-[node name="SettingsVerticality" type="VBoxContainer" parent="HBoxContainer"]
+[node name="SettingsVerticality" type="VBoxContainer" parent="HBoxContainer" unique_id=74313591]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/SettingsVerticality"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/SettingsVerticality" unique_id=338549066]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/SettingsVerticality/ScrollContainer"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/SettingsVerticality/ScrollContainer" unique_id=1168460960]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.2003226, 0.42366183, 0.5781183, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect" unique_id=1847865960]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -235,31 +238,31 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer" unique_id=2020621070]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer" unique_id=1082894597]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1821005762]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Fullscreen"
 
-[node name="FullscreenToggle" type="CheckButton" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="FullscreenToggle" type="CheckButton" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1028578565]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer" unique_id=1239228719]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=2118778939]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Resolution"
 
-[node name="ResolutionOptions" type="OptionButton" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="ResolutionOptions" type="OptionButton" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1858669119]
 layout_mode = 2
 size_flags_horizontal = 10
 selected = 1
@@ -273,27 +276,27 @@ popup/item_2/id = 2
 popup/item_3/text = "3840 x 2160"
 popup/item_3/id = 3
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer" unique_id=1754811310]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=921609231]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Mute"
 
-[node name="Button" type="CheckButton" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="Button" type="CheckButton" parent="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1163352382]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="Container" type="TextureRect" parent="HBoxContainer/SettingsVerticality"]
+[node name="Container" type="TextureRect" parent="HBoxContainer/SettingsVerticality" unique_id=1509222070]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_0cor1")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=430255314]
+libraries/ = SubResource("AnimationLibrary_0cor1")
 
 [connection signal="toggled" from="HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_toggled"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Homebase" to="." method="_on_homebase_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="toggled" from="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer/FullscreenToggle" to="." method="_on_fullscreen_toggle_toggled"]
 [connection signal="item_selected" from="HBoxContainer/SettingsVerticality/ScrollContainer/ColorRect/MarginContainer/VBoxContainer/HBoxContainer2/ResolutionOptions" to="." method="_on_resolution_options_item_selected"]
