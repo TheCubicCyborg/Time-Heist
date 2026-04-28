@@ -1,18 +1,15 @@
 [gd_scene format=3 uid="uid://cyif8uwvd8l5"]
 
-[ext_resource type="PackedScene" uid="uid://cne3kilvgkpxb" path="res://Modules/AI/NPC/NPC.tscn" id="1_0mxr5"]
+[ext_resource type="PackedScene" uid="uid://c2jmn7fqcsv24" path="res://Player/camera_pivot.tscn" id="1_3aima"]
 [ext_resource type="Script" uid="uid://d0afbfeblscar" path="res://Modules/Interaction/interactable.gd" id="1_urgcb"]
+[ext_resource type="PackedScene" uid="uid://b0eilnkhu73fw" path="res://Player/Player.tscn" id="2_w2fhl"]
 [ext_resource type="Script" uid="uid://br704tdr56wo1" path="res://addons/NPC Pathing/PathClasses/PathComponent.gd" id="3_0d2mm"]
 [ext_resource type="Script" uid="uid://d07sq7me61pcj" path="res://addons/NPC Pathing/PathClasses/PathVertex.gd" id="4_sby2f"]
+[ext_resource type="PackedScene" uid="uid://bq3mncu2eepfx" path="res://Modules/AI/NPC/Guard.tscn" id="4_w2fhl"]
 [ext_resource type="Script" uid="uid://bveu2y00mhldy" path="res://addons/NPC Pathing/PathClasses/VertexAction.gd" id="5_khdrh"]
 [ext_resource type="Script" uid="uid://bfuy4q5dyjpbi" path="res://addons/NPC Pathing/PathClasses/PathLine.gd" id="6_nhqvp"]
 [ext_resource type="Script" uid="uid://bqksnw54upvlw" path="res://addons/NPC Pathing/PathClasses/NPCPath.gd" id="7_3aima"]
-[ext_resource type="Script" uid="uid://cjhgp3kkd22yr" path="res://addons/NPC Pathing/PathClasses/DoorAction.gd" id="7_npck5"]
-[ext_resource type="Script" uid="uid://c8pv0a0in0u3y" path="res://addons/NPC Pathing/PathClasses/WaitAction.gd" id="7_w2fhl"]
 [ext_resource type="Texture2D" uid="uid://co4jpppqbvflr" path="res://icon.svg" id="8_sby2f"]
-[ext_resource type="Script" uid="uid://dn4bpr3ia1qr0" path="res://addons/NPC Pathing/PathClasses/InteractAction.gd" id="9_3aima"]
-[ext_resource type="Script" uid="uid://daejfwfkoy2cv" path="res://addons/NPC Pathing/PathClasses/SetVarAction.gd" id="10_7oa7a"]
-[ext_resource type="Script" uid="uid://68nqpa721my0" path="res://addons/NPC Pathing/PathClasses/FaceAction.gd" id="11_w2fhl"]
 [ext_resource type="PackedScene" uid="uid://bk11o2jtj5d7g" path="res://Modules/Interaction/Door/generic_door.tscn" id="13_npck5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m53t8"]
@@ -34,186 +31,89 @@ func _process(delta):
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ah0ni"]
 
-[sub_resource type="Resource" id="Resource_jyu0l"]
+[sub_resource type="Resource" id="Resource_3aima"]
 resource_local_to_scene = true
 script = ExtResource("4_sby2f")
-position = Vector3(0.0052558184, 0.032344818, -0.00019264221)
 
-[sub_resource type="Resource" id="Resource_svjk4"]
-script = ExtResource("7_npck5")
-door = NodePath("../Generic_Door")
-metadata/_custom_type_script = "uid://cjhgp3kkd22yr"
+[sub_resource type="Resource" id="Resource_w2fhl"]
+resource_local_to_scene = true
+script = ExtResource("4_sby2f")
+position = Vector3(8, 0, 0)
+time_start = 8.0
+time_end = 8.0
+id = 2
 
-[sub_resource type="Resource" id="Resource_8lxqm"]
-script = ExtResource("7_w2fhl")
-end_time = 2.0
-duration = 2.0
-metadata/_custom_type_script = "uid://c8pv0a0in0u3y"
+[sub_resource type="Resource" id="Resource_npck5"]
+resource_local_to_scene = true
+script = ExtResource("6_nhqvp")
+speed = 1.0
+prev_vertex = SubResource("Resource_3aima")
+next_vertex = SubResource("Resource_w2fhl")
+time_end = 8.0
+id = 1
+
+[sub_resource type="Resource" id="Resource_7oa7a"]
+resource_local_to_scene = true
+script = ExtResource("4_sby2f")
+position = Vector3(8, 0, 3.75)
+time_start = 11.75
+time_end = 11.75
+id = 4
+
+[sub_resource type="Resource" id="Resource_jyu0l"]
+resource_local_to_scene = true
+script = ExtResource("6_nhqvp")
+speed = 1.0
+prev_vertex = SubResource("Resource_w2fhl")
+next_vertex = SubResource("Resource_7oa7a")
+time_start = 8.0
+time_end = 11.75
+id = 3
+
+[sub_resource type="Resource" id="Resource_7sp3u"]
+resource_local_to_scene = true
+script = ExtResource("4_sby2f")
+position = Vector3(0, 0, 3.75)
+time_start = 19.75
+time_end = 19.75
+id = 6
 
 [sub_resource type="Resource" id="Resource_lj00a"]
 resource_local_to_scene = true
-script = ExtResource("4_sby2f")
-position = Vector3(0, 0, 4)
-vertex_actions = Array[ExtResource("5_khdrh")]([SubResource("Resource_svjk4"), SubResource("Resource_8lxqm")])
-time_start = 4.000196
-time_end = 6.000196
-id = 2
+script = ExtResource("6_nhqvp")
+speed = 1.0
+prev_vertex = SubResource("Resource_7oa7a")
+next_vertex = SubResource("Resource_7sp3u")
+time_start = 11.75
+time_end = 19.75
+id = 5
 
 [sub_resource type="Resource" id="Resource_7e2gi"]
 resource_local_to_scene = true
 script = ExtResource("6_nhqvp")
 speed = 1.0
-prev_vertex = SubResource("Resource_jyu0l")
-next_vertex = SubResource("Resource_lj00a")
-time_end = 4.000196
-id = 1
-
-[sub_resource type="Resource" id="Resource_7sp3u"]
-script = ExtResource("7_npck5")
-door = NodePath("../Generic_Door")
-action = 1
-metadata/_custom_type_script = "uid://cjhgp3kkd22yr"
+prev_vertex = SubResource("Resource_7sp3u")
+next_vertex = SubResource("Resource_3aima")
+is_loop_line = true
+time_start = 19.75
+time_end = 23.5
+id = 7
 
 [sub_resource type="Resource" id="Resource_usbjq"]
 resource_local_to_scene = true
-script = ExtResource("4_sby2f")
-position = Vector3(0, 0, 5.5)
-vertex_actions = Array[ExtResource("5_khdrh")]([SubResource("Resource_7sp3u")])
-time_start = 7.500196
-time_end = 7.500196
-id = 4
-
-[sub_resource type="Resource" id="Resource_k52w3"]
-resource_local_to_scene = true
-script = ExtResource("6_nhqvp")
-speed = 1.0
-prev_vertex = SubResource("Resource_lj00a")
-next_vertex = SubResource("Resource_usbjq")
-time_start = 6.000196
-time_end = 7.500196
-id = 3
-
-[sub_resource type="Resource" id="Resource_7oa7a"]
-script = ExtResource("10_7oa7a")
-property = "branch"
-object = NodePath("../TestCube")
-type = 4
-bool_value = true
-metadata/_custom_type_script = "uid://daejfwfkoy2cv"
-
-[sub_resource type="Resource" id="Resource_q3uff"]
-resource_local_to_scene = true
-script = ExtResource("4_sby2f")
-position = Vector3(0, 0, 8)
-vertex_actions = Array[ExtResource("5_khdrh")]([SubResource("Resource_7oa7a")])
-time_start = 10.000196
-time_end = 10.000196
-id = 6
-
-[sub_resource type="Resource" id="Resource_70th2"]
-resource_local_to_scene = true
-script = ExtResource("6_nhqvp")
-speed = 1.0
-prev_vertex = SubResource("Resource_usbjq")
-next_vertex = SubResource("Resource_q3uff")
-time_start = 7.500196
-time_end = 10.000196
-id = 5
-
-[sub_resource type="Resource" id="Resource_wf320"]
-resource_local_to_scene = true
-script = ExtResource("4_sby2f")
-position = Vector3(8, 0, 8)
-time_start = 18.000196000000003
-time_end = 18.000196000000003
-id = 8
-
-[sub_resource type="Resource" id="Resource_uvja5"]
-resource_local_to_scene = true
-script = ExtResource("6_nhqvp")
-speed = 1.0
-prev_vertex = SubResource("Resource_q3uff")
-next_vertex = SubResource("Resource_wf320")
-time_start = 10.000196
-time_end = 18.000196000000003
-id = 7
-
-[sub_resource type="Resource" id="Resource_l6f57"]
-resource_local_to_scene = true
 script = ExtResource("7_3aima")
-name = "1"
-path_components = Array[ExtResource("3_0d2mm")]([SubResource("Resource_jyu0l"), SubResource("Resource_7e2gi"), SubResource("Resource_lj00a"), SubResource("Resource_k52w3"), SubResource("Resource_usbjq"), SubResource("Resource_70th2"), SubResource("Resource_q3uff"), SubResource("Resource_uvja5"), SubResource("Resource_wf320")])
-
-[sub_resource type="Resource" id="Resource_iblv2"]
-resource_local_to_scene = true
-script = ExtResource("4_sby2f")
-position = Vector3(0.0052558184, 0, -0.00019264221)
-
-[sub_resource type="Resource" id="Resource_a56g1"]
-script = ExtResource("7_w2fhl")
-end_time = 2.0
-duration = 2.0
-metadata/_custom_type_script = "uid://c8pv0a0in0u3y"
-
-[sub_resource type="Resource" id="Resource_0t17t"]
-resource_local_to_scene = true
-script = ExtResource("4_sby2f")
-position = Vector3(0, 0, 8)
-vertex_actions = Array[ExtResource("5_khdrh")]([SubResource("Resource_a56g1")])
-time_start = 8.000195
-time_end = 10.000195
-id = 2
-
-[sub_resource type="Resource" id="Resource_m2y43"]
-resource_local_to_scene = true
-script = ExtResource("6_nhqvp")
-speed = 0.9999999436964409
-prev_vertex = SubResource("Resource_iblv2")
-next_vertex = SubResource("Resource_0t17t")
-time_end = 8.000195
-id = 1
-
-[sub_resource type="Resource" id="Resource_7o2t7"]
-script = ExtResource("7_w2fhl")
-end_time = 2.0
-duration = 2.0
-metadata/_custom_type_script = "uid://c8pv0a0in0u3y"
-
-[sub_resource type="Resource" id="Resource_fty6p"]
-script = ExtResource("11_w2fhl")
-metadata/_custom_type_script = "uid://68nqpa721my0"
-
-[sub_resource type="Resource" id="Resource_jgwqm"]
-script = ExtResource("9_3aima")
-interactable = NodePath("../TestCube/Interactable")
-metadata/_custom_type_script = "uid://dn4bpr3ia1qr0"
-
-[sub_resource type="Resource" id="Resource_k2qbp"]
-resource_local_to_scene = true
-script = ExtResource("4_sby2f")
-position = Vector3(-8, 0, 8)
-vertex_actions = Array[ExtResource("5_khdrh")]([SubResource("Resource_7o2t7"), SubResource("Resource_fty6p"), SubResource("Resource_jgwqm")])
-time_start = 18.000194999999998
-time_end = 20.000195
-id = 4
-
-[sub_resource type="Resource" id="Resource_p8rwl"]
-resource_local_to_scene = true
-script = ExtResource("6_nhqvp")
-speed = 1.0000000000000002
-prev_vertex = SubResource("Resource_0t17t")
-next_vertex = SubResource("Resource_k2qbp")
-time_start = 10.000195
-time_end = 18.000194999999998
-id = 3
-
-[sub_resource type="Resource" id="Resource_ch6nj"]
-resource_local_to_scene = true
-script = ExtResource("7_3aima")
-name = "2"
-path_components = Array[ExtResource("3_0d2mm")]([SubResource("Resource_iblv2"), SubResource("Resource_m2y43"), SubResource("Resource_0t17t"), SubResource("Resource_p8rwl"), SubResource("Resource_k2qbp")])
+path_components = Array[ExtResource("3_0d2mm")]([SubResource("Resource_3aima"), SubResource("Resource_npck5"), SubResource("Resource_w2fhl"), SubResource("Resource_jyu0l"), SubResource("Resource_7oa7a"), SubResource("Resource_lj00a"), SubResource("Resource_7sp3u"), SubResource("Resource_7e2gi")])
+loop = true
 
 [node name="Pathing Test World" type="Node3D" unique_id=1891461424]
+
+[node name="Camera_pivot" parent="." unique_id=144358182 instance=ExtResource("1_3aima")]
+CAMERA_DISTANCE_BACK = 3.0
+CAMERA_DISTANCE_UP = 3.5
+facing_direction = 2
+
+[node name="CharacterBody3D" parent="." unique_id=265121882 instance=ExtResource("2_w2fhl")]
+transform = Transform3D(-1, 0, -2.6226832e-07, 0, 1, 0, 2.6226832e-07, 0, -1, 3.6935678, 0, -19.591475)
 
 [node name="Camera3D2" type="Camera3D" parent="." unique_id=1728502867]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.7857132, 22.849392, 1.5849341e-06)
@@ -235,12 +135,6 @@ metadata/_custom_type_script = "uid://d0afbfeblscar"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestCube/Interactable" unique_id=912900751]
 shape = SubResource("BoxShape3D_ah0ni")
 
-[node name="NPC" parent="." unique_id=580269137 instance=ExtResource("1_0mxr5")]
-transform = Transform3D(1, 0, 0, 0, 0.9999826, 0.005899179, 0, -0.005899179, 0.9999826, 0.0052558184, 0.032344818, -0.00019264221)
-branch_paths = Array[ExtResource("7_3aima")]([SubResource("Resource_l6f57"), SubResource("Resource_ch6nj")])
-follow_branch = 0
-path = SubResource("Resource_l6f57")
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1573951455]
 transform = Transform3D(0.57513374, -0.37195083, 0.7286108, -1.4901161e-08, 0.8906576, 0.4546746, -0.8180594, -0.26149872, 0.5122472, 0, 0, 0)
 
@@ -252,4 +146,10 @@ texture = ExtResource("8_sby2f")
 [node name="Generic_Door" parent="." unique_id=74631722 instance=ExtResource("13_npck5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
+[node name="Guard" parent="." unique_id=854805088 instance=ExtResource("4_w2fhl")]
+branch_paths = Array[ExtResource("7_3aima")]([SubResource("Resource_usbjq")])
+follow_branch = 0
+
 [connection signal="anon_interacted" from="TestCube/Interactable" to="TestCube" method="interact"]
+
+[editable path="Camera_pivot"]
