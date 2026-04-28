@@ -4,7 +4,7 @@ enum InputControllers {UI, GAMEPLAY, NONE}
 
 var in_control = InputControllers.GAMEPLAY
 
-var camera_sens_hor: float = 20
+var camera_sens_hor: float = 5
 
 var roll_walk_timer: float = 0
 var player: Player2
