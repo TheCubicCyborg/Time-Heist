@@ -5,6 +5,7 @@ signal keycard_scanned
 var display_note: bool = false
 var display_time_elapsed: float = 0
 @export var needed_item: Array[PickupItem]
+@export var consume_items: bool = false
 @export var needed_clearance: Array[globals.Clearances]
 @export var needed_doc: Array[DocumentInfo]
 @export var needed_lever: Array[Lever]
@@ -49,6 +50,8 @@ func check_interact():
 		for item in needed_item:
 			if not global_inventory.has_item(item):
 				success = false
+			elif consume_items:
+				global_inventory.remove_item(item)
 	if needed_clearance:
 		for clearance in needed_clearance:
 			if not global_inventory.has_clearance(clearance):

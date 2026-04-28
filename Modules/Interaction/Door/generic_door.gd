@@ -125,7 +125,10 @@ func unlock():
 
 func toggle_lock():
 	is_locked = not is_locked
-
+	
+func unlock_open():
+	unlock()
+	open()
 
  #and not globals.player.can_open_any_door
 func interact(person: Node):

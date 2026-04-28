@@ -204,11 +204,11 @@ script = ExtResource("1_nk12b")
 [node name="Door_v20" parent="." unique_id=1337713685 instance=ExtResource("2_gq3nt")]
 transform = Transform3D(1.03, 0, 0, 0, 1.03, 0, 0, 0, 1.03, -0.47409245, 0, 0.075)
 
-[node name="Door" parent="Door_v20/DoorHinge" parent_id_path=PackedInt32Array(1337713685, 601038326) index="0" unique_id=1634384146]
+[node name="Door" parent="Door_v20/DoorHinge" parent_id_path=PackedInt32Array(1337713685, 1199168949) index="0" unique_id=1419930764]
 material_overlay = ExtResource("3_aahkk")
 mesh = SubResource("ArrayMesh_tmfvf")
 
-[node name="DoorKnob" parent="Door_v20/DoorHinge/Door/Knob Pivot" parent_id_path=PackedInt32Array(1337713685, 480970255) index="0" unique_id=331549325]
+[node name="DoorKnob" parent="Door_v20/DoorHinge/Door/Knob Pivot" parent_id_path=PackedInt32Array(1337713685, 2058640826) index="0" unique_id=648434023]
 mesh = SubResource("ArrayMesh_dpbtl")
 
 [node name="Door RB" type="StaticBody3D" parent="Door_v20/DoorHinge/Door" index="1" unique_id=1743068897]
@@ -228,7 +228,7 @@ interact_object = NodePath("../../../..")
 [node name="InteractableCollider" type="CollisionShape3D" parent="Door_v20/DoorHinge/Door/Interactable" unique_id=1482335466]
 shape = SubResource("BoxShape3D_nk12b")
 
-[node name="AnimationPlayer" parent="Door_v20" index="1" unique_id=1057330870]
+[node name="AnimationPlayer" parent="Door_v20" index="1" unique_id=331658562]
 libraries/ = SubResource("AnimationLibrary_wa7fm")
 speed_scale = 1.5
 
