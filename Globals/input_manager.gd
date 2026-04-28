@@ -7,7 +7,7 @@ var in_control = InputControllers.UI
 var camera_sens_hor: float = 20
 
 var roll_walk_timer: float = 0
-var player: Player2:
+var player: Player:
 	set(value):
 		player = value
 		if value:
@@ -18,7 +18,7 @@ const TAP_HOLD_THRESH:float = 0.2
 func _ready():
 	change_input_controller(in_control)
 	await get_tree().process_frame
-	player = globals.player2
+	player = globals.player
 
 func change_input_controller(controller: InputControllers):
 	match controller:
