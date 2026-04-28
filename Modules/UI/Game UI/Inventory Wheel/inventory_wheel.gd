@@ -3,27 +3,24 @@ extends Control
 
 @export var radius : float = 350
 @export var width : float = 180
-@export var angle : float = 160:
-	set(value):
-		angle = value
-		angle_start_rad = deg_to_rad(angle/2) - TAU/4
-		angle_end_rad = deg_to_rad(-angle/2) - TAU/4
+@export var gap_width : float = 10
+@export var angle : float = 160
 var angle_start_rad
 var angle_end_rad
-var angle_rad := deg_to_rad(angle)
 @export_range(2,100,1) var num_of_items : int = 3
-@export var redraw : bool:
-	set(value):
-		queue_redraw()
-		redraw = false
+@export_tool_button("Redraw","CanvasItem") var redraw = queue_redraw
 
 func _draw() -> void:
-	angle_rad = deg_to_rad(angle)
-	draw_arc(Vector2.ZERO,radius,angle_start_rad, angle_end_rad,100,Color(0.042, 0.37, 0.708, 1.0),width,true)
+	var arcs = calc_arcs()
+	#for angle in arcs:
+		#draw_arc(Vector2.ZERO,radius,angle[0], angle[1],100,Color(0.043, 0.376, 0.71, 0.659),width,true)
 	
-	var step = angle_rad/num_of_items
-	for i in range(num_of_items):
-		var rads = (i * step) + angle_start_rad
+	draw_arc(Vector2.ZERO, radius, angle_start_rad,angle_end_rad,100,Color(0.23, 0.377, 0.82, 0.694),width,true)
+	var step = angle/num_of_items
+
+	for i in range(num_of_items+1):
+		print(step)
+		var rads = deg_to_rad(rad_to_deg(angle_start_rad) + (i * step))
 		var point = Vector2.from_angle(rads)
 		draw_line(
 			point * (radius - width/2),
@@ -32,6 +29,24 @@ func _draw() -> void:
 			10,
 			true
 		)
+		
+func calc_arcs():
+	angle_start_rad = - TAU/4 - deg_to_rad(angle/2)
+	angle_end_rad = - TAU/4 + deg_to_rad(angle/2)
+	print(angle_start_rad)
+	print(rad_to_deg(angle_end_rad))
+	var current_angle = angle_start_rad
 	
+	var arcs : Array[Vector2]
+	var new_angle = angle - ((num_of_items-1)*gap_width)
+	var step_rad = deg_to_rad(new_angle/num_of_items)
+	print("STEP ", step_rad)
+	for i in range(num_of_items):
+		arcs.append(Vector2(current_angle,current_angle+step_rad))
+		current_angle += (step_rad + deg_to_rad(gap_width))
+	print(arcs)
+	return arcs
+	
+
 func _process(_delta: float) -> void:
-	queue_redraw()
+	pass
