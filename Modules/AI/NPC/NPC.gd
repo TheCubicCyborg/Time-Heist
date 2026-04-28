@@ -4,7 +4,7 @@ class_name NPC extends Node3D
 @export var color : Color = Color("cf7d00"):
 	set(value):
 		color = value
-		print("changing their colors")
+		#print("changing their colors")
 		if find_child("MeshInstance3D"):
 			$MeshInstance3D.mesh.material.albedo_color = value
 		if find_child("torso"):
@@ -34,8 +34,6 @@ var reached_path_end: bool = false
 var branched: bool
 
 var start_pos: Vector3
-
-
 
 @export_category("Path Editor")
 @export var path: NPCPath:

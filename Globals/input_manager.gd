@@ -2,12 +2,16 @@ extends Node
 
 enum InputControllers {UI, GAMEPLAY, NONE}
 
-var in_control = InputControllers.GAMEPLAY
+var in_control = InputControllers.UI
 
 var camera_sens_hor: float = 20
 
 var roll_walk_timer: float = 0
-var player: Player2
+var player: Player2:
+	set(value):
+		player = value
+		if value:
+			change_input_controller(InputControllers.GAMEPLAY)
 
 const TAP_HOLD_THRESH:float = 0.2
 
