@@ -1,5 +1,5 @@
 @tool
-extends Control
+extends Node2D
 
 @export var radius : float = 350
 @export var width : float = 180
@@ -10,12 +10,17 @@ var angle_end_rad
 @export_range(2,100,1) var num_of_items : int = 3
 @export_tool_button("Redraw","CanvasItem") var redraw = queue_redraw
 
+func _ready() -> void:
+	get_viewport().size_changed.connect(queue_redraw)
+	queue_redraw()
+
 func _draw() -> void:
 	var arcs = calc_arcs()
+	var center = Vector2(-450,-200)
 	#for angle in arcs:
 		#draw_arc(Vector2.ZERO,radius,angle[0], angle[1],100,Color(0.043, 0.376, 0.71, 0.659),width,true)
 	
-	draw_arc(Vector2.ZERO, radius, angle_start_rad,angle_end_rad,100,Color(0.23, 0.377, 0.82, 0.694),width,true)
+	draw_arc(center, radius, angle_start_rad,angle_end_rad,100,Color(0.23, 0.377, 0.82, 0.694),width,true)
 	var step = angle/num_of_items
 
 	for i in range(num_of_items+1):
@@ -23,10 +28,10 @@ func _draw() -> void:
 		var rads = deg_to_rad(rad_to_deg(angle_start_rad) + (i * step))
 		var point = Vector2.from_angle(rads)
 		draw_line(
-			point * (radius - width/2),
-			point * (radius + width/2),
+			point * (radius - width/2) + center,
+			point * (radius + width/2) + center,
 			Color(0.997, 0.812, 0.892, 1.0),
-			10,
+			gap_width,
 			true
 		)
 		
