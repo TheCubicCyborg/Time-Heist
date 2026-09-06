@@ -676,7 +676,6 @@ offset_bottom = 64.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.804, 0, -4.844)
 scan_speed = 1.5
 scan_width = 1.5
-look_lerp_speed = 10.0
 branch_paths = Array[ExtResource("21_mtsgv")]([SubResource("Resource_lc4eq")])
 follow_branch = 0
 path = SubResource("Resource_lc4eq")

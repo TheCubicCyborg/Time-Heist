@@ -34,7 +34,7 @@ var last_seen_position : Vector3
 @onready var collision := $DetectorCollision
 @onready var vision_mesh: MeshInstance3D = $VisionMesh
 
-## Colors for the vision-cone overlay shown to the player (topdown decal).
+## Colors for the vision cone overlay shown to the player (topdown decal).
 ## Brightens/reddens while the player is actually spotted.
 @export var vision_color: Color = Color(1, 1, 1, 0.12)
 @export var vision_alert_color: Color = Color(1, 0.15, 0.15, 0.35)
@@ -43,27 +43,88 @@ var last_seen_position : Vector3
 
 var vision_material: StandardMaterial3D
 
-@export var sight_line_angle : float = 130:
+var sight_line_angle : float
+var sight_line_radius : float
+var smaller_sight_line_angle : float
+var smaller_sight_line_radius : float
+
+@export_category("Normal Vision Cone")
+## Angle of the vision cone
+@export var normal_sight_line_angle : float = 110:
 	set(value):
-		sight_line_angle = value
-		create_mesh()
-@export var sight_line_radius : float = 15:
+		normal_sight_line_angle = value
+		create_normal_mesh()
+## Radius of the vision cone
+@export var normal_sight_line_radius : float = 10:
 	set(value):
-		sight_line_radius = value
-		create_mesh()
-@export var smaller_sight_line_angle : float = 30:
+		normal_sight_line_radius = value
+		create_normal_mesh()
+## Angle of small vision cone
+@export var normal_smaller_sight_line_angle : float = 60:
 	set(value):
-		smaller_sight_line_angle = value
-		create_mesh()
-@export var smaller_sight_line_radius : float = 1.5:
+		normal_smaller_sight_line_angle = value
+		create_normal_mesh()
+## Radius of small vision cone
+@export var normal_smaller_sight_line_radius : float = 1.5:
 	set(value):
-		smaller_sight_line_radius = value
-		create_mesh()
-@export var time_till_caught : float = 2
+		normal_smaller_sight_line_radius = value
+		create_normal_mesh()
+@export_category("Tight Vision Cone (Search)")
+## Angle of the vision cone
+@export var tight_sight_line_angle : float = 90:
+	set(value):
+		tight_sight_line_angle = value
+		create_tight_mesh()
+## Radius of the vision cone
+@export var tight_sight_line_radius : float = 12:
+	set(value):
+		tight_sight_line_radius = value
+		create_tight_mesh()
+## Angle of small vision cone
+@export var tight_smaller_sight_line_angle : float = 80:
+	set(value):
+		tight_smaller_sight_line_angle = value
+		create_tight_mesh()
+## Radius of small vision cone
+@export var tight_smaller_sight_line_radius : float = 1.5:
+	set(value):
+		tight_smaller_sight_line_radius = value
+		create_tight_mesh()
+@export_category("Wide Vision Cone (Alert)")
+## Angle of the vision cone
+@export var wide_sight_line_angle : float = 200:
+	set(value):
+		wide_sight_line_angle = value
+		create_wide_mesh()
+## Radius of the vision cone
+@export var wide_sight_line_radius : float = 12:
+	set(value):
+		wide_sight_line_radius = value
+		create_wide_mesh()
+## Angle of small vision cone
+@export var wide_smaller_sight_line_angle : float = 25:
+	set(value):
+		wide_smaller_sight_line_angle = value
+		create_wide_mesh()
+## Radius of small vision cone
+@export var wide_smaller_sight_line_radius : float = 1.5:
+	set(value):
+		wide_smaller_sight_line_radius = value
+		create_wide_mesh()
+@export_category("Misc")
 @export var angle_steps : float = 5:
 	set(value):
 		angle_steps = value
 		create_mesh()
+		
+@export_tool_button("Create Normal Mesh")
+var create_normal_mesh_button = create_normal_mesh
+
+@export_tool_button("Create Tight Mesh")
+var create_tight_mesh_button = create_tight_mesh
+
+@export_tool_button("Create Wide Mesh")
+var create_wide_mesh_button = create_wide_mesh
 
 var polygon_points : PackedVector2Array = []
 
@@ -71,9 +132,36 @@ var polygon_points : PackedVector2Array = []
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		globals.safe_ratio = 1
+		create_normal_mesh()
 		sight_checker.target_position.z = -sight_line_radius
-		create_mesh()
 		collision.polygon = polygon_points
+
+
+## Creates normal mesh
+func create_normal_mesh():
+	sight_line_angle = normal_sight_line_angle
+	sight_line_radius = normal_sight_line_radius
+	smaller_sight_line_angle = normal_smaller_sight_line_angle
+	smaller_sight_line_radius = normal_smaller_sight_line_radius
+	create_mesh()
+
+
+## Create tight mesh
+func create_tight_mesh():
+	sight_line_angle = tight_sight_line_angle
+	sight_line_radius = tight_sight_line_radius
+	smaller_sight_line_angle = tight_smaller_sight_line_angle
+	smaller_sight_line_radius = tight_smaller_sight_line_radius
+	create_mesh()
+
+
+## Create wide mesh
+func create_wide_mesh():
+	sight_line_angle = wide_sight_line_angle
+	sight_line_radius = wide_sight_line_radius
+	smaller_sight_line_angle = wide_smaller_sight_line_angle
+	smaller_sight_line_radius = wide_smaller_sight_line_radius
+	create_mesh()
 
 
 ## Creates the mesh based on export values

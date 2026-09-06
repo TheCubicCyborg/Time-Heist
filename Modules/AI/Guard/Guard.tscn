@@ -28,14 +28,10 @@ size = Vector3(1, 1.9223633, 1)
 script = ExtResource("1_7jld1")
 alert_time = 0.8
 caught_time = 1.6
-look_lerp_speed = null
 
 [node name="PlayerDetector" parent="." unique_id=1869490121 instance=ExtResource("2_irx7y")]
 collision_layer = 0
 input_ray_pickable = false
-sight_line_angle = 100.0
-sight_line_radius = 7.5
-smaller_sight_line_angle = 69.92
 
 [node name="Laser" parent="." unique_id=1428973108 instance=ExtResource("3_16tbt")]
 laser_on = true

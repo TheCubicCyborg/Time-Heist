@@ -190,6 +190,7 @@ func _exit_state(old_state: AlertStates) -> void:
 
 
 func _enter_normal() -> void:
+	#detector.create_normal_mesh()
 	torso_material.emission = Color("ff0000")
 	torso_material.emission_energy_multiplier = 1
 	# Only realigning if we are currently returning from another state
@@ -205,6 +206,7 @@ func _exit_normal() -> void:
 
 
 func _enter_seen() -> void:
+	#detector.create_normal_mesh()
 	seen_sound.play()
 	torso_material.emission = Color("ff0000")
 	torso_material.emission_energy_multiplier = 3
@@ -217,6 +219,7 @@ func _exit_seen() -> void:
 
 
 func _enter_alert() -> void:
+	#detector.create_wide_mesh()
 	if not alert_group:
 		AlertGroup.new(search_time, time_manager.cur_time).add(self)
 
@@ -229,6 +232,7 @@ func _exit_alert() -> void:
 
 
 func _enter_search() -> void:
+	#detector.create_tight_mesh()
 	torso_material.emission = Color("ba7902")
 	scan_angle = 0.0
 	if not alert_group:
