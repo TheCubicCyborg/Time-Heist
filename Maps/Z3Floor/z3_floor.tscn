@@ -28,7 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://dmpqkd8aehlh7" path="res://Assets/Environment/Imported Assets/monitor_V3.glb" id="20_xc52o"]
 [ext_resource type="PackedScene" uid="uid://efb0belj2klm" path="res://Assets/Environment/Shelf_Counter/small_shelf.tscn" id="20_y6qj7"]
 [ext_resource type="PackedScene" uid="uid://uww33bnurarr" path="res://Modules/Interaction/HideSpot/locker.tscn" id="21_wsjrk"]
-[ext_resource type="PackedScene" uid="uid://bq3mncu2eepfx" path="res://Modules/AI/Guard/guard.tscn" id="22_mbdnt"]
+[ext_resource type="PackedScene" uid="uid://bq3mncu2eepfx" path="res://Modules/AI/Guard/Guard.tscn" id="22_mbdnt"]
 [ext_resource type="PackedScene" uid="uid://b1sw083h5lqhn" path="res://Assets/Environment/Shelf_Counter/small_shelf_long.tscn" id="22_necek"]
 [ext_resource type="Script" uid="uid://bqksnw54upvlw" path="res://addons/NPC Pathing/PathClasses/NPCPath.gd" id="23_q0a50"]
 [ext_resource type="PackedScene" uid="uid://1cs4nrno8aha" path="res://Modules/Interaction/lockable.tscn" id="23_wsjrk"]
@@ -6025,80 +6025,60 @@ data = ExtResource("49_eiwon")
 
 [node name="BigLoopGuard" parent="MainRoom/Guards" unique_id=854805088 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.75, 0, -24.75)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_urhl4")])
 follow_branch = 0
 path = SubResource("Resource_urhl4")
 
 [node name="LineHallwayGuard" parent="MainRoom/Guards" unique_id=1150655872 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -12.25)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_unsqx")])
 follow_branch = 0
 path = SubResource("Resource_unsqx")
 
 [node name="LineHallwayReceptionGuard" parent="MainRoom/Guards" unique_id=2062896012 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.25, 0, -35.125)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_240ps")])
 follow_branch = 0
 path = SubResource("Resource_240ps")
 
 [node name="UpperBalconyGuard" parent="MainRoom/Guards" unique_id=17725005 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.875, 0, -39.625)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_mhsrd")])
 follow_branch = 0
 path = SubResource("Resource_mhsrd")
 
 [node name="NearBathroomGuard" parent="MainRoom/Guards" unique_id=918371280 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.25, 0, -39.625)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_gt844")])
 follow_branch = 0
 path = SubResource("Resource_gt844")
 
 [node name="NearBathroomGuard2" parent="MainRoom/Guards" unique_id=1138999599 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.75, 0, -43.625)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_e2huf")])
 follow_branch = 0
 path = SubResource("Resource_e2huf")
 
 [node name="CubicleCornerGuard" parent="MainRoom/Guards" unique_id=1235362814 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.375, 0, -24.125)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_012ye")])
 follow_branch = 0
 path = SubResource("Resource_012ye")
 
 [node name="CurlyDoorGuard" parent="MainRoom/Guards" unique_id=477911202 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.275, 0, -41.25)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_ob8if")])
 follow_branch = 0
 path = SubResource("Resource_ob8if")
 
 [node name="ElevatorGuard" parent="MainRoom/Guards" unique_id=393080131 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0, -14.875)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_4i8ou")])
 follow_branch = 0
 path = SubResource("Resource_4i8ou")
 
 [node name="NearClosetGuard" parent="MainRoom/Guards" unique_id=936632106 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -26.25)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_xvdfr")])
 follow_branch = 0
 path = SubResource("Resource_xvdfr")
@@ -8390,48 +8370,36 @@ item = ExtResource("82_sc1jj")
 
 [node name="BigLoopGuard" parent="Lab/Guards" unique_id=1898539759 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.625, 0, -15.75)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_d012j")])
 follow_branch = 0
 path = SubResource("Resource_d012j")
 
 [node name="SmallLoopGuard" parent="Lab/Guards" unique_id=1294913957 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -8.75)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_0l2cb")])
 follow_branch = 0
 path = SubResource("Resource_0l2cb")
 
 [node name="LineGuard" parent="Lab/Guards" unique_id=1629200249 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, -21.5)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_ak1ow")])
 follow_branch = 0
 path = SubResource("Resource_ak1ow")
 
 [node name="LineGuard2" parent="Lab/Guards" unique_id=226159916 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.875, 0, -13.25)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_htqud")])
 follow_branch = 0
 path = SubResource("Resource_htqud")
 
 [node name="ReceptionDeskGuard" parent="Lab/Guards" unique_id=1413789374 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.25, 0, -6.375)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_fhjfi")])
 follow_branch = 0
 path = SubResource("Resource_fhjfi")
 
 [node name="MeetingRoomGuard" parent="Lab/Guards" unique_id=25184493 instance=ExtResource("22_mbdnt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -4.875)
-scan_speed = 1.5
-scan_width = 1.5
 branch_paths = Array[ExtResource("23_q0a50")]([SubResource("Resource_gn4yu")])
 follow_branch = 0
 path = SubResource("Resource_gn4yu")

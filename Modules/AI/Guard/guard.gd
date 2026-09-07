@@ -33,8 +33,8 @@ class_name Guard extends PathFollower
 @onready var tires: MeshInstance3D = %Tires
 @onready var seen_sound: AudioStreamPlayer = %SeenSound
 
-## Different states the Guard can be in
-enum AlertStates {NORMAL, SEEN, ALERT, CAUGHT, SEARCH}
+## Different states the Guard can be in. Order determines severity
+enum AlertStates {NORMAL, SEARCH, SEEN, ALERT, CAUGHT}
 
 ## Current state of the Guard (TIMEVAR)
 var state = AlertStates.NORMAL: #TIMEVAR
@@ -59,6 +59,8 @@ var player_seen: bool = false: #TIMEVAR
 			globals.time_manager.timelog(self, "player_seen", player_seen)
 		if value:
 			sight_started_at = time_manager.cur_time
+		else:
+			lost_sight_at = time_manager.cur_time
 		player_seen = value
 
 ## cur_time at which player_seen most recently became true (TIMEVAR)
@@ -72,15 +74,27 @@ var sight_started_at: float = 0.0: #TIMEVAR
 			globals.time_manager.timelog(self, "sight_started_at", sight_started_at)
 		sight_started_at = value
 
+## cur_time at whcih the player_seen most recently became false (TIMEVAR)
+var lost_sight_at: float = 0.0 : #TIMEVAR
+	set(value):
+		if value == lost_sight_at:
+			return
+		if globals.time_manager and globals.time_manager.logging:
+			globals.time_manager.timelog(self,"lost_sight_at",lost_sight_at)
+		lost_sight_at = value
+
 @onready var detector: PlayerDetector = $PlayerDetector
 @onready var laser: Laser = $Laser
 ## Time to detect the player before becoming Alert
-@export var alert_time: float = 1
+@export var alert_time: float = 0.8
 ## Time to detect the player before catching them
-@export var caught_time: float = 2
+@export var caught_time: float = 1.6
 ## How long a guard (or its whole alert group) searches without
 ## anyone having line of sight before giving up and returning to NORMAL
-@export var search_time: float = 3
+@export var search_time: float = 5
+## How long the guard will stay in its current state after losing
+## player sight before beginning to search
+@export var time_till_search : float = 1.2
 
 ## Total cur_time this guard has spent off NORMAL
 ## accumulated from stretches that have already ended. TIMEVAR. Combined with
@@ -106,9 +120,9 @@ var left_normal_at: float = 0.0: #TIMEVAR
 
 var scan_angle: float = 0.0
 ## Speed at which a guard scans when SEARCHING
-@export var scan_speed: float = 5
+@export var scan_speed: float = 1.5
 ## Width of the angle the guard scans when SEARCHING (meters)
-@export var scan_width: float = 3
+@export var scan_width: float = 4
 
 ## Guard torso material
 var torso_material: StandardMaterial3D
@@ -127,7 +141,7 @@ var realigning_to_path: bool = false
 
 ## Radius within which this guard's SEEN/ALERT/SEARCH state is broadcast to
 ## other guards
-@export var alert_radius: float = 10.0
+@export var alert_radius: float = 8.0
 
 ## Last known position of the player (or position broadcasted by another guard)
 ## Used by looking_process when this guard doesn't have real line of sight of its own. (TIMEVAR)
@@ -190,7 +204,7 @@ func _exit_state(old_state: AlertStates) -> void:
 
 
 func _enter_normal() -> void:
-	detector.view_mesh(0)
+	detector.set_profile(PlayerDetector.VisionProfile.NORMAL)
 	torso_material.emission = Color("ff0000")
 	torso_material.emission_energy_multiplier = 1
 	# Only realigning if we are currently returning from another state
@@ -206,7 +220,7 @@ func _exit_normal() -> void:
 
 
 func _enter_seen() -> void:
-	detector.view_mesh(0)
+	detector.set_profile(PlayerDetector.VisionProfile.NORMAL)
 	seen_sound.play()
 	torso_material.emission = Color("ff0000")
 	torso_material.emission_energy_multiplier = 3
@@ -219,7 +233,7 @@ func _exit_seen() -> void:
 
 
 func _enter_alert() -> void:
-	detector.view_mesh(2)
+	detector.set_profile(PlayerDetector.VisionProfile.WIDE)
 	if not alert_group:
 		AlertGroup.new(search_time, time_manager.cur_time).add(self)
 
@@ -232,7 +246,7 @@ func _exit_alert() -> void:
 
 
 func _enter_search() -> void:
-	detector.view_mesh(1)
+	detector.set_profile(PlayerDetector.VisionProfile.TIGHT)
 	torso_material.emission = Color("ba7902")
 	scan_angle = 0.0
 	if not alert_group:
@@ -301,6 +315,13 @@ func get_time_detecting() -> float:
 	return clamp(time_manager.cur_time - sight_started_at, 0.0, caught_time)
 
 
+## How since the player has lost sight. Calculated from lost_sight_at
+func get_time_not_detecting() -> float:
+	if player_seen:
+		return 0.0
+	return clamp(time_manager.cur_time - lost_sight_at, 0.0, time_till_search)
+
+
 func seen_process(delta):
 	looking_process(delta)
 	broadcast_alert()
@@ -310,9 +331,12 @@ func seen_process(delta):
 		return
 
 	var detecting := get_time_detecting()
+	var not_detecting := get_time_not_detecting()
 	globals.safe_ratio = min(globals.safe_ratio, (caught_time - detecting) / caught_time)
 	if detecting >= alert_time:
 		state = AlertStates.ALERT
+	elif not_detecting >= time_till_search:
+		state = AlertStates.SEARCH
 
 
 func alert_process(delta):
@@ -324,10 +348,14 @@ func alert_process(delta):
 		return
 		
 	var detecting := get_time_detecting()
+	var not_detecting := get_time_not_detecting()
 	globals.safe_ratio = min(globals.safe_ratio, (caught_time - detecting) / caught_time)
 	if detecting >= caught_time:
 		state = AlertStates.CAUGHT
 		catch_player()
+		return
+	elif not_detecting >= time_till_search:
+		state = AlertStates.SEARCH
 		return
 		
 	if detector.player_spotted:
@@ -384,7 +412,6 @@ func receive_alert(source_group: AlertGroup, seen_position: Vector3) -> void:
 ## Called every frame while SEEN, ALERT, or SEARCH, so a guard still in NORMAL picks
 ## up whatever incident a nearby guard is currently part of the moment it
 ## it enters the alert_radius.
-# HACK: kinda gross to check every guard in the tree
 func broadcast_alert() -> void:
 	if not alert_group:
 		AlertGroup.new(search_time, time_manager.cur_time).add(self)
@@ -425,14 +452,17 @@ func looking_process(delta):
 ## Catches signal when [var detector] sees the player. Sets state to SEEN
 func _on_player_detector_player_seen(_player_position: Vector3) -> void:
 	player_seen = true
-	state = AlertStates.SEEN
+	# Only return to SEEN if it is a more "severe" state
+	# If Guard loses sight when Alert and player steps back into view, return to Alert
+	if AlertStates.SEEN > state:
+		state = AlertStates.SEEN
 
 
 ## Catches signal when [var detector] stops seeing the player. Sets state to SEARCH
 func _on_player_detector_player_stopped_seen(last_position: Vector3) -> void:
 	player_seen = false
 	target_seen_position = last_position
-	state = AlertStates.SEARCH
+
 
 ## Class AlertGroup
 ## Guards sharing an incident track whether ANY member currently has real
