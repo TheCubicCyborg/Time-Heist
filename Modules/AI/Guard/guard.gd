@@ -190,7 +190,7 @@ func _exit_state(old_state: AlertStates) -> void:
 
 
 func _enter_normal() -> void:
-	#detector.create_normal_mesh()
+	detector.view_mesh(0)
 	torso_material.emission = Color("ff0000")
 	torso_material.emission_energy_multiplier = 1
 	# Only realigning if we are currently returning from another state
@@ -206,7 +206,7 @@ func _exit_normal() -> void:
 
 
 func _enter_seen() -> void:
-	#detector.create_normal_mesh()
+	detector.view_mesh(0)
 	seen_sound.play()
 	torso_material.emission = Color("ff0000")
 	torso_material.emission_energy_multiplier = 3
@@ -219,7 +219,7 @@ func _exit_seen() -> void:
 
 
 func _enter_alert() -> void:
-	#detector.create_wide_mesh()
+	detector.view_mesh(2)
 	if not alert_group:
 		AlertGroup.new(search_time, time_manager.cur_time).add(self)
 
@@ -232,7 +232,7 @@ func _exit_alert() -> void:
 
 
 func _enter_search() -> void:
-	#detector.create_tight_mesh()
+	detector.view_mesh(1)
 	torso_material.emission = Color("ba7902")
 	scan_angle = 0.0
 	if not alert_group:
@@ -502,7 +502,7 @@ class AlertGroup:
 
 	## Advances the shared disband countdown once per rendered frame no
 	## matter how many members call this the same frame.
-	func tick(delta: float, cur_time: float) -> void:
+	func tick(_delta: float, cur_time: float) -> void:
 		var frame := Engine.get_process_frames()
 		if frame == _last_tick_frame:
 			return

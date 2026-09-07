@@ -54,11 +54,6 @@ var collision_meshes : Array[CollisionPolygon3D] = [
 
 var vision_material: StandardMaterial3D
 
-#var sight_line_angle : float
-#var sight_line_radius : float
-#var smaller_sight_line_angle : float
-#var smaller_sight_line_radius : float
-
 @export_category("Normal Vision Cone")
 ## Angle of the vision cone
 @export var normal_sight_line_angle : float = 110:
@@ -71,7 +66,7 @@ var vision_material: StandardMaterial3D
 		normal_sight_line_radius = value
 		create_normal_mesh()
 ## Angle of small vision cone
-@export var normal_smaller_sight_line_angle : float = 60:
+@export var normal_smaller_sight_line_angle : float = 70:
 	set(value):
 		normal_smaller_sight_line_angle = value
 		create_normal_mesh()
@@ -82,17 +77,17 @@ var vision_material: StandardMaterial3D
 		create_normal_mesh()
 @export_category("Tight Vision Cone (Search)")
 ## Angle of the vision cone
-@export var tight_sight_line_angle : float = 90:
+@export var tight_sight_line_angle : float = 40:
 	set(value):
 		tight_sight_line_angle = value
 		create_tight_mesh()
 ## Radius of the vision cone
-@export var tight_sight_line_radius : float = 12:
+@export var tight_sight_line_radius : float = 14:
 	set(value):
 		tight_sight_line_radius = value
 		create_tight_mesh()
 ## Angle of small vision cone
-@export var tight_smaller_sight_line_angle : float = 80:
+@export var tight_smaller_sight_line_angle : float = 105:
 	set(value):
 		tight_smaller_sight_line_angle = value
 		create_tight_mesh()
@@ -137,67 +132,67 @@ var view_tight_mesh_button = view_mesh.bind(1)
 @export_tool_button("View Wide Mesh")
 var view_wide_mesh_button = view_mesh.bind(2)
 
-var polygon_points : PackedVector2Array = []
-
 
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		globals.safe_ratio = 1
-		create_normal_mesh()
-		sight_checker.target_position.z = -tight_sight_line_radius
-		normal_collision.polygon = polygon_points
+		view_mesh(0)
+		sight_checker.target_position.z = -15
 
 
 ## Creates normal mesh
 func create_normal_mesh():
 	create_mesh(normal_collision, normal_sight_line_angle, normal_sight_line_radius, normal_smaller_sight_line_angle, normal_smaller_sight_line_radius)
-	view_mesh(0)
+	if Engine.is_editor_hint():
+		view_mesh(0)
 	
 
 
 ## Create tight mesh
 func create_tight_mesh():
 	create_mesh(tight_collision, tight_sight_line_angle, tight_sight_line_radius, tight_smaller_sight_line_angle, tight_smaller_sight_line_radius)
-	view_mesh(1)
+	if Engine.is_editor_hint():
+		view_mesh(1)
 
 
 ## Create wide mesh
 func create_wide_mesh():
 	create_mesh(wide_collision, wide_sight_line_angle, wide_sight_line_radius, wide_smaller_sight_line_angle, wide_smaller_sight_line_radius)
-	view_mesh(2)
+	if Engine.is_editor_hint():
+		view_mesh(2)
 
 
 ## Makes the correct mesh visible. Disables and hides other meshes
-func view_mesh(id : int) -> void:
+func view_mesh(id: int) -> void:
 	match id:
 		0:
 			normal_collision.show()
-			normal_collision.disabled = false
+			normal_collision.set_deferred("disabled", false)
 			tight_collision.hide()
-			tight_collision.disabled = true
+			tight_collision.set_deferred("disabled", true)
 			wide_collision.hide()
-			wide_collision.disabled = true
+			wide_collision.set_deferred("disabled", true)
 			_update_vision_mesh(normal_collision)
 		1:
 			tight_collision.show()
-			tight_collision.disabled = false
+			tight_collision.set_deferred("disabled", false)
 			normal_collision.hide()
-			normal_collision.disabled = true
+			normal_collision.set_deferred("disabled", true)
 			wide_collision.hide()
-			wide_collision.disabled = true
+			wide_collision.set_deferred("disabled", true)
 			_update_vision_mesh(tight_collision)
 		2:
 			wide_collision.show()
-			wide_collision.disabled = false
+			wide_collision.set_deferred("disabled", false)
 			normal_collision.hide()
-			normal_collision.disabled = true
+			normal_collision.set_deferred("disabled", true)
 			tight_collision.hide()
-			tight_collision.disabled = true
+			tight_collision.set_deferred("disabled", true)
 			_update_vision_mesh(wide_collision)
 
 ## Creates the mesh based on export values
 func create_mesh(collision : CollisionPolygon3D, sight_line_angle : float, sight_line_radius : float, smaller_sight_line_angle : float, smaller_sight_line_radius : float):
-	polygon_points = []
+	var polygon_points : PackedVector2Array = []
 	var start_angle = -(sight_line_angle/2)
 	var end_angle = sight_line_angle/2
 	
@@ -288,22 +283,26 @@ func _update_vision_color() -> void:
 		vision_material.albedo_color = vision_alert_color if player_spotted else vision_color
 	
 func _process(_delta: float) -> void:
-	if not Engine.is_editor_hint():
-		if player_in_zone and not globals.player.is_hidden and not globals.player_invisible and globals.time_manager.delta_time > 0:
-			sight_checker.look_at(globals.player.detection_point.global_position)
-			if sight_checker.get_collider() == globals.player:
-				_seen_process(_delta)
-				player_spotted = true
-			else:
-				last_seen_position = seen_position
-				player_spotted = false
-				
+	if Engine.is_editor_hint():
+		return
+	if player_in_zone and not globals.player.is_hidden and not globals.player_invisible and globals.time_manager.delta_time > 0:
+		sight_checker.look_at(globals.player.detection_point.global_position)
+		if sight_checker.get_collider() == globals.player:
+			_seen_process(_delta)
+			player_spotted = true
+		else:
+			last_seen_position = seen_position 
+			player_spotted = false
+			
+			
 func _seen_process(_delta: float) -> void:
 	seen_position = globals.player.detection_point.global_position
-
+	
+	
 func _on_body_entered(body: Node3D) -> void:
 	if body == globals.player:
 		player_in_zone = true
+		
 		
 func _on_body_exited(body: Node3D) -> void:
 	if body == globals.player:
