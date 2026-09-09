@@ -1,6 +1,7 @@
 @tool
 extends Node3D
 class_name Generic_Door
+## @deprecated
 
 @onready var collision_body: StaticBody3D = $"Door/DoorHinge/DoorMesh/Door RB"
 @onready var mesh: MeshInstance3D = $Door/DoorHinge/DoorMesh
