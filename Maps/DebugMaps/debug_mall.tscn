@@ -19,20 +19,25 @@
 [ext_resource type="PackedScene" uid="uid://cbtqqo3a4oo70" path="res://Modules/UI/Game UI/Pipe Game/pipe_row.tscn" id="16_m7fnc"]
 [ext_resource type="PackedScene" uid="uid://cne2roithf6os" path="res://Modules/UI/Game UI/Pipe Game/pipe_cell.tscn" id="18_0wlcr"]
 [ext_resource type="Texture2D" uid="uid://dmcfnjmmhdcf0" path="res://Modules/UI/Game UI/Pipe Game/pipe_textures/pipe_straight.png" id="20_8b7s2"]
+[ext_resource type="Script" uid="uid://bxc4dyfccnpuq" path="res://addons/time_paths/path_follower.gd" id="20_fdgdj"]
+[ext_resource type="Script" uid="uid://c2tfic5m1pfay" path="res://addons/time_paths/resources/path_edge.gd" id="21_mtsgv"]
+[ext_resource type="Script" uid="uid://cj8wbl3qc6l2j" path="res://addons/time_paths/resources/path_data.gd" id="22_6dtb4"]
+[ext_resource type="Script" uid="uid://cubjybclcdt7g" path="res://addons/time_paths/resources/path_vertex.gd" id="23_ad6bp"]
+[ext_resource type="Script" uid="uid://f845h7rcahvl" path="res://addons/time_paths/resources/vertex_action.gd" id="24_gqqej"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_y1si3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_yarxy"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qcv7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbl44"]
 resource_local_to_scene = true
 transparency = 1
 shading_mode = 0
-albedo_texture = SubResource("ViewportTexture_y1si3")
+albedo_texture = SubResource("ViewportTexture_yarxy")
 billboard_mode = 1
 
-[sub_resource type="QuadMesh" id="QuadMesh_fry3c"]
+[sub_resource type="QuadMesh" id="QuadMesh_20kmb"]
 resource_local_to_scene = true
-material = SubResource("StandardMaterial3D_0qcv7")
+material = SubResource("StandardMaterial3D_hbl44")
 size = Vector2(2.83, 1.5)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_m7fnc"]
@@ -56,6 +61,41 @@ grow_amount = -4.125
 
 [sub_resource type="QuadMesh" id="QuadMesh_8b7s2"]
 
+[sub_resource type="Resource" id="Resource_y6vue"]
+script = ExtResource("21_mtsgv")
+id = 0
+from_vertex = 0
+to_vertex = 1
+
+[sub_resource type="Resource" id="Resource_4emtm"]
+script = ExtResource("21_mtsgv")
+id = 1
+from_vertex = 1
+to_vertex = 2
+
+[sub_resource type="Resource" id="Resource_kqmap"]
+script = ExtResource("23_ad6bp")
+id = 0
+position = Vector3(7, 0, -6.5)
+
+[sub_resource type="Resource" id="Resource_qru86"]
+script = ExtResource("23_ad6bp")
+id = 1
+position = Vector3(7, 0, -10)
+
+[sub_resource type="Resource" id="Resource_dm0gv"]
+script = ExtResource("23_ad6bp")
+id = 2
+position = Vector3(2, 0, -10)
+
+[sub_resource type="Resource" id="Resource_tukrh"]
+script = ExtResource("22_6dtb4")
+vertices = Array[ExtResource("23_ad6bp")]([SubResource("Resource_kqmap"), SubResource("Resource_qru86"), SubResource("Resource_dm0gv")])
+edges = Array[ExtResource("21_mtsgv")]([SubResource("Resource_y6vue"), SubResource("Resource_4emtm")])
+metadata/_custom_type_script = "uid://cj8wbl3qc6l2j"
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0l2b8"]
+
 [node name="Debug Mall" type="Node3D" unique_id=1495256944]
 
 [node name="SceneConfig" parent="." unique_id=705177490 instance=ExtResource("1_yjhg3")]
@@ -76,7 +116,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -5)
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player/Camera Pivot/CameraMarker/Camera3D" parent_id_path=PackedInt32Array(288105915, 214841099) index="2" unique_id=885707867]
 
 [node name="MeshInstance3D" parent="Player/Inventory Wheel Holder" parent_id_path=PackedInt32Array(288105915, 1988325530) index="0" unique_id=332989845]
-mesh = SubResource("QuadMesh_fry3c")
+mesh = SubResource("QuadMesh_20kmb")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1157303031]
 metadata/_edit_lock_ = true
@@ -606,6 +646,16 @@ layout_mode = 0
 offset_left = 256.0
 offset_right = 320.0
 offset_bottom = 64.0
+
+[node name="PathFollower" type="Node3D" parent="." unique_id=70803868]
+transform = Transform3D(0.9999997, 0, 0, 0, 1, 0, 0, 0, 0.9999997, 7, 0, -6.9328446)
+script = ExtResource("20_fdgdj")
+path_data = SubResource("Resource_tukrh")
+metadata/_custom_type_script = "uid://bxc4dyfccnpuq"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PathFollower" unique_id=1514717551]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_0l2b8")
 
 [connection signal="puzzle_solved" from="PuzzlePanel/PipeGame" to="PuzzlePanel" method="turn_off"]
 
